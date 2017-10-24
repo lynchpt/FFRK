@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>FFRKApi.Logic.EnlirImport</AssemblyName>
+    <RootNamespace>FFRKApi.Logic.EnlirImport</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Infra.Options.EnlirETL\Infra.Options.EnlirETL.csproj" />
+    <ProjectReference Include="..\Model.EnlirImport\Model.EnlirImport.csproj" />
+    <ProjectReference Include="..\SheetsApiHelper\SheetsApiHelper.csproj" />
+  </ItemGroup>
+
+</Project>

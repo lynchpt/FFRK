@@ -1,0 +1,11 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace FFRKApi.Model.EnlirTransform
+{
+    public class TransformResultsContainer
+    {
+        public IEnumerable<Mission> Missions { get; set; }
+    }
+}

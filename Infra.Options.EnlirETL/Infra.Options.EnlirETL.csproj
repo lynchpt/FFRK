@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>FFRK.Api.Infra.Options.EnlirETL</AssemblyName>
+    <RootNamespace>FFRK.Api.Infra.Options.EnlirETL</RootNamespace>
+  </PropertyGroup>
+
+</Project>
