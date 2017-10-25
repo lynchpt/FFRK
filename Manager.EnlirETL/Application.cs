@@ -118,6 +118,7 @@ namespace Manager.EnlirETL
             _servicesCollection.AddScoped<IRowImporter<ExperienceRow>, ExperienceImporter>();
 
             _servicesCollection.AddScoped<IRowTransformer<MissionRow, Mission>, MissionTransformer>();
+            _servicesCollection.AddScoped<IRowTransformer<EventRow, Event>, EventTransformer>();
 
 
             _servicesCollection.AddScoped<IImportStorageProvider, FileImportStorageProvider>();

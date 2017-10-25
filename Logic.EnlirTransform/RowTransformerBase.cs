@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using FFRK.Api.Infra.Options.EnlirETL;
 using FFRKApi.Model.EnlirTransform;
@@ -71,7 +72,7 @@ namespace FFRKApi.Logic.EnlirTransform
 
             if (!String.IsNullOrWhiteSpace(input))
             {
-                results = input.Split(new string[] { commaCharacter }, StringSplitOptions.None);
+                results = input.Split(new string[] { commaCharacter }, StringSplitOptions.None).Select(s => s.Trim()).ToList();
             }
 
             return results;

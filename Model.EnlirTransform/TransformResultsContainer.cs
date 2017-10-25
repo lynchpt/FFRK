@@ -6,6 +6,7 @@ namespace FFRKApi.Model.EnlirTransform
 {
     public class TransformResultsContainer
     {
+        public IEnumerable<Event> Events { get; set; }
         public IEnumerable<Mission> Missions { get; set; }
     }
 }

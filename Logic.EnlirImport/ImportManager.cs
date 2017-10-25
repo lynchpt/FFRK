@@ -114,10 +114,10 @@ namespace FFRKApi.Logic.EnlirImport
             //resultsContainer.DungeonRows = _dungeonImporter.Import();
             _logger.LogInformation("finished loading DungeonRows");
 
-            //resultsContainer.EventRows = _eventImporter.Import();
+            resultsContainer.EventRows = _eventImporter.Import();
             _logger.LogInformation("finished loading EventRows");
 
-            resultsContainer.MissionRows = _missionImporter.Import();
+            //resultsContainer.MissionRows = _missionImporter.Import();
             _logger.LogInformation("finished loading MissionRows");
 
             //resultsContainer.ExperienceRows = _experienceImporter.Import();
