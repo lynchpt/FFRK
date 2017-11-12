@@ -14,7 +14,7 @@ namespace FFRKApi.Logic.EnlirTransform
     {
         #region Class Variables
 
-        private readonly ILogger<RowTransformerBase<TRow, TModel>> _logger;
+        protected readonly ILogger<RowTransformerBase<TRow, TModel>> _logger;
 
         #endregion
 
@@ -36,7 +36,7 @@ namespace FFRKApi.Logic.EnlirTransform
 
 
         #region IRowTransformer Implementation
-        public IEnumerable<TModel> Transform(IEnumerable<TRow> importedRows)
+        public virtual IEnumerable<TModel> Transform(IEnumerable<TRow> importedRows)
         {
             _logger.LogInformation($"Transform invoked and attempting to transform imported Rows");
 

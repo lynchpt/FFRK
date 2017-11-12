@@ -8,5 +8,6 @@ namespace FFRKApi.Model.EnlirTransform
     {
         public IEnumerable<Event> Events { get; set; }
         public IEnumerable<Mission> Missions { get; set; }
+        public IEnumerable<Experience> Experiences { get; set; }
     }
 }

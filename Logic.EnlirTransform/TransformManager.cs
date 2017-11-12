@@ -19,6 +19,7 @@ namespace FFRKApi.Logic.EnlirTransform
 
         private readonly IRowTransformer<MissionRow, Mission> _missionRowTransformer;
         private readonly IRowTransformer<EventRow, Event> _eventRowTransformer;
+        private readonly IRowTransformer<ExperienceRow, Experience> _experienceRowTransformer;
 
         private readonly IImportStorageProvider _importStorageProvider;
         private readonly ILogger<TransformManager> _logger;
@@ -28,11 +29,12 @@ namespace FFRKApi.Logic.EnlirTransform
         #region Constructors
 
         public TransformManager(IRowTransformer<EventRow, Event> eventRowTransformer, IRowTransformer<MissionRow, Mission> missionRowTransformer,
+            IRowTransformer<ExperienceRow, Experience> experienceRowTransformer,
             IImportStorageProvider importStorageProvider, ILogger<TransformManager> logger)
         {
             _eventRowTransformer = eventRowTransformer;
             _missionRowTransformer = missionRowTransformer;
-
+            _experienceRowTransformer = experienceRowTransformer;
 
             _importStorageProvider = importStorageProvider;
             _logger = logger;
@@ -45,11 +47,14 @@ namespace FFRKApi.Logic.EnlirTransform
 
             ImportResultsContainer importResults = _importStorageProvider.RetrieveImportResults();
 
-            transformResultsContainer.Events = _eventRowTransformer.Transform(importResults.EventRows);
+           // transformResultsContainer.Events = _eventRowTransformer.Transform(importResults.EventRows);
             _logger.LogInformation("finished transforming EventRows to Events");
 
             //transformResultsContainer.Missions = _missionRowTransformer.Transform(importResults.MissionRows);
             _logger.LogInformation("finished transforming MissionRows to Missions");
+
+            transformResultsContainer.Experiences = _experienceRowTransformer.Transform(importResults.ExperienceRows);
+            _logger.LogInformation("finished transforming ExperienceRows to a single Experience object in a list");
 
             return transformResultsContainer;
         }
