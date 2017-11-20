@@ -120,6 +120,8 @@ namespace Manager.EnlirETL
             _servicesCollection.AddScoped<IRowTransformer<MissionRow, Mission>, MissionTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<EventRow, Event>, EventTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<ExperienceRow, Experience>, ExperienceTransformer>();
+            _servicesCollection.AddScoped<IRowTransformer<MagiciteSkillRow, MagiciteSkill>, MagiciteSkillTransformer>();
+            _servicesCollection.AddScoped<IRowTransformer<MagiciteRow, Magicite>, MagiciteTransformer>();
 
 
             _servicesCollection.AddScoped<IImportStorageProvider, FileImportStorageProvider>();

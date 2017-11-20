@@ -43,6 +43,7 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.Passive1StrengthLevel50 = ResolveColumnContents(columnCount, MagiciteColumn.Passive1StrengthLevel50, row);
             importedRow.Passive1StrengthLevel65 = ResolveColumnContents(columnCount, MagiciteColumn.Passive1StrengthLevel65, row);
             importedRow.Passive1StrengthLevel80 = ResolveColumnContents(columnCount, MagiciteColumn.Passive1StrengthLevel80, row);
+            importedRow.Passive1StrengthLevel81 = ResolveColumnContents(columnCount, MagiciteColumn.Passive1StrengthLevel81, row);
             importedRow.Passive1StrengthLevel90 = ResolveColumnContents(columnCount, MagiciteColumn.Passive1StrengthLevel90, row);
             importedRow.Passive1StrengthLevel99 = ResolveColumnContents(columnCount, MagiciteColumn.Passive1StrengthLevel99, row);
 
@@ -54,6 +55,7 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.Passive2StrengthLevel50 = ResolveColumnContents(columnCount, MagiciteColumn.Passive2StrengthLevel50, row);
             importedRow.Passive2StrengthLevel65 = ResolveColumnContents(columnCount, MagiciteColumn.Passive2StrengthLevel65, row);
             importedRow.Passive2StrengthLevel80 = ResolveColumnContents(columnCount, MagiciteColumn.Passive2StrengthLevel80, row);
+            importedRow.Passive2StrengthLevel81 = ResolveColumnContents(columnCount, MagiciteColumn.Passive2StrengthLevel81, row);
             importedRow.Passive2StrengthLevel90 = ResolveColumnContents(columnCount, MagiciteColumn.Passive2StrengthLevel90, row);
             importedRow.Passive2StrengthLevel99 = ResolveColumnContents(columnCount, MagiciteColumn.Passive2StrengthLevel99, row);
 
@@ -65,6 +67,7 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.Passive3StrengthLevel50 = ResolveColumnContents(columnCount, MagiciteColumn.Passive3StrengthLevel50, row);
             importedRow.Passive3StrengthLevel65 = ResolveColumnContents(columnCount, MagiciteColumn.Passive3StrengthLevel65, row);
             importedRow.Passive3StrengthLevel80 = ResolveColumnContents(columnCount, MagiciteColumn.Passive3StrengthLevel80, row);
+            importedRow.Passive3StrengthLevel81 = ResolveColumnContents(columnCount, MagiciteColumn.Passive3StrengthLevel81, row);
             importedRow.Passive3StrengthLevel90 = ResolveColumnContents(columnCount, MagiciteColumn.Passive3StrengthLevel90, row);
             importedRow.Passive3StrengthLevel99 = ResolveColumnContents(columnCount, MagiciteColumn.Passive3StrengthLevel99, row);
 

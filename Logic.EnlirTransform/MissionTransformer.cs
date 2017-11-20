@@ -17,9 +17,10 @@ namespace FFRKApi.Logic.EnlirTransform
         #region Constructors
         public MissionTransformer(ILogger<RowTransformerBase<MissionRow, Mission>> logger): base(logger)
         {
-        } 
+        }
         #endregion
-    
+
+        #region RowTransformerBase Overrides
         protected override Mission ConvertRowToModel(int generatedId, MissionRow row)
         {
             Mission model = new Mission();
@@ -62,6 +63,7 @@ namespace FFRKApi.Logic.EnlirTransform
             model.Rewards = iwcaslList;
 
             return model;
-        }
+        } 
+        #endregion
     }
 }

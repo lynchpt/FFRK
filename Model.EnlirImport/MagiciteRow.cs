@@ -29,45 +29,48 @@ namespace FFRKApi.Model.EnlirImport
         Passive1StrengthLevel50 = 17,
         Passive1StrengthLevel65 = 18,
         Passive1StrengthLevel80 = 19,
-        Passive1StrengthLevel90 = 20,
-        Passive1StrengthLevel99 = 21,
+        Passive1StrengthLevel81 = 20,
+        Passive1StrengthLevel90 = 21,
+        Passive1StrengthLevel99 = 22,
 
         //Passive 2
-        Passive2Name = 22,
-        Passive2StrengthLevel1 = 23,
-        Passive2StrengthLevel10 = 24,
-        Passive2StrengthLevel25 = 25,
-        Passive2StrengthLevel50 = 26,
-        Passive2StrengthLevel65 = 27,
-        Passive2StrengthLevel80 = 28,
-        Passive2StrengthLevel90 = 29,
-        Passive2StrengthLevel99 = 30,
+        Passive2Name = 23,
+        Passive2StrengthLevel1 = 24,
+        Passive2StrengthLevel10 = 25,
+        Passive2StrengthLevel25 = 26,
+        Passive2StrengthLevel50 = 27,
+        Passive2StrengthLevel65 = 28,
+        Passive2StrengthLevel80 = 29,
+        Passive2StrengthLevel81 = 30,
+        Passive2StrengthLevel90 = 31,
+        Passive2StrengthLevel99 = 32,
 
         //Passive 3
-        Passive3Name = 31,
-        Passive3StrengthLevel1 = 32,
-        Passive3StrengthLevel10 = 33,
-        Passive3StrengthLevel25 = 34,
-        Passive3StrengthLevel50 = 35,
-        Passive3StrengthLevel65 = 36,
-        Passive3StrengthLevel80 = 37,
-        Passive3StrengthLevel90 = 38,
-        Passive3StrengthLevel99 = 39,
+        Passive3Name = 33,
+        Passive3StrengthLevel1 = 34,
+        Passive3StrengthLevel10 = 35,
+        Passive3StrengthLevel25 = 36,
+        Passive3StrengthLevel50 = 37,
+        Passive3StrengthLevel65 = 38,
+        Passive3StrengthLevel80 = 39,
+        Passive3StrengthLevel81 = 40,
+        Passive3StrengthLevel90 = 41,
+        Passive3StrengthLevel99 = 42,
 
         //Ultra Skill
-        Cooldown = 40,
-        Duration = 41,
-        UltraSkill = 42,
-        Type = 43,
-        AutoTarget = 44,
-        Formula = 45,
-        Multiplier = 46,
-        UltraSkillElement = 47,
-        Time = 48,
-        Effects = 49,
-        Counter = 50,
-        JapaneseName = 51,
-        ID = 52
+        Cooldown = 43,
+        Duration = 44,
+        UltraSkill = 45,
+        Type = 46,
+        AutoTarget = 47,
+        Formula = 48,
+        Multiplier = 49,
+        UltraSkillElement = 50,
+        Time = 51,
+        Effects = 52,
+        Counter = 53,
+        JapaneseName = 54,
+        ID = 55
     }
 
     public class MagiciteRow
@@ -95,6 +98,7 @@ namespace FFRKApi.Model.EnlirImport
         public string Passive1StrengthLevel50 { get; set; }
         public string Passive1StrengthLevel65 { get; set; }
         public string Passive1StrengthLevel80 { get; set; }
+        public string Passive1StrengthLevel81 { get; set; }
         public string Passive1StrengthLevel90 { get; set; }
         public string Passive1StrengthLevel99 { get; set; }
 
@@ -106,6 +110,7 @@ namespace FFRKApi.Model.EnlirImport
         public string Passive2StrengthLevel50 { get; set; }
         public string Passive2StrengthLevel65 { get; set; }
         public string Passive2StrengthLevel80 { get; set; }
+        public string Passive2StrengthLevel81 { get; set; }
         public string Passive2StrengthLevel90 { get; set; }
         public string Passive2StrengthLevel99 { get; set; }
 
@@ -117,6 +122,7 @@ namespace FFRKApi.Model.EnlirImport
         public string Passive3StrengthLevel50 { get; set; }
         public string Passive3StrengthLevel65 { get; set; }
         public string Passive3StrengthLevel80 { get; set; }
+        public string Passive3StrengthLevel81 { get; set; }
         public string Passive3StrengthLevel90 { get; set; }
         public string Passive3StrengthLevel99 { get; set; }
         

@@ -5,10 +5,10 @@ using System.Text;
 
 namespace FFRKApi.Model.EnlirTransform.IdLists
 {
-    public class RealmList
-    {
-        public IList<KeyValuePair<int, string>> Realms = new List<KeyValuePair<int, string>>()
-                                                                {
+    public class RealmList : ITypeList
+    {       
+        private IList<KeyValuePair<int, string>> _typeList = new List<KeyValuePair<int, string>>()
+                                                             {
                                                                     new KeyValuePair<int, string>(0, "Unknown"),
                                                                     new KeyValuePair<int, string>(1, "I"),
                                                                     new KeyValuePair<int, string>(2, "II"),
@@ -29,7 +29,9 @@ namespace FFRKApi.Model.EnlirTransform.IdLists
                                                                     new KeyValuePair<int, string>(17, "Beyond"),
                                                                     new KeyValuePair<int, string>(18, "Type-0"),
                                                                     new KeyValuePair<int, string>(19, "Core")
-                                                                };
+                                                             };
+
+        public IList<KeyValuePair<int, string>> TypeList => _typeList;
 
 
     }
