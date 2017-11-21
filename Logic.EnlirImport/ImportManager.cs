@@ -105,7 +105,7 @@ namespace FFRKApi.Logic.EnlirImport
             //resultsContainer.RelicRows = _relicImporter.Import();
             _logger.LogInformation("finished loading RelicRows");
 
-            resultsContainer.MagiciteRows = _magiciteImporter.Import();
+            //resultsContainer.MagiciteRows = _magiciteImporter.Import();
             _logger.LogInformation("finished loading MagiciteRows");
 
             //resultsContainer.MagiciteSkillRows = _magiciteSkillImporter.Import();
@@ -117,7 +117,7 @@ namespace FFRKApi.Logic.EnlirImport
             //resultsContainer.EventRows = _eventImporter.Import();
             _logger.LogInformation("finished loading EventRows");
 
-            //resultsContainer.MissionRows = _missionImporter.Import();
+            resultsContainer.MissionRows = _missionImporter.Import();
             _logger.LogInformation("finished loading MissionRows");
 
             //resultsContainer.ExperienceRows = _experienceImporter.Import();

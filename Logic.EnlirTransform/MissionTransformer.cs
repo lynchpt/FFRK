@@ -31,36 +31,7 @@ namespace FFRKApi.Logic.EnlirTransform
             model.MissionType = row.Type;
             model.AssociatedEvent = row.Event;
 
-            //rewards
-            var iwcaslList = new List<ItemWithCountAndStarLevel>();
-
-            //turn reward string into a list, if needed
-            IList<string> rewardStrings = ConvertCommaSeparatedStringToList(row.Reward);
-
-            //for each reward, turn it into an item name and a count
-            IList<ItemWithItemCount> rewardItemsWithItemCounts = new List<ItemWithItemCount>();
-
-            foreach (var rewardString in rewardStrings)
-            {
-                ItemWithItemCount itemWithItemCount = ExtractItemWithItemCount(rewardString);
-                rewardItemsWithItemCounts.Add(itemWithItemCount);
-            }
-
-            //now for each reward item, extract the star level if applicable
-            foreach (ItemWithItemCount iwc in rewardItemsWithItemCounts)
-            {
-                ItemWithCountAndStarLevel iwcasl = new ItemWithCountAndStarLevel();
-
-                ItemWithStarLevel iwsl = ExtractItemWithStarLevel(iwc.ItemName);
-
-                iwcasl.ItemName = iwsl.ItemName;
-                iwcasl.ItemCount = iwc.ItemCount;
-                iwcasl.ItemStarLevel = iwsl.ItemStarLevel;
-
-                iwcaslList.Add(iwcasl);
-            }
-
-            model.Rewards = iwcaslList;
+            model.Rewards = ExtractItemWithCountAndStarLevel(row.Reward);
 
             return model;
         } 

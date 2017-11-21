@@ -10,6 +10,8 @@ namespace FFRKApi.Model.EnlirTransform
         public IEnumerable<Mission> Missions { get; set; }
         public IEnumerable<Experience> Experiences { get; set; }
 
+        public IEnumerable<Dungeon> Dungeons { get; set; }
+
         public IEnumerable<MagiciteSkill> MagiciteSkills { get; set; }
 
         public IEnumerable<Magicite> Magicites { get; set; }

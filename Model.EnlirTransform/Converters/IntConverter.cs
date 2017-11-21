@@ -13,13 +13,16 @@ namespace FFRKApi.Model.EnlirTransform.Converters
 
             if (!String.IsNullOrWhiteSpace(input))
             {
+                //trim for safety
+                string trimmedInput = input.Trim();
+
                 //input number from enlir are in French format when using group separators
                 NumberFormatInfo provider = new NumberFormatInfo();
                 provider.NumberDecimalSeparator = ",";
                 provider.NumberGroupSeparator = ".";
                 provider.NumberGroupSizes = new int[] { 3 };
 
-                bool converted = Int32.TryParse(input, NumberStyles.AllowThousands, provider, out int candidateResult);
+                bool converted = Int32.TryParse(trimmedInput, NumberStyles.AllowThousands, provider, out int candidateResult);
 
                 if (converted)
                 {
