@@ -27,5 +27,13 @@ namespace FFRKApi.Model.EnlirTransform
         public IEnumerable<Relic> Relics { get; set; }
 
         public IEnumerable<Ability> Abilities { get; set; }
+
+        public IEnumerable<LegendMateria> LegendMaterias { get; set; }
+
+        public IEnumerable<RecordMateria> RecordMaterias { get; set; }
+
+        public IEnumerable<RecordSphere> RecordSpheres { get; set; }
+
+        public IEnumerable<LegendSphere> LegendSpheres { get; set; }
     }
 }

@@ -129,6 +129,10 @@ namespace Manager.EnlirETL
             _servicesCollection.AddScoped<IRowTransformer<SoulBreakRow, SoulBreak>, SoulBreakTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<RelicRow, Relic>, RelicTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<AbilityRow, Ability>, AbilityTransformer>();
+            _servicesCollection.AddScoped<IRowTransformer<LegendMateriaRow, LegendMateria>, LegendMateriaTransformer>();
+            _servicesCollection.AddScoped<IRowTransformer<RecordMateriaRow, RecordMateria>, RecordMateriaTransformer>();
+            _servicesCollection.AddScoped<IRowTransformer<RecordSphereRow, RecordSphere>, RecordSphereTransformer>();
+            _servicesCollection.AddScoped<IRowTransformer<LegendSphereRow, LegendSphere>, LegendSphereTransformer>();
 
 
             _servicesCollection.AddScoped<IImportStorageProvider, FileImportStorageProvider>();

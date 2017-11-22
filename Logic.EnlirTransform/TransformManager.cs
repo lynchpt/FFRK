@@ -29,6 +29,10 @@ namespace FFRKApi.Logic.EnlirTransform
         private readonly IRowTransformer<SoulBreakRow, SoulBreak> _soulBreakRowTransformer;
         private readonly IRowTransformer<RelicRow, Relic> _relicRowTransformer;
         private readonly IRowTransformer<AbilityRow, Ability> _abilityRowTransformer;
+        private readonly IRowTransformer<LegendMateriaRow, LegendMateria> _legendMateriaRowTransformer;
+        private readonly IRowTransformer<RecordMateriaRow, RecordMateria> _recordMateriaRowTransformer;
+        private readonly IRowTransformer<RecordSphereRow, RecordSphere> _recordSphereRowTransformer;
+        private readonly IRowTransformer<LegendSphereRow, LegendSphere> _legendSphereRowTransformer;
 
         private readonly IImportStorageProvider _importStorageProvider;
         private readonly ILogger<TransformManager> _logger;
@@ -43,6 +47,8 @@ namespace FFRKApi.Logic.EnlirTransform
             IRowTransformer<StatusRow, Status> statusRowTransformer, IRowTransformer<OtherRow, Other> otherRowTransformer,
             IRowTransformer<CommandRow, Command> commandRowTransformer, IRowTransformer<SoulBreakRow, SoulBreak> soulBreakRowTransformer,
             IRowTransformer<RelicRow, Relic> relicRowTransformer, IRowTransformer<AbilityRow, Ability> abilityRowTransformer,
+            IRowTransformer<LegendMateriaRow, LegendMateria> legendMateriaRowTransformer, IRowTransformer<RecordMateriaRow, RecordMateria> recordMateriaRowTransformer,
+            IRowTransformer<RecordSphereRow, RecordSphere> recordSphereRowTransformer, IRowTransformer<LegendSphereRow, LegendSphere> legendSphereRowTransformer,
             IImportStorageProvider importStorageProvider, ILogger<TransformManager> logger)
         {
             _eventRowTransformer = eventRowTransformer;
@@ -57,7 +63,10 @@ namespace FFRKApi.Logic.EnlirTransform
             _soulBreakRowTransformer = soulBreakRowTransformer;
             _relicRowTransformer = relicRowTransformer;
             _abilityRowTransformer = abilityRowTransformer;
-
+            _legendMateriaRowTransformer = legendMateriaRowTransformer;
+            _recordMateriaRowTransformer = recordMateriaRowTransformer;
+            _recordSphereRowTransformer = recordSphereRowTransformer;
+            _legendSphereRowTransformer = legendSphereRowTransformer;
 
             _importStorageProvider = importStorageProvider;
             _logger = logger;
@@ -92,7 +101,7 @@ namespace FFRKApi.Logic.EnlirTransform
             //transformResultsContainer.Others = _otherRowTransformer.Transform(importResults.OtherRows);
             _logger.LogInformation("finished transforming OtherRows to Others");
 
-            transformResultsContainer.Commands = _commandRowTransformer.Transform(importResults.CommandRows);
+            //transformResultsContainer.Commands = _commandRowTransformer.Transform(importResults.CommandRows);
             _logger.LogInformation("finished transforming CommandRows to Commands");
 
             //transformResultsContainer.SoulBreaks = _soulBreakRowTransformer.Transform(importResults.SoulBreakRows);
@@ -103,6 +112,18 @@ namespace FFRKApi.Logic.EnlirTransform
 
             //transformResultsContainer.Abilities = _abilityRowTransformer.Transform(importResults.AbilityRows);
             _logger.LogInformation("finished transforming AbilityRows to Abilities");
+
+            //transformResultsContainer.LegendMaterias = _legendMateriaRowTransformer.Transform(importResults.LegendMateriaRows);
+            _logger.LogInformation("finished transforming LegendMateriaRows to LegendMaterias");
+
+            //transformResultsContainer.RecordMaterias = _recordMateriaRowTransformer.Transform(importResults.RecordMateriaRows);
+            _logger.LogInformation("finished transforming RecordMateriaRows to RecordMaterias");
+
+            //transformResultsContainer.RecordSpheres = _recordSphereRowTransformer.Transform(importResults.RecordSphereRows);
+            _logger.LogInformation("finished transforming RecordMateriaRows to RecordMaterias");
+
+            transformResultsContainer.LegendSpheres = _legendSphereRowTransformer.Transform(importResults.LegendSphereRows);
+            _logger.LogInformation("finished transforming LegendSphereRows to LegendSpheres");
 
             return transformResultsContainer;
         } 
