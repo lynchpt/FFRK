@@ -12,7 +12,7 @@ namespace FFRKApi.Model.EnlirTransform
         #endregion
 
         //core attributes
-        public string Name { get; set; }
+        public string MagiciteName { get; set; }
 
         public int Element { get; set; }
 
@@ -22,7 +22,8 @@ namespace FFRKApi.Model.EnlirTransform
 
         public string ImagePath { get; set; }
 
-        public Event IntoducingEvent { get; set; }
+        public string IntroducingEventName { get; set; }
+        public int IntroducingEventId { get; set; }
 
         //stats
         public int HitPoints { get; set; }

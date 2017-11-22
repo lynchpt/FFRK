@@ -35,13 +35,13 @@ namespace FFRKApi.Logic.EnlirTransform
         {
             Dungeon model = new Dungeon();
 
-            //IModelDescriptot
+            //IModelDescriptor
             model.Id = generatedId;
             model.Description = row.DungeonName;
 
             model.Realm = _realmConverter.ConvertFromNameToId(row.Realm);
             model.DungeonName = row.DungeonName;
-            model.IntroducingDungeonUpdate = null; //fill in during merge stage
+            model.IntroducingDungeonUpdateId = 0; //fill in during merge stage
 
             //classic
             model.StaminaClassic = _intConverter.ConvertFromStringToInt(row.StaminaClassic);
@@ -56,6 +56,8 @@ namespace FFRKApi.Logic.EnlirTransform
             model.CompletionGilElite = _intConverter.ConvertFromStringToInt(row.CompletionElite.TrimEnd(GilCharArray));
             model.FirstTimeRewardsElite = ExtractItemWithCountAndStarLevel(row.FirstTimeElite);
             model.MasteryRewardsElite = ExtractItemWithCountAndStarLevel(row.MasteryElite);
+
+            _logger.LogInformation("Converted DungeonRow to Dungeon: {Id} - {Description}", model.Id, model.Description);
 
             return model;
         }

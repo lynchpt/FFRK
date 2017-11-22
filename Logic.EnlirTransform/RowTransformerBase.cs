@@ -20,9 +20,10 @@ namespace FFRKApi.Logic.EnlirTransform
 
         #region Constants
 
-        private const string countCharacter = "x";
-        private const string commaCharacter = ",";
-        private const string starCharacter = "★";
+        protected const string CountCharacter = "x";
+        protected const string CommaCharacter = ",";
+        protected const string StarCharacter = "★";
+        protected const string DashCharacter = "-";
         #endregion
 
         #region Constructors
@@ -72,7 +73,7 @@ namespace FFRKApi.Logic.EnlirTransform
 
             if (!String.IsNullOrWhiteSpace(input))
             {
-                results = input.Split(new string[] { commaCharacter }, StringSplitOptions.None).Select(s => s.Trim()).ToList();
+                results = input.Split(new string[] { CommaCharacter }, StringSplitOptions.None).Select(s => s.Trim()).ToList();
             }
 
             return results;
@@ -82,7 +83,7 @@ namespace FFRKApi.Logic.EnlirTransform
         {
             ItemWithItemCount result = new ItemWithItemCount();
 
-            int xPosition = input.LastIndexOf(countCharacter);
+            int xPosition = input.LastIndexOf(CountCharacter);
 
             if (xPosition == -1) //there is no count
             {
@@ -107,7 +108,7 @@ namespace FFRKApi.Logic.EnlirTransform
         {
             ItemWithStarLevel result = new ItemWithStarLevel();
 
-            int starPosition = input.IndexOf(starCharacter);
+            int starPosition = input.IndexOf(StarCharacter);
 
             if (starPosition == -1) //there is no star
             {

@@ -9,66 +9,65 @@ using Microsoft.Extensions.Logging;
 
 namespace FFRKApi.Logic.EnlirTransform
 {
-    public class MagiciteSkillTransformer : RowTransformerBase<MagiciteSkillRow, MagiciteSkill>
+    public class OtherTransformer : RowTransformerBase<OtherRow, Other>
     {
         #region Class Variables
+        private readonly IntConverter _intConverter;
         private readonly DoubleConverter _doubleConverter;
         private readonly StringToBooleanConverter _stringToBooleanConverter;
-        private readonly PercentConverter _percentConverter;
+
         private readonly TypeListConverter _abilityTypeConverter;
+        private readonly TypeListConverter _targetTypeConverter;
         private readonly TypeListConverter _autoTargetTypeConverter;
         private readonly TypeListConverter _damageFormulaTypeConverter;
         private readonly TypeListConverter _elementConverter;
-
+        private readonly TypeListConverter _schoolConverter;
         #endregion
 
-        #region Constructors
-        public MagiciteSkillTransformer(ILogger<RowTransformerBase<MagiciteSkillRow, MagiciteSkill>> logger) : base(logger)
+        public OtherTransformer(ILogger<RowTransformerBase<OtherRow, Other>> logger) : base(logger)
         {
             //prepare converters so we only need one instance no matter how many rows are processed
             _doubleConverter = new DoubleConverter();
+            _intConverter = new IntConverter();
             _stringToBooleanConverter = new StringToBooleanConverter();
-            _percentConverter = new PercentConverter();
             _abilityTypeConverter = new TypeListConverter(new AbilityTypeList());
+            _targetTypeConverter = new TypeListConverter(new TargetTypeList());
             _autoTargetTypeConverter = new TypeListConverter(new AutoTargetTypeList());
             _damageFormulaTypeConverter = new TypeListConverter(new DamageFormulaTypeList());
             _elementConverter = new TypeListConverter(new ElementList());
-
+            _schoolConverter = new TypeListConverter(new SchoolList());
         }
-        #endregion
 
-        #region RowTransformerBase Overrides
-        protected override MagiciteSkill ConvertRowToModel(int generatedId, MagiciteSkillRow row)
+        protected override Other ConvertRowToModel(int generatedId, OtherRow row)
         {
-            MagiciteSkill model = new MagiciteSkill();
+            Other model = new Other();
 
             model.Id = generatedId;
-            model.Description = $"{row.Magicite} - {row.Name}";
+            model.Description = row.OtherName;
 
-            model.MagiciteName = row.Magicite;
-            model.MagiciteId = 0; //fill in during merge phase
-            model.SkillName = row.Name;
-            model.JapaneseName = row.JapaneseName;
+            model.CharacterName = row.Character;
+            model.SourceName = row.Source;
+            model.SourceType = null; //fill in during merge phase
+            model.SourceId = 0; //fill in during merge phase
             model.ImagePath = row.ImagePath;
+            model.Name = row.OtherName;
+
             model.AbilityType = _abilityTypeConverter.ConvertFromNameToId(row.Type);
-            model.AutoTargetType = _autoTargetTypeConverter.ConvertFromNameToId(row.AutoTarget);
+            model.TargetType = _targetTypeConverter.ConvertFromNameToId(row.Target);
             model.DamageFormulaType = _damageFormulaTypeConverter.ConvertFromNameToId(row.Formula);
             model.Multiplier = _doubleConverter.ConvertFromStringToDouble(row.Multiplier);
-            model.Element = _elementConverter.ConvertFromNameToId(row.Element);
+            model.Elements = _elementConverter.ConvertFromCommaSeparatedListToIds(row.Element);
             model.CastTime = _doubleConverter.ConvertFromStringToDouble(row.Time);
             model.Effects = row.Effects;
             model.IsCounterable = _stringToBooleanConverter.ConvertFromStringToBool(row.Counter);
+            model.AutoTargetType = _autoTargetTypeConverter.ConvertFromNameToId(row.AutoTarget);
+            model.SoulBreakPointsGained = _intConverter.ConvertFromStringToInt(row.SB);
+            model.School = _schoolConverter.ConvertFromNameToId(row.School);
             model.IsChecked = _stringToBooleanConverter.ConvertFromStringToBool(row.Checked);
 
-            model.ChanceForSkillUseWith0LevelCapBreaks = _percentConverter.ConvertFromStringToDouble(row.ChanceToUseTier0);
-            model.ChanceForSkillUseWith1LevelCapBreaks = _percentConverter.ConvertFromStringToDouble(row.ChanceToUseTier1);
-            model.ChanceForSkillUseWith2LevelCapBreaks = _percentConverter.ConvertFromStringToDouble(row.ChanceToUseTier2);
-            model.ChanceForSkillUseWith3LevelCapBreaks = _percentConverter.ConvertFromStringToDouble(row.ChanceToUseTier3);
-
-            _logger.LogInformation("Converted MagiciteSkillRow to MagiciteSkill: {Id} - {Description}", model.Id, model.Description);
+            _logger.LogInformation("Converted OtherRow to Other: {Id} - {Description}", model.Id, model.Description);
 
             return model;
-        } 
-        #endregion
+        }
     }
 }

@@ -57,17 +57,10 @@ namespace FFRKApi.Model.EnlirImport
         Orb4RequiredRank4 = 39,
         Orb4RequiredRank5 = 40,
 
-        //Gil
-        GilRequiredRank1 = 41,
-        GilRequiredRank2 = 42,
-        GilRequiredRank3 = 43,
-        GilRequiredRank4 = 44,
-        GilRequiredRank5 = 45,
-
         //Misc
-        IntroducingEvent = 46,
-        ID = 47,
-        Checked = 48
+        IntroducingEvent = 41,
+        ID = 42,
+        Checked = 43
     }
 
     public class AbilityRow
@@ -123,12 +116,6 @@ namespace FFRKApi.Model.EnlirImport
         public string Orb4RequiredRank4 { get; set; }
         public string Orb4RequiredRank5 { get; set; }
 
-        //Gil
-        public string GilRequiredRank1 { get; set; }
-        public string GilRequiredRank2 { get; set; }
-        public string GilRequiredRank3 { get; set; }
-        public string GilRequiredRank4 { get; set; }
-        public string GilRequiredRank5 { get; set; }
 
         //Misc
         public string IntroducingEvent { get; set; }

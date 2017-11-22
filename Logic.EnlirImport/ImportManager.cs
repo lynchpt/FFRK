@@ -78,7 +78,7 @@ namespace FFRKApi.Logic.EnlirImport
             //resultsContainer.CharacterRows = _characterImporter.Import();
             _logger.LogInformation("finished loading CharacterRows");
 
-           // resultsContainer.RecordSphereRows = _recordSphereImporter.Import();
+            //resultsContainer.RecordSphereRows = _recordSphereImporter.Import();
             _logger.LogInformation("finished loading RecordSphereRows");
 
             //resultsContainer.LegendSphereRows = _legendSphereImporter.Import();
@@ -93,7 +93,7 @@ namespace FFRKApi.Logic.EnlirImport
             //resultsContainer.SoulBreakRows = _soulBreakImporter.Import();
             _logger.LogInformation("finished loading SoulBreakRows");
 
-            //resultsContainer.CommandRows = _commandImporter.Import();
+            resultsContainer.CommandRows = _commandImporter.Import();
             _logger.LogInformation("finished loading CommandRows");
 
             //resultsContainer.OtherRows = _otherImporter.Import();
@@ -117,7 +117,7 @@ namespace FFRKApi.Logic.EnlirImport
             //resultsContainer.EventRows = _eventImporter.Import();
             _logger.LogInformation("finished loading EventRows");
 
-            resultsContainer.MissionRows = _missionImporter.Import();
+            //resultsContainer.MissionRows = _missionImporter.Import();
             _logger.LogInformation("finished loading MissionRows");
 
             //resultsContainer.ExperienceRows = _experienceImporter.Import();

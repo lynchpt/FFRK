@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -21,12 +22,15 @@ namespace FFRKApi.Model.EnlirTransform.Converters
             if (!String.IsNullOrWhiteSpace(input))
             {
                 //input number from enlir are in French format when using group separators
-                //NumberFormatInfo provider = new NumberFormatInfo();
-                //provider.NumberDecimalSeparator = ",";
-                //provider.NumberGroupSeparator = ".";
-                //provider.NumberGroupSizes = new int[] { 3 };
+                NumberFormatInfo provider = new NumberFormatInfo();
+                provider.NumberDecimalSeparator = ",";
+                provider.NumberGroupSeparator = ".";
+                provider.NumberGroupSizes = new int[] { 3 };
 
-                bool converted = Double.TryParse(input.TrimEnd(_percentCharArray), out double candidateResult);
+                //cleanse input
+                string cleansedInput = input.TrimEnd(_percentCharArray).Trim();
+
+                bool converted = Double.TryParse(cleansedInput, NumberStyles.AllowDecimalPoint, provider, out double candidateResult);
 
                 if (converted)
                 {

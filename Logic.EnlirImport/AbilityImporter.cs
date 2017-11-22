@@ -61,11 +61,6 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.Orb4RequiredRank3 = ResolveColumnContents(columnCount, AbilityColumn.Orb4RequiredRank3, row);
             importedRow.Orb4RequiredRank4 = ResolveColumnContents(columnCount, AbilityColumn.Orb4RequiredRank4, row);
             importedRow.Orb4RequiredRank5 = ResolveColumnContents(columnCount, AbilityColumn.Orb4RequiredRank5, row);
-            importedRow.GilRequiredRank1 = ResolveColumnContents(columnCount, AbilityColumn.GilRequiredRank1, row);
-            importedRow.GilRequiredRank2 = ResolveColumnContents(columnCount, AbilityColumn.GilRequiredRank2, row);
-            importedRow.GilRequiredRank3 = ResolveColumnContents(columnCount, AbilityColumn.GilRequiredRank3, row);
-            importedRow.GilRequiredRank4 = ResolveColumnContents(columnCount, AbilityColumn.GilRequiredRank4, row);
-            importedRow.GilRequiredRank5 = ResolveColumnContents(columnCount, AbilityColumn.GilRequiredRank5, row);
             importedRow.IntroducingEvent = ResolveColumnContents(columnCount, AbilityColumn.IntroducingEvent, row);
             importedRow.ID = ResolveColumnContents(columnCount, AbilityColumn.ID, row);
             importedRow.Checked = ResolveColumnContents(columnCount, AbilityColumn.Checked, row);

@@ -28,8 +28,6 @@ namespace FFRKApi.Logic.EnlirTransform
 
         private const int MagiciteLevelBands = 9;
         private readonly int[] MagiciteLevelBandBreakpoints = new[] {1, 10, 25, 50, 65, 80, 81, 90, 99};
-
-
         #endregion
 
         #region Constructors
@@ -58,12 +56,13 @@ namespace FFRKApi.Logic.EnlirTransform
             model.Description = row.Name;
 
             //core attributes
-            model.Name = row.Name;
+            model.MagiciteName = row.Name;
             model.Element = _elementConverter.ConvertFromNameToId(row.Element);
             model.Rarity = _intConverter.ConvertFromStringToInt(row.Rarity);
             model.Realm = _realmConverter.ConvertFromNameToId(row.Realm);
             model.ImagePath = row.ImagePath;
-            model.IntoducingEvent = null; //fill in during merge phase
+            model.IntroducingEventName = row.IntroducingEvent;
+            model.IntroducingEventId = 0; //fill in during merge phase
 
             //stats
             model.HitPoints = _intConverter.ConvertFromStringToInt(row.HP);
@@ -77,6 +76,7 @@ namespace FFRKApi.Logic.EnlirTransform
             //passives
             model.PassiveEffects = GetPassiveEffectsForMagicite(row);
 
+            //ultra skill
             if (row.UltraSkill.Length > 1)
             {
                 UltraSkill ultraSkill = new UltraSkill()
@@ -98,10 +98,12 @@ namespace FFRKApi.Logic.EnlirTransform
 
                 model.UltraSkill = ultraSkill;
             }
-            //ultra skill
+
 
             //magicite skills
             model.MagiciteSkills = new List<MagiciteSkill>(); //fill in during merge phase            
+
+            _logger.LogInformation("Converted MagiciteRow to Magicite: {Id} - {Description}", model.Id, model.Description);
 
             return model;
         }

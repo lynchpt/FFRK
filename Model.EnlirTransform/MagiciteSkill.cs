@@ -13,6 +13,7 @@ namespace FFRKApi.Model.EnlirTransform
         #endregion
 
         public string MagiciteName { get; set; }
+        public int MagiciteId { get; set; }
         public string SkillName { get; set; }
 
         public string JapaneseName { get; set; }

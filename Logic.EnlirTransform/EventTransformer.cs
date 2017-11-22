@@ -64,6 +64,8 @@ namespace FFRKApi.Logic.EnlirTransform
             model.WardrobeRecordsAwarded = ConvertCommaSeparatedStringToList(row.WardrobeRecords);
             model.AbilitiesAwarded = ConvertCommaSeparatedStringToList(row.AbilitiesAwarded);
 
+            _logger.LogInformation("Converted EventRow to Event: {Id} - {Description}", model.Id, model.Description);
+
             return model;
         } 
         #endregion

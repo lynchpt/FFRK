@@ -15,5 +15,17 @@ namespace FFRKApi.Model.EnlirTransform
         public IEnumerable<MagiciteSkill> MagiciteSkills { get; set; }
 
         public IEnumerable<Magicite> Magicites { get; set; }
+
+        public IEnumerable<Status> Statuses { get; set; }
+
+        public IEnumerable<Other> Others { get; set; }
+
+        public IEnumerable<Command> Commands { get; set; }
+
+        public IEnumerable<SoulBreak> SoulBreaks { get; set; }
+
+        public IEnumerable<Relic> Relics { get; set; }
+
+        public IEnumerable<Ability> Abilities { get; set; }
     }
 }

@@ -123,7 +123,12 @@ namespace Manager.EnlirETL
             _servicesCollection.AddScoped<IRowTransformer<DungeonRow, Dungeon>, DungeonTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<MagiciteSkillRow, MagiciteSkill>, MagiciteSkillTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<MagiciteRow, Magicite>, MagiciteTransformer>();
-
+            _servicesCollection.AddScoped<IRowTransformer<StatusRow, Status>, StatusTransformer>();
+            _servicesCollection.AddScoped<IRowTransformer<OtherRow, Other>, OtherTransformer>();
+            _servicesCollection.AddScoped<IRowTransformer<CommandRow, Command>, CommandTransformer>();
+            _servicesCollection.AddScoped<IRowTransformer<SoulBreakRow, SoulBreak>, SoulBreakTransformer>();
+            _servicesCollection.AddScoped<IRowTransformer<RelicRow, Relic>, RelicTransformer>();
+            _servicesCollection.AddScoped<IRowTransformer<AbilityRow, Ability>, AbilityTransformer>();
 
 
             _servicesCollection.AddScoped<IImportStorageProvider, FileImportStorageProvider>();

@@ -41,6 +41,7 @@ namespace FFRKApi.Logic.EnlirTransform
                 PivotInputRow(row, model);
             }
 
+            _logger.LogInformation("Converted ExperienceRow to Experience: {Id} - {Description}", model.Id, model.Description);
 
             return models;
         }
