@@ -37,7 +37,7 @@ namespace FFRKApi.Data.Storage
 
         public string StoreTransformResults(TransformResultsContainer transformResultsContainer)
         {
-            string serializedImportResults = JsonConvert.SerializeObject(transformResultsContainer);
+            string serializedTransformResults = JsonConvert.SerializeObject(transformResultsContainer);
 
             string fileDateSegment = DateTimeOffset.UtcNow.ToString(DateFormatSpecifier);
 
@@ -53,7 +53,7 @@ namespace FFRKApi.Data.Storage
 
             using (TextWriter writer = File.CreateText(datedFilePath))
             {
-                writer.Write(serializedImportResults);
+                writer.Write(serializedTransformResults);
             }
 
             return datedFilePath;

@@ -19,7 +19,7 @@
   "CharacterImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Characters",
-    "RangeExpression": "A2:CZ"
+    "RangeExpression": "A2:DA"
   },
   "RecordSphereImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",

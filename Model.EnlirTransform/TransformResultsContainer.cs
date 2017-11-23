@@ -35,5 +35,7 @@ namespace FFRKApi.Model.EnlirTransform
         public IEnumerable<RecordSphere> RecordSpheres { get; set; }
 
         public IEnumerable<LegendSphere> LegendSpheres { get; set; }
+
+        public IEnumerable<Character> Characters { get; set; }
     }
 }

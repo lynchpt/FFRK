@@ -125,6 +125,7 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.DarknessAccess = ResolveColumnContents(columnCount, CharacterColumn.DarknessAccess, row);
             importedRow.SharpshooterAccess = ResolveColumnContents(columnCount, CharacterColumn.SharpshooterAccess, row);
             importedRow.WitchAccess = ResolveColumnContents(columnCount, CharacterColumn.WitchAccess, row);
+            importedRow.HeavyAccess = ResolveColumnContents(columnCount, CharacterColumn.HeavyAccess, row);
 
             //Record Sphere
             importedRow.IntroducingEventRecordSphere = ResolveColumnContents(columnCount, CharacterColumn.IntroducingEventRecordSphere, row);

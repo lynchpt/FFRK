@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using FFRK.Api.Infra.Options.EnlirETL;
 using FFRKApi.Data.Storage;
@@ -50,6 +51,8 @@ namespace Manager.EnlirETL
 
         public void Run()
         {
+            Stopwatch stopwatchFull = Stopwatch.StartNew();
+
             _logger.LogInformation($"{nameof(Application)}.{nameof(Run)} execution invoked");
 
             _importManager = _serviceProvider.GetService<IImportManager>();
@@ -58,14 +61,24 @@ namespace Manager.EnlirETL
             _transformManager = _serviceProvider.GetService<ITransformManager>();
             _transformStorageProvider = _serviceProvider.GetService<ITransformStorageProvider>();
 
+            Stopwatch stopwatchImport = Stopwatch.StartNew();
             ImportResultsContainer importResultsContainer = _importManager.ImportAll();
             string importStoragePath = _importStorageProvider.StoreImportResults(importResultsContainer);
+            stopwatchImport.Stop();
 
+            Stopwatch stopwatchTransform = Stopwatch.StartNew();
             TransformResultsContainer transformResultsContainer = _transformManager.TransformAll();
             string transformStoragePath = _transformStorageProvider.StoreTransformResults(transformResultsContainer);
+            stopwatchTransform.Stop();
 
             //test transform storage
             TransformResultsContainer testTransformResultsContainer =_transformStorageProvider.RetrieveTransformResults();
+            stopwatchFull.Stop();
+
+            _logger.LogInformation("Import Completed in {ImportTime} seconds", stopwatchImport.Elapsed.Seconds);
+            _logger.LogInformation("Import Completed in {TransformTime} seconds", stopwatchTransform.Elapsed.Seconds);
+            _logger.LogInformation("Full Run Completed in {FullRunTime} seconds", stopwatchFull.Elapsed.Seconds);
+
 
             Console.Read();
         }
@@ -133,6 +146,7 @@ namespace Manager.EnlirETL
             _servicesCollection.AddScoped<IRowTransformer<RecordMateriaRow, RecordMateria>, RecordMateriaTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<RecordSphereRow, RecordSphere>, RecordSphereTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<LegendSphereRow, LegendSphere>, LegendSphereTransformer>();
+            _servicesCollection.AddScoped<IRowTransformer<CharacterRow, Character>, CharacterTransformer>();
 
 
             _servicesCollection.AddScoped<IImportStorageProvider, FileImportStorageProvider>();

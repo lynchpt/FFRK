@@ -108,25 +108,26 @@ namespace Model.EnlirImport
         DarknessAccess = 86,
         SharpshooterAccess = 87,
         WitchAccess = 88,
+        HeavyAccess = 89,
 
         //Record Sphere
-        IntroducingEventRecordSphere = 89,
-        HPRecordSphere = 90,
-        ATKRecordSphere = 91,
-        DEFRecordSphere = 92,
-        MAGRecordSphere = 93,
-        RESRecordSphere = 94,
-        MNDRecordSphere = 95,
+        IntroducingEventRecordSphere = 90,
+        HPRecordSphere = 91,
+        ATKRecordSphere = 92,
+        DEFRecordSphere = 93,
+        MAGRecordSphere = 94,
+        RESRecordSphere = 95,
+        MNDRecordSphere = 96,
 
         //Legend Sphere
-        IntroducingEventLegendSphere = 96,
-        HPLegendSphere = 97,
-        ATKLegendSphere = 98,
-        DEFLegendSphere = 99,
-        MAGLegendSphere = 100,
-        RESLegendSphere = 101,
-        MNDLegendSphere = 102,
-        SPDLegendSphere = 103
+        IntroducingEventLegendSphere = 97,
+        HPLegendSphere = 98,
+        ATKLegendSphere = 99,
+        DEFLegendSphere = 100,
+        MAGLegendSphere = 101,
+        RESLegendSphere = 102,
+        MNDLegendSphere = 103,
+        SPDLegendSphere = 104
     }
 
     public class CharacterRow
@@ -233,7 +234,8 @@ namespace Model.EnlirImport
         public string MachinistAccess { get; set; }
         public string DarknessAccess { get; set; }
         public string SharpshooterAccess { get; set; }
-        public string WitchAccess { get; set; } 
+        public string WitchAccess { get; set; }
+        public string HeavyAccess { get; set; }
 
         //Record Sphere
         public string IntroducingEventRecordSphere { get; set; }
