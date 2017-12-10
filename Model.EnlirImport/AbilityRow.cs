@@ -21,46 +21,45 @@ namespace FFRKApi.Model.EnlirImport
         Counter = 11,
         AutoTarget = 12,
         SB = 13,
-        SBJP = 14,
-        Uses = 15,
-        Max = 16,
+        Uses = 14,
+        Max = 15,
 
         //Orb 1
-        Orb1RequiredType = 17,
-        Orb1RequiredRank1 = 18,
-        Orb1RequiredRank2 = 19,
-        Orb1RequiredRank3 = 20,
-        Orb1RequiredRank4 = 21,
-        Orb1RequiredRank5 = 22,
+        Orb1RequiredType = 16,
+        Orb1RequiredRank1 = 17,
+        Orb1RequiredRank2 = 18,
+        Orb1RequiredRank3 = 19,
+        Orb1RequiredRank4 = 20,
+        Orb1RequiredRank5 = 21,
 
         //Orb 2
-        Orb2RequiredType = 23,
-        Orb2RequiredRank1 = 24,
-        Orb2RequiredRank2 = 25,
-        Orb2RequiredRank3 = 26,
-        Orb2RequiredRank4 = 27,
-        Orb2RequiredRank5 = 28,
+        Orb2RequiredType = 22,
+        Orb2RequiredRank1 = 23,
+        Orb2RequiredRank2 = 24,
+        Orb2RequiredRank3 = 25,
+        Orb2RequiredRank4 = 26,
+        Orb2RequiredRank5 = 27,
 
         //Orb 3
-        Orb3RequiredType = 29,
-        Orb3RequiredRank1 = 30,
-        Orb3RequiredRank2 = 31,
-        Orb3RequiredRank3 = 32,
-        Orb3RequiredRank4 = 33,
-        Orb3RequiredRank5 = 34,
+        Orb3RequiredType = 28,
+        Orb3RequiredRank1 = 29,
+        Orb3RequiredRank2 = 30,
+        Orb3RequiredRank3 = 31,
+        Orb3RequiredRank4 = 32,
+        Orb3RequiredRank5 = 33,
 
         //Orb 4
-        Orb4RequiredType = 35,
-        Orb4RequiredRank1 = 36,
-        Orb4RequiredRank2 = 37,
-        Orb4RequiredRank3 = 38,
-        Orb4RequiredRank4 = 39,
-        Orb4RequiredRank5 = 40,
+        Orb4RequiredType = 34,
+        Orb4RequiredRank1 = 35,
+        Orb4RequiredRank2 = 36,
+        Orb4RequiredRank3 = 37,
+        Orb4RequiredRank4 = 38,
+        Orb4RequiredRank5 = 39,
 
         //Misc
-        IntroducingEvent = 41,
-        ID = 42,
-        Checked = 43
+        IntroducingEvent = 40,
+        ID = 41,
+        Checked = 42
     }
 
     public class AbilityRow
@@ -80,7 +79,6 @@ namespace FFRKApi.Model.EnlirImport
         public string Counter { get; set; }
         public string AutoTarget { get; set; }
         public string SB { get; set; }
-        public string SBJP { get; set; }
         public string Uses { get; set; }
         public string Max { get; set; }
 

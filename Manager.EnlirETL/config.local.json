@@ -44,7 +44,7 @@
   "AbilityImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Abilities",
-    "RangeExpression": "A2:AR"
+    "RangeExpression": "A2:AQ"
   },
   "SoulBreakImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
