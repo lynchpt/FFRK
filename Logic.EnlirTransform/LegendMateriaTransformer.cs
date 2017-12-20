@@ -43,7 +43,7 @@ namespace FFRKApi.Logic.EnlirTransform
             model.CharacterName = row.Character;
             model.CharacterId = 0; //filled in during merge phase
 
-            model.RelicName = row.Relic != null ? row.Relic.Replace(DashCharacter, String.Empty) : String.Empty;
+            model.RelicName = row.Relic != null ? row.Relic : String.Empty;
             model.RelicId = 0; //filled in during merge phase
 
             model.Effect = row.Effect;

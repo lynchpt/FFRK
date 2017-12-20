@@ -5,8 +5,10 @@ using System.Text;
 using FFRK.Api.Infra.Options.EnlirETL;
 using FFRKApi.Data.Storage;
 using FFRKApi.Logic.EnlirImport;
+using FFRKApi.Logic.EnlirMerge;
 using FFRKApi.Logic.EnlirTransform;
 using FFRKApi.Model.EnlirImport;
+using FFRKApi.Model.EnlirMerge;
 using FFRKApi.Model.EnlirTransform;
 using FFRKApi.SheetsApiHelper;
 using Microsoft.Extensions.Configuration;
@@ -31,6 +33,7 @@ namespace Manager.EnlirETL
         private readonly IConfiguration _configuration;
         private IImportManager _importManager;
         private ITransformManager _transformManager;
+        private IMergeManager _mergeManager;
         private IImportStorageProvider _importStorageProvider;
         private ITransformStorageProvider _transformStorageProvider;
         private ApplicationOptions _applicationOptions;
@@ -61,22 +64,29 @@ namespace Manager.EnlirETL
             _transformManager = _serviceProvider.GetService<ITransformManager>();
             _transformStorageProvider = _serviceProvider.GetService<ITransformStorageProvider>();
 
-            Stopwatch stopwatchImport = Stopwatch.StartNew();
-            ImportResultsContainer importResultsContainer = _importManager.ImportAll();
-            string importStoragePath = _importStorageProvider.StoreImportResults(importResultsContainer);
-            stopwatchImport.Stop();
+            _mergeManager = _serviceProvider.GetService<IMergeManager>();
 
-            Stopwatch stopwatchTransform = Stopwatch.StartNew();
-            TransformResultsContainer transformResultsContainer = _transformManager.TransformAll();
-            string transformStoragePath = _transformStorageProvider.StoreTransformResults(transformResultsContainer);
-            stopwatchTransform.Stop();
+            //uncomment below to actually run import and transform stages
+            //Stopwatch stopwatchImport = Stopwatch.StartNew();
+            //ImportResultsContainer importResultsContainer = _importManager.ImportAll();
+            //string importStoragePath = _importStorageProvider.StoreImportResults(importResultsContainer);
+            //stopwatchImport.Stop();
 
-            //test transform storage
-            TransformResultsContainer testTransformResultsContainer =_transformStorageProvider.RetrieveTransformResults();
+            //Stopwatch stopwatchTransform = Stopwatch.StartNew();
+            //TransformResultsContainer transformResultsContainer = _transformManager.TransformAll();
+            //string transformStoragePath = _transformStorageProvider.StoreTransformResults(transformResultsContainer);
+            //stopwatchTransform.Stop();
+
+            ////test transform storage
+            //TransformResultsContainer testTransformResultsContainer = _transformStorageProvider.RetrieveTransformResults();
+
+            //merge stage
+            MergeResultsContainer mergeResultsContainer =  _mergeManager.MergeAll();
+
             stopwatchFull.Stop();
 
-            _logger.LogInformation("Import Completed in {ImportTime} seconds", stopwatchImport.Elapsed.Seconds);
-            _logger.LogInformation("Import Completed in {TransformTime} seconds", stopwatchTransform.Elapsed.Seconds);
+            //_logger.LogInformation("Import Completed in {ImportTime} seconds", stopwatchImport.Elapsed.Seconds);
+            //_logger.LogInformation("Import Completed in {TransformTime} seconds", stopwatchTransform.Elapsed.Seconds);
             _logger.LogInformation("Full Run Completed in {FullRunTime} seconds", stopwatchFull.Elapsed.Seconds);
 
 
@@ -154,6 +164,7 @@ namespace Manager.EnlirETL
 
             _servicesCollection.AddScoped<IImportManager, ImportManager>();
             _servicesCollection.AddScoped<ITransformManager, TransformManager>();
+            _servicesCollection.AddScoped<IMergeManager, MergeManager>();
 
             _serviceProvider = _servicesCollection.BuildServiceProvider();
         }

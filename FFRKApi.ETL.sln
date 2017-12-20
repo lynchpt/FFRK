@@ -13,11 +13,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Manager.EnlirETL", "Manager
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.Options.EnlirETL", "Infra.Options.EnlirETL\Infra.Options.EnlirETL.csproj", "{A1074D58-012D-4395-A5C6-6CA73935BF0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Storage", "Data.Storage\Data.Storage.csproj", "{8018E0ED-4A45-4D6A-A18B-E6C086E153DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Storage", "Data.Storage\Data.Storage.csproj", "{8018E0ED-4A45-4D6A-A18B-E6C086E153DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic.EnlirTransform", "Logic.EnlirTransform\Logic.EnlirTransform.csproj", "{96EE7352-A3EF-4A99-B702-C666A8CEED88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic.EnlirTransform", "Logic.EnlirTransform\Logic.EnlirTransform.csproj", "{96EE7352-A3EF-4A99-B702-C666A8CEED88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model.EnlirTransform", "Model.EnlirTransform\Model.EnlirTransform.csproj", "{B0C15A91-E5FF-4804-82FC-E7F6E05966A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model.EnlirTransform", "Model.EnlirTransform\Model.EnlirTransform.csproj", "{B0C15A91-E5FF-4804-82FC-E7F6E05966A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic.EnlirMerge", "Logic.EnlirMerge\Logic.EnlirMerge.csproj", "{A63403E8-8D17-47E5-AE0D-C0D5BE5BB985}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model.EnlirMerge", "Model.EnlirMerge\Model.EnlirMerge.csproj", "{5607E47C-4DCE-458D-93E9-1DB8F69D30C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +61,14 @@ Global
 		{B0C15A91-E5FF-4804-82FC-E7F6E05966A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0C15A91-E5FF-4804-82FC-E7F6E05966A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0C15A91-E5FF-4804-82FC-E7F6E05966A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A63403E8-8D17-47E5-AE0D-C0D5BE5BB985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A63403E8-8D17-47E5-AE0D-C0D5BE5BB985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A63403E8-8D17-47E5-AE0D-C0D5BE5BB985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A63403E8-8D17-47E5-AE0D-C0D5BE5BB985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5607E47C-4DCE-458D-93E9-1DB8F69D30C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5607E47C-4DCE-458D-93E9-1DB8F69D30C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5607E47C-4DCE-458D-93E9-1DB8F69D30C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5607E47C-4DCE-458D-93E9-1DB8F69D30C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

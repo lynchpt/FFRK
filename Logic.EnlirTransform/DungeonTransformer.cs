@@ -41,7 +41,8 @@ namespace FFRKApi.Logic.EnlirTransform
 
             model.Realm = _realmConverter.ConvertFromNameToId(row.Realm);
             model.DungeonName = row.DungeonName;
-            model.IntroducingDungeonUpdateId = 0; //fill in during merge stage
+            model.IntroducingEvent = row.Update;
+            model.IntroducingEventId = 0; //fill in during merge stage
 
             //classic
             model.StaminaClassic = _intConverter.ConvertFromStringToInt(row.StaminaClassic);

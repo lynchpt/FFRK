@@ -56,10 +56,10 @@ namespace FFRKApi.Logic.EnlirTransform
             model.JapaneseName = row.JapaneseName;
             model.ImagePath = row.ImagePath;
 
-            model.CharacterName = row.Character;
+            model.CharacterName = row.Character.Replace(DashCharacter, String.Empty); ;
             model.CharacterId = 0; //fill in during merge phase
 
-            model.RelicName = row.Relic.Replace(DashCharacter, String.Empty);
+            model.RelicName = row.Relic;
             model.RelicId = 0; //fill in during merge phase
 
             model.Realm = _realmConverter.ConvertFromNameToId(row.Realm);

@@ -13,7 +13,9 @@ namespace FFRKApi.Model.EnlirTransform
 
         public int Realm { get; set; }
         public string DungeonName { get; set; }
-        public int IntroducingDungeonUpdateId { get; set; }
+
+        public string IntroducingEvent { get; set; }
+        public int IntroducingEventId { get; set; }
 
         //Classic
         public int StaminaClassic { get; set; }
