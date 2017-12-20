@@ -73,60 +73,69 @@ namespace FFRKApi.Logic.EnlirImport
         #region IImportManager Implementation
         public ImportResultsContainer ImportAll()
         {
-            ImportResultsContainer resultsContainer = new ImportResultsContainer();
+            try
+            {
+                ImportResultsContainer resultsContainer = new ImportResultsContainer();
 
-            resultsContainer.CharacterRows = _characterImporter.Import();
-            _logger.LogInformation("finished loading CharacterRows");
+                resultsContainer.CharacterRows = _characterImporter.Import();
+                _logger.LogInformation("finished loading CharacterRows");
 
-            resultsContainer.RecordSphereRows = _recordSphereImporter.Import();
-            _logger.LogInformation("finished loading RecordSphereRows");
+                resultsContainer.RecordSphereRows = _recordSphereImporter.Import();
+                _logger.LogInformation("finished loading RecordSphereRows");
 
-            resultsContainer.LegendSphereRows = _legendSphereImporter.Import();
-            _logger.LogInformation("finished loading LegendSphereRows");
+                resultsContainer.LegendSphereRows = _legendSphereImporter.Import();
+                _logger.LogInformation("finished loading LegendSphereRows");
 
-            resultsContainer.RecordMateriaRows = _recordMateriaImporter.Import();
-            _logger.LogInformation("finished loading RecordMateriaRows");
+                resultsContainer.RecordMateriaRows = _recordMateriaImporter.Import();
+                _logger.LogInformation("finished loading RecordMateriaRows");
 
-            resultsContainer.LegendMateriaRows = _legendMateriaImporter.Import();
-            _logger.LogInformation("finished loading LegendMateriaRows");
+                resultsContainer.LegendMateriaRows = _legendMateriaImporter.Import();
+                _logger.LogInformation("finished loading LegendMateriaRows");
 
-            resultsContainer.AbilityRows = _abilityImporter.Import();
-            _logger.LogInformation("finished loading AbilityRows");
+                resultsContainer.AbilityRows = _abilityImporter.Import();
+                _logger.LogInformation("finished loading AbilityRows");
 
-            resultsContainer.SoulBreakRows = _soulBreakImporter.Import();
-            _logger.LogInformation("finished loading SoulBreakRows");
+                resultsContainer.SoulBreakRows = _soulBreakImporter.Import();
+                _logger.LogInformation("finished loading SoulBreakRows");
 
-            resultsContainer.CommandRows = _commandImporter.Import();
-            _logger.LogInformation("finished loading CommandRows");
+                resultsContainer.CommandRows = _commandImporter.Import();
+                _logger.LogInformation("finished loading CommandRows");
 
-            resultsContainer.OtherRows = _otherImporter.Import();
-            _logger.LogInformation("finished loading OtherRows");
+                resultsContainer.OtherRows = _otherImporter.Import();
+                _logger.LogInformation("finished loading OtherRows");
 
-            resultsContainer.StatusRows = _statusImporter.Import();
-            _logger.LogInformation("finished loading StatusRows");
+                resultsContainer.StatusRows = _statusImporter.Import();
+                _logger.LogInformation("finished loading StatusRows");
 
-            resultsContainer.RelicRows = _relicImporter.Import();
-            _logger.LogInformation("finished loading RelicRows");
+                resultsContainer.RelicRows = _relicImporter.Import();
+                _logger.LogInformation("finished loading RelicRows");
 
-            resultsContainer.MagiciteRows = _magiciteImporter.Import();
-            _logger.LogInformation("finished loading MagiciteRows");
+                resultsContainer.MagiciteRows = _magiciteImporter.Import();
+                _logger.LogInformation("finished loading MagiciteRows");
 
-            resultsContainer.MagiciteSkillRows = _magiciteSkillImporter.Import();
-            _logger.LogInformation("finished loading MagiciteSkillRows");
+                resultsContainer.MagiciteSkillRows = _magiciteSkillImporter.Import();
+                _logger.LogInformation("finished loading MagiciteSkillRows");
 
-            resultsContainer.DungeonRows = _dungeonImporter.Import();
-            _logger.LogInformation("finished loading DungeonRows");
+                resultsContainer.DungeonRows = _dungeonImporter.Import();
+                _logger.LogInformation("finished loading DungeonRows");
 
-            resultsContainer.EventRows = _eventImporter.Import();
-            _logger.LogInformation("finished loading EventRows");
+                resultsContainer.EventRows = _eventImporter.Import();
+                _logger.LogInformation("finished loading EventRows");
 
-            resultsContainer.MissionRows = _missionImporter.Import();
-            _logger.LogInformation("finished loading MissionRows");
+                resultsContainer.MissionRows = _missionImporter.Import();
+                _logger.LogInformation("finished loading MissionRows");
 
-            resultsContainer.ExperienceRows = _experienceImporter.Import();
-            _logger.LogInformation("finished loading ExperienceRows");
+                resultsContainer.ExperienceRows = _experienceImporter.Import();
+                _logger.LogInformation("finished loading ExperienceRows");
 
-            return resultsContainer;
+                return resultsContainer;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                _logger.LogInformation("Error in ImportManager ImportAll method - import was NOT completed.");
+                throw;
+            }
         }
         #endregion
 

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Logic.EnlirTransform\Logic.EnlirTransform.csproj" />
+    <ProjectReference Include="..\Model.EnlirTransform\Model.EnlirTransform.csproj" />
   </ItemGroup>
 
 </Project>

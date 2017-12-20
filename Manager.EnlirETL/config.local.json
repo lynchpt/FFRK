@@ -11,6 +11,9 @@
   "FileTransformStorageOptions": {
     "TransformResultsStoragePath": "D:\\Temp\\FFRKApi\\TransformResults-{Date}.json"
   },
+  "FileMergeStorageOptions": {
+    "MergeResultsStoragePath": "D:\\Temp\\FFRKApi\\MergeResults-{Date}.json"
+  },
   "SheetsServiceOptions": {
     "Name": "FFRKApi",
     "ApiKey": "AIzaSyDRM4pp81uWhzvtDb5pI0n4y_8GVNFb5fM",

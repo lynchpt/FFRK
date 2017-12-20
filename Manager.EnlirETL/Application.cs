@@ -36,6 +36,7 @@ namespace Manager.EnlirETL
         private IMergeManager _mergeManager;
         private IImportStorageProvider _importStorageProvider;
         private ITransformStorageProvider _transformStorageProvider;
+        private IMergeStorageProvider _mergeStorageProvider;
         private ApplicationOptions _applicationOptions;
         private readonly ILogger<Application> _logger; 
         #endregion
@@ -54,40 +55,58 @@ namespace Manager.EnlirETL
 
         public void Run()
         {
-            Stopwatch stopwatchFull = Stopwatch.StartNew();
+            try
+            {
+                Stopwatch stopwatchFull = Stopwatch.StartNew();
 
-            _logger.LogInformation($"{nameof(Application)}.{nameof(Run)} execution invoked");
+                _logger.LogInformation($"{nameof(Application)}.{nameof(Run)} execution invoked");
 
-            _importManager = _serviceProvider.GetService<IImportManager>();
-            _importStorageProvider = _serviceProvider.GetService<IImportStorageProvider>();
+                _importManager = _serviceProvider.GetService<IImportManager>();
+                _importStorageProvider = _serviceProvider.GetService<IImportStorageProvider>();
 
-            _transformManager = _serviceProvider.GetService<ITransformManager>();
-            _transformStorageProvider = _serviceProvider.GetService<ITransformStorageProvider>();
+                _transformManager = _serviceProvider.GetService<ITransformManager>();
+                _transformStorageProvider = _serviceProvider.GetService<ITransformStorageProvider>();
 
-            _mergeManager = _serviceProvider.GetService<IMergeManager>();
+                _mergeManager = _serviceProvider.GetService<IMergeManager>();
+                _mergeStorageProvider = _serviceProvider.GetService<IMergeStorageProvider>();
 
-            //uncomment below to actually run import and transform stages
-            //Stopwatch stopwatchImport = Stopwatch.StartNew();
-            //ImportResultsContainer importResultsContainer = _importManager.ImportAll();
-            //string importStoragePath = _importStorageProvider.StoreImportResults(importResultsContainer);
-            //stopwatchImport.Stop();
+                //uncomment below to actually run import and transform stages
 
-            //Stopwatch stopwatchTransform = Stopwatch.StartNew();
-            //TransformResultsContainer transformResultsContainer = _transformManager.TransformAll();
-            //string transformStoragePath = _transformStorageProvider.StoreTransformResults(transformResultsContainer);
-            //stopwatchTransform.Stop();
+                //Import
+                Stopwatch stopwatchImport = Stopwatch.StartNew();
+                ImportResultsContainer importResultsContainer = _importManager.ImportAll();
+                string importStoragePath = _importStorageProvider.StoreImportResults(importResultsContainer);
+                stopwatchImport.Stop();
 
-            ////test transform storage
-            //TransformResultsContainer testTransformResultsContainer = _transformStorageProvider.RetrieveTransformResults();
+                //Transform
+                Stopwatch stopwatchTransform = Stopwatch.StartNew();
+                TransformResultsContainer transformResultsContainer = _transformManager.TransformAll();
+                string transformStoragePath = _transformStorageProvider.StoreTransformResults(transformResultsContainer);
+                stopwatchTransform.Stop();
 
-            //merge stage
-            MergeResultsContainer mergeResultsContainer =  _mergeManager.MergeAll();
+                //Merge
+                Stopwatch stopwatchMerge = Stopwatch.StartNew();
+                MergeResultsContainer mergeResultsContainer = _mergeManager.MergeAll();
+                _mergeStorageProvider.StoreMergeResults(mergeResultsContainer);
+                stopwatchMerge.Stop();
 
-            stopwatchFull.Stop();
+                //test merge storage
+                MergeResultsContainer testMergeResultsContainer = _mergeStorageProvider.RetrieveMergeResults();
 
-            //_logger.LogInformation("Import Completed in {ImportTime} seconds", stopwatchImport.Elapsed.Seconds);
-            //_logger.LogInformation("Import Completed in {TransformTime} seconds", stopwatchTransform.Elapsed.Seconds);
-            _logger.LogInformation("Full Run Completed in {FullRunTime} seconds", stopwatchFull.Elapsed.Seconds);
+                stopwatchFull.Stop();
+
+                _logger.LogInformation("Import Completed in {ImportTime} seconds", stopwatchImport.Elapsed.Seconds);
+                _logger.LogInformation("Transform Completed in {TransformTime} seconds", stopwatchTransform.Elapsed.Seconds);
+                _logger.LogInformation("Merge Completed in {MergeTime} seconds", stopwatchMerge.Elapsed.Seconds);
+                _logger.LogInformation("Full Run Completed in {FullRunTime} seconds", stopwatchFull.Elapsed.Seconds);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+
+                _logger.LogInformation("Error in Top Level Application execution. Import, Transform, and Merge operations were NOT successfully completed. Previously existing data is unchanged");
+                throw;
+            }
 
 
             Console.Read();
@@ -117,6 +136,7 @@ namespace Manager.EnlirETL
 
             _servicesCollection.Configure<FileImportStorageOptions>(_configuration.GetSection(nameof(FileImportStorageOptions)));
             _servicesCollection.Configure<FileTransformStorageOptions>(_configuration.GetSection(nameof(FileTransformStorageOptions)));
+            _servicesCollection.Configure<FileMergeStorageOptions>(_configuration.GetSection(nameof(FileMergeStorageOptions)));
 
 
 
@@ -161,6 +181,7 @@ namespace Manager.EnlirETL
 
             _servicesCollection.AddScoped<IImportStorageProvider, FileImportStorageProvider>();
             _servicesCollection.AddScoped<ITransformStorageProvider, FileTransformStorageProvider>();
+            _servicesCollection.AddScoped<IMergeStorageProvider, FileMergeStorageProvider>();
 
             _servicesCollection.AddScoped<IImportManager, ImportManager>();
             _servicesCollection.AddScoped<ITransformManager, TransformManager>();
