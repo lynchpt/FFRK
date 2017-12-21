@@ -19,5 +19,12 @@ namespace FFRKApi.Data.Storage
         /// </summary>
         /// <returns></returns>
         TransformResultsContainer RetrieveTransformResults();
+
+        /// <summary>
+        /// Returns the TransformResults at the given path, or empty TransformResultsContainer if nothing exists at that path
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        TransformResultsContainer RetrieveTransformResults(string path);
     }
 }

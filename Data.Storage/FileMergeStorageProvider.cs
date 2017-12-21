@@ -78,5 +78,19 @@ namespace FFRKApi.Data.Storage
 
             return mergeResultsContainer;
         }
+
+        public MergeResultsContainer RetrieveMergeResults(string path)
+        {
+            MergeResultsContainer mergeResultsContainer = new MergeResultsContainer();
+
+            if (path != null && File.Exists(path))
+            {
+                string fileContents = File.ReadAllText(path);
+
+                mergeResultsContainer = JsonConvert.DeserializeObject<MergeResultsContainer>(fileContents);
+            }
+
+            return mergeResultsContainer;
+        }
     }
 }

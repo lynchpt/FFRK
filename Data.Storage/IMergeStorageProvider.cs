@@ -13,12 +13,19 @@ namespace FFRKApi.Data.Storage
         /// </summary>
         /// <param name="importResultsContainer"></param>
         /// <returns></returns>
-        string StoreMergeResults(MergeResultsContainer transformResultsContainer);
+        string StoreMergeResults(MergeResultsContainer mergeResultsContainer);
 
         /// <summary>
         /// Gets latest transform results.
         /// </summary>
         /// <returns></returns>
         MergeResultsContainer RetrieveMergeResults();
+
+        /// <summary>
+        /// Returns the MergeResults at the given path, or empty MergeResultsContainer if nothing exists at that path
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        MergeResultsContainer RetrieveMergeResults(string path);
     }
 }

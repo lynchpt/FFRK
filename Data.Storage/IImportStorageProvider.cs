@@ -19,5 +19,12 @@ namespace FFRKApi.Data.Storage
         /// </summary>
         /// <returns></returns>
         ImportResultsContainer RetrieveImportResults();
+
+        /// <summary>
+        /// Returns the ImportResults at the given path, or empty ImportResultsContainer if nothing exists at that path
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        ImportResultsContainer RetrieveImportResults(string path);
     }
 }

@@ -13,7 +13,18 @@ namespace FFRKApi.Logic.EnlirMerge
 {
     public interface IMergeManager
     {
+        /// <summary>
+        /// Merges based on the latest tranform results file
+        /// </summary>
+        /// <returns></returns>
         MergeResultsContainer MergeAll();
+
+        /// <summary>
+        /// Merges based on a specified tranform results file
+        /// </summary>
+        /// <param name="importFilePath"></param>
+        /// <returns></returns>
+        MergeResultsContainer MergeAll(string transformFilePath);
     }
 
     public class MergeManager : IMergeManager
@@ -95,84 +106,12 @@ namespace FFRKApi.Logic.EnlirMerge
          */
         public MergeResultsContainer MergeAll()
         {
-            MergeResultsContainer mergeResultsContainer = new MergeResultsContainer();
-
             try
             {
                 TransformResultsContainer transformResults = _transformStorageProvider.RetrieveTransformResults();
 
-                //Id Wireup
-                WireUpLegendMateriaIds(transformResults);
-                _logger.LogInformation("Finished wiring up LegendMateriaIds");
 
-                WireUpCharacterIds(transformResults);
-                _logger.LogInformation("Finished wiring up CharacterIds");
-
-                WireUpSoulBreakIds(transformResults);
-                _logger.LogInformation("Finished wiring up SoulBreakIds");
-
-                WireUpRelicIds(transformResults);
-                _logger.LogInformation("Finished wiring up RelicIds");
-
-                WireUpEventIds(transformResults);
-                _logger.LogInformation("Finished wiring up EventIds");
-
-                WireUpOtherSourceInfo(transformResults);
-                _logger.LogInformation("Finished wiring up OtherSourceInfo");
-
-
-                //Object Wireup
-                WireUpMagiciteSkills(transformResults);
-                _logger.LogInformation("Finished wiring up MagiciteSkills");
-
-                WireUpRecordSpheres(transformResults);
-                _logger.LogInformation("Finished wiring up RecordSpheres");
-
-                WireUpLegendSpheres(transformResults);
-                _logger.LogInformation("Finished wiring up LegendSpheres");
-
-                WireUpRecordMaterias(transformResults);
-                _logger.LogInformation("Finished wiring up RecordMaterias");
-
-                WireUpLegendMaterias(transformResults);
-                _logger.LogInformation("Finished wiring up LegendMaterias");
-
-                WireUpCommands(transformResults);
-                _logger.LogInformation("Finished wiring up Commands");
-
-                WireUpStatuses(transformResults);
-                _logger.LogInformation("Finished wiring up Statuses");
-
-                WireUpOthers(transformResults);
-                _logger.LogInformation("Finished wiring up Others");
-
-                WireUpSoulBreaks(transformResults);
-                _logger.LogInformation("Finished wiring up SoulBreaks");
-
-                WireUpRelics(transformResults);
-                _logger.LogInformation("Finished wiring up Relics");
-
-
-                _logger.LogInformation("Finished MergeAll Operation");
-
-                //copy data from transformResults container to merge results container
-
-                mergeResultsContainer.Abilities = transformResults.Abilities;
-                mergeResultsContainer.Characters = transformResults.Characters;
-                mergeResultsContainer.Commands = transformResults.Commands;
-                mergeResultsContainer.Dungeons = transformResults.Dungeons;
-                mergeResultsContainer.Events = transformResults.Events;
-                mergeResultsContainer.Experiences = transformResults.Experiences;
-                mergeResultsContainer.LegendMaterias = transformResults.LegendMaterias;
-                mergeResultsContainer.LegendSpheres = transformResults.LegendSpheres;
-                mergeResultsContainer.MagiciteSkills = transformResults.MagiciteSkills;
-                mergeResultsContainer.Magicites = transformResults.Magicites;
-                mergeResultsContainer.Characters = transformResults.Characters;
-                mergeResultsContainer.Characters = transformResults.Characters;
-                mergeResultsContainer.Characters = transformResults.Characters;
-                mergeResultsContainer.Characters = transformResults.Characters;
-                mergeResultsContainer.Characters = transformResults.Characters;
-
+                MergeResultsContainer mergeResultsContainer = ExecuteMerge(transformResults);
 
 
                 return mergeResultsContainer;
@@ -184,6 +123,27 @@ namespace FFRKApi.Logic.EnlirMerge
                 throw;
             }
         }
+
+        public MergeResultsContainer MergeAll(string transformFilePath)
+        {
+            try
+            {
+                TransformResultsContainer transformResults = _transformStorageProvider.RetrieveTransformResults(transformFilePath);
+
+
+                MergeResultsContainer mergeResultsContainer = ExecuteMerge(transformResults);
+
+
+                return mergeResultsContainer;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                _logger.LogInformation("Error in MergeManager MergeAll method - Merge was NOT completed.");
+                throw;
+            }
+        }
+
         #endregion
 
         #region Id Wireup Private Methods
@@ -544,9 +504,88 @@ namespace FFRKApi.Logic.EnlirMerge
 
         #endregion
 
-
-
         #region Private Methods
+
+        private MergeResultsContainer ExecuteMerge(TransformResultsContainer transformResults)
+        {
+            MergeResultsContainer mergeResultsContainer = new MergeResultsContainer();
+
+            //Id Wireup
+            WireUpLegendMateriaIds(transformResults);
+            _logger.LogInformation("Finished wiring up LegendMateriaIds");
+
+            WireUpCharacterIds(transformResults);
+            _logger.LogInformation("Finished wiring up CharacterIds");
+
+            WireUpSoulBreakIds(transformResults);
+            _logger.LogInformation("Finished wiring up SoulBreakIds");
+
+            WireUpRelicIds(transformResults);
+            _logger.LogInformation("Finished wiring up RelicIds");
+
+            WireUpEventIds(transformResults);
+            _logger.LogInformation("Finished wiring up EventIds");
+
+            WireUpOtherSourceInfo(transformResults);
+            _logger.LogInformation("Finished wiring up OtherSourceInfo");
+
+
+            //Object Wireup
+            WireUpMagiciteSkills(transformResults);
+            _logger.LogInformation("Finished wiring up MagiciteSkills");
+
+            WireUpRecordSpheres(transformResults);
+            _logger.LogInformation("Finished wiring up RecordSpheres");
+
+            WireUpLegendSpheres(transformResults);
+            _logger.LogInformation("Finished wiring up LegendSpheres");
+
+            WireUpRecordMaterias(transformResults);
+            _logger.LogInformation("Finished wiring up RecordMaterias");
+
+            WireUpLegendMaterias(transformResults);
+            _logger.LogInformation("Finished wiring up LegendMaterias");
+
+            WireUpCommands(transformResults);
+            _logger.LogInformation("Finished wiring up Commands");
+
+            WireUpStatuses(transformResults);
+            _logger.LogInformation("Finished wiring up Statuses");
+
+            WireUpOthers(transformResults);
+            _logger.LogInformation("Finished wiring up Others");
+
+            WireUpSoulBreaks(transformResults);
+            _logger.LogInformation("Finished wiring up SoulBreaks");
+
+            WireUpRelics(transformResults);
+            _logger.LogInformation("Finished wiring up Relics");
+
+
+            _logger.LogInformation("Finished MergeAll Operation");
+
+            //copy data from transformResults container to merge results container
+
+            mergeResultsContainer.Abilities = transformResults.Abilities;
+            mergeResultsContainer.Characters = transformResults.Characters;
+            mergeResultsContainer.Commands = transformResults.Commands;
+            mergeResultsContainer.Dungeons = transformResults.Dungeons;
+            mergeResultsContainer.Events = transformResults.Events;
+            mergeResultsContainer.Experiences = transformResults.Experiences;
+            mergeResultsContainer.LegendMaterias = transformResults.LegendMaterias;
+            mergeResultsContainer.LegendSpheres = transformResults.LegendSpheres;
+            mergeResultsContainer.MagiciteSkills = transformResults.MagiciteSkills;
+            mergeResultsContainer.Magicites = transformResults.Magicites;
+            mergeResultsContainer.Missions = transformResults.Missions;
+            mergeResultsContainer.Others = transformResults.Others;
+            mergeResultsContainer.RecordMaterias = transformResults.RecordMaterias;
+            mergeResultsContainer.RecordSpheres = transformResults.RecordSpheres;
+            mergeResultsContainer.Relics = transformResults.Relics;
+            mergeResultsContainer.SoulBreaks = transformResults.SoulBreaks;
+            mergeResultsContainer.Statuses = transformResults.Statuses;
+
+            return mergeResultsContainer;
+        }
 
         private string GetNameOfTypeListItem<T>(int itemId) where T : class, ITypeList, new()
         {

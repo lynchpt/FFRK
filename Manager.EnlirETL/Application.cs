@@ -80,18 +80,18 @@ namespace Manager.EnlirETL
 
                 //Transform
                 Stopwatch stopwatchTransform = Stopwatch.StartNew();
-                TransformResultsContainer transformResultsContainer = _transformManager.TransformAll();
+                TransformResultsContainer transformResultsContainer = _transformManager.TransformAll(importStoragePath);
                 string transformStoragePath = _transformStorageProvider.StoreTransformResults(transformResultsContainer);
                 stopwatchTransform.Stop();
 
                 //Merge
                 Stopwatch stopwatchMerge = Stopwatch.StartNew();
-                MergeResultsContainer mergeResultsContainer = _mergeManager.MergeAll();
-                _mergeStorageProvider.StoreMergeResults(mergeResultsContainer);
+                MergeResultsContainer mergeResultsContainer = _mergeManager.MergeAll(transformStoragePath);
+                string mergeStoragePath = _mergeStorageProvider.StoreMergeResults(mergeResultsContainer);
                 stopwatchMerge.Stop();
 
                 //test merge storage
-                MergeResultsContainer testMergeResultsContainer = _mergeStorageProvider.RetrieveMergeResults();
+                MergeResultsContainer testMergeResultsContainer = _mergeStorageProvider.RetrieveMergeResults(mergeStoragePath);
 
                 stopwatchFull.Stop();
 
@@ -138,6 +138,8 @@ namespace Manager.EnlirETL
             _servicesCollection.Configure<FileTransformStorageOptions>(_configuration.GetSection(nameof(FileTransformStorageOptions)));
             _servicesCollection.Configure<FileMergeStorageOptions>(_configuration.GetSection(nameof(FileMergeStorageOptions)));
 
+            _servicesCollection.Configure<AzureBlobStorageOptions>(_configuration.GetSection(nameof(AzureBlobStorageOptions)));
+
 
 
             //services
@@ -179,9 +181,13 @@ namespace Manager.EnlirETL
             _servicesCollection.AddScoped<IRowTransformer<CharacterRow, Character>, CharacterTransformer>();
 
 
-            _servicesCollection.AddScoped<IImportStorageProvider, FileImportStorageProvider>();
-            _servicesCollection.AddScoped<ITransformStorageProvider, FileTransformStorageProvider>();
-            _servicesCollection.AddScoped<IMergeStorageProvider, FileMergeStorageProvider>();
+            //_servicesCollection.AddScoped<IImportStorageProvider, FileImportStorageProvider>();
+            //_servicesCollection.AddScoped<ITransformStorageProvider, FileTransformStorageProvider>();
+            //_servicesCollection.AddScoped<IMergeStorageProvider, FileMergeStorageProvider>();
+
+            _servicesCollection.AddScoped<IImportStorageProvider, AzureBlobStorageProvider>();
+            _servicesCollection.AddScoped<ITransformStorageProvider, AzureBlobStorageProvider>();
+            _servicesCollection.AddScoped<IMergeStorageProvider, AzureBlobStorageProvider>();
 
             _servicesCollection.AddScoped<IImportManager, ImportManager>();
             _servicesCollection.AddScoped<ITransformManager, TransformManager>();

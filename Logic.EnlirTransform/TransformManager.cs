@@ -11,7 +11,18 @@ namespace FFRKApi.Logic.EnlirTransform
 {
     public interface ITransformManager
     {
+        /// <summary>
+        /// Tranforms based on the latest import results file
+        /// </summary>
+        /// <returns></returns>
         TransformResultsContainer TransformAll();
+
+        /// <summary>
+        /// Tranforms based on a specified import reults file
+        /// </summary>
+        /// <param name="importFilePath"></param>
+        /// <returns></returns>
+        TransformResultsContainer TransformAll(string importFilePath);
     }
 
     public class TransformManager: ITransformManager
@@ -82,60 +93,11 @@ namespace FFRKApi.Logic.EnlirTransform
         {
             try
             {
-                TransformResultsContainer transformResultsContainer = new TransformResultsContainer();
-
                 ImportResultsContainer importResults = _importStorageProvider.RetrieveImportResults();
 
-                transformResultsContainer.Events = _eventRowTransformer.Transform(importResults.EventRows);
-                _logger.LogInformation("finished transforming EventRows to Events");
 
-                transformResultsContainer.Missions = _missionRowTransformer.Transform(importResults.MissionRows);
-                _logger.LogInformation("finished transforming MissionRows to Missions");
+                TransformResultsContainer transformResultsContainer = ExecuteTransform(importResults);
 
-                transformResultsContainer.Experiences = _experienceRowTransformer.Transform(importResults.ExperienceRows);
-                _logger.LogInformation("finished transforming ExperienceRows to a single Experience object in a list");
-
-                transformResultsContainer.Dungeons = _dungeonRowTransformer.Transform(importResults.DungeonRows);
-                _logger.LogInformation("finished transforming DungeonRows to Dungeons");
-
-                transformResultsContainer.MagiciteSkills = _magiciteSkillRowTransformer.Transform(importResults.MagiciteSkillRows);
-                _logger.LogInformation("finished transforming MagiciteSkillRows to MagiciteSkills");
-
-                transformResultsContainer.Magicites = _magiciteRowTransformer.Transform(importResults.MagiciteRows);
-                _logger.LogInformation("finished transforming MagiciteRows to Magicites");
-
-                transformResultsContainer.Statuses = _statusRowTransformer.Transform(importResults.StatusRows);
-                _logger.LogInformation("finished transforming StatusRows to Statuses");
-
-                transformResultsContainer.Others = _otherRowTransformer.Transform(importResults.OtherRows);
-                _logger.LogInformation("finished transforming OtherRows to Others");
-
-                transformResultsContainer.Commands = _commandRowTransformer.Transform(importResults.CommandRows);
-                _logger.LogInformation("finished transforming CommandRows to Commands");
-
-                transformResultsContainer.SoulBreaks = _soulBreakRowTransformer.Transform(importResults.SoulBreakRows);
-                _logger.LogInformation("finished transforming SoulBreakRows to SoulBreaks");
-
-                transformResultsContainer.Relics = _relicRowTransformer.Transform(importResults.RelicRows);
-                _logger.LogInformation("finished transforming RelicRows to Relics");
-
-                transformResultsContainer.Abilities = _abilityRowTransformer.Transform(importResults.AbilityRows);
-                _logger.LogInformation("finished transforming AbilityRows to Abilities");
-
-                transformResultsContainer.LegendMaterias = _legendMateriaRowTransformer.Transform(importResults.LegendMateriaRows);
-                _logger.LogInformation("finished transforming LegendMateriaRows to LegendMaterias");
-
-                transformResultsContainer.RecordMaterias = _recordMateriaRowTransformer.Transform(importResults.RecordMateriaRows);
-                _logger.LogInformation("finished transforming RecordMateriaRows to RecordMaterias");
-
-                transformResultsContainer.RecordSpheres = _recordSphereRowTransformer.Transform(importResults.RecordSphereRows);
-                _logger.LogInformation("finished transforming RecordMateriaRows to RecordMaterias");
-
-                transformResultsContainer.LegendSpheres = _legendSphereRowTransformer.Transform(importResults.LegendSphereRows);
-                _logger.LogInformation("finished transforming LegendSphereRows to LegendSpheres");
-
-                transformResultsContainer.Characters = _characterRowTransformer.Transform(importResults.CharacterRows);
-                _logger.LogInformation("finished transforming CharacterRows to Characters");
 
                 return transformResultsContainer;
             }
@@ -145,7 +107,90 @@ namespace FFRKApi.Logic.EnlirTransform
                 _logger.LogInformation("Error in TransformManager TransformAll method - transform was NOT completed.");
                 throw;
             }
-        } 
+        }
+
+        public TransformResultsContainer TransformAll(string importFilePath)
+        {
+            try
+            {
+                ImportResultsContainer importResults = _importStorageProvider.RetrieveImportResults(importFilePath);
+
+
+                TransformResultsContainer transformResultsContainer = ExecuteTransform(importResults);
+
+
+                return transformResultsContainer;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                _logger.LogInformation("Error in TransformManager TransformAll method - transform was NOT completed.");
+                throw;
+            }
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private TransformResultsContainer ExecuteTransform(ImportResultsContainer importResults)
+        {
+            TransformResultsContainer transformResultsContainer = new TransformResultsContainer();
+
+            transformResultsContainer.Events = _eventRowTransformer.Transform(importResults.EventRows);
+            _logger.LogInformation("finished transforming EventRows to Events");
+
+            transformResultsContainer.Missions = _missionRowTransformer.Transform(importResults.MissionRows);
+            _logger.LogInformation("finished transforming MissionRows to Missions");
+
+            transformResultsContainer.Experiences = _experienceRowTransformer.Transform(importResults.ExperienceRows);
+            _logger.LogInformation("finished transforming ExperienceRows to a single Experience object in a list");
+
+            transformResultsContainer.Dungeons = _dungeonRowTransformer.Transform(importResults.DungeonRows);
+            _logger.LogInformation("finished transforming DungeonRows to Dungeons");
+
+            transformResultsContainer.MagiciteSkills = _magiciteSkillRowTransformer.Transform(importResults.MagiciteSkillRows);
+            _logger.LogInformation("finished transforming MagiciteSkillRows to MagiciteSkills");
+
+            transformResultsContainer.Magicites = _magiciteRowTransformer.Transform(importResults.MagiciteRows);
+            _logger.LogInformation("finished transforming MagiciteRows to Magicites");
+
+            transformResultsContainer.Statuses = _statusRowTransformer.Transform(importResults.StatusRows);
+            _logger.LogInformation("finished transforming StatusRows to Statuses");
+
+            transformResultsContainer.Others = _otherRowTransformer.Transform(importResults.OtherRows);
+            _logger.LogInformation("finished transforming OtherRows to Others");
+
+            transformResultsContainer.Commands = _commandRowTransformer.Transform(importResults.CommandRows);
+            _logger.LogInformation("finished transforming CommandRows to Commands");
+
+            transformResultsContainer.SoulBreaks = _soulBreakRowTransformer.Transform(importResults.SoulBreakRows);
+            _logger.LogInformation("finished transforming SoulBreakRows to SoulBreaks");
+
+            transformResultsContainer.Relics = _relicRowTransformer.Transform(importResults.RelicRows);
+            _logger.LogInformation("finished transforming RelicRows to Relics");
+
+            transformResultsContainer.Abilities = _abilityRowTransformer.Transform(importResults.AbilityRows);
+            _logger.LogInformation("finished transforming AbilityRows to Abilities");
+
+            transformResultsContainer.LegendMaterias = _legendMateriaRowTransformer.Transform(importResults.LegendMateriaRows);
+            _logger.LogInformation("finished transforming LegendMateriaRows to LegendMaterias");
+
+            transformResultsContainer.RecordMaterias = _recordMateriaRowTransformer.Transform(importResults.RecordMateriaRows);
+            _logger.LogInformation("finished transforming RecordMateriaRows to RecordMaterias");
+
+            transformResultsContainer.RecordSpheres = _recordSphereRowTransformer.Transform(importResults.RecordSphereRows);
+            _logger.LogInformation("finished transforming RecordMateriaRows to RecordMaterias");
+
+            transformResultsContainer.LegendSpheres = _legendSphereRowTransformer.Transform(importResults.LegendSphereRows);
+            _logger.LogInformation("finished transforming LegendSphereRows to LegendSpheres");
+
+            transformResultsContainer.Characters = _characterRowTransformer.Transform(importResults.CharacterRows);
+            _logger.LogInformation("finished transforming CharacterRows to Characters");
+
+            return transformResultsContainer;
+        }
+
         #endregion
     }
 }
