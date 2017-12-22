@@ -38,7 +38,11 @@ namespace Manager.EnlirETL
         private ITransformStorageProvider _transformStorageProvider;
         private IMergeStorageProvider _mergeStorageProvider;
         private ApplicationOptions _applicationOptions;
-        private readonly ILogger<Application> _logger; 
+        private readonly ILogger<Application> _logger;
+        #endregion
+
+        #region Constants
+        private const string DateFormatSpecifier = "yyyy-MM-dd_hh-mm-ss";
         #endregion
 
 
@@ -70,24 +74,25 @@ namespace Manager.EnlirETL
                 _mergeManager = _serviceProvider.GetService<IMergeManager>();
                 _mergeStorageProvider = _serviceProvider.GetService<IMergeStorageProvider>();
 
-                //uncomment below to actually run import and transform stages
+                //uncomment below to actually run import and transform stages - file based
+                string formattedDateString = DateTimeOffset.UtcNow.ToString(DateFormatSpecifier);
 
                 //Import
                 Stopwatch stopwatchImport = Stopwatch.StartNew();
                 ImportResultsContainer importResultsContainer = _importManager.ImportAll();
-                string importStoragePath = _importStorageProvider.StoreImportResults(importResultsContainer, null);
+                string importStoragePath = _importStorageProvider.StoreImportResults(importResultsContainer, formattedDateString);
                 stopwatchImport.Stop();
 
                 //Transform
                 Stopwatch stopwatchTransform = Stopwatch.StartNew();
                 TransformResultsContainer transformResultsContainer = _transformManager.TransformAll(importStoragePath);
-                string transformStoragePath = _transformStorageProvider.StoreTransformResults(transformResultsContainer, null);
+                string transformStoragePath = _transformStorageProvider.StoreTransformResults(transformResultsContainer, formattedDateString);
                 stopwatchTransform.Stop();
 
                 //Merge
                 Stopwatch stopwatchMerge = Stopwatch.StartNew();
                 MergeResultsContainer mergeResultsContainer = _mergeManager.MergeAll(transformStoragePath);
-                string mergeStoragePath = _mergeStorageProvider.StoreMergeResults(mergeResultsContainer, null);
+                string mergeStoragePath = _mergeStorageProvider.StoreMergeResults(mergeResultsContainer, formattedDateString);
                 stopwatchMerge.Stop();
 
                 //test merge storage
@@ -181,13 +186,13 @@ namespace Manager.EnlirETL
             _servicesCollection.AddScoped<IRowTransformer<CharacterRow, Character>, CharacterTransformer>();
 
 
-            //_servicesCollection.AddScoped<IImportStorageProvider, FileImportStorageProvider>();
-            //_servicesCollection.AddScoped<ITransformStorageProvider, FileTransformStorageProvider>();
-            //_servicesCollection.AddScoped<IMergeStorageProvider, FileMergeStorageProvider>();
+            _servicesCollection.AddScoped<IImportStorageProvider, FileImportStorageProvider>();
+            _servicesCollection.AddScoped<ITransformStorageProvider, FileTransformStorageProvider>();
+            _servicesCollection.AddScoped<IMergeStorageProvider, FileMergeStorageProvider>();
 
-            _servicesCollection.AddScoped<IImportStorageProvider, AzureBlobStorageProvider>();
-            _servicesCollection.AddScoped<ITransformStorageProvider, AzureBlobStorageProvider>();
-            _servicesCollection.AddScoped<IMergeStorageProvider, AzureBlobStorageProvider>();
+            //_servicesCollection.AddScoped<IImportStorageProvider, AzureBlobStorageProvider>();
+            //_servicesCollection.AddScoped<ITransformStorageProvider, AzureBlobStorageProvider>();
+            //_servicesCollection.AddScoped<IMergeStorageProvider, AzureBlobStorageProvider>();
 
             _servicesCollection.AddScoped<IImportManager, ImportManager>();
             _servicesCollection.AddScoped<ITransformManager, TransformManager>();

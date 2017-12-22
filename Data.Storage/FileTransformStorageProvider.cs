@@ -12,26 +12,22 @@ using Newtonsoft.Json;
 
 namespace FFRKApi.Data.Storage
 {
-    public class FileTransformStorageProvider : ITransformStorageProvider
+    public class FileTransformStorageProvider : FileStorageProviderBase,  ITransformStorageProvider
     {
         #region Class Variables
 
         private readonly FileTransformStorageOptions _fileTransformStorageOptions;
-        private readonly ILogger<FileTransformStorageProvider> _logger;
         #endregion
 
         #region Constants
 
-        private const string DateReplacementToken = "{Date}";
-        private const string DateFormatSpecifier = "yyyy-MM-dd_hh-mm-ss";
         private const string TransformResultFileFilterExpression = "TransformResults*.json";
         #endregion
 
         #region Constructors
-        public FileTransformStorageProvider(IOptions<FileTransformStorageOptions> fileTransformStorageOptions, ILogger<FileTransformStorageProvider> logger)
+        public FileTransformStorageProvider(IOptions<FileTransformStorageOptions> fileTransformStorageOptions, ILogger<FileTransformStorageProvider> logger): base(logger)
         {
             _fileTransformStorageOptions = fileTransformStorageOptions.Value;
-            _logger = logger;
         }
         #endregion
 
@@ -39,61 +35,29 @@ namespace FFRKApi.Data.Storage
         {
             string serializedTransformResults = JsonConvert.SerializeObject(transformResultsContainer);
 
-            if (String.IsNullOrWhiteSpace(formattedDateString))
-            {
-                formattedDateString = DateTimeOffset.UtcNow.ToString(DateFormatSpecifier);
-            }
-
-            string datedFilePath = _fileTransformStorageOptions.TransformResultsStoragePath.Replace(DateReplacementToken, formattedDateString);
-
-            string directory = new FileInfo(datedFilePath).Directory.FullName;
-
-
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-
-            using (TextWriter writer = File.CreateText(datedFilePath))
-            {
-                writer.Write(serializedTransformResults);
-            }
+            string datedFilePath = StoreSerializedData(serializedTransformResults, formattedDateString, _fileTransformStorageOptions.TransformResultsStoragePath);
 
             return datedFilePath;
         }
 
         public TransformResultsContainer RetrieveTransformResults()
         {
-            TransformResultsContainer transformResultsContainer = new TransformResultsContainer();
+            string fileContents = RetrieveSerializedData(_fileTransformStorageOptions.TransformResultsStoragePath, TransformResultFileFilterExpression);
 
-            string directory = new FileInfo(_fileTransformStorageOptions.TransformResultsStoragePath).Directory.FullName;
-
-            IList<string> filepaths = Directory.EnumerateFiles(directory, TransformResultFileFilterExpression).OrderByDescending(p => p).ToList();
-
-            string latestFilepath = filepaths.FirstOrDefault();
-
-            if (latestFilepath != null)
-            {
-                string fileContents = File.ReadAllText(latestFilepath);
-
-                transformResultsContainer = JsonConvert.DeserializeObject<TransformResultsContainer>(fileContents);
-            }
+            TransformResultsContainer transformResultsContainer = JsonConvert.DeserializeObject<TransformResultsContainer>(fileContents);
 
             return transformResultsContainer;
         }
 
+
         public TransformResultsContainer RetrieveTransformResults(string path)
         {
-            TransformResultsContainer transformResultsContainer = new TransformResultsContainer();
+            string fileContents = RetrieveSerializedData(path);
 
-            if (path != null && File.Exists(path))
-            {
-                string fileContents = File.ReadAllText(path);
-
-                transformResultsContainer = JsonConvert.DeserializeObject<TransformResultsContainer>(fileContents);
-            }
+            TransformResultsContainer transformResultsContainer = JsonConvert.DeserializeObject<TransformResultsContainer>(fileContents);
 
             return transformResultsContainer;
         }
     }
+
 }

@@ -12,26 +12,22 @@ using Newtonsoft.Json;
 
 namespace FFRKApi.Data.Storage
 {
-    public class FileMergeStorageProvider : IMergeStorageProvider
+    public class FileMergeStorageProvider : FileStorageProviderBase, IMergeStorageProvider
     {
         #region Class Variables
 
         private readonly FileMergeStorageOptions _fileMergeStorageOptions;
-        private readonly ILogger<FileMergeStorageProvider> _logger;
         #endregion
 
         #region Constants
 
-        private const string DateReplacementToken = "{Date}";
-        private const string DateFormatSpecifier = "yyyy-MM-dd_hh-mm-ss";
         private const string MergeResultFileFilterExpression = "MergeResults*.json";
         #endregion
 
         #region Constructors
-        public FileMergeStorageProvider(IOptions<FileMergeStorageOptions> fileMergeStorageOptions, ILogger<FileMergeStorageProvider> logger)
+        public FileMergeStorageProvider(IOptions<FileMergeStorageOptions> fileMergeStorageOptions, ILogger<FileMergeStorageProvider> logger) : base(logger)
         {
             _fileMergeStorageOptions = fileMergeStorageOptions.Value;
-            _logger = logger;
         }
         #endregion
 
@@ -39,59 +35,25 @@ namespace FFRKApi.Data.Storage
         {
             string serializedMergeResults = JsonConvert.SerializeObject(mergeResultsContainer);
 
-            if (String.IsNullOrWhiteSpace(formattedDateString))
-            {
-                formattedDateString = DateTimeOffset.UtcNow.ToString(DateFormatSpecifier);
-            }
-
-            string datedFilePath = _fileMergeStorageOptions.MergeResultsStoragePath.Replace(DateReplacementToken, formattedDateString);
-
-            string directory = new FileInfo(datedFilePath).Directory.FullName;
-
-
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-
-            using (TextWriter writer = File.CreateText(datedFilePath))
-            {
-                writer.Write(serializedMergeResults);
-            }
+            string datedFilePath = StoreSerializedData(serializedMergeResults, formattedDateString, _fileMergeStorageOptions.MergeResultsStoragePath);
 
             return datedFilePath;
         }
 
         public MergeResultsContainer RetrieveMergeResults()
         {
-            MergeResultsContainer mergeResultsContainer = new MergeResultsContainer();
+            string fileContents = RetrieveSerializedData(_fileMergeStorageOptions.MergeResultsStoragePath, MergeResultFileFilterExpression);
 
-            string directory = new FileInfo(_fileMergeStorageOptions.MergeResultsStoragePath).Directory.FullName;
-
-            IList<string> filepaths = Directory.EnumerateFiles(directory, MergeResultFileFilterExpression).OrderByDescending(p => p).ToList();
-
-            string latestFilepath = filepaths.FirstOrDefault();
-
-            if (latestFilepath != null)
-            {
-                string fileContents = File.ReadAllText(latestFilepath);
-
-                mergeResultsContainer = JsonConvert.DeserializeObject<MergeResultsContainer>(fileContents);
-            }
+            MergeResultsContainer mergeResultsContainer = JsonConvert.DeserializeObject<MergeResultsContainer>(fileContents);
 
             return mergeResultsContainer;
         }
 
         public MergeResultsContainer RetrieveMergeResults(string path)
         {
-            MergeResultsContainer mergeResultsContainer = new MergeResultsContainer();
+            string fileContents = RetrieveSerializedData(path);
 
-            if (path != null && File.Exists(path))
-            {
-                string fileContents = File.ReadAllText(path);
-
-                mergeResultsContainer = JsonConvert.DeserializeObject<MergeResultsContainer>(fileContents);
-            }
+            MergeResultsContainer mergeResultsContainer = JsonConvert.DeserializeObject<MergeResultsContainer>(fileContents);
 
             return mergeResultsContainer;
         }

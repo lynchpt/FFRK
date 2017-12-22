@@ -11,87 +11,50 @@ using Newtonsoft.Json;
 
 namespace FFRKApi.Data.Storage
 {
-    public class FileImportStorageProvider : IImportStorageProvider
+    public class FileImportStorageProvider : FileStorageProviderBase, IImportStorageProvider
     {
         #region Class Variables
 
         private readonly FileImportStorageOptions _fileImportStorageOptions;
-        private readonly ILogger<FileImportStorageProvider> _logger;
         #endregion
 
         #region Constants
 
-        private const string DateReplacementToken = "{Date}";
-        private const string DateFormatSpecifier = "yyyy-MM-dd_hh-mm-ss";
         private const string ImportResultFileFilterExpression = "ImportsResults*.json";
         #endregion
 
         #region Constructors
-        public FileImportStorageProvider(IOptions<FileImportStorageOptions> fileImportStorageOptions, ILogger<FileImportStorageProvider> logger)
+        public FileImportStorageProvider(IOptions<FileImportStorageOptions> fileImportStorageOptions, ILogger<FileImportStorageProvider> logger): base(logger)
         {
             _fileImportStorageOptions = fileImportStorageOptions.Value;
-            _logger = logger;
-        } 
+
+        }
         #endregion
 
         public string StoreImportResults(ImportResultsContainer importResultsContainer, string formattedDateString)
         {
-
             string serializedImportResults = JsonConvert.SerializeObject(importResultsContainer);
 
-            if (String.IsNullOrWhiteSpace(formattedDateString))
-            {
-                formattedDateString = DateTimeOffset.UtcNow.ToString(DateFormatSpecifier);
-            }
-            
-            string datedFilePath = _fileImportStorageOptions.ImportResultsStoragePath.Replace(DateReplacementToken, formattedDateString);
-
-            string directory = new FileInfo(datedFilePath).Directory.FullName;
-
-
-            if (!Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-
-            using (TextWriter writer = File.CreateText(datedFilePath))
-            {
-                writer.Write(serializedImportResults);
-            }
+            string datedFilePath = StoreSerializedData(serializedImportResults, formattedDateString, _fileImportStorageOptions.ImportResultsStoragePath);
 
             return datedFilePath;
         }
 
         public ImportResultsContainer RetrieveImportResults()
         {
-            ImportResultsContainer importResultsContainer = new ImportResultsContainer();
+            string fileContents = RetrieveSerializedData(_fileImportStorageOptions.ImportResultsStoragePath, ImportResultFileFilterExpression);
 
-            string directory = new FileInfo(_fileImportStorageOptions.ImportResultsStoragePath).Directory.FullName;
-
-            IList<string> filepaths = Directory.EnumerateFiles(directory, ImportResultFileFilterExpression).OrderByDescending(p =>p).ToList();
-
-            string latestFilepath = filepaths.FirstOrDefault();
-
-            if (latestFilepath != null)
-            {
-                string fileContents = File.ReadAllText(latestFilepath);
-
-                importResultsContainer = JsonConvert.DeserializeObject<ImportResultsContainer>(fileContents);
-            }
+            ImportResultsContainer importResultsContainer = JsonConvert.DeserializeObject<ImportResultsContainer>(fileContents);
 
             return importResultsContainer;
         }
 
+
         public ImportResultsContainer RetrieveImportResults(string path)
         {
-            ImportResultsContainer importResultsContainer = new ImportResultsContainer();
+            string fileContents = RetrieveSerializedData(path);
 
-            if (path != null && File.Exists(path))
-            {
-                string fileContents = File.ReadAllText(path);
-
-                importResultsContainer = JsonConvert.DeserializeObject<ImportResultsContainer>(fileContents);
-            }
+            ImportResultsContainer importResultsContainer = JsonConvert.DeserializeObject<ImportResultsContainer>(fileContents);
 
             return importResultsContainer;
         }
