@@ -50,11 +50,11 @@ namespace FFRKApi.Data.Storage
         #endregion
 
         #region IImportStorageProvider Implementation
-        public string StoreImportResults(ImportResultsContainer importResultsContainer)
+        public string StoreImportResults(ImportResultsContainer importResultsContainer, string formattedDateString)
         {
             string serializedImportResults = JsonConvert.SerializeObject(importResultsContainer);
 
-            string datedFilePath = StoreTextAsBlob(_azureBlobStorageOptions.ImportResultsStoragePath, serializedImportResults);
+            string datedFilePath = StoreTextAsBlob(_azureBlobStorageOptions.ImportResultsStoragePath, serializedImportResults, formattedDateString);
 
             return datedFilePath; //this is the identifier of the blob  
         }
@@ -86,11 +86,11 @@ namespace FFRKApi.Data.Storage
         #endregion
 
         #region ITransformStorageProvider Implementation
-        public string StoreTransformResults(TransformResultsContainer transformResultsContainer)
+        public string StoreTransformResults(TransformResultsContainer transformResultsContainer, string formattedDateString)
         {
             string serializedTransformResults = JsonConvert.SerializeObject(transformResultsContainer);
 
-            string datedFilePath = StoreTextAsBlob(_azureBlobStorageOptions.TransformResultsStoragePath, serializedTransformResults);
+            string datedFilePath = StoreTextAsBlob(_azureBlobStorageOptions.TransformResultsStoragePath, serializedTransformResults, formattedDateString);
 
             return datedFilePath; //this is the identifier of the blob 
         }
@@ -120,11 +120,11 @@ namespace FFRKApi.Data.Storage
         #endregion
 
         #region IMergeStorageProvider Implementation
-        public string StoreMergeResults(MergeResultsContainer mergeResultsContainer)
+        public string StoreMergeResults(MergeResultsContainer mergeResultsContainer, string formattedDateString)
         {
             string serializedMergeResults = JsonConvert.SerializeObject(mergeResultsContainer);
 
-            string datedFilePath = StoreTextAsBlob(_azureBlobStorageOptions.MergeResultsStoragePath, serializedMergeResults);
+            string datedFilePath = StoreTextAsBlob(_azureBlobStorageOptions.MergeResultsStoragePath, serializedMergeResults, formattedDateString);
 
             return datedFilePath; //this is the identifier of the blob 
         }
@@ -155,10 +155,14 @@ namespace FFRKApi.Data.Storage
 
         #region Private Methods
 
-        private string StoreTextAsBlob(string storagePath, string contents)
+        private string StoreTextAsBlob(string storagePath, string contents, string formattedDateString)
         {
-            string fileDateSegment = DateTimeOffset.UtcNow.ToString(DateFormatSpecifier);
-            string datedFilePath = storagePath.Replace(DateReplacementToken, fileDateSegment);
+            if (String.IsNullOrWhiteSpace(formattedDateString))
+            {
+                formattedDateString = DateTimeOffset.UtcNow.ToString(DateFormatSpecifier);
+            }
+
+            string datedFilePath = storagePath.Replace(DateReplacementToken, formattedDateString);
 
             CloudBlockBlob blockBlob = _container.GetBlockBlobReference(datedFilePath);
 

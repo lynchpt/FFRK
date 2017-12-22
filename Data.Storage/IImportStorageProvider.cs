@@ -11,8 +11,9 @@ namespace FFRKApi.Data.Storage
         /// Stores the passed in import results to a storage medium
         /// </summary>
         /// <param name="importResultsContainer"></param>
+        /// <param name="formattedDateString">in format yyyy-MM-dd_hh-mm-ss, if null passed in, implementation should use DateTime.UtcNow</param>
         /// <returns></returns>
-        string StoreImportResults(ImportResultsContainer importResultsContainer);
+        string StoreImportResults(ImportResultsContainer importResultsContainer, string formattedDateString);
 
         /// <summary>
         /// Gets latest import results.

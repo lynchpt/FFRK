@@ -10,9 +10,10 @@ namespace FFRKApi.Data.Storage
         /// <summary>
         /// Stores the passed in transform results to a storage medium
         /// </summary>
-        /// <param name="importResultsContainer"></param>
+        /// <param name="transformResultsContainer"></param>
+        /// <param name="formattedDateString">in format yyyy-MM-dd_hh-mm-ss, if null passed in, implementation should use DateTime.UtcNow</param>
         /// <returns></returns>
-        string StoreTransformResults(TransformResultsContainer transformResultsContainer);
+        string StoreTransformResults(TransformResultsContainer transformResultsContainer, string formattedDateString);
 
         /// <summary>
         /// Gets latest transform results.

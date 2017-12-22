@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SheetsApiHelper", "SheetsApiHelper\SheetsApiHelper.csproj", "{1BD111AA-C246-474A-B6E2-F0B8F1DCE280}"
 EndProject
@@ -19,9 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic.EnlirTransform", "Log
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model.EnlirTransform", "Model.EnlirTransform\Model.EnlirTransform.csproj", "{B0C15A91-E5FF-4804-82FC-E7F6E05966A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic.EnlirMerge", "Logic.EnlirMerge\Logic.EnlirMerge.csproj", "{A63403E8-8D17-47E5-AE0D-C0D5BE5BB985}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic.EnlirMerge", "Logic.EnlirMerge\Logic.EnlirMerge.csproj", "{A63403E8-8D17-47E5-AE0D-C0D5BE5BB985}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model.EnlirMerge", "Model.EnlirMerge\Model.EnlirMerge.csproj", "{5607E47C-4DCE-458D-93E9-1DB8F69D30C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model.EnlirMerge", "Model.EnlirMerge\Model.EnlirMerge.csproj", "{5607E47C-4DCE-458D-93E9-1DB8F69D30C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionApp.ETL", "FunctionApp.ETL\FunctionApp.ETL.csproj", "{FC130A58-B027-4F1F-A941-97E7B91550CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{5607E47C-4DCE-458D-93E9-1DB8F69D30C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5607E47C-4DCE-458D-93E9-1DB8F69D30C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5607E47C-4DCE-458D-93E9-1DB8F69D30C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC130A58-B027-4F1F-A941-97E7B91550CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC130A58-B027-4F1F-A941-97E7B91550CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC130A58-B027-4F1F-A941-97E7B91550CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC130A58-B027-4F1F-A941-97E7B91550CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

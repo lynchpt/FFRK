@@ -34,13 +34,17 @@ namespace FFRKApi.Data.Storage
         } 
         #endregion
 
-        public string StoreImportResults(ImportResultsContainer importResultsContainer)
+        public string StoreImportResults(ImportResultsContainer importResultsContainer, string formattedDateString)
         {
+
             string serializedImportResults = JsonConvert.SerializeObject(importResultsContainer);
 
-            string fileDateSegment = DateTimeOffset.UtcNow.ToString(DateFormatSpecifier);
-
-            string datedFilePath = _fileImportStorageOptions.ImportResultsStoragePath.Replace(DateReplacementToken, fileDateSegment);
+            if (String.IsNullOrWhiteSpace(formattedDateString))
+            {
+                formattedDateString = DateTimeOffset.UtcNow.ToString(DateFormatSpecifier);
+            }
+            
+            string datedFilePath = _fileImportStorageOptions.ImportResultsStoragePath.Replace(DateReplacementToken, formattedDateString);
 
             string directory = new FileInfo(datedFilePath).Directory.FullName;
 

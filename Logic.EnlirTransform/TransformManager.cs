@@ -23,6 +23,13 @@ namespace FFRKApi.Logic.EnlirTransform
         /// <param name="importFilePath"></param>
         /// <returns></returns>
         TransformResultsContainer TransformAll(string importFilePath);
+
+        /// <summary>
+        /// Tranforms based on a directly passed in  ImportResultsContainer
+        /// </summary>
+        /// <param name="importResultsContainer"></param>
+        /// <returns></returns>
+        TransformResultsContainer TransformAll(ImportResultsContainer importResultsContainer);
     }
 
     public class TransformManager: ITransformManager
@@ -118,6 +125,22 @@ namespace FFRKApi.Logic.EnlirTransform
 
                 TransformResultsContainer transformResultsContainer = ExecuteTransform(importResults);
 
+
+                return transformResultsContainer;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                _logger.LogInformation("Error in TransformManager TransformAll method - transform was NOT completed.");
+                throw;
+            }
+        }
+
+        public TransformResultsContainer TransformAll(ImportResultsContainer importResultsContainer)
+        {
+            try
+            {
+                TransformResultsContainer transformResultsContainer = ExecuteTransform(importResultsContainer);
 
                 return transformResultsContainer;
             }

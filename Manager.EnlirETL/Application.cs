@@ -75,19 +75,19 @@ namespace Manager.EnlirETL
                 //Import
                 Stopwatch stopwatchImport = Stopwatch.StartNew();
                 ImportResultsContainer importResultsContainer = _importManager.ImportAll();
-                string importStoragePath = _importStorageProvider.StoreImportResults(importResultsContainer);
+                string importStoragePath = _importStorageProvider.StoreImportResults(importResultsContainer, null);
                 stopwatchImport.Stop();
 
                 //Transform
                 Stopwatch stopwatchTransform = Stopwatch.StartNew();
                 TransformResultsContainer transformResultsContainer = _transformManager.TransformAll(importStoragePath);
-                string transformStoragePath = _transformStorageProvider.StoreTransformResults(transformResultsContainer);
+                string transformStoragePath = _transformStorageProvider.StoreTransformResults(transformResultsContainer, null);
                 stopwatchTransform.Stop();
 
                 //Merge
                 Stopwatch stopwatchMerge = Stopwatch.StartNew();
                 MergeResultsContainer mergeResultsContainer = _mergeManager.MergeAll(transformStoragePath);
-                string mergeStoragePath = _mergeStorageProvider.StoreMergeResults(mergeResultsContainer);
+                string mergeStoragePath = _mergeStorageProvider.StoreMergeResults(mergeResultsContainer, null);
                 stopwatchMerge.Stop();
 
                 //test merge storage

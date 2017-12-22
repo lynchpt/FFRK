@@ -22,9 +22,16 @@ namespace FFRKApi.Logic.EnlirMerge
         /// <summary>
         /// Merges based on a specified tranform results file
         /// </summary>
-        /// <param name="importFilePath"></param>
+        /// <param name="transformFilePath"></param>
         /// <returns></returns>
         MergeResultsContainer MergeAll(string transformFilePath);
+
+        /// <summary>
+        /// Tranforms based on a directly passed in  ImportResultsContainer
+        /// </summary>
+        /// <param name="transformResultsContainer"></param>
+        /// <returns></returns>
+        MergeResultsContainer MergeAll(TransformResultsContainer transformResultsContainer);
     }
 
     public class MergeManager : IMergeManager
@@ -132,6 +139,23 @@ namespace FFRKApi.Logic.EnlirMerge
 
 
                 MergeResultsContainer mergeResultsContainer = ExecuteMerge(transformResults);
+
+
+                return mergeResultsContainer;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                _logger.LogInformation("Error in MergeManager MergeAll method - Merge was NOT completed.");
+                throw;
+            }
+        }
+
+        public MergeResultsContainer MergeAll(TransformResultsContainer transformResultsContainer)
+        {
+            try
+            {
+                MergeResultsContainer mergeResultsContainer = ExecuteMerge(transformResultsContainer);
 
 
                 return mergeResultsContainer;
