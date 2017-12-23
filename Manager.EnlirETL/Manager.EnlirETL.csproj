@@ -29,6 +29,7 @@
     <ProjectReference Include="..\Logic.EnlirMerge\Logic.EnlirMerge.csproj" />
     <ProjectReference Include="..\Logic.EnlirTransform\Logic.EnlirTransform.csproj" />
     <ProjectReference Include="..\Model.EnlirImport\Model.EnlirImport.csproj" />
+    <ProjectReference Include="..\Model.EnlirMerge\Model.EnlirMerge.csproj" />
     <ProjectReference Include="..\Model.EnlirTransform\Model.EnlirTransform.csproj" />
     <ProjectReference Include="..\SheetsApiHelper\SheetsApiHelper.csproj" />
   </ItemGroup>

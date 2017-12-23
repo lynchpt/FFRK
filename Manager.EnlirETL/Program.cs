@@ -21,6 +21,7 @@ namespace Manager.EnlirETL
         #region Constants
 
         private const string EnvironmentIndicatingEnvironmentVariable = "ASPNETCORE_ENVIRONMENT";
+        private const string LocalEnvironmentKey = "local";
         private const string ConfigFileName = "config";
         private const string ConfigFileExtension = "json";
         #endregion
@@ -49,12 +50,24 @@ namespace Manager.EnlirETL
         {
             var environmentName = Environment.GetEnvironmentVariable(EnvironmentIndicatingEnvironmentVariable);
 
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile($"{ConfigFileName}.{ConfigFileExtension}", optional: true)
-                .AddJsonFile($"{ConfigFileName}.{environmentName}.{ConfigFileExtension}", optional: true);
 
-            _configuration = builder.Build();
+            if (environmentName == LocalEnvironmentKey)
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile($"{ConfigFileName}.{environmentName}.{ConfigFileExtension}", optional: true);
+
+                _configuration = builder.Build();
+            }
+            else
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile($"{ConfigFileName}.{ConfigFileExtension}", optional: true);
+
+                _configuration = builder.Build();
+            }
+
 
         }
 

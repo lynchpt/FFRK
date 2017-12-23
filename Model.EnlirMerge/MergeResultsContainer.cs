@@ -40,5 +40,39 @@ namespace FFRKApi.Model.EnlirMerge
         public IEnumerable<LegendSphere> LegendSpheres { get; set; }
 
         public IEnumerable<Character> Characters { get; set; }
+
+        //Type Lists
+        public IList<KeyValuePair<int, string>> AbilityTypeList { get; set; }
+        public IList<KeyValuePair<int, string>> AutoTargetTypeList { get; set; }
+        public IList<KeyValuePair<int, string>> DamageFormulaTypeList { get; set; }
+        public IList<KeyValuePair<int, string>> ElementList { get; set; }
+        public IList<KeyValuePair<int, string>> EquipmentTypeList { get; set; }
+        public IList<KeyValuePair<int, string>> EventTypeList { get; set; }
+        public IList<KeyValuePair<int, string>> MissionTypeList { get; set; }
+        public IList<KeyValuePair<int, string>> OrbTypeList { get; set; }
+        public IList<KeyValuePair<int, string>> RealmList { get; set; }
+        public IList<KeyValuePair<int, string>> RelicTypeList { get; set; }
+        public IList<KeyValuePair<int, string>> SchoolList { get; set; }
+        public IList<KeyValuePair<int, string>> SoulBreakTierList { get; set; }
+        public IList<KeyValuePair<int, string>> TargetTypeList { get; set; }
+
+        //Model lookup lists
+        public IList<KeyValuePair<int, string>> EventIdList { get; set; }
+        public IList<KeyValuePair<int, string>> MissionList { get; set; }
+        public IList<KeyValuePair<int, string>> ExperienceIdList { get; set; }
+        public IList<KeyValuePair<int, string>> DungeonIdList { get; set; }
+        public IList<KeyValuePair<int, string>> MagiciteSkillIdList { get; set; }
+        public IList<KeyValuePair<int, string>> MagiciteIdList { get; set; }
+        public IList<KeyValuePair<int, string>> StatusIdList { get; set; }
+        public IList<KeyValuePair<int, string>> OtherIdList { get; set; }
+        public IList<KeyValuePair<int, string>> CommandIdList { get; set; }
+        public IList<KeyValuePair<int, string>> SoulBreakIdList { get; set; }
+        public IList<KeyValuePair<int, string>> RelicIdList { get; set; }
+        public IList<KeyValuePair<int, string>> AbilityIdList { get; set; }
+        public IList<KeyValuePair<int, string>> LegendMateriaIdList { get; set; }
+        public IList<KeyValuePair<int, string>> RecordMateriaIdList { get; set; }
+        public IList<KeyValuePair<int, string>> RecordSphereIdList { get; set; }
+        public IList<KeyValuePair<int, string>> LegendSphereIdList { get; set; }
+        public IList<KeyValuePair<int, string>> CharacterIdList { get; set; }
     }
 }

@@ -17,8 +17,8 @@ namespace FFRKApi.Model.EnlirTransform.IdLists
                                                                     new KeyValuePair<int, string>(6, "OSB"),
                                                                     new KeyValuePair<int, string>(7, "USB"),
                                                                     new KeyValuePair<int, string>(8, "CSB"),
-                                                                    new KeyValuePair<int, string>(8, "UOSB"),
-                                                                    new KeyValuePair<int, string>(8, "FSB")
+                                                                    new KeyValuePair<int, string>(9, "UOSB"),
+                                                                    new KeyValuePair<int, string>(10, "FSB")
                                                              };
 
         public IList<KeyValuePair<int, string>> TypeList => _typeList;

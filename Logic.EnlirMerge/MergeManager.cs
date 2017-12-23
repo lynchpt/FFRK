@@ -608,6 +608,40 @@ namespace FFRKApi.Logic.EnlirMerge
             mergeResultsContainer.SoulBreaks = transformResults.SoulBreaks;
             mergeResultsContainer.Statuses = transformResults.Statuses;
 
+            //now add in list members
+            mergeResultsContainer.AbilityTypeList = new AbilityTypeList().TypeList;
+            mergeResultsContainer.AutoTargetTypeList = new AutoTargetTypeList().TypeList;
+            mergeResultsContainer.DamageFormulaTypeList = new DamageFormulaTypeList().TypeList;
+            mergeResultsContainer.ElementList = new ElementList().TypeList;
+            mergeResultsContainer.EquipmentTypeList = new EquipmentTypeList().TypeList;
+            mergeResultsContainer.EventTypeList = new EventTypeList().TypeList;
+            mergeResultsContainer.MissionTypeList = new MissionTypeList().TypeList;
+            mergeResultsContainer.OrbTypeList = new OrbTypeList().TypeList;
+            mergeResultsContainer.RealmList = new RealmList().TypeList;
+            mergeResultsContainer.RelicTypeList = new RelicTypeList().TypeList;
+            mergeResultsContainer.SchoolList = new SchoolList().TypeList;
+            mergeResultsContainer.SoulBreakTierList = new SoulBreakTierList().TypeList;
+            mergeResultsContainer.TargetTypeList = new TargetTypeList().TypeList;
+
+            //now add in model lookup lists
+            mergeResultsContainer.EventIdList = mergeResultsContainer.Events.Select(i => new KeyValuePair<int, string>(i.Id, i.EventName)).ToList();
+            mergeResultsContainer.MissionList = mergeResultsContainer.Missions.Select(i => new KeyValuePair<int, string>(i.Id, i.Description)).ToList();
+            mergeResultsContainer.ExperienceIdList = mergeResultsContainer.Experiences.Select(i => new KeyValuePair<int, string>(i.Id, i.Description)).ToList();
+            mergeResultsContainer.DungeonIdList = mergeResultsContainer.Dungeons.Select(i => new KeyValuePair<int, string>(i.Id, i.DungeonName)).ToList();
+            mergeResultsContainer.MagiciteSkillIdList = mergeResultsContainer.MagiciteSkills.Select(i => new KeyValuePair<int, string>(i.Id, i.Description)).ToList();
+            mergeResultsContainer.MagiciteIdList = mergeResultsContainer.Magicites.Select(i => new KeyValuePair<int, string>(i.Id, i.MagiciteName)).ToList();
+            mergeResultsContainer.StatusIdList = mergeResultsContainer.Statuses.Select(i => new KeyValuePair<int, string>(i.Id, i.CommonName)).ToList();
+            mergeResultsContainer.OtherIdList = mergeResultsContainer.Others.Select(i => new KeyValuePair<int, string>(i.Id, i.Name)).ToList();
+            mergeResultsContainer.CommandIdList = mergeResultsContainer.Commands.Select(i => new KeyValuePair<int, string>(i.Id, i.Description)).ToList();
+            mergeResultsContainer.SoulBreakIdList = mergeResultsContainer.SoulBreaks.Select(i => new KeyValuePair<int, string>(i.Id, i.SoulBreakName)).ToList();
+            mergeResultsContainer.RelicIdList = mergeResultsContainer.Relics.Select(i => new KeyValuePair<int, string>(i.Id, i.Description)).ToList();
+            mergeResultsContainer.AbilityIdList = mergeResultsContainer.Abilities.Select(i => new KeyValuePair<int, string>(i.Id, i.AbilityName)).ToList();
+            mergeResultsContainer.LegendMateriaIdList = mergeResultsContainer.LegendMaterias.Select(i => new KeyValuePair<int, string>(i.Id, i.Description)).ToList();
+            mergeResultsContainer.RecordMateriaIdList = mergeResultsContainer.RecordMaterias.Select(i => new KeyValuePair<int, string>(i.Id, i.Description)).ToList();
+            mergeResultsContainer.RecordSphereIdList = mergeResultsContainer.RecordSpheres.Select(i => new KeyValuePair<int, string>(i.Id, i.Description)).ToList();
+            mergeResultsContainer.LegendSphereIdList = mergeResultsContainer.LegendSpheres.Select(i => new KeyValuePair<int, string>(i.Id, i.Description)).ToList();
+            mergeResultsContainer.CharacterIdList = mergeResultsContainer.Characters.Select(i => new KeyValuePair<int, string>(i.Id, i.CharacterName)).ToList();
+
             return mergeResultsContainer;
         }
 
