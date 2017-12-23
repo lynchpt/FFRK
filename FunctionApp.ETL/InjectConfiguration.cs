@@ -9,63 +9,32 @@ namespace FunctionApp.ETL
 {
     public class InjectConfiguration : IExtensionConfigProvider
     {
+        #region Class Variables
         private IServiceProvider _serviceProvider;
-        private IConfiguration _configuration;
+        #endregion 
 
-        private const string EnvironmentIndicatingEnvironmentVariable = "ASPNETCORE_ENVIRONMENT";
-        private const string LocalEnvironmentKey = "local";
-        private const string ConfigFileName = "config";
-        private const string ConfigFileExtension = "json";
 
         public void Initialize(ExtensionConfigContext context)
         {
-            InitializeConfiguration();
+            //InitializeConfiguration();
 
             var services = new ServiceCollection();
-            RegisterServices(services);
+
+            Startup startup = new Startup();
+
+            startup.ConfigureServices(services);
+
+            //RegisterServices(services);
             _serviceProvider = services.BuildServiceProvider(true);
 
             IOptions<SheetsServiceOptions> options =
                 _serviceProvider.GetRequiredService<IOptions<SheetsServiceOptions>>();
 
+
             context
                 .AddBindingRule<InjectAttribute>()
                 .BindToInput<dynamic>(i => _serviceProvider.GetRequiredService(i.Type));
         }
-
-        private void InitializeConfiguration()
-        {
-            var environmentName = Environment.GetEnvironmentVariable(EnvironmentIndicatingEnvironmentVariable);
-
-            string dir = Environment.CurrentDirectory;
-
-            if (environmentName == LocalEnvironmentKey)
-            {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Environment.CurrentDirectory)
-                    .AddJsonFile($"{ConfigFileName}.{environmentName}.{ConfigFileExtension}", optional: true);
-
-                _configuration = builder.Build();
-            }
-            else
-            {
-                var builder = new ConfigurationBuilder()
-                    .SetBasePath(Environment.CurrentDirectory)
-                    .AddJsonFile($"{ConfigFileName}.{ConfigFileExtension}", optional: true);
-
-                _configuration = builder.Build();
-            }
-        }
-
-        private void RegisterServices(IServiceCollection services)
-        {
-            services.AddOptions();
-
-            // services.AddSingleton<IGreeter, Greeter>();
-            string section = _configuration.GetSection(nameof(SheetsServiceOptions)).Path;
-
-            services.Configure<SheetsServiceOptions>(_configuration.GetSection(nameof(SheetsServiceOptions)));
-
-        }
+     
     }
 }

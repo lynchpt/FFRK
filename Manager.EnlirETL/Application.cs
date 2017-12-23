@@ -186,13 +186,13 @@ namespace Manager.EnlirETL
             _servicesCollection.AddScoped<IRowTransformer<CharacterRow, Character>, CharacterTransformer>();
 
 
-            //_servicesCollection.AddScoped<IImportStorageProvider, FileImportStorageProvider>();
-            //_servicesCollection.AddScoped<ITransformStorageProvider, FileTransformStorageProvider>();
-            //_servicesCollection.AddScoped<IMergeStorageProvider, FileMergeStorageProvider>();
+            _servicesCollection.AddScoped<IImportStorageProvider, FileImportStorageProvider>();
+            _servicesCollection.AddScoped<ITransformStorageProvider, FileTransformStorageProvider>();
+            _servicesCollection.AddScoped<IMergeStorageProvider, FileMergeStorageProvider>();
 
-            _servicesCollection.AddScoped<IImportStorageProvider, AzureBlobStorageProvider>();
-            _servicesCollection.AddScoped<ITransformStorageProvider, AzureBlobStorageProvider>();
-            _servicesCollection.AddScoped<IMergeStorageProvider, AzureBlobStorageProvider>();
+            //_servicesCollection.AddScoped<IImportStorageProvider, AzureBlobStorageProvider>();
+            //_servicesCollection.AddScoped<ITransformStorageProvider, AzureBlobStorageProvider>();
+            //_servicesCollection.AddScoped<IMergeStorageProvider, AzureBlobStorageProvider>();
 
             _servicesCollection.AddScoped<IImportManager, ImportManager>();
             _servicesCollection.AddScoped<ITransformManager, TransformManager>();
