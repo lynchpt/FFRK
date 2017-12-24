@@ -22,7 +22,8 @@
     "MergeResultsStoragePath": "Merge\\MergeResults-{Date}.json"
   },
   "LoggingOptions": {
-    "StoragePath": "FFRKApi.ETL.Log-{Date}.txt"
+    "LogFilePath": "FFRKApi.ETL.Log-{Date}.txt",
+    "ApplicationInsightsKey": "fd426711-00c7-467e-9741-2525dc798ab9"
   },
   "CharacterImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",

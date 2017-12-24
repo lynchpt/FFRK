@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic.EnlirMerge", "Logic.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model.EnlirMerge", "Model.EnlirMerge\Model.EnlirMerge.csproj", "{5607E47C-4DCE-458D-93E9-1DB8F69D30C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionApp.ETL", "FunctionApp.ETL\FunctionApp.ETL.csproj", "{FC130A58-B027-4F1F-A941-97E7B91550CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionApp.ETL", "FunctionApp.ETL\FunctionApp.ETL.csproj", "{FC130A58-B027-4F1F-A941-97E7B91550CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

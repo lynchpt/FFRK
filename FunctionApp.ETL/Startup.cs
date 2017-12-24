@@ -126,13 +126,13 @@ namespace FunctionApp.ETL
             services.AddSingleton<IRowTransformer<CharacterRow, Character>, CharacterTransformer>();
 
 
-            services.AddSingleton<IImportStorageProvider, FileImportStorageProvider>();
-            services.AddSingleton<ITransformStorageProvider, FileTransformStorageProvider>();
-            services.AddSingleton<IMergeStorageProvider, FileMergeStorageProvider>();
+            //services.AddSingleton<IImportStorageProvider, FileImportStorageProvider>();
+            //services.AddSingleton<ITransformStorageProvider, FileTransformStorageProvider>();
+            //services.AddSingleton<IMergeStorageProvider, FileMergeStorageProvider>();
 
-            //services.AddSingleton<IImportStorageProvider, AzureBlobStorageProvider>();
-            //services.AddSingleton<ITransformStorageProvider, AzureBlobStorageProvider>();
-            //services.AddSingleton<IMergeStorageProvider, AzureBlobStorageProvider>();
+            services.AddSingleton<IImportStorageProvider, AzureBlobStorageProvider>();
+            services.AddSingleton<ITransformStorageProvider, AzureBlobStorageProvider>();
+            services.AddSingleton<IMergeStorageProvider, AzureBlobStorageProvider>();
 
             services.AddSingleton<IImportManager, ImportManager>();
             services.AddSingleton<ITransformManager, TransformManager>();
@@ -170,10 +170,13 @@ namespace FunctionApp.ETL
         {
             string rollingFileLogPath = _configuration.GetSection($"{nameof(LoggingOptions)}:{nameof(LoggingOptions.LogFilePath)}").Value;
 
+            string appInsightsKey = _configuration["LoggingOptions:ApplicationInsightsKey"];
+
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
                 .Enrich.FromLogContext()
                 .WriteTo.RollingFile(rollingFileLogPath).MinimumLevel.Information()
+                .WriteTo.ApplicationInsightsEvents(appInsightsKey)
                 .WriteTo.Console(theme: SystemConsoleTheme.Literate).MinimumLevel.Information()
                 .WriteTo.Debug().MinimumLevel.Debug()
                 .CreateLogger();

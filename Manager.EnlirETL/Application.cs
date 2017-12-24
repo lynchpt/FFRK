@@ -75,7 +75,7 @@ namespace Manager.EnlirETL
                 _mergeStorageProvider = _serviceProvider.GetService<IMergeStorageProvider>();
 
                 //uncomment below to actually run import and transform stages - file based
-                string formattedDateString = DateTimeOffset.UtcNow.ToString(DateFormatSpecifier);
+                string formattedDateString = DateTime.UtcNow.ToString(DateFormatSpecifier);
 
                 //Import
                 Stopwatch stopwatchImport = Stopwatch.StartNew();

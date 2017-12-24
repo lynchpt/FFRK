@@ -3,7 +3,8 @@
 
   },
   "LoggingOptions": {
-    "LogFilePath": "FFRKApi.ETL.Log-{Date}.txt"
+    "LogFilePath": "FFRKApi.ETL.Log-{Date}.txt",
+    "ApplicationInsightsKey": "fd426711-00c7-467e-9741-2525dc798ab9"
   },
   "FileImportStorageOptions": {
     "ImportResultsStoragePath": "D:\\Temp\\FFRKApi\\ImportsResults-{Date}.json"

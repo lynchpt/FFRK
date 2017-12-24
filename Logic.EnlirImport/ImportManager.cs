@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using FFRKApi.Model.EnlirImport;
 using Microsoft.Extensions.Logging;
@@ -78,55 +79,55 @@ namespace FFRKApi.Logic.EnlirImport
                 ImportResultsContainer resultsContainer = new ImportResultsContainer();
 
                 resultsContainer.CharacterRows = _characterImporter.Import();
-                _logger.LogInformation("finished loading CharacterRows");
+                _logger.LogInformation("finished loading {RowCount} CharacterRows", resultsContainer.CharacterRows?.Count());
 
                 resultsContainer.RecordSphereRows = _recordSphereImporter.Import();
-                _logger.LogInformation("finished loading RecordSphereRows");
+                _logger.LogInformation("finished loading {RowCount} RecordSphereRows", resultsContainer.RecordSphereRows?.Count());
 
                 resultsContainer.LegendSphereRows = _legendSphereImporter.Import();
-                _logger.LogInformation("finished loading LegendSphereRows");
+                _logger.LogInformation("finished loading {RowCount} LegendSphereRows", resultsContainer.LegendSphereRows?.Count());
 
                 resultsContainer.RecordMateriaRows = _recordMateriaImporter.Import();
-                _logger.LogInformation("finished loading RecordMateriaRows");
+                _logger.LogInformation("finished loading {RowCount} RecordMateriaRows", resultsContainer.RecordMateriaRows?.Count());
 
                 resultsContainer.LegendMateriaRows = _legendMateriaImporter.Import();
-                _logger.LogInformation("finished loading LegendMateriaRows");
+                _logger.LogInformation("finished loading {RowCount} LegendMateriaRows", resultsContainer.LegendMateriaRows?.Count());
 
                 resultsContainer.AbilityRows = _abilityImporter.Import();
-                _logger.LogInformation("finished loading AbilityRows");
+                _logger.LogInformation("finished loading {RowCount} AbilityRows", resultsContainer.AbilityRows?.Count());
 
                 resultsContainer.SoulBreakRows = _soulBreakImporter.Import();
-                _logger.LogInformation("finished loading SoulBreakRows");
+                _logger.LogInformation("finished loading {RowCount} SoulBreakRows", resultsContainer.SoulBreakRows?.Count());
 
                 resultsContainer.CommandRows = _commandImporter.Import();
-                _logger.LogInformation("finished loading CommandRows");
+                _logger.LogInformation("finished loading {RowCount} CommandRows", resultsContainer.CommandRows?.Count());
 
                 resultsContainer.OtherRows = _otherImporter.Import();
-                _logger.LogInformation("finished loading OtherRows");
+                _logger.LogInformation("finished loading {RowCount} OtherRows", resultsContainer.OtherRows?.Count());
 
                 resultsContainer.StatusRows = _statusImporter.Import();
-                _logger.LogInformation("finished loading StatusRows");
+                _logger.LogInformation("finished loading {RowCount} StatusRows", resultsContainer.StatusRows?.Count());
 
                 resultsContainer.RelicRows = _relicImporter.Import();
-                _logger.LogInformation("finished loading RelicRows");
+                _logger.LogInformation("finished loading {RowCount} RelicRows", resultsContainer.RelicRows?.Count());
 
                 resultsContainer.MagiciteRows = _magiciteImporter.Import();
-                _logger.LogInformation("finished loading MagiciteRows");
+                _logger.LogInformation("finished loading {RowCount} MagiciteRows", resultsContainer.MagiciteRows?.Count());
 
                 resultsContainer.MagiciteSkillRows = _magiciteSkillImporter.Import();
-                _logger.LogInformation("finished loading MagiciteSkillRows");
+                _logger.LogInformation("finished loading {RowCount} MagiciteSkillRows", resultsContainer.MagiciteSkillRows?.Count());
 
                 resultsContainer.DungeonRows = _dungeonImporter.Import();
-                _logger.LogInformation("finished loading DungeonRows");
+                _logger.LogInformation("finished loading {RowCount} DungeonRows", resultsContainer.DungeonRows?.Count());
 
                 resultsContainer.EventRows = _eventImporter.Import();
-                _logger.LogInformation("finished loading EventRows");
+                _logger.LogInformation("finished loading {RowCount} EventRows", resultsContainer.EventRows?.Count());
 
                 resultsContainer.MissionRows = _missionImporter.Import();
-                _logger.LogInformation("finished loading MissionRows");
+                _logger.LogInformation("finished loading {RowCount} MissionRows", resultsContainer.MissionRows?.Count());
 
                 resultsContainer.ExperienceRows = _experienceImporter.Import();
-                _logger.LogInformation("finished loading ExperienceRows");
+                _logger.LogInformation("finished loading {RowCount} ExperienceRows", resultsContainer.ExperienceRows?.Count());
 
                 return resultsContainer;
             }

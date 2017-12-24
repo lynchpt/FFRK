@@ -5,10 +5,12 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using FFRK.Api.Infra.Options.EnlirETL;
 using FFRKApi.Logic.EnlirImport;
+using FFRKApi.Logic.EnlirTransform;
 using FFRKApi.Model.EnlirImport;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace FunctionApp.ETL
@@ -17,35 +19,28 @@ namespace FunctionApp.ETL
     {
         [FunctionName("ExecuteImport")]
         public static async Task<HttpResponseMessage> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req, TraceWriter log, 
-            [Inject(typeof(IImportManager))]IImportManager importManager)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req, 
+            [Inject(typeof(IImportManager))]IImportManager importManager, [Inject(typeof(ILogger<IImportManager>))]ILogger<IImportManager> logger)
         {
-            log.Info("C# HTTP trigger function processed a request.");
+            logger.LogInformation("Azure Function ExecuteImport processed a request.");
 
-            //// parse query parameter
-            //string name = req.GetQueryNameValuePairs()
-            //    .FirstOrDefault(q => string.Compare(q.Key, "name", true) == 0)
-            //    .Value;
+            try
+            {
+                ImportResultsContainer irc = importManager.ImportAll();
 
-            //// Get request body
-            //dynamic data = await req.Content.ReadAsAsync<object>();
+                var response = req.CreateResponse(HttpStatusCode.OK, irc);
 
-            //// Set name to query string or body data
-            //name = name ?? data?.name;
+                return response;
+            }
+            catch (System.Exception ex)
+            {
 
-            ////List<string> results = new List<string>(){"one", "two"};
+                logger.LogError(ex, $"Error in Azure Function ExecuteImport : {ex.Message}");
 
-            ////var res = req.CreateResponse(HttpStatusCode.OK, results);
+                var response = req.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
 
-            //return name == null
-            //    ? req.CreateResponse(HttpStatusCode.BadRequest, "Please pass a name on the query string or in the request body")
-            //    : req.CreateResponse(HttpStatusCode.OK, "Hello " + name);
-
-            ImportResultsContainer irc = importManager.ImportAll();
-
-            var res = req.CreateResponse(HttpStatusCode.OK, irc);
-
-            return res;
+                return response;
+            }
         }
     }
 }
