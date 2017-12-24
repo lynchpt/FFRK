@@ -89,54 +89,54 @@ namespace FunctionApp.ETL
 
             services.AddSingleton<ISheetsApiHelper, SheetsApiHelper>();//was already singleton
 
-            services.AddSingleton<IRowImporter<CharacterRow>, CharacterImporter>();
-            services.AddSingleton<IRowImporter<RecordSphereRow>, RecordSphereImporter>();
-            services.AddSingleton<IRowImporter<LegendSphereRow>, LegendSphereImporter>();
-            services.AddSingleton<IRowImporter<RecordMateriaRow>, RecordMateriaImporter>();
-            services.AddSingleton<IRowImporter<LegendMateriaRow>, LegendMateriaImporter>();
-            services.AddSingleton<IRowImporter<AbilityRow>, AbilityImporter>();
-            services.AddSingleton<IRowImporter<SoulBreakRow>, SoulBreakImporter>();
-            services.AddSingleton<IRowImporter<CommandRow>, CommandImporter>();
-            services.AddSingleton<IRowImporter<OtherRow>, OtherImporter>();
-            services.AddSingleton<IRowImporter<StatusRow>, StatusImporter>();
-            services.AddSingleton<IRowImporter<RelicRow>, RelicImporter>();
-            services.AddSingleton<IRowImporter<MagiciteRow>, MagiciteImporter>();
-            services.AddSingleton<IRowImporter<MagiciteSkillRow>, MagiciteSkillImporter>();
-            services.AddSingleton<IRowImporter<DungeonRow>, DungeonImporter>();
-            services.AddSingleton<IRowImporter<EventRow>, EventImporter>();
-            services.AddSingleton<IRowImporter<MissionRow>, MissionImporter>();
-            services.AddSingleton<IRowImporter<ExperienceRow>, ExperienceImporter>();
+            services.AddScoped<IRowImporter<CharacterRow>, CharacterImporter>();
+            services.AddScoped<IRowImporter<RecordSphereRow>, RecordSphereImporter>();
+            services.AddScoped<IRowImporter<LegendSphereRow>, LegendSphereImporter>();
+            services.AddScoped<IRowImporter<RecordMateriaRow>, RecordMateriaImporter>();
+            services.AddScoped<IRowImporter<LegendMateriaRow>, LegendMateriaImporter>();
+            services.AddScoped<IRowImporter<AbilityRow>, AbilityImporter>();
+            services.AddScoped<IRowImporter<SoulBreakRow>, SoulBreakImporter>();
+            services.AddScoped<IRowImporter<CommandRow>, CommandImporter>();
+            services.AddScoped<IRowImporter<OtherRow>, OtherImporter>();
+            services.AddScoped<IRowImporter<StatusRow>, StatusImporter>();
+            services.AddScoped<IRowImporter<RelicRow>, RelicImporter>();
+            services.AddScoped<IRowImporter<MagiciteRow>, MagiciteImporter>();
+            services.AddScoped<IRowImporter<MagiciteSkillRow>, MagiciteSkillImporter>();
+            services.AddScoped<IRowImporter<DungeonRow>, DungeonImporter>();
+            services.AddScoped<IRowImporter<EventRow>, EventImporter>();
+            services.AddScoped<IRowImporter<MissionRow>, MissionImporter>();
+            services.AddScoped<IRowImporter<ExperienceRow>, ExperienceImporter>();
 
-            services.AddSingleton<IRowTransformer<MissionRow, Mission>, MissionTransformer>();
-            services.AddSingleton<IRowTransformer<EventRow, Event>, EventTransformer>();
-            services.AddSingleton<IRowTransformer<ExperienceRow, Experience>, ExperienceTransformer>();
-            services.AddSingleton<IRowTransformer<DungeonRow, Dungeon>, DungeonTransformer>();
-            services.AddSingleton<IRowTransformer<MagiciteSkillRow, MagiciteSkill>, MagiciteSkillTransformer>();
-            services.AddSingleton<IRowTransformer<MagiciteRow, Magicite>, MagiciteTransformer>();
-            services.AddSingleton<IRowTransformer<StatusRow, Status>, StatusTransformer>();
-            services.AddSingleton<IRowTransformer<OtherRow, Other>, OtherTransformer>();
-            services.AddSingleton<IRowTransformer<CommandRow, Command>, CommandTransformer>();
-            services.AddSingleton<IRowTransformer<SoulBreakRow, SoulBreak>, SoulBreakTransformer>();
-            services.AddSingleton<IRowTransformer<RelicRow, Relic>, RelicTransformer>();
-            services.AddSingleton<IRowTransformer<AbilityRow, Ability>, AbilityTransformer>();
-            services.AddSingleton<IRowTransformer<LegendMateriaRow, LegendMateria>, LegendMateriaTransformer>();
-            services.AddSingleton<IRowTransformer<RecordMateriaRow, RecordMateria>, RecordMateriaTransformer>();
-            services.AddSingleton<IRowTransformer<RecordSphereRow, RecordSphere>, RecordSphereTransformer>();
-            services.AddSingleton<IRowTransformer<LegendSphereRow, LegendSphere>, LegendSphereTransformer>();
-            services.AddSingleton<IRowTransformer<CharacterRow, Character>, CharacterTransformer>();
+            services.AddScoped<IRowTransformer<MissionRow, Mission>, MissionTransformer>();
+            services.AddScoped<IRowTransformer<EventRow, Event>, EventTransformer>();
+            services.AddScoped<IRowTransformer<ExperienceRow, Experience>, ExperienceTransformer>();
+            services.AddScoped<IRowTransformer<DungeonRow, Dungeon>, DungeonTransformer>();
+            services.AddScoped<IRowTransformer<MagiciteSkillRow, MagiciteSkill>, MagiciteSkillTransformer>();
+            services.AddScoped<IRowTransformer<MagiciteRow, Magicite>, MagiciteTransformer>();
+            services.AddScoped<IRowTransformer<StatusRow, Status>, StatusTransformer>();
+            services.AddScoped<IRowTransformer<OtherRow, Other>, OtherTransformer>();
+            services.AddScoped<IRowTransformer<CommandRow, Command>, CommandTransformer>();
+            services.AddScoped<IRowTransformer<SoulBreakRow, SoulBreak>, SoulBreakTransformer>();
+            services.AddScoped<IRowTransformer<RelicRow, Relic>, RelicTransformer>();
+            services.AddScoped<IRowTransformer<AbilityRow, Ability>, AbilityTransformer>();
+            services.AddScoped<IRowTransformer<LegendMateriaRow, LegendMateria>, LegendMateriaTransformer>();
+            services.AddScoped<IRowTransformer<RecordMateriaRow, RecordMateria>, RecordMateriaTransformer>();
+            services.AddScoped<IRowTransformer<RecordSphereRow, RecordSphere>, RecordSphereTransformer>();
+            services.AddScoped<IRowTransformer<LegendSphereRow, LegendSphere>, LegendSphereTransformer>();
+            services.AddScoped<IRowTransformer<CharacterRow, Character>, CharacterTransformer>();
 
 
-            //services.AddSingleton<IImportStorageProvider, FileImportStorageProvider>();
-            //services.AddSingleton<ITransformStorageProvider, FileTransformStorageProvider>();
-            //services.AddSingleton<IMergeStorageProvider, FileMergeStorageProvider>();
+            //services.AddScoped<IImportStorageProvider, FileImportStorageProvider>();
+            //services.AddScoped<ITransformStorageProvider, FileTransformStorageProvider>();
+            //services.AddScoped<IMergeStorageProvider, FileMergeStorageProvider>();
 
-            services.AddSingleton<IImportStorageProvider, AzureBlobStorageProvider>();
-            services.AddSingleton<ITransformStorageProvider, AzureBlobStorageProvider>();
-            services.AddSingleton<IMergeStorageProvider, AzureBlobStorageProvider>();
+            services.AddScoped<IImportStorageProvider, AzureBlobStorageProvider>();
+            services.AddScoped<ITransformStorageProvider, AzureBlobStorageProvider>();
+            services.AddScoped<IMergeStorageProvider, AzureBlobStorageProvider>();
 
-            services.AddSingleton<IImportManager, ImportManager>();
-            services.AddSingleton<ITransformManager, TransformManager>();
-            services.AddSingleton<IMergeManager, MergeManager>();
+            services.AddScoped<IImportManager, ImportManager>();
+            services.AddScoped<ITransformManager, TransformManager>();
+            services.AddScoped<IMergeManager, MergeManager>();
         }
 
         #endregion

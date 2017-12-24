@@ -16,7 +16,7 @@ namespace FunctionApp.ETL
     {
         [FunctionName("StoreTransform")]
         public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req,
-            [Inject(typeof(ITransformStorageProvider))]ITransformStorageProvider transformStorageProvider, [Inject(typeof(ILogger<ITransformStorageProvider>))]ILogger<ITransformStorageProvider> logger)
+            [Inject]ITransformStorageProvider transformStorageProvider, [Inject]ILogger<ITransformStorageProvider> logger)
         {
             logger.LogInformation("Azure Function StoreTransform processed a request.");
 

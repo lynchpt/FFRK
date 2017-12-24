@@ -17,7 +17,7 @@ namespace FunctionApp.ETL
     {
         [FunctionName("StoreMerge")]
         public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req,
-            [Inject(typeof(IMergeStorageProvider))]IMergeStorageProvider mergeStorageProvider, [Inject(typeof(ILogger<IMergeStorageProvider>))]ILogger<IMergeStorageProvider> logger)
+            [Inject]IMergeStorageProvider mergeStorageProvider, [Inject]ILogger<IMergeStorageProvider> logger)
         {
             logger.LogInformation("Azure Function StoreMerge processed a request.");
 

@@ -16,7 +16,7 @@ namespace FunctionApp.ETL
     {
         [FunctionName("StoreImport")]
         public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req,
-            [Inject(typeof(IImportStorageProvider))]IImportStorageProvider importStorageProvider, [Inject(typeof(ILogger<IImportStorageProvider>))]ILogger<IImportStorageProvider> logger)
+            [Inject]IImportStorageProvider importStorageProvider, [Inject]ILogger<IImportStorageProvider> logger)
         {
             logger.LogInformation("Azure Function StoreImport processed a request.");
 

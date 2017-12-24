@@ -16,7 +16,7 @@ namespace FunctionApp.ETL
     {
         [FunctionName("GetFormattedDate")]
         public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequestMessage req,
-            [Inject(typeof(ILogger<IImportManager>))]ILogger<IImportManager> logger)
+            [Inject]ILogger<IImportManager> logger)
         {
 
             logger.LogInformation("Azure Function GetFormattedDate processed a request.");

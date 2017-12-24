@@ -18,7 +18,7 @@ namespace FunctionApp.ETL
     {
         [FunctionName("ExecuteMerge")]
         public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req,
-            [Inject(typeof(IMergeManager))]IMergeManager mergeManager, [Inject(typeof(ILogger<IMergeManager>))]ILogger<IMergeManager> logger)
+            [Inject]IMergeManager mergeManager, [Inject]ILogger<IMergeManager> logger)
         {
             logger.LogInformation("Azure Function ExecuteMerge processed a request.");
 

@@ -18,7 +18,7 @@ namespace FunctionApp.ETL
         [FunctionName("ExecuteTransform")]
         public static async Task<HttpResponseMessage> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req, TraceWriter log,
-            [Inject(typeof(ITransformManager))]ITransformManager transformManager, [Inject(typeof(ILogger<ITransformManager>))]ILogger<ITransformManager> logger)
+            [Inject]ITransformManager transformManager, [Inject]ILogger<ITransformManager> logger)
         {
             logger.LogInformation("Azure Function ExecuteTransform processed a request.");
 

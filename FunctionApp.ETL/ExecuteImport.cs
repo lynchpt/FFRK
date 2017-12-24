@@ -20,7 +20,7 @@ namespace FunctionApp.ETL
         [FunctionName("ExecuteImport")]
         public static async Task<HttpResponseMessage> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req, 
-            [Inject(typeof(IImportManager))]IImportManager importManager, [Inject(typeof(ILogger<IImportManager>))]ILogger<IImportManager> logger)
+            [Inject]IImportManager importManager, [Inject]ILogger<IImportManager> logger)
         {
             logger.LogInformation("Azure Function ExecuteImport processed a request.");
 
