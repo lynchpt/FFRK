@@ -1,10 +1,10 @@
-﻿using Microsoft.Azure.WebJobs.Host.Bindings;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.Azure.WebJobs.Host.Bindings;
 using Microsoft.Azure.WebJobs.Host.Protocols;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Threading.Tasks;
 
-namespace FunctionApp.ETL
+namespace FunctionApp.ETL.DISupport
 {
     public class InjectBinding : IBinding
     {
@@ -26,8 +26,8 @@ namespace FunctionApp.ETL
         {
             await Task.Yield();
 
-            var scope = InjectBindingProvider.Scopes.GetOrAdd(context.FunctionInstanceId, (_) => _serviceProvider.CreateScope());
-            var value = scope.ServiceProvider.GetRequiredService(_type);
+            var scope = InjectBindingProvider.Scopes.GetOrAdd(context.FunctionInstanceId, (_) => ServiceProviderServiceExtensions.CreateScope(_serviceProvider));
+            var value = ServiceProviderServiceExtensions.GetRequiredService(scope.ServiceProvider, _type);
 
             return await BindAsync(value, context.ValueContext);
         }
@@ -42,7 +42,7 @@ namespace FunctionApp.ETL
 
             public Type Type => _value.GetType();
 
-            public Task<object> GetValueAsync() => Task.FromResult(_value);
+            public Task<object> GetValueAsync() => Task.FromResult<object>(_value);
 
             public string ToInvokeString() => _value.ToString();
         }

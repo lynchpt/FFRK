@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FFRKApi.Logic.EnlirTransform;
 using FFRKApi.Model.EnlirImport;
 using FFRKApi.Model.EnlirTransform;
+using FunctionApp.ETL.DISupport;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;

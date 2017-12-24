@@ -1,9 +1,7 @@
-﻿
-using System;
+﻿using System;
 using Microsoft.Azure.WebJobs.Description;
 
-
-namespace FunctionApp.ETL
+namespace FunctionApp.ETL.DISupport
 
 {
     [Binding]

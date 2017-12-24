@@ -1,10 +1,10 @@
-﻿using Microsoft.Azure.WebJobs.Host.Bindings;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Threading.Tasks;
+using Microsoft.Azure.WebJobs.Host.Bindings;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace FunctionApp.ETL
+namespace FunctionApp.ETL.DISupport
 {
     public class InjectBindingProvider : IBindingProvider
 

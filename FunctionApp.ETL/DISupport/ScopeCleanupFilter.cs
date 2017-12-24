@@ -1,9 +1,9 @@
-﻿using Microsoft.Azure.WebJobs.Host;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Azure.WebJobs.Host;
 
-namespace FunctionApp.ETL
+namespace FunctionApp.ETL.DISupport
 {
     public class ScopeCleanupFilter : IFunctionInvocationFilter, IFunctionExceptionFilter
     {

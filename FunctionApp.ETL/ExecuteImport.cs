@@ -7,6 +7,7 @@ using FFRK.Api.Infra.Options.EnlirETL;
 using FFRKApi.Logic.EnlirImport;
 using FFRKApi.Logic.EnlirTransform;
 using FFRKApi.Model.EnlirImport;
+using FunctionApp.ETL.DISupport;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Host;
