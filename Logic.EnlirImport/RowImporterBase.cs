@@ -90,11 +90,35 @@ namespace FFRKApi.Logic.EnlirImport
 
         protected string ResolveColumnContents(int columnCount, Enum columnEnum, IList<object> row)
         {
-            string contents = Convert.ToInt32(columnEnum) < columnCount ? (string)row[Convert.ToInt32(columnEnum)] : null;
+            object contents = Convert.ToInt32(columnEnum) < columnCount ? (object)row[Convert.ToInt32(columnEnum)] : null;
 
+            string contentString = contents?.ToString();
 
-            return contents;
-        } 
+            //string contents = Convert.ToInt32(columnEnum) < columnCount ? (string)row[Convert.ToInt32(columnEnum)] : null;
+
+            string processedContents = PostProcessColumnContents(contentString);
+
+            return processedContents;
+        }
+        #endregion
+
+        #region Private Methods
+
+        private string PostProcessColumnContents(string contents)
+        {
+            const string ImageFunctionMarker = "=image(\"";
+            const string FunctionTerminator = "\")";
+
+            string processedContents = contents;
+
+            if (contents != null && contents.StartsWith(ImageFunctionMarker))
+            {
+                processedContents = contents.Replace(ImageFunctionMarker, String.Empty).Replace(FunctionTerminator, String.Empty);
+
+            }
+
+            return processedContents;
+        }
         #endregion
     }
 }

@@ -62,7 +62,7 @@ namespace FFRKApi.SheetsApiHelper
             string range = $"{worksheetName}!{rangeExpression}";
 
             SpreadsheetsResource.ValuesResource.GetRequest request = _sheetsService.Spreadsheets.Values.Get(spreadsheetId, range);
-           // request.ValueRenderOption = SpreadsheetsResource.ValuesResource.GetRequest.ValueRenderOptionEnum.FORMULA;
+            request.ValueRenderOption = SpreadsheetsResource.ValuesResource.GetRequest.ValueRenderOptionEnum.FORMULA;
             return request;
         }
         #endregion
