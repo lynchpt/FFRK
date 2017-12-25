@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Text;
 using FFRK.Api.Infra.Options.EnlirETL;
@@ -18,6 +19,13 @@ namespace FFRKApi.Logic.EnlirImport
         private readonly ImporterOptions _importerOptions;
         private readonly ILogger<RowImporterBase<T>> _logger;
         #endregion
+
+        #region Constants
+        private const string ImageFunctionMarker = "=image(\"";
+        private const string ImageFunctionMarkerCap = "=IMAGE(\"";
+        private const string FunctionTerminator = "\")";
+        #endregion
+
 
         #region Constructors
         protected RowImporterBase(ISheetsApiHelper sheetsApiHelper, IOptions<ImporterOptions> importerOptionsAccessor, ILogger<RowImporterBase<T>> logger)
@@ -106,18 +114,27 @@ namespace FFRKApi.Logic.EnlirImport
 
         private string PostProcessColumnContents(string contents)
         {
-            const string ImageFunctionMarker = "=image(\"";
-            const string FunctionTerminator = "\")";
-
-            string processedContents = contents;
-
-            if (contents != null && contents.StartsWith(ImageFunctionMarker))
-            {
-                processedContents = contents.Replace(ImageFunctionMarker, String.Empty).Replace(FunctionTerminator, String.Empty);
-
-            }
+            string processedContents = ProcessForImageFunction(contents);
 
             return processedContents;
+        }
+
+        private string ProcessForImageFunction(string input)
+        {
+            string processedInput = input;
+
+            if (String.IsNullOrWhiteSpace(input)) return processedInput;
+
+            if (input.StartsWith(ImageFunctionMarker))
+            {
+                processedInput = input.Replace(ImageFunctionMarker, String.Empty).Replace(FunctionTerminator, String.Empty);
+            }
+            else if (input.StartsWith(ImageFunctionMarkerCap))
+            {
+                processedInput = input.Replace(ImageFunctionMarkerCap, String.Empty).Replace(FunctionTerminator, String.Empty);
+            }
+
+            return processedInput;
         }
         #endregion
     }
