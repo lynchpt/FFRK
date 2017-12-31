@@ -67,9 +67,11 @@ namespace FFRKApi.Logic.EnlirTransform
             model.IsCounterable = _stringToBooleanConverter.ConvertFromStringToBool(row.Counter);
             model.IsChecked = _stringToBooleanConverter.ConvertFromStringToBool(row.Checked);
             model.SoulBreakPointsGained = _intConverter.ConvertFromStringToInt(row.SB);
+            model.SoulBreakPointsGainedJapan = _intConverter.ConvertFromStringToInt(row.SBJP);
 
             model.IntroducingEventName = row.IntroducingEvent;
             model.IntroducingEventId = 0; //filled in during merge phase
+            model.JapaneseName = row.JapaneseName;
             model.EnlirId = row.ID;
 
             model.OrbRequirements = GetOrbRequirements(row);

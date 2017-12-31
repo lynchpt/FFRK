@@ -104,6 +104,8 @@ namespace Manager.EnlirETL
                 _logger.LogInformation("Transform Completed in {TransformTime} seconds", stopwatchTransform.Elapsed.Seconds);
                 _logger.LogInformation("Merge Completed in {MergeTime} seconds", stopwatchMerge.Elapsed.Seconds);
                 _logger.LogInformation("Full Run Completed in {FullRunTime} seconds", stopwatchFull.Elapsed.Seconds);
+                int aggregateTime = stopwatchImport.Elapsed.Seconds + stopwatchMerge.Elapsed.Seconds + stopwatchFull.Elapsed.Seconds;
+                _logger.LogInformation("Full Run Aggregate Time in {AggregateTime} seconds", aggregateTime);
             }
             catch (Exception ex)
             {

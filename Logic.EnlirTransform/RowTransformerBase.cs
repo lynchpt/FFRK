@@ -148,34 +148,44 @@ namespace FFRKApi.Logic.EnlirTransform
             List<ItemWithCountAndStarLevel> iwcaslList = new List<ItemWithCountAndStarLevel>();
 
 
-            //turn reward string into a list, if needed
-            IList<string> rewardStrings = ConvertCommaSeparatedStringToList(input);
-
-            //for each reward, turn it into an item name and a count
-            IList<ItemWithItemCount> rewardItemsWithItemCounts = new List<ItemWithItemCount>();
-
-            foreach (var rewardString in rewardStrings)
+            try
             {
-                ItemWithItemCount itemWithItemCount = ExtractItemWithItemCount(rewardString);
-                rewardItemsWithItemCounts.Add(itemWithItemCount);
+                //turn reward string into a list, if needed
+                IList<string> rewardStrings = ConvertCommaSeparatedStringToList(input);
+
+                //for each reward, turn it into an item name and a count
+                IList<ItemWithItemCount> rewardItemsWithItemCounts = new List<ItemWithItemCount>();
+
+                foreach (var rewardString in rewardStrings)
+                {
+                    ItemWithItemCount itemWithItemCount = ExtractItemWithItemCount(rewardString);
+                    rewardItemsWithItemCounts.Add(itemWithItemCount);
+                }
+
+                //now for each reward item, extract the star level if applicable
+                foreach (ItemWithItemCount iwc in rewardItemsWithItemCounts)
+                {
+                    ItemWithCountAndStarLevel iwcasl = new ItemWithCountAndStarLevel();
+
+                    ItemWithStarLevel iwsl = ExtractItemWithStarLevel(iwc.ItemName);
+
+                    iwcasl.ItemName = iwsl.ItemName;
+                    iwcasl.ItemCount = iwc.ItemCount > 0 ? iwc.ItemCount : !String.IsNullOrWhiteSpace(iwsl.ItemName) ? 1 : 0;
+                    iwcasl.ItemStarLevel = iwsl.ItemStarLevel;
+
+                    iwcaslList.Add(iwcasl);
+                }
             }
-
-            //now for each reward item, extract the star level if applicable
-            foreach (ItemWithItemCount iwc in rewardItemsWithItemCounts)
+            catch (Exception ex)
             {
-                ItemWithCountAndStarLevel iwcasl = new ItemWithCountAndStarLevel();
 
-                ItemWithStarLevel iwsl = ExtractItemWithStarLevel(iwc.ItemName);
-
-                iwcasl.ItemName = iwsl.ItemName;
-                iwcasl.ItemCount = iwc.ItemCount > 0 ? iwc.ItemCount : !String.IsNullOrWhiteSpace(iwsl.ItemName) ? 1 : 0;
-                iwcasl.ItemStarLevel = iwsl.ItemStarLevel;
-
-                iwcaslList.Add(iwcasl);
+                _logger.LogWarning("ItemWithCountAndStarLevel String {iwcaslString} could not be parsed; {Message}", input, ex.Message);
             }
 
             return iwcaslList;
         }
+
+
         #endregion
 
 

@@ -34,6 +34,7 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.Counter = ResolveColumnContents(columnCount, AbilityColumn.Counter, row);
             importedRow.AutoTarget = ResolveColumnContents(columnCount, AbilityColumn.AutoTarget, row);
             importedRow.SB = ResolveColumnContents(columnCount, AbilityColumn.SB, row);
+            importedRow.SBJP = ResolveColumnContents(columnCount, AbilityColumn.SBJP, row);
             importedRow.Uses = ResolveColumnContents(columnCount, AbilityColumn.Uses, row);
             importedRow.Max = ResolveColumnContents(columnCount, AbilityColumn.Max, row);
             importedRow.Orb1RequiredType = ResolveColumnContents(columnCount, AbilityColumn.Orb1RequiredType, row);
@@ -61,6 +62,7 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.Orb4RequiredRank4 = ResolveColumnContents(columnCount, AbilityColumn.Orb4RequiredRank4, row);
             importedRow.Orb4RequiredRank5 = ResolveColumnContents(columnCount, AbilityColumn.Orb4RequiredRank5, row);
             importedRow.IntroducingEvent = ResolveColumnContents(columnCount, AbilityColumn.IntroducingEvent, row);
+            importedRow.JapaneseName = ResolveColumnContents(columnCount, AbilityColumn.JapaneseName, row);
             importedRow.ID = ResolveColumnContents(columnCount, AbilityColumn.ID, row);
             importedRow.Checked = ResolveColumnContents(columnCount, AbilityColumn.Checked, row);
 
