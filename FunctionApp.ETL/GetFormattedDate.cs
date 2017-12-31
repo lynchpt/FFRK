@@ -16,7 +16,7 @@ namespace FunctionApp.ETL
     public static class GetFormattedDate
     {
         [FunctionName("GetFormattedDate")]
-        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequestMessage req,
+        public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)]HttpRequestMessage req,
             [Inject]ILogger<IImportManager> logger)
         {
 
