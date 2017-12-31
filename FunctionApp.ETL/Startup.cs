@@ -168,14 +168,14 @@ namespace FunctionApp.ETL
 
         private void ConfigureLogger(IServiceCollection services)
         {
-            string rollingFileLogPath = _configuration.GetSection($"{nameof(LoggingOptions)}:{nameof(LoggingOptions.LogFilePath)}").Value;
+            //string rollingFileLogPath = _configuration.GetSection($"{nameof(LoggingOptions)}:{nameof(LoggingOptions.LogFilePath)}").Value;
 
             string appInsightsKey = _configuration["LoggingOptions:ApplicationInsightsKey"];
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
                 .Enrich.FromLogContext()
-                .WriteTo.RollingFile(rollingFileLogPath).MinimumLevel.Information()
+                //.WriteTo.RollingFile(rollingFileLogPath).MinimumLevel.Information()
                 .WriteTo.ApplicationInsightsEvents(appInsightsKey)
                 .WriteTo.Console(theme: SystemConsoleTheme.Literate).MinimumLevel.Information()
                 .WriteTo.Debug().MinimumLevel.Debug()
