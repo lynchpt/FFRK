@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,6 +33,7 @@ namespace FunctionApp.ETL
 
         #region Constants
         private const string EnvironmentIndicatingEnvironmentVariable = "ASPNETCORE_ENVIRONMENT";
+        private const string DirectoryGrandparentPath = @"..\..\";
         private const string LocalEnvironmentKey = "local";
         private const string ConfigFileName = "config";
         private const string ConfigFileExtension = "json";
@@ -146,12 +149,28 @@ namespace FunctionApp.ETL
         {
             var environmentName = Environment.GetEnvironmentVariable(EnvironmentIndicatingEnvironmentVariable);
 
-            string dir = Environment.CurrentDirectory;
+            //string dir = Environment.CurrentDirectory;
+
+            //get the function app compiled dll location
+            //example (local): file:///D:/Code/FFRKApi/FFRKApi.ETL/FunctionApp.ETL/bin/Debug/net461/bin/FunctionApp.ETL.dll
+            //example (Azure): file:///D:/home/site/wwwroot/bin/FunctionApp.ETL.dll
+            string functionDllLocation = Assembly.GetExecutingAssembly().CodeBase;
+
+            //get rid of the file moniker so that other path methods work
+            //example (local): D:\Code\FFRKApi\FFRKApi.ETL\FunctionApp.ETL\bin\Debug\net461\bin\FunctionApp.ETL.dll
+            //example (Azure): D:/home/site/wwwroot/bin/FunctionApp.ETL.dll
+            string functionDllLocationAsPath = new Uri(functionDllLocation).LocalPath;
+
+            //now navigate up two directories to get to the function project directory. This contains the config file.
+            //example (local): D:\Code\FFRKApi\FFRKApi.ETL\FunctionApp.ETL\bin\Debug\net461\
+            //example (Azure): D:/home/site/wwwroot/
+            string configFileDir = Path.GetFullPath(Path.Combine(functionDllLocationAsPath, DirectoryGrandparentPath));
+
 
             if (environmentName == LocalEnvironmentKey)
             {
                 var builder = new ConfigurationBuilder()
-                    .SetBasePath(Environment.CurrentDirectory)
+                    .SetBasePath(configFileDir)
                     .AddJsonFile($"{ConfigFileName}.{environmentName}.{ConfigFileExtension}", optional: true);
 
                 _configuration = builder.Build();
@@ -159,7 +178,7 @@ namespace FunctionApp.ETL
             else
             {
                 var builder = new ConfigurationBuilder()
-                    .SetBasePath(Environment.CurrentDirectory)
+                    .SetBasePath(configFileDir)
                     .AddJsonFile($"{ConfigFileName}.{ConfigFileExtension}", optional: true);
 
                 _configuration = builder.Build();
