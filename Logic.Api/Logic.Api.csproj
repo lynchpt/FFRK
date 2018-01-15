@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>FFRKApi.Logic.Api</AssemblyName>
+    <RootNamespace>FFRKApi.Logic.Api</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Data.Storage\Data.Storage.csproj" />
+    <ProjectReference Include="..\Model.EnlirMerge\Model.EnlirMerge.csproj" />
+  </ItemGroup>
+
+</Project>

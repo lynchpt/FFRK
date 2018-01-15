@@ -25,6 +25,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model.EnlirMerge", "Model.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionApp.ETL", "FunctionApp.ETL\FunctionApp.ETL.csproj", "{FC130A58-B027-4F1F-A941-97E7B91550CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.FFRK", "Api.FFRK\Api.FFRK.csproj", "{72CDE731-B014-44D1-B4B4-0847E9B104AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic.Api", "Logic.Api\Logic.Api.csproj", "{7CF686B1-ADF5-4EE7-826E-D2EF75D0B638}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +79,14 @@ Global
 		{FC130A58-B027-4F1F-A941-97E7B91550CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC130A58-B027-4F1F-A941-97E7B91550CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC130A58-B027-4F1F-A941-97E7B91550CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72CDE731-B014-44D1-B4B4-0847E9B104AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72CDE731-B014-44D1-B4B4-0847E9B104AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72CDE731-B014-44D1-B4B4-0847E9B104AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72CDE731-B014-44D1-B4B4-0847E9B104AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CF686B1-ADF5-4EE7-826E-D2EF75D0B638}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CF686B1-ADF5-4EE7-826E-D2EF75D0B638}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CF686B1-ADF5-4EE7-826E-D2EF75D0B638}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CF686B1-ADF5-4EE7-826E-D2EF75D0B638}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

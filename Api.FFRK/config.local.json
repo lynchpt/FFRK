@@ -1,0 +1,13 @@
+﻿{
+  "FileMergeStorageOptions": {
+    "MergeResultsStoragePath": "D:\\Temp\\FFRKApi\\MergeResults-{Date}.json"
+  },
+  "AzureBlobStorageOptions": {
+    "StorageAccountName": "ffrkstorage",
+    "ContainerName": "etl",
+    "ConnectionString": "DefaultEndpointsProtocol=https;AccountName=ffrkstorage;AccountKey=a8Eu/OG8HYM28X896q+7XTVnMaMGhEDSUkYmO0+wjPjpn1Is5HwQlqHYMcnvNubZleFJNl18GBL1fuFLMqYxrw==;EndpointSuffix=core.windows.net",
+    "ImportResultsStoragePath": "Import\\ImportsResults-{Date}.json",
+    "TransformResultsStoragePath": "Transform\\TransformResults-{Date}.json",
+    "MergeResultsStoragePath": "Merge\\MergeResults-{Date}.json"
+  }
+}
