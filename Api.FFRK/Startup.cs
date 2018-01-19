@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FFRK.Api.Infra.Options.EnlirETL;
 using FFRKApi.Data.Storage;
 using FFRKApi.Logic.Api;
@@ -10,10 +7,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Serilog;
+using Serilog.Sinks.SystemConsole.Themes;
+using Swashbuckle.AspNetCore.Swagger;
 
-namespace Api.FFRK
+namespace FFRKApi.Api.FFRK
 {
     public class Startup
     {
@@ -28,6 +26,13 @@ namespace Api.FFRK
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddSwaggerGen(c =>
+                                   {
+                                       c.SwaggerDoc("v1", new Info { Title = "FFRK API", Version = "v1" });
+                                   });
+
+            ConfigureLogger(services);
         }
 
         /// <summary>
@@ -55,7 +60,15 @@ namespace Api.FFRK
 
             app.UseMvc();
 
-            var c = app.ApplicationServices.GetService<MergeResultsContainer>();
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+                             {
+                                 c.RoutePrefix = "swagger/ui";
+                                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "FFRK API v1.0");
+                             });
+
+            //var c = app.ApplicationServices.GetService<MergeResultsContainer>();
         }
 
         #region Private Configuration Methods
@@ -63,7 +76,7 @@ namespace Api.FFRK
         {
             services.AddScoped<IMergeStorageProvider, FileMergeStorageProvider>();
             services.AddScoped<IMaintenanceLogic, MaintenanceLogic>();
-            services.AddScoped<IListLogic, ListLogic>();
+            services.AddScoped<IIdListsLogic, IdListsLogic>();
 
 
             //need to do this last so that other services are all registered and ready for actual use.
@@ -91,7 +104,22 @@ namespace Api.FFRK
 
             return mergeResultsContainer;
         }
-        
+
+        private void ConfigureLogger(IServiceCollection services)
+        {
+            string appInsightsKey = Configuration["LoggingOptions:ApplicationInsightsKey"];
+
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Verbose()
+                .Enrich.FromLogContext()
+                //.WriteTo.RollingFile(rollingFileLogPath).MinimumLevel.Information()
+                .WriteTo.ApplicationInsightsEvents(appInsightsKey).MinimumLevel.Information()
+                .WriteTo.Console(theme: SystemConsoleTheme.Literate).MinimumLevel.Information()
+                .WriteTo.Debug().MinimumLevel.Debug()
+                .CreateLogger();
+
+            services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog());
+        }
         #endregion
     }
 }

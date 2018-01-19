@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FFRKApi.Api.FFRK.Constants;
 using FFRKApi.Data.Storage;
 using FFRKApi.Logic.Api;
 using FFRKApi.Model.EnlirMerge;
@@ -11,8 +12,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Api.FFRK.Controllers
 {
-    [Produces("application/json")]
-    [Route("api/Maintenance")]
+    public interface IMaintenanceController
+    {
+        IActionResult LoadLatestMergeResultsContainer();
+    }
+
+    [Produces(RouteConstants.ContentType_ApplicationJson)]
+    [Route(RouteConstants.BaseRoute)]
     public class MaintenanceController : Controller, IMaintenanceController
     {
         #region Class Variables
@@ -33,8 +39,8 @@ namespace Api.FFRK.Controllers
 
 
         #region IMaintenanceController Implementation
-
-        [Route("DataStatus")]
+        [HttpGet]
+        [Route(RouteConstants.MaintenanceRoute_DataStatus)]
         public IActionResult LoadLatestMergeResultsContainer()
         {
             MergeResultsContainer mergeResultsContainer = _maintenanceLogic.GetLatestMergeResultsContainer();
