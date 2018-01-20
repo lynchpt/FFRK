@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Serilog" Version="2.6.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
@@ -25,9 +26,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Data.Api\Data.Api.csproj" />
+    <ProjectReference Include="..\Dto.Api\Dto.Api.csproj" />
     <ProjectReference Include="..\Infra.Options.EnlirETL\Infra.Options.EnlirETL.csproj" />
     <ProjectReference Include="..\Logic.Api\Logic.Api.csproj" />
+    <ProjectReference Include="..\Model.Api\Model.Api.csproj" />
     <ProjectReference Include="..\Model.EnlirMerge\Model.EnlirMerge.csproj" />
+    <ProjectReference Include="..\Model.EnlirTransform\Model.EnlirTransform.csproj" />
   </ItemGroup>
 
 </Project>

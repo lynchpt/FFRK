@@ -2,14 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>FFRKApi.Logic.Api</AssemblyName>
-    <RootNamespace>FFRKApi.Logic.Api</RootNamespace>
+    <AssemblyName>FFRKApi.Data.Api</AssemblyName>
+    <RootNamespace>FFRKApi.Data.Api</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Data.Api\Data.Api.csproj" />
     <ProjectReference Include="..\Data.Storage\Data.Storage.csproj" />
-    <ProjectReference Include="..\Model.Api\Model.Api.csproj" />
     <ProjectReference Include="..\Model.EnlirMerge\Model.EnlirMerge.csproj" />
   </ItemGroup>
 

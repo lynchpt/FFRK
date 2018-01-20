@@ -1,4 +1,6 @@
 ﻿using System;
+using AutoMapper;
+using Data.Api;
 using FFRK.Api.Infra.Options.EnlirETL;
 using FFRKApi.Data.Storage;
 using FFRKApi.Logic.Api;
@@ -80,13 +82,17 @@ namespace FFRKApi.Api.FFRK
         protected virtual void ConfigureDependencyInjection(IServiceCollection services)
         {
             services.AddScoped<IMergeStorageProvider, FileMergeStorageProvider>();
+
+            services.AddScoped<IEnlirRepository, EnlirRepository>();
+            
+
             services.AddScoped<IMaintenanceLogic, MaintenanceLogic>();
             services.AddScoped<IIdListsLogic, IdListsLogic>();
+            services.AddScoped<ITypeListsLogic, TypeListsLogic>();
 
+            services.AddSingleton<IEnlirRepository, EnlirRepository>();
 
-            //need to do this last so that other services are all registered and ready for actual use.
-            MergeResultsContainer mrc = LoadMergeResultsContainer(services);
-            services.AddSingleton<MergeResultsContainer, MergeResultsContainer>(p => mrc);
+            services.AddSingleton<IMapper>(ConfigureMappings);
         }
 
         private void ConfigureOptions(IServiceCollection services)
@@ -99,16 +105,7 @@ namespace FFRKApi.Api.FFRK
 
         #region Private Methods
 
-        private MergeResultsContainer LoadMergeResultsContainer(IServiceCollection services)
-        {
-            IServiceProvider provider = services.BuildServiceProvider();
 
-            IMaintenanceLogic maintenanceLogic = provider.GetRequiredService<IMaintenanceLogic>();
-
-            MergeResultsContainer mergeResultsContainer = maintenanceLogic.GetLatestMergeResultsContainer();
-
-            return mergeResultsContainer;
-        }
 
         private void ConfigureLogger(IServiceCollection services)
         {
@@ -126,6 +123,23 @@ namespace FFRKApi.Api.FFRK
                 .CreateLogger();
 
             services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog());
+        }
+
+        private IMapper ConfigureMappings(IServiceProvider provider)
+        {
+            MapperConfiguration mapperConfiguration =
+                new MapperConfiguration(
+                    mce =>
+                    {
+                        mce.AddProfile<EnlirTransformMappingProfile>();                        
+                        mce.ConstructServicesUsing(t => ActivatorUtilities.CreateInstance(provider, t));
+                    });
+
+            mapperConfiguration.AssertConfigurationIsValid();
+
+            IMapper mapper = mapperConfiguration.CreateMapper();
+
+            return mapper;
         }
         #endregion
     }

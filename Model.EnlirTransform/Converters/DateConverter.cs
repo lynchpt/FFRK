@@ -17,7 +17,7 @@ namespace FFRKApi.Model.EnlirTransform.Converters
                 {
                     utcDate = DateTime.Parse(europeanDate, new CultureInfo("fr-FR"));
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     ; //swallow error, it is enough that we report a default data of MaxDate
                 }
