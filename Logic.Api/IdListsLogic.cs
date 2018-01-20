@@ -41,34 +41,6 @@ namespace FFRKApi.Logic.Api
 
         #region Constructors
 
-        public IdListBundle GetAllIdLists()
-        {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetAllIdLists)}");
-
-            IdListBundle bundle = new IdListBundle()
-                    {
-                        Ability = _enlirRepository.GetMergeResultsContainer().AbilityIdList,
-                        Character = _enlirRepository.GetMergeResultsContainer().CharacterIdList,
-                        Command = _enlirRepository.GetMergeResultsContainer().CommandIdList,
-                        Dungeon = _enlirRepository.GetMergeResultsContainer().DungeonIdList,
-                        Event = _enlirRepository.GetMergeResultsContainer().EventIdList,
-                        Experience = _enlirRepository.GetMergeResultsContainer().ExperienceIdList,
-                        LegendMateria = _enlirRepository.GetMergeResultsContainer().LegendMateriaIdList,
-                        LegendSphere = _enlirRepository.GetMergeResultsContainer().LegendSphereIdList,
-                        Magicite = _enlirRepository.GetMergeResultsContainer().MagiciteIdList,
-                        MagiciteSkill = _enlirRepository.GetMergeResultsContainer().MagiciteSkillIdList,
-                        Mission = _enlirRepository.GetMergeResultsContainer().MissionList,
-                        Other = _enlirRepository.GetMergeResultsContainer().OtherIdList,
-                        RecordMateria = _enlirRepository.GetMergeResultsContainer().RecordMateriaIdList,
-                        RecordSphere = _enlirRepository.GetMergeResultsContainer().RecordSphereIdList,
-                        Relic = _enlirRepository.GetMergeResultsContainer().RelicIdList,
-                        SoulBreak = _enlirRepository.GetMergeResultsContainer().SoulBreakIdList,
-                        Status = _enlirRepository.GetMergeResultsContainer().StatusIdList
-                    };
-
-            return bundle;
-        }
-
         public IdListsLogic(IEnlirRepository enlirRepository, ILogger<IdListsLogic> logger)
         {
             _enlirRepository = enlirRepository;
@@ -77,6 +49,34 @@ namespace FFRKApi.Logic.Api
         #endregion
 
         #region IIdListsLogic Implementation
+        public IdListBundle GetAllIdLists()
+        {
+            _logger.LogInformation($"Logic Method invoked: {nameof(GetAllIdLists)}");
+
+            IdListBundle bundle = new IdListBundle()
+                                  {
+                                      Ability = _enlirRepository.GetMergeResultsContainer().AbilityIdList,
+                                      Character = _enlirRepository.GetMergeResultsContainer().CharacterIdList,
+                                      Command = _enlirRepository.GetMergeResultsContainer().CommandIdList,
+                                      Dungeon = _enlirRepository.GetMergeResultsContainer().DungeonIdList,
+                                      Event = _enlirRepository.GetMergeResultsContainer().EventIdList,
+                                      Experience = _enlirRepository.GetMergeResultsContainer().ExperienceIdList,
+                                      LegendMateria = _enlirRepository.GetMergeResultsContainer().LegendMateriaIdList,
+                                      LegendSphere = _enlirRepository.GetMergeResultsContainer().LegendSphereIdList,
+                                      Magicite = _enlirRepository.GetMergeResultsContainer().MagiciteIdList,
+                                      MagiciteSkill = _enlirRepository.GetMergeResultsContainer().MagiciteSkillIdList,
+                                      Mission = _enlirRepository.GetMergeResultsContainer().MissionList,
+                                      Other = _enlirRepository.GetMergeResultsContainer().OtherIdList,
+                                      RecordMateria = _enlirRepository.GetMergeResultsContainer().RecordMateriaIdList,
+                                      RecordSphere = _enlirRepository.GetMergeResultsContainer().RecordSphereIdList,
+                                      Relic = _enlirRepository.GetMergeResultsContainer().RelicIdList,
+                                      SoulBreak = _enlirRepository.GetMergeResultsContainer().SoulBreakIdList,
+                                      Status = _enlirRepository.GetMergeResultsContainer().StatusIdList
+                                  };
+
+            return bundle;
+        }
+
         public IEnumerable<KeyValuePair<int, string>> GetAbilityIdList()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAbilityIdList)}");

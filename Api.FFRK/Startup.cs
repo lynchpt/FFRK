@@ -84,7 +84,24 @@ namespace FFRKApi.Api.FFRK
             services.AddScoped<IMergeStorageProvider, FileMergeStorageProvider>();
 
             services.AddScoped<IEnlirRepository, EnlirRepository>();
-            
+
+            services.AddScoped<IAbilitiesLogic, AbilitiesLogic>();
+            services.AddScoped<ICharactersLogic, CharactersLogic>();
+            services.AddScoped<ICommandsLogic, CommandsLogic>();
+            services.AddScoped<IDungeonsLogic, DungeonsLogic>();
+            services.AddScoped<IEventsLogic, EventsLogic>();
+            services.AddScoped<IExperiencesLogic, ExperiencesLogic>();
+            services.AddScoped<ILegendMateriasLogic, LegendMateriasLogic>();
+            services.AddScoped<ILegendSpheresLogic, LegendSpheresLogic>();
+            services.AddScoped<IMagicitesLogic, MagicitesLogic>();
+            services.AddScoped<IMagiciteSkillsLogic, MagiciteSkillsLogic>();
+            services.AddScoped<IMissionsLogic, MissionsLogic>();
+            services.AddScoped<IOthersLogic, OthersLogic>();
+            services.AddScoped<IRecordMateriasLogic, RecordMateriasLogic>();
+            services.AddScoped<IRecordSpheresLogic, RecordSpheresLogic>();
+            services.AddScoped<IRelicsLogic, RelicsLogic>();
+            services.AddScoped<ISoulBreaksLogic, SoulBreaksLogic>();
+            services.AddScoped<IStatusesLogic, StatusesLogic>();
 
             services.AddScoped<IMaintenanceLogic, MaintenanceLogic>();
             services.AddScoped<IIdListsLogic, IdListsLogic>();

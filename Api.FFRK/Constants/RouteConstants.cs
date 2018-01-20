@@ -49,6 +49,77 @@ namespace FFRKApi.Api.FFRK.Constants
         public const string TypeListsRoute_SoulBreakTierType = "SoulBreakTierType";
         public const string TypeListsRoute_TargetType = "TargetType";
 
+        //Abilities Routes
+        public const string AbilitiesRoute_All = "";
+
+        //Characters Routes
+        public const string CharactersRoute_All = "";
+
+
+        //Commands Routes
+        public const string Route_All = "";
+
+
+        //Dungeons Routes
+        public const string CommandsRoute_All = "";
+
+
+        //Events Routes
+        public const string EventsRoute_All = "";
+
+
+        //Experiences Routes
+        public const string ExperiencesRoute_All = "";
+
+
+        //LegendMaterias Routes
+        public const string LegendMateriasRoute_All = "";
+
+
+        //LegendSpheres Routes
+        public const string LegendSpheresRoute_All = "";
+
+
+        //Magicites Routes
+        public const string MagicitesRoute_All = "";
+
+
+        //MagiciteSkills Routes
+        public const string MagiciteSkillsRoute_All = "";
+
+
+        //Missions Routes
+        public const string MissionsRoute_All = "";
+
+
+        //Others Routes
+        public const string OthersRoute_All = "";
+
+
+        //RecordMaterias Routes
+        public const string RecordMateriasRoute_All = "";
+
+
+        //RecordSpheres Routes
+        public const string RecordSpheresRoute_All = "";
+
+
+        //Relics Routes
+        public const string RelicsRoute_All = "";
+
+
+        //SoulBreaks Routes
+        public const string SoulBreaksRoute_All = "";
+
+
+        //Statuses Routes
+        public const string StatusesRoute_All = "";
+
+
+
+
+
+
 
         //Maintenance Routes
         public const string MaintenanceRoute_DataStatus = "DataStatus";
