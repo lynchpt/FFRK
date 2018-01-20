@@ -50,7 +50,7 @@ namespace FFRKApi.Logic.EnlirTransform
 
             model.RecordSphereLevels = GetRecordSphereLevels(row);
 
-            _logger.LogInformation("Converted RecordSphereRow to RecordSphere: {Id} - {Description}", model.Id, model.Description);
+            _logger.LogDebug("Converted RecordSphereRow to RecordSphere: {Id} - {Description}", model.Id, model.Description);
 
             return model;
         }

@@ -86,7 +86,7 @@ namespace FFRKApi.Logic.EnlirTransform
             model.EnlirId = row.ID;
 
 
-            _logger.LogInformation("Converted SoulBreakRow to SoulBreak: {Id} - {Description}", model.Id, model.Description);
+            _logger.LogDebug("Converted SoulBreakRow to SoulBreak: {Id} - {Description}", model.Id, model.Description);
 
             return model;
         } 

@@ -52,7 +52,7 @@ namespace FFRKApi.Logic.EnlirTransform
 
 
 
-            _logger.LogInformation("Converted LegendMateriaRow to LegendMateria: {Id} - {Description}", model.Id, model.Description);
+            _logger.LogDebug("Converted LegendMateriaRow to LegendMateria: {Id} - {Description}", model.Id, model.Description);
 
             return model;
         } 

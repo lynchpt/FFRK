@@ -73,7 +73,7 @@ namespace FFRKApi.Logic.EnlirTransform
             model.School = _schoolConverter.ConvertFromNameToId(row.School);
             model.EnlirId = row.ID;
 
-            _logger.LogInformation("Converted CommandRow to Command: {Id} - {Description}", model.Id, model.Description);
+            _logger.LogDebug("Converted CommandRow to Command: {Id} - {Description}", model.Id, model.Description);
 
             return model;
         } 

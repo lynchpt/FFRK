@@ -45,7 +45,7 @@ namespace FFRKApi.Logic.EnlirTransform
             model.CodedName = row.CodedName;
             model.Notes = row.Notes.Replace(DashCharacter, String.Empty);
 
-            _logger.LogInformation("Converted StatusRow to Status: {Id} - {Description}", model.Id, model.Description);
+            _logger.LogDebug("Converted StatusRow to Status: {Id} - {Description}", model.Id, model.Description);
 
             return model;
         }

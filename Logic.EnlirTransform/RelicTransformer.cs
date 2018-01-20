@@ -88,7 +88,7 @@ namespace FFRKApi.Logic.EnlirTransform
             model.MaxEvasion = _intConverter.ConvertFromStringToInt(row.MEVA);
 
 
-            _logger.LogInformation("Converted RelicRow to Relic: {Id} - {Description}", model.Id, model.Description);
+            _logger.LogDebug("Converted RelicRow to Relic: {Id} - {Description}", model.Id, model.Description);
 
             return model;
         }

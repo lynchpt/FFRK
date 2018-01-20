@@ -103,7 +103,7 @@ namespace FFRKApi.Logic.EnlirTransform
             //magicite skills
             model.MagiciteSkills = new List<MagiciteSkill>(); //fill in during merge phase            
 
-            _logger.LogInformation("Converted MagiciteRow to Magicite: {Id} - {Description}", model.Id, model.Description);
+            _logger.LogDebug("Converted MagiciteRow to Magicite: {Id} - {Description}", model.Id, model.Description);
 
             return model;
         }

@@ -5,5 +5,7 @@
         public string LogFilePath { get; set; }
 
         public string ApplicationInsightsKey { get; set; }
+
+        public string AppComponentName { get; set; }
     }
 }

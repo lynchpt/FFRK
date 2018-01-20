@@ -120,7 +120,7 @@ namespace FFRKApi.Logic.EnlirMerge
 
                 MergeResultsContainer mergeResultsContainer = ExecuteMerge(transformResults);
 
-
+                _logger.LogInformation("MergeManager MergeAll method successfully completed.");
                 return mergeResultsContainer;
             }
             catch (Exception ex)
@@ -140,7 +140,7 @@ namespace FFRKApi.Logic.EnlirMerge
 
                 MergeResultsContainer mergeResultsContainer = ExecuteMerge(transformResults);
 
-
+                _logger.LogInformation("MergeManager MergeAll method successfully completed.");
                 return mergeResultsContainer;
             }
             catch (Exception ex)
@@ -157,7 +157,7 @@ namespace FFRKApi.Logic.EnlirMerge
             {
                 MergeResultsContainer mergeResultsContainer = ExecuteMerge(transformResultsContainer);
 
-
+                _logger.LogInformation("MergeManager MergeAll method successfully completed.");
                 return mergeResultsContainer;
             }
             catch (Exception ex)
@@ -179,7 +179,7 @@ namespace FFRKApi.Logic.EnlirMerge
                 {
                     rs.CharacterId = transformResults.Characters.Where(c => c.CharacterName == rs.CharacterName).Select(c => c.Id).SingleOrDefault();
 
-                    _logger.LogInformation("wired up CharacterId {CharacterId} to RecordSphere {RecordSphere}", rs.CharacterId, rs.Description);
+                    _logger.LogDebug("wired up CharacterId {CharacterId} to RecordSphere {RecordSphere}", rs.CharacterId, rs.Description);
                 }
             }
 
@@ -189,7 +189,7 @@ namespace FFRKApi.Logic.EnlirMerge
                 {
                     ls.CharacterId = transformResults.Characters.Where(c => c.CharacterName == ls.CharacterName).Select(c => c.Id).SingleOrDefault();
 
-                    _logger.LogInformation("wired up CharacterId {CharacterId} to LegendSphere {LegendSphere}", ls.CharacterId, ls.Description);
+                    _logger.LogDebug("wired up CharacterId {CharacterId} to LegendSphere {LegendSphere}", ls.CharacterId, ls.Description);
                 }
             }
 
@@ -199,7 +199,7 @@ namespace FFRKApi.Logic.EnlirMerge
                 {
                     rm.CharacterId = transformResults.Characters.Where(c => c.CharacterName == rm.CharacterName).Select(c => c.Id).SingleOrDefault();
 
-                    _logger.LogInformation("wired up CharacterId {CharacterId} to RecordMateria {RecordMateria}", rm.CharacterId, rm.Description);
+                    _logger.LogDebug("wired up CharacterId {CharacterId} to RecordMateria {RecordMateria}", rm.CharacterId, rm.Description);
                 }
             }
 
@@ -209,7 +209,7 @@ namespace FFRKApi.Logic.EnlirMerge
                 {
                     lm.CharacterId = transformResults.Characters.Where(c => c.CharacterName == lm.CharacterName).Select(c => c.Id).SingleOrDefault();
 
-                    _logger.LogInformation("wired up CharacterId {CharacterId} to LegendMateria {LegendMateria}", lm.CharacterId, lm.Description);
+                    _logger.LogDebug("wired up CharacterId {CharacterId} to LegendMateria {LegendMateria}", lm.CharacterId, lm.Description);
                 }
             }
 
@@ -219,7 +219,7 @@ namespace FFRKApi.Logic.EnlirMerge
                 {
                     relic.CharacterId = transformResults.Characters.Where(c => c.CharacterName == relic.CharacterName).Select(c => c.Id).SingleOrDefault();
 
-                    _logger.LogInformation("wired up CharacterId {CharacterId} to Relic {Relic}", relic.CharacterId, relic.Description);
+                    _logger.LogDebug("wired up CharacterId {CharacterId} to Relic {Relic}", relic.CharacterId, relic.Description);
                 }
             }
 
@@ -229,7 +229,7 @@ namespace FFRKApi.Logic.EnlirMerge
                 {
                     command.CharacterId = transformResults.Characters.Where(c => c.CharacterName == command.CharacterName).Select(c => c.Id).SingleOrDefault();
 
-                    _logger.LogInformation("wired up CharacterId {CharacterId} to Command {Command}", command.CharacterId, command.Description);
+                    _logger.LogDebug("wired up CharacterId {CharacterId} to Command {Command}", command.CharacterId, command.Description);
                 }
             }
 
@@ -239,7 +239,7 @@ namespace FFRKApi.Logic.EnlirMerge
                 {
                     soulbreak.CharacterId = transformResults.Characters.Where(c => c.CharacterName == soulbreak.CharacterName).Select(c => c.Id).SingleOrDefault();
 
-                    _logger.LogInformation("wired up CharacterId {CharacterId} to SoulBreak {SoulBreak}", soulbreak.CharacterId, soulbreak.Description);
+                    _logger.LogDebug("wired up CharacterId {CharacterId} to SoulBreak {SoulBreak}", soulbreak.CharacterId, soulbreak.Description);
                 }
             }
         }
@@ -252,7 +252,7 @@ namespace FFRKApi.Logic.EnlirMerge
                 {
                     relic.LegendMateriaId = transformResults.LegendMaterias.Where(lm => (lm.LegendMateriaName == relic.LegendMateriaName) && (lm.Realm == relic.Realm)).Select(lm => lm.Id).SingleOrDefault();
 
-                    _logger.LogInformation("wired up LegendMateriaId {LegendMateriaId} to Relic {Relic}", relic.CharacterId, relic.Description);
+                    _logger.LogDebug("wired up LegendMateriaId {LegendMateriaId} to Relic {Relic}", relic.CharacterId, relic.Description);
                 }
             }
 
@@ -264,14 +264,14 @@ namespace FFRKApi.Logic.EnlirMerge
             {
                 dungeon.IntroducingEventId = transformResults.Events.Where(e => e.EventName == dungeon.IntroducingEvent).Select(e => e.Id).SingleOrDefault();
 
-                _logger.LogInformation("wired up EventId {EventId} to Dungeon {Dungeon}", dungeon.IntroducingEventId, dungeon.Description);
+                _logger.LogDebug("wired up EventId {EventId} to Dungeon {Dungeon}", dungeon.IntroducingEventId, dungeon.Description);
             }
 
             foreach (Magicite magicite in transformResults.Magicites)
             {
                 magicite.IntroducingEventId = transformResults.Events.Where(e => e.EventName == magicite.IntroducingEventName).Select(e => e.Id).Single();
 
-                _logger.LogInformation("wired up EventId {EventId} to Magicite {Magicite}", magicite.IntroducingEventId, magicite.Description);
+                _logger.LogDebug("wired up EventId {EventId} to Magicite {Magicite}", magicite.IntroducingEventId, magicite.Description);
             }
 
             foreach (Character character in transformResults.Characters)
@@ -280,21 +280,21 @@ namespace FFRKApi.Logic.EnlirMerge
                 {
                     info.IntroducingEventId = transformResults.Events.Where(e => e.EventName == info.IntroducingEvent).Select(e => e.Id).SingleOrDefault();
 
-                    _logger.LogInformation("wired up EventId {EventId} to StatsByLevelInfo for Character {Character}", info.IntroducingEventId, character.Description);
+                    _logger.LogDebug("wired up EventId {EventId} to StatsByLevelInfo for Character {Character}", info.IntroducingEventId, character.Description);
                 }
 
                 character.StatIncrementsForRecordSpheres.IntroducingEventId = transformResults.Events.Where(e => e.EventName == character.StatIncrementsForRecordSpheres.IntroducingEvent).Select(e => e.Id).SingleOrDefault();
-                _logger.LogInformation("wired up EventId {EventId} to StatIncrementsForRecordSpheres for Character {Character}", character.StatIncrementsForRecordSpheres.IntroducingEventId, character.Description);
+                _logger.LogDebug("wired up EventId {EventId} to StatIncrementsForRecordSpheres for Character {Character}", character.StatIncrementsForRecordSpheres.IntroducingEventId, character.Description);
 
                 character.StatIncrementsForLegendSpheres.IntroducingEventId = transformResults.Events.Where(e => e.EventName == character.StatIncrementsForLegendSpheres.IntroducingEvent).Select(e => e.Id).SingleOrDefault();
-                _logger.LogInformation("wired up EventId {EventId} to StatIncrementsForLegendSpheres for Character {Character}", character.StatIncrementsForLegendSpheres.IntroducingEventId, character.Description);
+                _logger.LogDebug("wired up EventId {EventId} to StatIncrementsForLegendSpheres for Character {Character}", character.StatIncrementsForLegendSpheres.IntroducingEventId, character.Description);
             }
 
             foreach (Ability ability in transformResults.Abilities)
             {
                 ability.IntroducingEventId = transformResults.Events.Where(e => e.EventName == ability.IntroducingEventName).Select(e => e.Id).SingleOrDefault();
 
-                _logger.LogInformation("wired up EventId {EventId} to Ability {Ability}", ability.IntroducingEventId, ability.Description);
+                _logger.LogDebug("wired up EventId {EventId} to Ability {Ability}", ability.IntroducingEventId, ability.Description);
             }
 
         }
@@ -306,7 +306,7 @@ namespace FFRKApi.Logic.EnlirMerge
                 command.SourceSoulBreakId = transformResults.SoulBreaks.Where(sb => sb.SoulBreakName == command.SourceSoulBreakName 
                 && sb.CharacterName.Trim() == command.CharacterName.Trim()).Select(e => e.Id).SingleOrDefault();
 
-                _logger.LogInformation("wired up SoulBreakId {SoulBreakId} to Command {Command}", command.SourceSoulBreakId, command.Description);
+                _logger.LogDebug("wired up SoulBreakId {SoulBreakId} to Command {Command}", command.SourceSoulBreakId, command.Description);
             }
 
             foreach (Relic relic in transformResults.Relics)
@@ -317,7 +317,7 @@ namespace FFRKApi.Logic.EnlirMerge
                 && (sb.CharacterName.Trim() == relic.CharacterName.Trim()) && (sb.RelicName == $"{relic.RelicName} ({realmName})")
                 && relic.Realm == sb.Realm).Select(e => e.Id).SingleOrDefault();
 
-                _logger.LogInformation("wired up SoulBreakId {SoulBreakId} to Relic {Relic}", relic.SoulBreakId, relic.Description);
+                _logger.LogDebug("wired up SoulBreakId {SoulBreakId} to Relic {Relic}", relic.SoulBreakId, relic.Description);
             }
         }
 
@@ -331,7 +331,7 @@ namespace FFRKApi.Logic.EnlirMerge
 
                     lm.RelicId = transformResults.Relics.Where(r => (lm.RelicName == $"{r.RelicName} ({realmName})") && r.Realm == lm.Realm).Select(r => r.Id).SingleOrDefault();
 
-                    _logger.LogInformation("wired up RelicId {RelicId} to LegendMateria {LegendMateria}", lm.RelicId, lm.Description);
+                    _logger.LogDebug("wired up RelicId {RelicId} to LegendMateria {LegendMateria}", lm.RelicId, lm.Description);
                 }
             }
 
@@ -343,7 +343,7 @@ namespace FFRKApi.Logic.EnlirMerge
 
                     sb.RelicId = transformResults.Relics.Where(r => (sb.RelicName == $"{r.RelicName} ({realmName})") && r.Realm == sb.Realm).Select(r => r.Id).SingleOrDefault();
 
-                    _logger.LogInformation("wired up RelicId {RelicId} to SoulBreak {SoulBreak}", sb.RelicId, sb.Description);
+                    _logger.LogDebug("wired up RelicId {RelicId} to SoulBreak {SoulBreak}", sb.RelicId, sb.Description);
                 }
             }
 
@@ -360,7 +360,7 @@ namespace FFRKApi.Logic.EnlirMerge
                     other.SourceId = relatedStatus.Id;
                     other.SourceType = nameof(Status);
 
-                    _logger.LogInformation("wired up SourceId {SourceId} and SourceType {SourceType} to Other {Other}", other.SourceId, other.SourceType, other.Description);
+                    _logger.LogDebug("wired up SourceId {SourceId} and SourceType {SourceType} to Other {Other}", other.SourceId, other.SourceType, other.Description);
                     continue;
                 }
 
@@ -372,7 +372,7 @@ namespace FFRKApi.Logic.EnlirMerge
                     other.SourceId = relatedSoulBreak.Id;
                     other.SourceType = nameof(SoulBreak);
 
-                    _logger.LogInformation("wired up SourceId {SourceId} and SourceType {SourceType} to Other {Other}", other.SourceId, other.SourceType, other.Description);
+                    _logger.LogDebug("wired up SourceId {SourceId} and SourceType {SourceType} to Other {Other}", other.SourceId, other.SourceType, other.Description);
                     continue;
                 }
 
@@ -382,7 +382,7 @@ namespace FFRKApi.Logic.EnlirMerge
                     other.SourceId = relatedRecordMateria.Id;
                     other.SourceType = nameof(RecordMateria);
 
-                    _logger.LogInformation("wired up SourceId {SourceId} and SourceType {SourceType} to Other {Other}", other.SourceId, other.SourceType, other.Description);
+                    _logger.LogDebug("wired up SourceId {SourceId} and SourceType {SourceType} to Other {Other}", other.SourceId, other.SourceType, other.Description);
                     continue;
                 }
 
@@ -392,7 +392,7 @@ namespace FFRKApi.Logic.EnlirMerge
                     other.SourceId = relatedRelic.Id;
                     other.SourceType = nameof(Relic);
 
-                    _logger.LogInformation("wired up SourceId {SourceId} and SourceType {SourceType} to Other {Other}", other.SourceId, other.SourceType, other.Description);
+                    _logger.LogDebug("wired up SourceId {SourceId} and SourceType {SourceType} to Other {Other}", other.SourceId, other.SourceType, other.Description);
                     continue;
                 }
 
@@ -402,7 +402,7 @@ namespace FFRKApi.Logic.EnlirMerge
                     other.SourceId = relatedCommand.Id;
                     other.SourceType = nameof(Command);
 
-                    _logger.LogInformation("wired up SourceId {SourceId} and SourceType {SourceType} to Other {Other}", other.SourceId, other.SourceType, other.Description);
+                    _logger.LogDebug("wired up SourceId {SourceId} and SourceType {SourceType} to Other {Other}", other.SourceId, other.SourceType, other.Description);
                     continue;
                 }
 
@@ -412,7 +412,7 @@ namespace FFRKApi.Logic.EnlirMerge
                     other.SourceId = relatedLegendMateria.Id;
                     other.SourceType = nameof(LegendMateria);
 
-                    _logger.LogInformation("wired up SourceId {SourceId} and SourceType {SourceType} to Other {Other}", other.SourceId, other.SourceType, other.Description);
+                    _logger.LogDebug("wired up SourceId {SourceId} and SourceType {SourceType} to Other {Other}", other.SourceId, other.SourceType, other.Description);
                     continue;
                 }
 
@@ -429,7 +429,7 @@ namespace FFRKApi.Logic.EnlirMerge
                 string realmName = GetNameOfTypeListItem<RealmList>(magicite.Realm);
                 magicite.MagiciteSkills = transformResults.MagiciteSkills.Where(s => s.MagiciteName == $"{magicite.MagiciteName} ({realmName})").ToList();
 
-                _logger.LogInformation("wired up {MagiciteSkillsCount} MagiciteSkills to Magicite {Magicite}", magicite.MagiciteSkills.Count(), magicite.Description);
+                _logger.LogDebug("wired up {MagiciteSkillsCount} MagiciteSkills to Magicite {Magicite}", magicite.MagiciteSkills.Count(), magicite.Description);
             }
         }
 
@@ -439,7 +439,7 @@ namespace FFRKApi.Logic.EnlirMerge
             {
                 character.RecordSpheres = transformResults.RecordSpheres.Where(rs => rs.CharacterName == character.CharacterName).ToList();
 
-                _logger.LogInformation("wired up {RecordSpheresCount} RecordSpheres to Character {Character}", character.RecordSpheres.Count(), character.Description);
+                _logger.LogDebug("wired up {RecordSpheresCount} RecordSpheres to Character {Character}", character.RecordSpheres.Count(), character.Description);
             }
         }
 
@@ -449,7 +449,7 @@ namespace FFRKApi.Logic.EnlirMerge
             {
                 character.LegendSpheres = transformResults.LegendSpheres.Where(ls => ls.CharacterName == character.CharacterName).ToList();
 
-                _logger.LogInformation("wired up {LegendSpheresCount} LegendSpheres to Character {Character}", character.LegendSpheres.Count(), character.Description);
+                _logger.LogDebug("wired up {LegendSpheresCount} LegendSpheres to Character {Character}", character.LegendSpheres.Count(), character.Description);
             }
         }
 
@@ -459,7 +459,7 @@ namespace FFRKApi.Logic.EnlirMerge
             {
                 character.RecordMaterias = transformResults.RecordMaterias.Where(rm => rm.CharacterName == character.CharacterName).ToList();
 
-                _logger.LogInformation("wired up {RecordMateriasCount} RecordMaterias to Character {Character}", character.RecordMaterias.Count(), character.Description);
+                _logger.LogDebug("wired up {RecordMateriasCount} RecordMaterias to Character {Character}", character.RecordMaterias.Count(), character.Description);
             }
         }
 
@@ -469,7 +469,7 @@ namespace FFRKApi.Logic.EnlirMerge
             {
                 character.LegendMaterias = transformResults.LegendMaterias.Where(lm => lm.CharacterName == character.CharacterName).ToList();
 
-                _logger.LogInformation("wired up {LegendMateriasCount} LegendMaterias to Character {Character}", character.LegendMaterias.Count(), character.Description);
+                _logger.LogDebug("wired up {LegendMateriasCount} LegendMaterias to Character {Character}", character.LegendMaterias.Count(), character.Description);
             }
         }
 
@@ -479,7 +479,7 @@ namespace FFRKApi.Logic.EnlirMerge
             {
                 soulBreak.Commands = transformResults.Commands.Where(c => c.SourceSoulBreakName == soulBreak.SoulBreakName).ToList();
 
-                _logger.LogInformation("wired up {CommandsCount} Commands to SoulBreak {SoulBreak}", soulBreak.Commands.Count(), soulBreak.Description);
+                _logger.LogDebug("wired up {CommandsCount} Commands to SoulBreak {SoulBreak}", soulBreak.Commands.Count(), soulBreak.Description);
             }
         }
 
@@ -489,7 +489,7 @@ namespace FFRKApi.Logic.EnlirMerge
             {
                 soulBreak.Statuses = transformResults.Statuses.Where(s => !String.IsNullOrWhiteSpace(s.CommonName) && soulBreak.Effects.Contains(s.CommonName)).ToList();
 
-                _logger.LogInformation("wired up {StatusesCount} Statuses to SoulBreak {SoulBreak}", soulBreak.Statuses.Count(), soulBreak.Description);
+                _logger.LogDebug("wired up {StatusesCount} Statuses to SoulBreak {SoulBreak}", soulBreak.Statuses.Count(), soulBreak.Description);
             }
         }
 
@@ -499,7 +499,7 @@ namespace FFRKApi.Logic.EnlirMerge
             {
                 soulBreak.OtherEffects = transformResults.Others.Where(o => soulBreak.Effects.Contains(o.SourceName)).ToList();
 
-                _logger.LogInformation("wired up {OtherEffectsCount} OtherEffects to SoulBreak {SoulBreak}", soulBreak.OtherEffects.Count(), soulBreak.Description);
+                _logger.LogDebug("wired up {OtherEffectsCount} OtherEffects to SoulBreak {SoulBreak}", soulBreak.OtherEffects.Count(), soulBreak.Description);
             }
         }
 
@@ -512,7 +512,7 @@ namespace FFRKApi.Logic.EnlirMerge
                 relic.SoulBreak = transformResults.SoulBreaks.SingleOrDefault(sb => sb.SoulBreakName.Trim() == relic.SoulBreakName.Trim()  
                 && (sb.CharacterName.Trim() == relic.CharacterName.Trim()) && (sb.RelicName == $"{relic.RelicName} ({realmName})") && relic.Realm == sb.Realm);
 
-                _logger.LogInformation("wired up {SoulBreak} SoulBreak to Relic {Relic}", relic.SoulBreak?.Description, relic?.Description);
+                _logger.LogDebug("wired up {SoulBreak} SoulBreak to Relic {Relic}", relic.SoulBreak?.Description, relic?.Description);
             }
         }
 
@@ -522,7 +522,7 @@ namespace FFRKApi.Logic.EnlirMerge
             {
                 character.Relics = transformResults.Relics.Where(r => r.CharacterName == character.CharacterName).ToList();
 
-                _logger.LogInformation("wired up {RelicsCount} Relics to Character {Character}", character.Relics.Count(), character.Description);
+                _logger.LogDebug("wired up {RelicsCount} Relics to Character {Character}", character.Relics.Count(), character.Description);
             }
         }
 

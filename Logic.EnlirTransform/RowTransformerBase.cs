@@ -39,10 +39,10 @@ namespace FFRKApi.Logic.EnlirTransform
         #region IRowTransformer Implementation
         public virtual IEnumerable<TModel> Transform(IEnumerable<TRow> importedRows)
         {
-            _logger.LogInformation($"Transform invoked and attempting to transform imported Rows");
+            _logger.LogInformation("Transform invoked and attempting to transform imported Rows for {ImportRowType}", typeof(TRow).Name);
 
             IList<TModel> models = new List<TModel>();
-
+       
             int generatedId = 1; 
 
             foreach (TRow row in importedRows)

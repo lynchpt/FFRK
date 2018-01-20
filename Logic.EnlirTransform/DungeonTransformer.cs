@@ -58,7 +58,7 @@ namespace FFRKApi.Logic.EnlirTransform
             model.FirstTimeRewardsElite = ExtractItemWithCountAndStarLevel(row.FirstTimeElite);
             model.MasteryRewardsElite = ExtractItemWithCountAndStarLevel(row.MasteryElite);
 
-            _logger.LogInformation("Converted DungeonRow to Dungeon: {Id} - {Description}", model.Id, model.Description);
+            _logger.LogDebug("Converted DungeonRow to Dungeon: {Id} - {Description}", model.Id, model.Description);
 
             return model;
         }

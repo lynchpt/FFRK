@@ -33,7 +33,7 @@ namespace FFRKApi.Logic.EnlirTransform
 
             model.Rewards = ExtractItemWithCountAndStarLevel(row.Reward);
 
-            _logger.LogInformation("Converted MissionRow to Mission: {Id} - {Description}", model.Id, model.Description);
+            _logger.LogDebug("Converted MissionRow to Mission: {Id} - {Description}", model.Id, model.Description);
 
             return model;
         } 

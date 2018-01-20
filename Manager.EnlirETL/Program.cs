@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Serilog.Configuration;
 using Serilog.Core;
 using Serilog.Sinks.SystemConsole.Themes;
 
@@ -24,6 +25,7 @@ namespace Manager.EnlirETL
         private const string LocalEnvironmentKey = "local";
         private const string ConfigFileName = "config";
         private const string ConfigFileExtension = "json";
+        private const string LoggingOptionsAppComponentNameKey = "AppComponent";
         #endregion
 
         #region Main Entry Point
@@ -83,11 +85,13 @@ namespace Manager.EnlirETL
         private static void ConfigureLogger()
         {
             string rollingFileLogPath = _configuration.GetSection($"{nameof(LoggingOptions)}:{nameof(LoggingOptions.LogFilePath)}").Value;
+            string appComponentName = _configuration.GetSection($"{nameof(LoggingOptions)}:{nameof(LoggingOptions.AppComponentName)}").Value;
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
                 .Enrich.FromLogContext()
-                .WriteTo.RollingFile(rollingFileLogPath).MinimumLevel.Information()
+                .Enrich.WithProperty(LoggingOptionsAppComponentNameKey, appComponentName)
+                .WriteTo.RollingFile(rollingFileLogPath).MinimumLevel.Debug()
                 .WriteTo.Console(theme: SystemConsoleTheme.Literate).MinimumLevel.Information()
                 .WriteTo.Debug().MinimumLevel.Debug()
                 .CreateLogger();

@@ -49,7 +49,7 @@ namespace FFRKApi.Logic.EnlirTransform
             model.IsChecked = _stringToBooleanConverter.ConvertFromStringToBool(row.Checked);
 
 
-            _logger.LogInformation("Converted RecordMateriaRow to RecordMateria: {Id} - {Description}", model.Id, model.Description);
+            _logger.LogDebug("Converted RecordMateriaRow to RecordMateria: {Id} - {Description}", model.Id, model.Description);
 
             return model;
         } 

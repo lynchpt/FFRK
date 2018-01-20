@@ -76,7 +76,7 @@ namespace FFRKApi.Logic.EnlirTransform
 
             model.OrbRequirements = GetOrbRequirements(row);
 
-            _logger.LogInformation("Converted AbilityRow to Ability: {Id} - {Description}", model.Id, model.Description);
+            _logger.LogDebug("Converted AbilityRow to Ability: {Id} - {Description}", model.Id, model.Description);
 
             return model;
         }

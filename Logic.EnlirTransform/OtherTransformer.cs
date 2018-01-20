@@ -65,7 +65,7 @@ namespace FFRKApi.Logic.EnlirTransform
             model.School = _schoolConverter.ConvertFromNameToId(row.School);
             model.IsChecked = _stringToBooleanConverter.ConvertFromStringToBool(row.Checked);
 
-            _logger.LogInformation("Converted OtherRow to Other: {Id} - {Description}", model.Id, model.Description);
+            _logger.LogDebug("Converted OtherRow to Other: {Id} - {Description}", model.Id, model.Description);
 
             return model;
         }

@@ -65,7 +65,7 @@ namespace FFRKApi.Logic.EnlirTransform
             model.ChanceForSkillUseWith2LevelCapBreaks = _percentConverter.ConvertFromStringToDouble(row.ChanceToUseTier2);
             model.ChanceForSkillUseWith3LevelCapBreaks = _percentConverter.ConvertFromStringToDouble(row.ChanceToUseTier3);
 
-            _logger.LogInformation("Converted MagiciteSkillRow to MagiciteSkill: {Id} - {Description}", model.Id, model.Description);
+            _logger.LogDebug("Converted MagiciteSkillRow to MagiciteSkill: {Id} - {Description}", model.Id, model.Description);
 
             return model;
         } 

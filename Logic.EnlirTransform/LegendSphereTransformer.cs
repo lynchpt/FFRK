@@ -44,7 +44,7 @@ namespace FFRKApi.Logic.EnlirTransform
 
             model.LegendSphereInfos = GetLegendSphereInfo(row);
 
-            _logger.LogInformation("Converted LegendSphereRow to LegendSphere: {Id} - {Description}", model.Id, model.Description);
+            _logger.LogDebug("Converted LegendSphereRow to LegendSphere: {Id} - {Description}", model.Id, model.Description);
 
             return model;
         }

@@ -15,6 +15,11 @@ namespace FFRKApi.Api.FFRK
 {
     public class Startup
     {
+        #region Constants
+
+        private const string LoggingOptionsAppComponentNameKey = "AppComponent";
+        #endregion
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -108,10 +113,12 @@ namespace FFRKApi.Api.FFRK
         private void ConfigureLogger(IServiceCollection services)
         {
             string appInsightsKey = Configuration["LoggingOptions:ApplicationInsightsKey"];
+            string appComponentName = Configuration["LoggingOptions:AppComponentName"];
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
                 .Enrich.FromLogContext()
+                .Enrich.WithProperty(LoggingOptionsAppComponentNameKey, appComponentName)
                 //.WriteTo.RollingFile(rollingFileLogPath).MinimumLevel.Information()
                 .WriteTo.ApplicationInsightsEvents(appInsightsKey).MinimumLevel.Information()
                 .WriteTo.Console(theme: SystemConsoleTheme.Literate).MinimumLevel.Information()

@@ -37,6 +37,7 @@ namespace FunctionApp.ETL
         private const string LocalEnvironmentKey = "local";
         private const string ConfigFileName = "config";
         private const string ConfigFileExtension = "json";
+        private const string LoggingOptionsAppComponentNameKey = "AppComponent";
         #endregion
 
         #region Constructors
@@ -190,12 +191,14 @@ namespace FunctionApp.ETL
             //string rollingFileLogPath = _configuration.GetSection($"{nameof(LoggingOptions)}:{nameof(LoggingOptions.LogFilePath)}").Value;
 
             string appInsightsKey = _configuration["LoggingOptions:ApplicationInsightsKey"];
+            string appComponentName = _configuration["LoggingOptions:AppComponentName"];
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
                 .Enrich.FromLogContext()
+                .Enrich.WithProperty(LoggingOptionsAppComponentNameKey, appComponentName)
                 //.WriteTo.RollingFile(rollingFileLogPath).MinimumLevel.Information()
-                .WriteTo.ApplicationInsightsEvents(appInsightsKey)
+                .WriteTo.ApplicationInsightsEvents(appInsightsKey).MinimumLevel.Information()
                 .WriteTo.Console(theme: SystemConsoleTheme.Literate).MinimumLevel.Information()
                 .WriteTo.Debug().MinimumLevel.Debug()
                 .CreateLogger();
