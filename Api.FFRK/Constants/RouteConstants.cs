@@ -51,6 +51,11 @@ namespace FFRKApi.Api.FFRK.Constants
 
         //Abilities Routes
         public const string AbilitiesRoute_All = "";
+        public const string AbilitiesRoute_Id = "{abilityId}";
+        public const string AbilitiesRoute_AbilityType = "AbilityType/{abilityType}";
+        public const string AbilitiesRoute_Rarity = "Rarity/{rarity}";
+        public const string AbilitiesRoute_School = "School/{schoolType}";
+        public const string AbilitiesRoute_Element = "Element/{elementType}";
 
         //Characters Routes
         public const string CharactersRoute_All = "";

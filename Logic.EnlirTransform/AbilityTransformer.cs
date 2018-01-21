@@ -22,6 +22,7 @@ namespace FFRKApi.Logic.EnlirTransform
         private readonly TypeListConverter _damageFormulaTypeConverter;
         private readonly TypeListConverter _elementConverter;
         private readonly TypeListConverter _orbTypeConverter;
+        private readonly TypeListConverter _schoolConverter;
 
         #endregion
 
@@ -38,6 +39,7 @@ namespace FFRKApi.Logic.EnlirTransform
             _damageFormulaTypeConverter = new TypeListConverter(new DamageFormulaTypeList());
             _elementConverter = new TypeListConverter(new ElementList());
             _orbTypeConverter = new TypeListConverter(new OrbTypeList());
+            _schoolConverter = new TypeListConverter(new SchoolList());
         }
         #endregion
 
@@ -51,6 +53,8 @@ namespace FFRKApi.Logic.EnlirTransform
 
             model.AbilityName = row.AbilityName;
             model.ImagePath = row.ImagePath;
+
+            model.School = _schoolConverter.ConvertFromNameToId(row.School ?? "Unknown");
 
             model.Rarity = _intConverter.ConvertFromStringToInt(row.Rarity);
             model.MinUses = _intConverter.ConvertFromStringToInt(row.Uses);

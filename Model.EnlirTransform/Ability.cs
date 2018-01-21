@@ -14,7 +14,9 @@ namespace FFRKApi.Model.EnlirTransform
         //General
         public string AbilityName { get; set; }
         public string ImagePath { get; set; }
-        
+
+        public int School { get; set; }
+
         public int Rarity { get; set; }
         public int MinUses { get; set; }
         public int MaxUses { get; set; }
