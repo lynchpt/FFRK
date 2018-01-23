@@ -22,6 +22,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         IActionResult GetAbilitiesByRarity(int rarity);
         IActionResult GetAbilitiesBySchool(int schoolType);
         IActionResult GetAbilitiesByElement(int elementType);
+        IActionResult GetAbilitiesBySearch(D.Ability abilityPrototype);
     }
 
     [Produces(RouteConstants.ContentType_ApplicationJson)]
@@ -137,6 +138,22 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        [HttpPost]
+        [Route(RouteConstants.AbilitiesRoute_Search)]
+        [SwaggerOperation(nameof(GetAbilitiesBySearch))]
+        [ProducesResponseType(typeof(IEnumerable<Action>), (int)HttpStatusCode.OK)]
+        public IActionResult GetAbilitiesBySearch([FromBody]D.Ability searchPrototype)
+        {
+            _logger.LogInformation($"Logic Method invoked: {nameof(GetAbilitiesBySearch)}");
+
+            Ability ability = _mapper.Map<Ability>(searchPrototype);
+
+            IEnumerable<Ability> model = _abilitiesLogic.GetAbilitiesBySearch(ability);
+
+            IEnumerable<D.Ability> result = _mapper.Map<IEnumerable<D.Ability>>(model);
+
+            return new ObjectResult(result);
+        }
         #endregion
     }
 }

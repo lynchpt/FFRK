@@ -16,6 +16,7 @@ namespace FFRKApi.Logic.Api
         IEnumerable<Ability> GetAbilitiesByRarity(int rarity);
         IEnumerable<Ability> GetAbilitiesBySchool(int schoolType);
         IEnumerable<Ability> GetAbilitiesByElement(int elementType);
+        IEnumerable<Ability> GetAbilitiesBySearch(Ability searchPrototype);
     }
 
     public class AbilitiesLogic : IAbilitiesLogic
@@ -76,6 +77,64 @@ namespace FFRKApi.Logic.Api
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAbilitiesByElement)}");
 
             return _enlirRepository.GetMergeResultsContainer().Abilities.Where(a => a.Elements.Contains(elementType));
+        }
+
+        public IEnumerable<Ability> GetAbilitiesBySearch(Ability searchPrototype)
+        {
+            _logger.LogInformation($"Logic Method invoked: {nameof(GetAbilitiesBySearch)}");
+
+
+            //ignore: Description, Effects, EnlirId, Id, ImagePath, IntroducingEventId, IntroducingEventName, IsChecked, IsCounterable, SoulBreakPointsGainedJapan
+            var query = _enlirRepository.GetMergeResultsContainer().Abilities;
+
+            if (!string.IsNullOrWhiteSpace(searchPrototype.AbilityName))
+            {
+                query = query.Where(a => a.AbilityName.Contains(searchPrototype.AbilityName));
+            }
+            if (searchPrototype.AbilityType != 0)
+            {
+                query = query.Where(a => a.AbilityType == searchPrototype.AbilityType);
+            }
+            if (searchPrototype.AutoTargetType != 0)
+            {
+                query = query.Where(a => a.AutoTargetType == searchPrototype.AutoTargetType);
+            }
+            if (searchPrototype.CastTime != 0)
+            {
+                query = query.Where(a => a.CastTime <= searchPrototype.CastTime);
+            }
+            if (searchPrototype.DamageFormulaType != 0)
+            {
+                query = query.Where(a => a.DamageFormulaType == searchPrototype.DamageFormulaType);
+            }
+            if (searchPrototype.Elements != null && searchPrototype.Elements.Any())
+            {
+                query = query.Where(a => a.Elements.Contains(searchPrototype.Elements.First()));
+            }
+            if (searchPrototype.Multiplier != 0)
+            {
+                query = query.Where(a => a.Multiplier >= searchPrototype.Multiplier);
+            }
+            if (searchPrototype.OrbRequirements != null && searchPrototype.OrbRequirements.Any())
+            {
+                query = query.Where(a => a.OrbRequirements.Select(or => or.OrbId).Contains(searchPrototype.OrbRequirements.First().OrbId));
+            }
+            if (searchPrototype.Rarity != 0)
+            {
+                query = query.Where(a => a.Rarity == searchPrototype.Rarity);
+            }
+            if (searchPrototype.SoulBreakPointsGained != 0)
+            {
+                query = query.Where(a => a.SoulBreakPointsGained >= searchPrototype.SoulBreakPointsGained);
+            }
+            if (searchPrototype.TargetType != 0)
+            {
+                query = query.Where(a => a.TargetType == searchPrototype.TargetType);
+            }
+
+            //var result = query.ToList();
+
+            return query;
         }
         #endregion
     }

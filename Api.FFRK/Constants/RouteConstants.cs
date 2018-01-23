@@ -56,6 +56,7 @@ namespace FFRKApi.Api.FFRK.Constants
         public const string AbilitiesRoute_Rarity = "Rarity/{rarity}";
         public const string AbilitiesRoute_School = "School/{schoolType}";
         public const string AbilitiesRoute_Element = "Element/{elementType}";
+        public const string AbilitiesRoute_Search = "Search"; //POST
 
         //Characters Routes
         public const string CharactersRoute_All = "";
