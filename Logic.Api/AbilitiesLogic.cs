@@ -89,7 +89,7 @@ namespace FFRKApi.Logic.Api
 
             if (!string.IsNullOrWhiteSpace(searchPrototype.AbilityName))
             {
-                query = query.Where(a => a.AbilityName.Contains(searchPrototype.AbilityName));
+                query = query.Where(a => a.AbilityName.ToLower().Contains(searchPrototype.AbilityName.ToLower()));
             }
             if (searchPrototype.AbilityType != 0)
             {
@@ -135,8 +135,6 @@ namespace FFRKApi.Logic.Api
             {
                 query = query.Where(a => a.TargetType == searchPrototype.TargetType);
             }
-
-            //var result = query.ToList();
 
             return query;
         }

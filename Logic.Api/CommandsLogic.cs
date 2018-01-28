@@ -129,8 +129,6 @@ namespace FFRKApi.Logic.Api
                 query = query.Where(c => c.TargetType == searchPrototype.TargetType);
             }
 
-            //var result = query.ToList();
-
             return query;
         }
         #endregion

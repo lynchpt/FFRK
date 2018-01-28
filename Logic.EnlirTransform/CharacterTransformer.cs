@@ -13,6 +13,7 @@ namespace FFRKApi.Logic.EnlirTransform
     {
         #region Class Variables
         private readonly IntConverter _intConverter;
+        private readonly TypeListConverter _realmConverter;
         private readonly StringToBooleanConverter _stringToBooleanConverter;
 
         #endregion
@@ -23,6 +24,7 @@ namespace FFRKApi.Logic.EnlirTransform
             //prepare converters so we only need one instance no matter how many rows are processed
             _intConverter = new IntConverter();
             _stringToBooleanConverter = new StringToBooleanConverter();
+            _realmConverter = new TypeListConverter(new RealmList());
         }
         #endregion
 
@@ -35,7 +37,7 @@ namespace FFRKApi.Logic.EnlirTransform
             model.Description = row.Name;
 
             model.CharacterName = row.Name;
-            model.Realm = _intConverter.ConvertFromStringToInt(row.Realm);
+            model.Realm = _realmConverter.ConvertFromNameToId(row.Realm);
 
 
             model.Relics = null; //filled in during merge phase

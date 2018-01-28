@@ -60,6 +60,12 @@ namespace FFRKApi.Api.FFRK.Constants
 
         //Characters Routes
         public const string CharactersRoute_All = "";
+        public const string CharactersRoute_Id = "{characterId}";
+        public const string CharactersRoute_RealmType = "RealmType/{realmType}";
+        public const string CharactersRoute_Name = "Name/{characterName}";
+        public const string CharactersRoute_Equipment = "Equipment/{equipmentType}";
+        public const string CharactersRoute_School = "School/{schoolType}/{schoolMinLevel}";
+        public const string CharactersRoute_Search = "Search"; //POST
 
 
         //Commands Routes

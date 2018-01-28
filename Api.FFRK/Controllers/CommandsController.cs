@@ -140,7 +140,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         }
 
         [HttpPost]
-        [Route(RouteConstants.AbilitiesRoute_Search)]
+        [Route(RouteConstants.CommandsRoute_Search)]
         [SwaggerOperation(nameof(GetCommandsBySearch))]
         [ProducesResponseType(typeof(IEnumerable<D.Command>), (int)HttpStatusCode.OK)]
         public IActionResult GetCommandsBySearch([FromBody]D.Command searchPrototype)
