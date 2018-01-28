@@ -22,7 +22,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         IActionResult GetAbilitiesByRarity(int rarity);
         IActionResult GetAbilitiesBySchool(int schoolType);
         IActionResult GetAbilitiesByElement(int elementType);
-        IActionResult GetAbilitiesBySearch(D.Ability abilityPrototype);
+        IActionResult GetAbilitiesBySearch(D.Ability searchPrototype);
     }
 
     [Produces(RouteConstants.ContentType_ApplicationJson)]
@@ -51,10 +51,10 @@ namespace FFRKApi.Api.FFRK.Controllers
         [HttpGet]
         [Route(RouteConstants.AbilitiesRoute_All)]
         [SwaggerOperation(nameof(GetAllAbilities))]
-        [ProducesResponseType(typeof(IEnumerable<Action>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<D.Ability>), (int)HttpStatusCode.OK)]
         public IActionResult GetAllAbilities()
         {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetAllAbilities)}");
+            _logger.LogInformation($"Controller Method invoked: {nameof(GetAllAbilities)}");
 
             IEnumerable<Ability> model = _abilitiesLogic.GetAllAbilities();
 
@@ -66,10 +66,10 @@ namespace FFRKApi.Api.FFRK.Controllers
         [HttpGet]
         [Route(RouteConstants.AbilitiesRoute_Id)]
         [SwaggerOperation(nameof(GetAbilitiesById))]
-        [ProducesResponseType(typeof(IEnumerable<Action>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<D.Ability>), (int)HttpStatusCode.OK)]
         public IActionResult GetAbilitiesById(int abilityId)
         {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetAbilitiesById)}");
+            _logger.LogInformation($"Controller Method invoked: {nameof(GetAbilitiesById)}");
 
             IEnumerable<Ability> model = _abilitiesLogic.GetAbilitiesById(abilityId);
 
@@ -81,10 +81,10 @@ namespace FFRKApi.Api.FFRK.Controllers
         [HttpGet]
         [Route(RouteConstants.AbilitiesRoute_AbilityType)]
         [SwaggerOperation(nameof(GetAbilitiesByAbilityType))]
-        [ProducesResponseType(typeof(IEnumerable<Action>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<D.Ability>), (int)HttpStatusCode.OK)]
         public IActionResult GetAbilitiesByAbilityType(int abilityType)
         {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetAbilitiesByAbilityType)}");
+            _logger.LogInformation($"Controller Method invoked: {nameof(GetAbilitiesByAbilityType)}");
 
             IEnumerable<Ability> model = _abilitiesLogic.GetAbilitiesByAbilityType(abilityType);
 
@@ -96,10 +96,10 @@ namespace FFRKApi.Api.FFRK.Controllers
         [HttpGet]
         [Route(RouteConstants.AbilitiesRoute_Rarity)]
         [SwaggerOperation(nameof(GetAbilitiesByRarity))]
-        [ProducesResponseType(typeof(IEnumerable<Action>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<D.Ability>), (int)HttpStatusCode.OK)]
         public IActionResult GetAbilitiesByRarity(int rarity)
         {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetAbilitiesByRarity)}");
+            _logger.LogInformation($"Controller Method invoked: {nameof(GetAbilitiesByRarity)}");
 
             IEnumerable<Ability> model = _abilitiesLogic.GetAbilitiesByRarity(rarity);
 
@@ -111,10 +111,10 @@ namespace FFRKApi.Api.FFRK.Controllers
         [HttpGet]
         [Route(RouteConstants.AbilitiesRoute_School)]
         [SwaggerOperation(nameof(GetAbilitiesBySchool))]
-        [ProducesResponseType(typeof(IEnumerable<Action>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<D.Ability>), (int)HttpStatusCode.OK)]
         public IActionResult GetAbilitiesBySchool(int schoolType)
         {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetAbilitiesBySchool)}");
+            _logger.LogInformation($"Controller Method invoked: {nameof(GetAbilitiesBySchool)}");
 
             IEnumerable<Ability> model = _abilitiesLogic.GetAbilitiesBySchool(schoolType);
 
@@ -126,10 +126,10 @@ namespace FFRKApi.Api.FFRK.Controllers
         [HttpGet]
         [Route(RouteConstants.AbilitiesRoute_Element)]
         [SwaggerOperation(nameof(GetAbilitiesByElement))]
-        [ProducesResponseType(typeof(IEnumerable<Action>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<D.Ability>), (int)HttpStatusCode.OK)]
         public IActionResult GetAbilitiesByElement(int elementType)
         {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetAbilitiesByElement)}");
+            _logger.LogInformation($"Controller Method invoked: {nameof(GetAbilitiesByElement)}");
 
             IEnumerable<Ability> model = _abilitiesLogic.GetAbilitiesByElement(elementType);
 
@@ -141,10 +141,10 @@ namespace FFRKApi.Api.FFRK.Controllers
         [HttpPost]
         [Route(RouteConstants.AbilitiesRoute_Search)]
         [SwaggerOperation(nameof(GetAbilitiesBySearch))]
-        [ProducesResponseType(typeof(IEnumerable<Action>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<D.Ability>), (int)HttpStatusCode.OK)]
         public IActionResult GetAbilitiesBySearch([FromBody]D.Ability searchPrototype)
         {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetAbilitiesBySearch)}");
+            _logger.LogInformation($"Controller Method invoked: {nameof(GetAbilitiesBySearch)}");
 
             Ability ability = _mapper.Map<Ability>(searchPrototype);
 

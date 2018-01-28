@@ -63,11 +63,16 @@ namespace FFRKApi.Api.FFRK.Constants
 
 
         //Commands Routes
-        public const string Route_All = "";
-
+        public const string CommandsRoute_All = "";
+        public const string CommandsRoute_Id = "{commandId}";
+        public const string CommandsRoute_AbilityType = "AbilityType/{abilityType}";
+        public const string CommandsRoute_Character = "Character/{characterId}";
+        public const string CommandsRoute_School = "School/{schoolType}";
+        public const string CommandsRoute_Element = "Element/{elementType}";
+        public const string CommandsRoute_Search = "Search"; //POST
 
         //Dungeons Routes
-        public const string CommandsRoute_All = "";
+        public const string DungeonssRoute_All = "";
 
 
         //Events Routes

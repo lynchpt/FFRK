@@ -123,6 +123,10 @@ namespace FFRKApi.Logic.Api
             {
                 query = query.Where(a => a.Rarity == searchPrototype.Rarity);
             }
+            if (searchPrototype.School != 0)
+            {
+                query = query.Where(a => a.School == searchPrototype.School);
+            }
             if (searchPrototype.SoulBreakPointsGained != 0)
             {
                 query = query.Where(a => a.SoulBreakPointsGained >= searchPrototype.SoulBreakPointsGained);
