@@ -28,7 +28,12 @@ namespace FFRKApi.Model.EnlirTransform.IdLists
                                                                     new KeyValuePair<int, string>(16, "FFT"),
                                                                     new KeyValuePair<int, string>(17, "Beyond"),
                                                                     new KeyValuePair<int, string>(18, "Type-0"),
-                                                                    new KeyValuePair<int, string>(19, "Core")
+                                                                    new KeyValuePair<int, string>(19, "Core"),
+                                                                    new KeyValuePair<int, string>(20, "IV:TAY"),
+                                                                    new KeyValuePair<int, string>(21, "CC:VII"),
+                                                                    new KeyValuePair<int, string>(22, "DC:VII"),
+                                                                    new KeyValuePair<int, string>(23, "X-2"),
+                                                                    new KeyValuePair<int, string>(24, "XIII-2")
                                                              };
 
         public IList<KeyValuePair<int, string>> TypeList => _typeList;

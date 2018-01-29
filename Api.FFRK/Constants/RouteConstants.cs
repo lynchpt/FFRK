@@ -78,7 +78,12 @@ namespace FFRKApi.Api.FFRK.Constants
         public const string CommandsRoute_Search = "Search"; //POST
 
         //Dungeons Routes
-        public const string DungeonssRoute_All = "";
+        public const string DungeonsRoute_All = "";
+        public const string DungeonsRoute_Id = "{dungeonId}";
+        public const string DungeonsRoute_RealmType = "RealmType/{realmType}";
+        public const string DungeonsRoute_Name = "Name/{dungeonName}";
+        public const string DungeonsRoute_Rewards = "Rewards/{itemName}/{starLevel}";
+        public const string DungeonsRoute_Search = "Search"; //POST
 
 
         //Events Routes
