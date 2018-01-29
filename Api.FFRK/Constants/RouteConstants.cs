@@ -88,6 +88,20 @@ namespace FFRKApi.Api.FFRK.Constants
 
         //Events Routes
         public const string EventsRoute_All = "";
+        public const string EventsRoute_Id = "{eventId}";
+        public const string EventsRoute_Name = "Name/{eventName}";
+        public const string EventsRoute_RealmType = "RealmType/{realmType}";
+        public const string EventsRoute_EventType = "EventType/{eventType}";
+        public const string EventsRoute_HeroRecords = "HeroRecords/{characterName}";
+        public const string EventsRoute_MemoryCrystal1 = "MemoryCrystal1/{characterName}";
+        public const string EventsRoute_MemoryCrystal2 = "MemoryCrystal2/{characterName}";
+        public const string EventsRoute_MemoryCrystal3 = "MemoryCrystal3/{characterName}";
+        public const string EventsRoute_SoulOfHero = "SoulOfHero";
+        public const string EventsRoute_MemoryLode1 = "MemoryLode1";
+        public const string EventsRoute_MemoryLode2 = "MemoryLode2";
+        public const string EventsRoute_MemoryLode3 = "MemoryLode3";
+        public const string EventsRoute_WardrobeRecord = "WardrobeRecord/{characterName}";
+        public const string EventsRoute_Abilities = "Abilities/{abilityName}";
 
 
         //Experiences Routes
