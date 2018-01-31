@@ -110,6 +110,14 @@ namespace FFRKApi.Api.FFRK.Constants
 
         //LegendMaterias Routes
         public const string LegendMateriasRoute_All = "";
+        public const string LegendMateriasRoute_Id = "{legendMateriaId}";
+        public const string LegendMateriasRoute_RealmType = "RealmType/{realmType}";
+        public const string LegendMateriasRoute_Name = "Name/{legendMateriaName}";
+        public const string LegendMateriasRoute_Character = "Character/{characterId}";
+        public const string LegendMateriasRoute_Effect = "Effect/{effectText}";
+        public const string LegendMateriasRoute_MasteryBonus = "MasteryBonus/{masteryBonusText}";
+        public const string LegendMateriasRoute_Relic = "Relic/{relicId}"; //POST
+        public const string LegendMateriasRoute_Search = "Search"; //POST
 
 
         //LegendSpheres Routes
