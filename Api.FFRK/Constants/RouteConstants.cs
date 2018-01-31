@@ -122,6 +122,12 @@ namespace FFRKApi.Api.FFRK.Constants
 
         //LegendSpheres Routes
         public const string LegendSpheresRoute_All = "";
+        public const string LegendSpheresRoute_Id = "{legendSphereId}";
+        public const string LegendSpheresRoute_RealmType = "RealmType/{realmType}";
+        public const string LegendSpheresRoute_Character = "Character/{characterId}";
+        public const string LegendSpheresRoute_Benefit = "Benefit/{benefit}";
+        public const string LegendSpheresRoute_RequiredMotes = "RequiredMotes/{moteType1}/{moteType2}";
+        public const string LegendSpheresRoute_Search = "Search"; //POST
 
 
         //Magicites Routes
