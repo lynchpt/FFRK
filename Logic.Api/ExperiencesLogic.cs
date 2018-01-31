@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using Data.Api;
+using FFRKApi.Model.EnlirTransform;
 using Microsoft.Extensions.Logging;
 
 namespace FFRKApi.Logic.Api
 {
     public interface IExperiencesLogic
     {
+        IEnumerable<Experience> GetAllExperiences();
     }
 
     public class ExperiencesLogic : IExperiencesLogic
@@ -27,7 +29,14 @@ namespace FFRKApi.Logic.Api
         #endregion
 
         #region IExperiencesLogic Implementation
+        public IEnumerable<Experience> GetAllExperiences()
+        {
+            _logger.LogInformation($"Logic Method invoked: {nameof(GetAllExperiences)}");
 
+            return _enlirRepository.GetMergeResultsContainer().Experiences;
+        }
         #endregion
+
+
     }
 }
