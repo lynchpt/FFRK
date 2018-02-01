@@ -131,7 +131,28 @@ namespace FFRKApi.Api.FFRK.Constants
 
 
         //Magicites Routes
+        //Magicite
         public const string MagicitesRoute_All = "";
+        public const string MagicitesRoute_Id = "{magiciteId}";
+        public const string MagicitesRoute_Name = "Name/{magiciteName}";
+        public const string MagicitesRoute_RealmType = "RealmType/{realmType}";
+        public const string MagicitesRoute_Rarity = "Rarity/{rarity}";
+        public const string MagicitesRoute_Element = "Element/{elementType}";
+        public const string MagicitesRoute_Effect = "Effect/{effectText}";
+
+        //UltraSkill
+        public const string MagicitesUltraSkillRoute_Name = "UltraSkill/Name/{ultraSkillName}";
+        public const string MagicitesUltraSkillRoute_AbilityType = "UltraSkill/AbilityType/{abilityType}";
+        public const string MagicitesUltraSkillRoute_Element = "UltraSkill/Element/{elementType}";
+        public const string MagicitesUltraSkillRoute_Effect = "UltraSkill/Effect/{effectText}";
+
+        //MagiciteSkill
+        public const string MagicitesMagiciteSkillRoute_Id = "MagiciteSkill/{magiciteSkillId}";
+        public const string MagicitesMagiciteSkillRoute_Name = "MagiciteSkill/Name/{magiciteSkillName}";
+        public const string MagicitesMagiciteSkillRoute_AbilityType = "MagiciteSkill/AbilityType/{abilityType}";
+        public const string MagicitesMagiciteSkillRoute_Element = "MagiciteSkill/Element/{elementType}";
+        public const string MagicitesMagiciteSkillRoute_Effect = "MagiciteSkill/Effect/{effectText}";
+
 
 
         //MagiciteSkills Routes
