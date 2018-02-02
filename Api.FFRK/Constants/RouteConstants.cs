@@ -210,11 +210,11 @@ namespace FFRKApi.Api.FFRK.Constants
 
         //Statuses Routes
         public const string StatusesRoute_All = "";
-
-
-
-
-
+        public const string StatusesRoute_Id = "{statusId}";
+        public const string StatusesRoute_CodedName = "CodedName/{codedName}";
+        public const string StatusesRoute_CommonName = "CommonName/{commonName}";
+        public const string StatusesRoute_Effect = "Effect/{effectText}";
+        public const string StatusesRoute_Notes = "Notes/{notes}";
 
 
         //Maintenance Routes
