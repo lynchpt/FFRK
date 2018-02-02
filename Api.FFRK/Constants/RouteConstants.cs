@@ -157,10 +157,16 @@ namespace FFRKApi.Api.FFRK.Constants
 
         //MagiciteSkills Routes
         public const string MagiciteSkillsRoute_All = "";
+        public const string MagiciteSkillsRoute_Id = "{magiciteSkillId}";
 
 
         //Missions Routes
         public const string MissionsRoute_All = "";
+        public const string MissionsRoute_Id = "{missionId}";
+        public const string MissionsRoute_MissionType = "MissionType/{missionType}";
+        public const string MissionsRoute_Event = "Event/{eventId}";
+        public const string MissionsRoute_Description = "Description/{description}";
+        public const string MissionsRoute_Reward = "Reward/{rewardName}";
 
 
         //Others Routes

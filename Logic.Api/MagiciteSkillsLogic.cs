@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Data.Api;
+using FFRKApi.Model.EnlirTransform;
 using Microsoft.Extensions.Logging;
 
 namespace FFRKApi.Logic.Api
 {
     public interface IMagiciteSkillsLogic
     {
+        IEnumerable<MagiciteSkill> GetAllMagiciteSkills();
+        IEnumerable<MagiciteSkill> GetAllMagiciteSkillsById(int magiciteSkillId);
     }
 
     public class MagiciteSkillsLogic : IMagiciteSkillsLogic
@@ -29,5 +33,19 @@ namespace FFRKApi.Logic.Api
         #region IMagiciteSkillsLogic Implementation
 
         #endregion
+
+        public IEnumerable<MagiciteSkill> GetAllMagiciteSkills()
+        {
+            _logger.LogInformation($"Logic Method invoked: {nameof(GetAllMagiciteSkills)}");
+
+            return _enlirRepository.GetMergeResultsContainer().MagiciteSkills;
+        }
+
+        public IEnumerable<MagiciteSkill> GetAllMagiciteSkillsById(int magiciteSkillId)
+        {
+            _logger.LogInformation($"Logic Method invoked: {nameof(GetAllMagiciteSkillsById)}");
+
+            return _enlirRepository.GetMergeResultsContainer().MagiciteSkills.Where(s => s.Id == magiciteSkillId);
+        }
     }
 }
