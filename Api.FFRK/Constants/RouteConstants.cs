@@ -116,7 +116,7 @@ namespace FFRKApi.Api.FFRK.Constants
         public const string LegendMateriasRoute_Character = "Character/{characterId}";
         public const string LegendMateriasRoute_Effect = "Effect/{effectText}";
         public const string LegendMateriasRoute_MasteryBonus = "MasteryBonus/{masteryBonusText}";
-        public const string LegendMateriasRoute_Relic = "Relic/{relicId}"; //POST
+        public const string LegendMateriasRoute_Relic = "Relic/{relicId}";
         public const string LegendMateriasRoute_Search = "Search"; //POST
 
 
@@ -181,6 +181,13 @@ namespace FFRKApi.Api.FFRK.Constants
 
         //RecordMaterias Routes
         public const string RecordMateriasRoute_All = "";
+        public const string RecordMateriasRoute_Id = "{recordMateriaId}";
+        public const string RecordMateriasRoute_RealmType = "RealmType/{realmType}";
+        public const string RecordMateriasRoute_Name = "Name/{recordMateriaName}";
+        public const string RecordMateriasRoute_Character = "Character/{characterId}";
+        public const string RecordMateriasRoute_Effect = "Effect/{effectText}";
+        public const string RecordMateriasRoute_Unlock = "Unlock/{unlockText}";
+        public const string RecordMateriasRoute_Search = "Search"; //POST
 
 
         //RecordSpheres Routes
