@@ -171,7 +171,13 @@ namespace FFRKApi.Api.FFRK.Constants
 
         //Others Routes
         public const string OthersRoute_All = "";
-
+        public const string OthersRoute_Id = "{otherId}"; 
+        public const string OthersRoute_Name = "Name/{otherName}";
+        public const string OthersRoute_SourceName = "SourceName/{sourceName}";
+        public const string OthersRoute_AbilityType = "AbilityType/{abilityType}";
+        public const string OthersRoute_School = "School/{schoolType}";
+        public const string OthersRoute_Element = "Element/{elementType}";
+        public const string OthersRoute_Effect = "Effect/{effectText}";
 
         //RecordMaterias Routes
         public const string RecordMateriasRoute_All = "";

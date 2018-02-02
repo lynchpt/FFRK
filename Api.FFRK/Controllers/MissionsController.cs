@@ -17,11 +17,11 @@ namespace FFRKApi.Api.FFRK.Controllers
     public interface IMissionsController
     {
         IActionResult GetAllMissions();
-        IActionResult GetAllMissionsById(int missionId);
-        IActionResult GetAllMissionsByMissionType(string missionType); //todo change to int
-        IActionResult GetAllMissionsByEventId(string eventId); //todo change to int
-        IActionResult GetAllMissionsByDescription(string description);
-        IActionResult GetAllMissionsByReward(string rewardName);
+        IActionResult GetMissionsById(int missionId);
+        IActionResult GetMissionsByMissionType(string missionType); //todo change to int
+        IActionResult GetMissionsByEventId(string eventId); //todo change to int
+        IActionResult GetMissionsByDescription(string description);
+        IActionResult GetMissionsByReward(string rewardName);
     }
 
     [Produces(RouteConstants.ContentType_ApplicationJson)]
@@ -64,13 +64,13 @@ namespace FFRKApi.Api.FFRK.Controllers
 
         [HttpGet]
         [Route(RouteConstants.MissionsRoute_Id)]
-        [SwaggerOperation(nameof(GetAllMissionsById))]
+        [SwaggerOperation(nameof(GetMissionsById))]
         [ProducesResponseType(typeof(IEnumerable<D.Mission>), (int)HttpStatusCode.OK)]
-        public IActionResult GetAllMissionsById(int missionId)
+        public IActionResult GetMissionsById(int missionId)
         {
-            _logger.LogInformation($"Controller Method invoked: {nameof(GetAllMissionsById)}");
+            _logger.LogInformation($"Controller Method invoked: {nameof(GetMissionsById)}");
 
-            IEnumerable<Mission> model = _missionsLogic.GetAllMissionsById(missionId);
+            IEnumerable<Mission> model = _missionsLogic.GetMissionsById(missionId);
 
             IEnumerable<D.Mission> result = _mapper.Map<IEnumerable<D.Mission>>(model);
 
@@ -79,13 +79,13 @@ namespace FFRKApi.Api.FFRK.Controllers
 
         [HttpGet]
         [Route(RouteConstants.MissionsRoute_MissionType)]
-        [SwaggerOperation(nameof(GetAllMissionsByMissionType))]
+        [SwaggerOperation(nameof(GetMissionsByMissionType))]
         [ProducesResponseType(typeof(IEnumerable<D.Mission>), (int)HttpStatusCode.OK)]
-        public IActionResult GetAllMissionsByMissionType(string missionType)
+        public IActionResult GetMissionsByMissionType(string missionType)
         {
-            _logger.LogInformation($"Controller Method invoked: {nameof(GetAllMissionsByMissionType)}");
+            _logger.LogInformation($"Controller Method invoked: {nameof(GetMissionsByMissionType)}");
 
-            IEnumerable<Mission> model = _missionsLogic.GetAllMissionsByMissionType(missionType);
+            IEnumerable<Mission> model = _missionsLogic.GetMissionsByMissionType(missionType);
 
             IEnumerable<D.Mission> result = _mapper.Map<IEnumerable<D.Mission>>(model);
 
@@ -94,13 +94,13 @@ namespace FFRKApi.Api.FFRK.Controllers
 
         [HttpGet]
         [Route(RouteConstants.MissionsRoute_Event)]
-        [SwaggerOperation(nameof(GetAllMissionsByEventId))]
+        [SwaggerOperation(nameof(GetMissionsByEventId))]
         [ProducesResponseType(typeof(IEnumerable<D.Mission>), (int)HttpStatusCode.OK)]
-        public IActionResult GetAllMissionsByEventId(string eventId)
+        public IActionResult GetMissionsByEventId(string eventId)
         {
-            _logger.LogInformation($"Controller Method invoked: {nameof(GetAllMissionsByEventId)}");
+            _logger.LogInformation($"Controller Method invoked: {nameof(GetMissionsByEventId)}");
 
-            IEnumerable<Mission> model = _missionsLogic.GetAllMissionsByEventId(eventId);
+            IEnumerable<Mission> model = _missionsLogic.GetMissionsByEventId(eventId);
 
             IEnumerable<D.Mission> result = _mapper.Map<IEnumerable<D.Mission>>(model);
 
@@ -109,13 +109,13 @@ namespace FFRKApi.Api.FFRK.Controllers
 
         [HttpGet]
         [Route(RouteConstants.MissionsRoute_Description)]
-        [SwaggerOperation(nameof(GetAllMissionsByDescription))]
+        [SwaggerOperation(nameof(GetMissionsByDescription))]
         [ProducesResponseType(typeof(IEnumerable<D.Mission>), (int)HttpStatusCode.OK)]
-        public IActionResult GetAllMissionsByDescription(string description)
+        public IActionResult GetMissionsByDescription(string description)
         {
-            _logger.LogInformation($"Controller Method invoked: {nameof(GetAllMissionsByDescription)}");
+            _logger.LogInformation($"Controller Method invoked: {nameof(GetMissionsByDescription)}");
 
-            IEnumerable<Mission> model = _missionsLogic.GetAllMissionsByDescription(description);
+            IEnumerable<Mission> model = _missionsLogic.GetMissionsByDescription(description);
 
             IEnumerable<D.Mission> result = _mapper.Map<IEnumerable<D.Mission>>(model);
 
@@ -124,13 +124,13 @@ namespace FFRKApi.Api.FFRK.Controllers
 
         [HttpGet]
         [Route(RouteConstants.MissionsRoute_Reward)]
-        [SwaggerOperation(nameof(GetAllMissionsByReward))]
+        [SwaggerOperation(nameof(GetMissionsByReward))]
         [ProducesResponseType(typeof(IEnumerable<D.Mission>), (int)HttpStatusCode.OK)]
-        public IActionResult GetAllMissionsByReward(string rewardName)
+        public IActionResult GetMissionsByReward(string rewardName)
         {
-            _logger.LogInformation($"Controller Method invoked: {nameof(GetAllMissionsByReward)}");
+            _logger.LogInformation($"Controller Method invoked: {nameof(GetMissionsByReward)}");
 
-            IEnumerable<Mission> model = _missionsLogic.GetAllMissionsByReward(rewardName);
+            IEnumerable<Mission> model = _missionsLogic.GetMissionsByReward(rewardName);
 
             IEnumerable<D.Mission> result = _mapper.Map<IEnumerable<D.Mission>>(model);
 

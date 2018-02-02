@@ -44,7 +44,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         #region IMagiciteSkillsController Implementation
 
         [HttpGet]
-        [Route(RouteConstants.MagicitesRoute_All)]
+        [Route(RouteConstants.MagiciteSkillsRoute_All)]
         [SwaggerOperation(nameof(GetAllMagiciteSkills))]
         [ProducesResponseType(typeof(IEnumerable<D.MagiciteSkill>), (int)HttpStatusCode.OK)]
         public IActionResult GetAllMagiciteSkills()

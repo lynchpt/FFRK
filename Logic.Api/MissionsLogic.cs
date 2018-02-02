@@ -11,11 +11,11 @@ namespace FFRKApi.Logic.Api
     public interface IMissionsLogic
     {
         IEnumerable<Mission> GetAllMissions();
-        IEnumerable<Mission> GetAllMissionsById(int missionId);
-        IEnumerable<Mission> GetAllMissionsByMissionType(string missionType); //todo change to int
-        IEnumerable<Mission> GetAllMissionsByEventId(string eventId); //todo change to int
-        IEnumerable<Mission> GetAllMissionsByDescription(string description);
-        IEnumerable<Mission> GetAllMissionsByReward(string rewardName);
+        IEnumerable<Mission> GetMissionsById(int missionId);
+        IEnumerable<Mission> GetMissionsByMissionType(string missionType); //todo change to int
+        IEnumerable<Mission> GetMissionsByEventId(string eventId); //todo change to int
+        IEnumerable<Mission> GetMissionsByDescription(string description);
+        IEnumerable<Mission> GetMissionsByReward(string rewardName);
     }
 
     public class MissionsLogic : IMissionsLogic
@@ -43,16 +43,16 @@ namespace FFRKApi.Logic.Api
             return _enlirRepository.GetMergeResultsContainer().Missions;
         }
 
-        public IEnumerable<Mission> GetAllMissionsById(int missionId)
+        public IEnumerable<Mission> GetMissionsById(int missionId)
         {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetAllMissionsById)}");
+            _logger.LogInformation($"Logic Method invoked: {nameof(GetMissionsById)}");
 
             return _enlirRepository.GetMergeResultsContainer().Missions.Where(e => e.Id == missionId);
         }
 
-        public IEnumerable<Mission> GetAllMissionsByMissionType(string missionType)
+        public IEnumerable<Mission> GetMissionsByMissionType(string missionType)
         {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetAllMissionsByMissionType)}");
+            _logger.LogInformation($"Logic Method invoked: {nameof(GetMissionsByMissionType)}");
 
             IEnumerable<Mission> results = new List<Mission>();
 
@@ -64,9 +64,9 @@ namespace FFRKApi.Logic.Api
             return results;
         }
 
-        public IEnumerable<Mission> GetAllMissionsByEventId(string eventId)
+        public IEnumerable<Mission> GetMissionsByEventId(string eventId)
         {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetAllMissionsByEventId)}");
+            _logger.LogInformation($"Logic Method invoked: {nameof(GetMissionsByEventId)}");
 
             IEnumerable<Mission> results = new List<Mission>();
 
@@ -78,9 +78,9 @@ namespace FFRKApi.Logic.Api
             return results;
         }
 
-        public IEnumerable<Mission> GetAllMissionsByDescription(string description)
+        public IEnumerable<Mission> GetMissionsByDescription(string description)
         {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetAllMissionsByDescription)}");
+            _logger.LogInformation($"Logic Method invoked: {nameof(GetMissionsByDescription)}");
 
             IEnumerable<Mission> results = new List<Mission>();
 
@@ -92,9 +92,9 @@ namespace FFRKApi.Logic.Api
             return results;
         }
 
-        public IEnumerable<Mission> GetAllMissionsByReward(string rewardName)
+        public IEnumerable<Mission> GetMissionsByReward(string rewardName)
         {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetAllMissionsByReward)}");
+            _logger.LogInformation($"Logic Method invoked: {nameof(GetMissionsByReward)}");
 
             IEnumerable<Mission> results = new List<Mission>();
 
