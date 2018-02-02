@@ -192,6 +192,12 @@ namespace FFRKApi.Api.FFRK.Constants
 
         //RecordSpheres Routes
         public const string RecordSpheresRoute_All = "";
+        public const string RecordSpheresRoute_Id = "{recordSphereId}";
+        public const string RecordSpheresRoute_RealmType = "RealmType/{realmType}";
+        public const string RecordSpheresRoute_Character = "Character/{characterId}";
+        public const string RecordSpheresRoute_Benefit = "Benefit/{benefit}";
+        public const string RecordSpheresRoute_RequiredMotes = "RequiredMotes/{moteType1}/{moteType2}";
+        public const string RecordSpheresRoute_Search = "Search"; //POST
 
 
         //Relics Routes
