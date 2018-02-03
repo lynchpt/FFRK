@@ -13,7 +13,7 @@ namespace FFRKApi.Logic.Api
         IEnumerable<LegendMateria> GetAllLegendMaterias();
         IEnumerable<LegendMateria> GetLegendMateriasById(int legendMateriaId);
         IEnumerable<LegendMateria> GetLegendMateriasByName(string legendMateriaName);
-        IEnumerable<LegendMateria> GetAllLegendMateriasByRealm(int realmType);
+        IEnumerable<LegendMateria> GetLegendMateriasByRealm(int realmType);
         IEnumerable<LegendMateria> GetLegendMateriasByCharacter(int characterId);
         IEnumerable<LegendMateria> GetLegendMateriasByEffect(string effectText);
         IEnumerable<LegendMateria> GetLegendMateriasByMasteryBonus(string masteryBonusText);
@@ -67,9 +67,9 @@ namespace FFRKApi.Logic.Api
             return results;
         }
 
-        public IEnumerable<LegendMateria> GetAllLegendMateriasByRealm(int realmType)
+        public IEnumerable<LegendMateria> GetLegendMateriasByRealm(int realmType)
         {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetAllLegendMateriasByRealm)}");
+            _logger.LogInformation($"Logic Method invoked: {nameof(GetLegendMateriasByRealm)}");
 
             return _enlirRepository.GetMergeResultsContainer().LegendMaterias.Where(e => e.Realm == realmType);
         }

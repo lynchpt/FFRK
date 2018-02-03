@@ -206,7 +206,18 @@ namespace FFRKApi.Api.FFRK.Constants
 
         //SoulBreaks Routes
         public const string SoulBreaksRoute_All = "";
-
+        public const string SoulBreaksRoute_Id = "{soulBreakId}";
+        public const string SoulBreaksRoute_AbilityType = "AbilityType/{abilityType}";
+        public const string SoulBreaksRoute_Name = "Name/{soulBreakName}";
+        public const string SoulBreaksRoute_RealmType = "RealmType/{realmType}";
+        public const string SoulBreaksRoute_Character = "Character/{characterId}";
+        public const string SoulBreaksRoute_Multiplier = "Multiplier/{multiplier}";
+        public const string SoulBreaksRoute_Element = "Element/{elementType}";
+        public const string SoulBreaksRoute_Effect = "Effect/{effectText}";
+        public const string SoulBreaksRoute_Tier = "Tier/{soulBreakTier}";
+        public const string SoulBreaksRoute_MasteryBonus = "MasteryBonus/{masteryBonusText}";
+        public const string SoulBreaksRoute_Status = "Status/{statusId}";
+        public const string SoulBreaksRoute_Search = "Search"; //POST
 
         //Statuses Routes
         public const string StatusesRoute_All = "";

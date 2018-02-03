@@ -19,7 +19,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         IActionResult GetAllLegendMaterias();
         IActionResult GetLegendMateriasById(int legendMateriaId);
         IActionResult GetLegendMateriasByName(string legendMateriaName);
-        IActionResult GetAllLegendMateriasByRealm(int realmType);
+        IActionResult GetLegendMateriasByRealm(int realmType);
         IActionResult GetLegendMateriasByCharacter(int characterId);
         IActionResult GetLegendMateriasByEffect(string effectText);
         IActionResult GetLegendMateriasByMasteryBonus(string masteryBonusText);
@@ -98,13 +98,13 @@ namespace FFRKApi.Api.FFRK.Controllers
 
         [HttpGet]
         [Route(RouteConstants.LegendMateriasRoute_RealmType)]
-        [SwaggerOperation(nameof(GetAllLegendMateriasByRealm))]
+        [SwaggerOperation(nameof(GetLegendMateriasByRealm))]
         [ProducesResponseType(typeof(IEnumerable<D.LegendMateria>), (int)HttpStatusCode.OK)]
-        public IActionResult GetAllLegendMateriasByRealm(int realmType)
+        public IActionResult GetLegendMateriasByRealm(int realmType)
         {
-            _logger.LogInformation($"Controller Method invoked: {nameof(GetAllLegendMateriasByRealm)}");
+            _logger.LogInformation($"Controller Method invoked: {nameof(GetLegendMateriasByRealm)}");
 
-            IEnumerable<LegendMateria> model = _legendMateriasLogic.GetAllLegendMateriasByRealm(realmType);
+            IEnumerable<LegendMateria> model = _legendMateriasLogic.GetLegendMateriasByRealm(realmType);
 
             IEnumerable<D.LegendMateria> result = _mapper.Map<IEnumerable<D.LegendMateria>>(model);
 
