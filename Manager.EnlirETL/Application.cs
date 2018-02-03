@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Text;
 using FFRK.Api.Infra.Options.EnlirETL;
@@ -11,6 +12,7 @@ using FFRKApi.Model.EnlirImport;
 using FFRKApi.Model.EnlirMerge;
 using FFRKApi.Model.EnlirTransform;
 using FFRKApi.SheetsApiHelper;
+using Google.Apis.Sheets.v4.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -31,6 +33,7 @@ namespace Manager.EnlirETL
         private IServiceProvider _serviceProvider;
         private IServiceCollection _servicesCollection;
         private readonly IConfiguration _configuration;
+        private IImportValidator _importValidator;
         private IImportManager _importManager;
         private ITransformManager _transformManager;
         private IMergeManager _mergeManager;
@@ -65,6 +68,8 @@ namespace Manager.EnlirETL
 
                 _logger.LogInformation($"{nameof(Application)}.{nameof(Run)} execution invoked");
 
+                _importValidator = _serviceProvider.GetService<IImportValidator>();
+
                 _importManager = _serviceProvider.GetService<IImportManager>();
                 _importStorageProvider = _serviceProvider.GetService<IImportStorageProvider>();
 
@@ -79,6 +84,16 @@ namespace Manager.EnlirETL
 
                 //Import
                 Stopwatch stopwatchImport = Stopwatch.StartNew();
+
+                string failureInfo;
+
+                bool isDataSourceValid = _importValidator.TryValidateDataSource(out failureInfo);
+                if (!isDataSourceValid)
+                {
+                    _logger.LogWarning("Enlir Import Data not in Expected Format: \n" + failureInfo);
+                    throw new ValidationException("Enlir Import Data not in Expected Format: \n" + failureInfo);
+                }
+
                 ImportResultsContainer importResultsContainer = _importManager.ImportAll();
                 string importStoragePath = _importStorageProvider.StoreImportResults(importResultsContainer, formattedDateString);
                 stopwatchImport.Stop();
@@ -111,7 +126,7 @@ namespace Manager.EnlirETL
             {
                 _logger.LogError(ex, ex.Message);
 
-                _logger.LogInformation("Error in Top Level Application execution. Import, Transform, and Merge operations were NOT successfully completed. Previously existing data is unchanged");
+                _logger.LogInformation("Error in Top Level Application execution. Validate, Import, Transform, and Merge operations were NOT successfully completed. Previously existing data is unchanged");
                 throw;
             }
 
@@ -151,6 +166,9 @@ namespace Manager.EnlirETL
 
             //services
             _servicesCollection.AddSingleton<ISheetsApiHelper, SheetsApiHelper>();
+            _servicesCollection.AddScoped<IGoogleSheetsDataValidator, GoogleSheetsDataValidator>();
+            _servicesCollection.AddScoped<IImportValidator, ImportValidator>();
+
             _servicesCollection.AddScoped<IRowImporter<CharacterRow>, CharacterImporter>();
             _servicesCollection.AddScoped<IRowImporter<RecordSphereRow>, RecordSphereImporter>();
             _servicesCollection.AddScoped<IRowImporter<LegendSphereRow>, LegendSphereImporter>();

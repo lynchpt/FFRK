@@ -16,6 +16,10 @@ namespace FFRKApi.SheetsApiHelper
     public interface ISheetsApiHelper
     {
         ValueRange GetSheetsData(string spreadsheetId, string worksheetName, string rangeExpression);
+
+        Spreadsheet GetSpreadsheetMetadata(string spreadsheetId);
+
+        int ExcelColumnNameToNumber(string columnName);
     }
 
     public class SheetsApiHelper : ISheetsApiHelper
@@ -54,6 +58,30 @@ namespace FFRKApi.SheetsApiHelper
             return response;
         }
 
+        public Spreadsheet GetSpreadsheetMetadata(string spreadsheetId)
+        {
+            Spreadsheet spreadsheet = _sheetsService.Spreadsheets.Get(spreadsheetId).Execute();
+
+            return spreadsheet;
+        }
+
+        public int ExcelColumnNameToNumber(string columnName)
+        {
+            if (string.IsNullOrEmpty(columnName)) throw new ArgumentNullException("columnName");
+
+            columnName = columnName.ToUpperInvariant();
+
+            int sum = 0;
+
+            for (int i = 0; i < columnName.Length; i++)
+            {
+                sum *= 26;
+                sum += (columnName[i] - 'A' + 1);
+            }
+
+            return sum;
+        }
+
         #endregion
 
         #region Private Methods
@@ -65,6 +93,7 @@ namespace FFRKApi.SheetsApiHelper
             request.ValueRenderOption = SpreadsheetsResource.ValuesResource.GetRequest.ValueRenderOptionEnum.FORMULA;
             return request;
         }
+
         #endregion
     }
 

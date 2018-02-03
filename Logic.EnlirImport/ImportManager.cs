@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FFRKApi.Model.EnlirImport;
+using FFRKApi.SheetsApiHelper;
 using Microsoft.Extensions.Logging;
 using Model.EnlirImport;
 
@@ -35,6 +36,7 @@ namespace FFRKApi.Logic.EnlirImport
         private readonly IRowImporter<MissionRow> _missionImporter;
         private readonly IRowImporter<ExperienceRow> _experienceImporter;
 
+        private readonly ISheetsApiHelper _sheetsApiHelper;
         private readonly ILogger<ImportManager> _logger;
         #endregion
 
@@ -47,7 +49,8 @@ namespace FFRKApi.Logic.EnlirImport
             IRowImporter<RelicRow> relicImporter, IRowImporter<MagiciteRow> magiciteImporter,
             IRowImporter<MagiciteSkillRow> magiciteSkillImporter, IRowImporter<DungeonRow> dungeonImporter,
             IRowImporter<MissionRow> missionImporter, IRowImporter<EventRow> eventImporter,
-            IRowImporter<ExperienceRow> experienceImporter, ILogger<ImportManager> logger)
+            IRowImporter<ExperienceRow> experienceImporter, ISheetsApiHelper sheetsApiHelper,
+            ILogger<ImportManager> logger)
         {
             _characterImporter = characterImporter;
             _recordSphereImporter = recordSphereImporter;
@@ -67,11 +70,13 @@ namespace FFRKApi.Logic.EnlirImport
             _missionImporter = missionImporter;
             _experienceImporter = experienceImporter;
 
+            _sheetsApiHelper = sheetsApiHelper;
             _logger = logger;
         }
         #endregion
 
         #region IImportManager Implementation
+
         public ImportResultsContainer ImportAll()
         {
             try
