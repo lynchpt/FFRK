@@ -29,11 +29,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api.FFRK", "Api.FFRK\Api.FF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic.Api", "Logic.Api\Logic.Api.csproj", "{7CF686B1-ADF5-4EE7-826E-D2EF75D0B638}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Api", "Data.Api\Data.Api.csproj", "{660154CD-842F-4ED1-92F9-0FCA3E290032}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Api", "Data.Api\Data.Api.csproj", "{660154CD-842F-4ED1-92F9-0FCA3E290032}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dto.Api", "Dto.Api\Dto.Api.csproj", "{626CF5CB-F41D-4270-9FE2-E62C332EDA97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dto.Api", "Dto.Api\Dto.Api.csproj", "{626CF5CB-F41D-4270-9FE2-E62C332EDA97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model.Api", "Model.Api\Model.Api.csproj", "{F68BF87E-E265-41CB-850A-D3E5A11BB337}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model.Api", "Model.Api\Model.Api.csproj", "{F68BF87E-E265-41CB-850A-D3E5A11BB337}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

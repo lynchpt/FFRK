@@ -92,6 +92,8 @@ namespace FunctionApp.ETL
 
 
             services.AddSingleton<ISheetsApiHelper, SheetsApiHelper>();//was already singleton
+            services.AddScoped<IGoogleSheetsDataValidator, GoogleSheetsDataValidator>();
+            services.AddScoped<IImportValidator, ImportValidator>();
 
             services.AddScoped<IRowImporter<CharacterRow>, CharacterImporter>();
             services.AddScoped<IRowImporter<RecordSphereRow>, RecordSphereImporter>();
