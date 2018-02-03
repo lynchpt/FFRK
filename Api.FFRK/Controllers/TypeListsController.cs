@@ -28,6 +28,8 @@ namespace FFRKApi.Api.FFRK.Controllers
         IActionResult GetRealmTypeList();
         IActionResult GetRelicTypeList();
         IActionResult GetSchoolTypeList();
+        IActionResult GetStatSetTypeList();
+        IActionResult GetStatTypeList();
         IActionResult GetSoulBreakTierTypeList();
         IActionResult GetTargetTypeList();
 
@@ -210,6 +212,32 @@ namespace FFRKApi.Api.FFRK.Controllers
             _logger.LogInformation($"Logic Method invoked: {nameof(GetSchoolTypeList)}");
 
             IEnumerable<KeyValuePair<int, string>> result = _typeListsLogic.GetSchoolTypeList();
+
+            return new ObjectResult(result);
+        }
+
+        [HttpGet]
+        [Route(RouteConstants.TypeListsRoute_StatSetType)]
+        [SwaggerOperation(nameof(GetStatSetTypeList))]
+        [ProducesResponseType(typeof(IEnumerable<KeyValuePair<int, string>>), (int)HttpStatusCode.OK)]
+        public IActionResult GetStatSetTypeList()
+        {
+            _logger.LogInformation($"Logic Method invoked: {nameof(GetStatSetTypeList)}");
+
+            IEnumerable<KeyValuePair<int, string>> result = _typeListsLogic.GetStatSetTypeList();
+
+            return new ObjectResult(result);
+        }
+
+        [HttpGet]
+        [Route(RouteConstants.TypeListsRoute_StatType)]
+        [SwaggerOperation(nameof(GetStatTypeList))]
+        [ProducesResponseType(typeof(IEnumerable<KeyValuePair<int, string>>), (int)HttpStatusCode.OK)]
+        public IActionResult GetStatTypeList()
+        {
+            _logger.LogInformation($"Logic Method invoked: {nameof(GetStatTypeList)}");
+
+            IEnumerable<KeyValuePair<int, string>> result = _typeListsLogic.GetStatTypeList();
 
             return new ObjectResult(result);
         }

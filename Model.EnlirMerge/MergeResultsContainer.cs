@@ -53,6 +53,8 @@ namespace FFRKApi.Model.EnlirMerge
         public IList<KeyValuePair<int, string>> RealmList { get; set; }
         public IList<KeyValuePair<int, string>> RelicTypeList { get; set; }
         public IList<KeyValuePair<int, string>> SchoolList { get; set; }
+        public IList<KeyValuePair<int, string>> StatSetTypeList { get; set; }
+        public IList<KeyValuePair<int, string>> StatTypeList { get; set; }
         public IList<KeyValuePair<int, string>> SoulBreakTierList { get; set; }
         public IList<KeyValuePair<int, string>> TargetTypeList { get; set; }
 

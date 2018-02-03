@@ -46,6 +46,8 @@ namespace FFRKApi.Api.FFRK.Constants
         public const string TypeListsRoute_RealmType = "RealmType";
         public const string TypeListsRoute_RelicType = "RelicType";
         public const string TypeListsRoute_SchoolType = "SchoolType";
+        public const string TypeListsRoute_StatSetType = "StatSetType";
+        public const string TypeListsRoute_StatType = "StatType";
         public const string TypeListsRoute_SoulBreakTierType = "SoulBreakTierType";
         public const string TypeListsRoute_TargetType = "TargetType";
 
@@ -202,7 +204,20 @@ namespace FFRKApi.Api.FFRK.Constants
 
         //Relics Routes
         public const string RelicsRoute_All = "";
-
+        public const string RelicsRoute_Id = "{relicId}";
+        public const string RelicsRoute_IdMulti = ""; //POST - body is list of relic ids
+        public const string RelicsRoute_Name = "Name/{relicName}";
+        public const string RelicsRoute_RealmType = "RealmType/{realmType}";
+        public const string RelicsRoute_Character = "Character/{characterId}";
+        public const string RelicsRoute_SoulBreak = "SoulBreak/{soulBreakId}";
+        public const string RelicsRoute_LegendMateria = "LegendMateria/{legendMateriaId}";
+        public const string RelicsRoute_RelicType = "RelicType/{relicType}";
+        public const string RelicsRoute_Effect = "Effect/{effectText}";
+        public const string RelicsRoute_Rarity = "Rarity/{rarity}";
+        //statSet = [base, std, max]
+        //statType = [acc, atk, def, eva, mag, mnd, res]
+        public const string RelicsRoute_Stat = "Stat/{statSetType}/{statType}/{statValue}";
+        public const string RelicsRoute_Search = "Search"; //POST
 
         //SoulBreaks Routes
         public const string SoulBreaksRoute_All = "";

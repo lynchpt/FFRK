@@ -24,6 +24,8 @@ namespace FFRKApi.Logic.Api
         IEnumerable<KeyValuePair<int, string>> GetRealmTypeList();
         IEnumerable<KeyValuePair<int, string>> GetRelicTypeList();
         IEnumerable<KeyValuePair<int, string>> GetSchoolTypeList();
+        IEnumerable<KeyValuePair<int, string>> GetStatSetTypeList();
+        IEnumerable<KeyValuePair<int, string>> GetStatTypeList();
         IEnumerable<KeyValuePair<int, string>> GetSoulBreakTierTypeList();
         IEnumerable<KeyValuePair<int, string>> GetTargetTypeList();
 
@@ -148,6 +150,20 @@ namespace FFRKApi.Logic.Api
             _logger.LogInformation($"Logic Method invoked: {nameof(GetSchoolTypeList)}");
 
             return _enlirRepository.GetMergeResultsContainer().SchoolList;
+        }
+
+        public IEnumerable<KeyValuePair<int, string>> GetStatSetTypeList()
+        {
+            _logger.LogInformation($"Logic Method invoked: {nameof(GetStatSetTypeList)}");
+
+            return _enlirRepository.GetMergeResultsContainer().StatSetTypeList;
+        }
+
+        public IEnumerable<KeyValuePair<int, string>> GetStatTypeList()
+        {
+            _logger.LogInformation($"Logic Method invoked: {nameof(GetStatTypeList)}");
+
+            return _enlirRepository.GetMergeResultsContainer().StatTypeList;
         }
 
         public IEnumerable<KeyValuePair<int, string>> GetSoulBreakTierTypeList()

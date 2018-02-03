@@ -620,6 +620,8 @@ namespace FFRKApi.Logic.EnlirMerge
             mergeResultsContainer.RealmList = new RealmList().TypeList;
             mergeResultsContainer.RelicTypeList = new RelicTypeList().TypeList;
             mergeResultsContainer.SchoolList = new SchoolList().TypeList;
+            mergeResultsContainer.StatSetTypeList = new StatSetTypeList().TypeList;
+            mergeResultsContainer.StatTypeList = new StatTypeList().TypeList;
             mergeResultsContainer.SoulBreakTierList = new SoulBreakTierList().TypeList;
             mergeResultsContainer.TargetTypeList = new TargetTypeList().TypeList;
 
