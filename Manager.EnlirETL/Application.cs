@@ -80,29 +80,33 @@ namespace Manager.EnlirETL
                 _mergeStorageProvider = _serviceProvider.GetService<IMergeStorageProvider>();
 
                 //uncomment below to actually run import and transform stages - file based
-                string formattedDateString = DateTime.UtcNow.ToString(DateFormatSpecifier);
+                //string formattedDateString = DateTime.UtcNow.ToString(DateFormatSpecifier);
 
-                //Import
-                Stopwatch stopwatchImport = Stopwatch.StartNew();
+                ////Import
+                //Stopwatch stopwatchImport = Stopwatch.StartNew();
 
-                string failureInfo;
+                //string failureInfo;
 
-                bool isDataSourceValid = _importValidator.TryValidateDataSource(out failureInfo);
-                if (!isDataSourceValid)
-                {
-                    _logger.LogWarning("Enlir Import Data not in Expected Format: \n" + failureInfo);
-                    throw new ValidationException("Enlir Import Data not in Expected Format: \n" + failureInfo);
-                }
+                //bool isDataSourceValid = _importValidator.TryValidateDataSource(out failureInfo);
+                //if (!isDataSourceValid)
+                //{
+                //    _logger.LogWarning("Enlir Import Data not in Expected Format: \n" + failureInfo);
+                //    throw new ValidationException("Enlir Import Data not in Expected Format: \n" + failureInfo);
+                //}
 
-                ImportResultsContainer importResultsContainer = _importManager.ImportAll();
-                string importStoragePath = _importStorageProvider.StoreImportResults(importResultsContainer, formattedDateString);
-                stopwatchImport.Stop();
+                //ImportResultsContainer importResultsContainer = _importManager.ImportAll();
+                //string importStoragePath = _importStorageProvider.StoreImportResults(importResultsContainer, formattedDateString);
+                //stopwatchImport.Stop();
 
                 //Transform
-                Stopwatch stopwatchTransform = Stopwatch.StartNew();
-                TransformResultsContainer transformResultsContainer = _transformManager.TransformAll(importStoragePath);
-                string transformStoragePath = _transformStorageProvider.StoreTransformResults(transformResultsContainer, formattedDateString);
-                stopwatchTransform.Stop();
+                string importStoragePath = @"D:\Temp\FFRKApi\ImportsResults-2018-02-05_08-51-01.json";
+                string transformStoragePath = @"D:\Temp\FFRKApi\TransformResults-2018-02-05_08-51-01.json";
+                string formattedDateString = "2018-02-05_08-51-01";
+
+                //Stopwatch stopwatchTransform = Stopwatch.StartNew();
+                //TransformResultsContainer transformResultsContainer = _transformManager.TransformAll(importStoragePath);
+                //string transformStoragePath = _transformStorageProvider.StoreTransformResults(transformResultsContainer, formattedDateString);
+                //stopwatchTransform.Stop();
 
                 //Merge
                 Stopwatch stopwatchMerge = Stopwatch.StartNew();
@@ -110,17 +114,17 @@ namespace Manager.EnlirETL
                 string mergeStoragePath = _mergeStorageProvider.StoreMergeResults(mergeResultsContainer, formattedDateString);
                 stopwatchMerge.Stop();
 
-                //test merge storage
-                MergeResultsContainer testMergeResultsContainer = _mergeStorageProvider.RetrieveMergeResults(mergeStoragePath);
+                ////test merge storage
+                //MergeResultsContainer testMergeResultsContainer = _mergeStorageProvider.RetrieveMergeResults(mergeStoragePath);
 
-                stopwatchFull.Stop();
+                //stopwatchFull.Stop();
 
-                _logger.LogInformation("Import Completed in {ImportTime} seconds", stopwatchImport.Elapsed.Seconds);
-                _logger.LogInformation("Transform Completed in {TransformTime} seconds", stopwatchTransform.Elapsed.Seconds);
-                _logger.LogInformation("Merge Completed in {MergeTime} seconds", stopwatchMerge.Elapsed.Seconds);
-                _logger.LogInformation("Full Run Completed in {FullRunTime} seconds", stopwatchFull.Elapsed.Seconds);
-                int aggregateTime = stopwatchImport.Elapsed.Seconds + stopwatchMerge.Elapsed.Seconds + stopwatchFull.Elapsed.Seconds;
-                _logger.LogInformation("Full Run Aggregate Time in {AggregateTime} seconds", aggregateTime);
+                //_logger.LogInformation("Import Completed in {ImportTime} seconds", stopwatchImport.Elapsed.Seconds);
+                //_logger.LogInformation("Transform Completed in {TransformTime} seconds", stopwatchTransform.Elapsed.Seconds);
+                //_logger.LogInformation("Merge Completed in {MergeTime} seconds", stopwatchMerge.Elapsed.Seconds);
+                //_logger.LogInformation("Full Run Completed in {FullRunTime} seconds", stopwatchFull.Elapsed.Seconds);
+                //int aggregateTime = stopwatchImport.Elapsed.Seconds + stopwatchMerge.Elapsed.Seconds + stopwatchFull.Elapsed.Seconds;
+                //_logger.LogInformation("Full Run Aggregate Time in {AggregateTime} seconds", aggregateTime);
             }
             catch (Exception ex)
             {

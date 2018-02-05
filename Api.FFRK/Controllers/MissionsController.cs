@@ -18,8 +18,8 @@ namespace FFRKApi.Api.FFRK.Controllers
     {
         IActionResult GetAllMissions();
         IActionResult GetMissionsById(int missionId);
-        IActionResult GetMissionsByMissionType(string missionType); //todo change to int
-        IActionResult GetMissionsByEventId(string eventId); //todo change to int
+        IActionResult GetMissionsByMissionType(int missionType);
+        IActionResult GetMissionsByEventId(int eventId);
         IActionResult GetMissionsByDescription(string description);
         IActionResult GetMissionsByReward(string rewardName);
     }
@@ -81,7 +81,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         [Route(RouteConstants.MissionsRoute_MissionType)]
         [SwaggerOperation(nameof(GetMissionsByMissionType))]
         [ProducesResponseType(typeof(IEnumerable<D.Mission>), (int)HttpStatusCode.OK)]
-        public IActionResult GetMissionsByMissionType(string missionType)
+        public IActionResult GetMissionsByMissionType(int missionType)
         {
             _logger.LogInformation($"Controller Method invoked: {nameof(GetMissionsByMissionType)}");
 
@@ -96,7 +96,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         [Route(RouteConstants.MissionsRoute_Event)]
         [SwaggerOperation(nameof(GetMissionsByEventId))]
         [ProducesResponseType(typeof(IEnumerable<D.Mission>), (int)HttpStatusCode.OK)]
-        public IActionResult GetMissionsByEventId(string eventId)
+        public IActionResult GetMissionsByEventId(int eventId)
         {
             _logger.LogInformation($"Controller Method invoked: {nameof(GetMissionsByEventId)}");
 

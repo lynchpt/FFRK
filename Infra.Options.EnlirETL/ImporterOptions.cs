@@ -9,5 +9,6 @@ namespace FFRK.Api.Infra.Options.EnlirETL
         public string SpreadsheetId { get; set; }
         public string WorkSheetName { get; set; }
         public string RangeExpression { get; set; }
+        public int ValueRenderOption { get; set; }
     }
 }

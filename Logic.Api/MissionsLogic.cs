@@ -12,8 +12,8 @@ namespace FFRKApi.Logic.Api
     {
         IEnumerable<Mission> GetAllMissions();
         IEnumerable<Mission> GetMissionsById(int missionId);
-        IEnumerable<Mission> GetMissionsByMissionType(string missionType); //todo change to int
-        IEnumerable<Mission> GetMissionsByEventId(string eventId); //todo change to int
+        IEnumerable<Mission> GetMissionsByMissionType(int missionType);
+        IEnumerable<Mission> GetMissionsByEventId(int eventId); 
         IEnumerable<Mission> GetMissionsByDescription(string description);
         IEnumerable<Mission> GetMissionsByReward(string rewardName);
     }
@@ -50,30 +50,25 @@ namespace FFRKApi.Logic.Api
             return _enlirRepository.GetMergeResultsContainer().Missions.Where(e => e.Id == missionId);
         }
 
-        public IEnumerable<Mission> GetMissionsByMissionType(string missionType)
+        public IEnumerable<Mission> GetMissionsByMissionType(int missionType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMissionsByMissionType)}");
 
             IEnumerable<Mission> results = new List<Mission>();
 
-            if (!String.IsNullOrWhiteSpace(missionType))
-            {
-                results = _enlirRepository.GetMergeResultsContainer().Missions.Where(e => e.MissionType.ToLower().Contains(missionType.ToLower()));
-            }
+            results = _enlirRepository.GetMergeResultsContainer().Missions.Where(e => e.MissionType == missionType);
 
             return results;
         }
 
-        public IEnumerable<Mission> GetMissionsByEventId(string eventId)
+        public IEnumerable<Mission> GetMissionsByEventId(int eventId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMissionsByEventId)}");
 
             IEnumerable<Mission> results = new List<Mission>();
 
-            if (!String.IsNullOrWhiteSpace(eventId))
-            {
-                results = _enlirRepository.GetMergeResultsContainer().Missions.Where(e => e.AssociatedEvent.ToLower().Contains(eventId.ToLower()));
-            }
+
+            results = _enlirRepository.GetMergeResultsContainer().Missions.Where(e => e.AssociatedEventId == eventId);
 
             return results;
         }

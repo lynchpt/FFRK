@@ -15,7 +15,7 @@ namespace FFRKApi.SheetsApiHelper
 {
     public interface ISheetsApiHelper
     {
-        ValueRange GetSheetsData(string spreadsheetId, string worksheetName, string rangeExpression);
+        ValueRange GetSheetsData(string spreadsheetId, string worksheetName, string rangeExpression, int valueRenderOption);
 
         Spreadsheet GetSpreadsheetMetadata(string spreadsheetId);
 
@@ -45,9 +45,9 @@ namespace FFRKApi.SheetsApiHelper
 
 
         #region ISheetsApiHelper Implementation
-        public ValueRange GetSheetsData(string spreadsheetId, string worksheetName, string rangeExpression)
+        public ValueRange GetSheetsData(string spreadsheetId, string worksheetName, string rangeExpression, int valueRenderOption)
         {
-            SpreadsheetsResource.ValuesResource.GetRequest request = GetSheetsRequest(spreadsheetId, worksheetName, rangeExpression);
+            SpreadsheetsResource.ValuesResource.GetRequest request = GetSheetsRequest(spreadsheetId, worksheetName, rangeExpression, valueRenderOption);
 
             ValueRange response = request.Execute();
 
@@ -85,12 +85,13 @@ namespace FFRKApi.SheetsApiHelper
         #endregion
 
         #region Private Methods
-        private SpreadsheetsResource.ValuesResource.GetRequest GetSheetsRequest(string spreadsheetId, string worksheetName, string rangeExpression)
+        private SpreadsheetsResource.ValuesResource.GetRequest GetSheetsRequest(string spreadsheetId, string worksheetName, string rangeExpression, int valueRenderOption)
         {
             string range = $"{worksheetName}!{rangeExpression}";
 
+
             SpreadsheetsResource.ValuesResource.GetRequest request = _sheetsService.Spreadsheets.Values.Get(spreadsheetId, range);
-            request.ValueRenderOption = SpreadsheetsResource.ValuesResource.GetRequest.ValueRenderOptionEnum.FORMULA;
+            request.ValueRenderOption = (SpreadsheetsResource.ValuesResource.GetRequest.ValueRenderOptionEnum)valueRenderOption;
             return request;
         }
 

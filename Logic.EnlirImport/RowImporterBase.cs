@@ -43,7 +43,7 @@ namespace FFRKApi.Logic.EnlirImport
 
             //get the raw data
             ValueRange sheetData = _sheetsApiHelper.GetSheetsData(_importerOptions.SpreadsheetId,
-                _importerOptions.WorkSheetName, _importerOptions.RangeExpression);
+                _importerOptions.WorkSheetName, _importerOptions.RangeExpression, _importerOptions.ValueRenderOption);
 
 
             //load the raw data into LegendSphereRow instances

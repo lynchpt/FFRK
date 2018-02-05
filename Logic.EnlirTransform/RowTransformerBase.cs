@@ -24,6 +24,10 @@ namespace FFRKApi.Logic.EnlirTransform
         protected const string CommaCharacter = ",";
         protected const string StarCharacter = "★";
         protected const string DashCharacter = "-";
+        protected const string RewardAndToken = " and ";
+        protected const string Comma = ",";
+        protected const string CommaWithSpace = ", ";
+        protected const string Space = " ";
         #endregion
 
         #region Constructors
@@ -150,8 +154,29 @@ namespace FFRKApi.Logic.EnlirTransform
 
             try
             {
+                //see if we need to jump out to the more complex multi item, single count reward parsing
+                if(input.Contains(RewardAndToken))
+                {
+                    int andIndex = input.IndexOf(RewardAndToken);
+                    string lastPhrase = input.Substring(andIndex + 5);
+                    string[] lastPhraseParts = lastPhrase.Split(Space.ToCharArray());
+                    string firstWordOfLastPhrase = lastPhraseParts[0];
+                    string rewardPartOfLastPhrase = lastPhrase.Replace(firstWordOfLastPhrase, String.Empty).Trim();
+
+                    string inputAndReplaced = input.Replace(RewardAndToken, CommaWithSpace);
+
+                    string inputRewardRemoved = inputAndReplaced.Replace(rewardPartOfLastPhrase, String.Empty).Trim();
+
+                    string[] rewardTypes = inputRewardRemoved.Split(Comma.ToCharArray());
+
+                    string[] rewardTypesAndCounts = rewardTypes.Select(r => $"{r} {rewardPartOfLastPhrase}").ToArray();
+                    string convertedInput = String.Join(CommaWithSpace, rewardTypesAndCounts);
+
+                    input = convertedInput;
+                }
+
                 //turn reward string into a list, if needed
-                IList<string> rewardStrings = ConvertCommaSeparatedStringToList(input);
+                    IList<string> rewardStrings = ConvertCommaSeparatedStringToList(input);
 
                 //for each reward, turn it into an item name and a count
                 IList<ItemWithItemCount> rewardItemsWithItemCounts = new List<ItemWithItemCount>();

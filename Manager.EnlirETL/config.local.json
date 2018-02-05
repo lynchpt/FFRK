@@ -32,87 +32,104 @@
   "CharacterImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Characters",
-    "RangeExpression": "A2:DA"
+    "RangeExpression": "A2:DA",
+    "ValueRenderOption": 2 
   },
   "RecordSphereImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "'Record Spheres'",
-    "RangeExpression": "A2:AG"
+    "RangeExpression": "A2:AG",
+    "ValueRenderOption": 2
   },
   "LegendSphereImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "'Legend Spheres'",
-    "RangeExpression": "A2:P"
+    "RangeExpression": "A2:P",
+    "ValueRenderOption": 2
   },
   "RecordMateriaImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "'Record Materia'",
-    "RangeExpression": "A2:H"
+    "RangeExpression": "A2:H",
+    "ValueRenderOption": 2
   },
   "LegendMateriaImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "'Legend Materia'",
-    "RangeExpression": "A2:I"
+    "RangeExpression": "A2:I",
+    "ValueRenderOption": 2
   },
   "AbilityImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Abilities",
-    "RangeExpression": "A2:AS"
+    "RangeExpression": "A2:AS",
+    "ValueRenderOption": 2
   },
   "SoulBreakImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "'Soul Breaks'",
-    "RangeExpression": "A2:T"
+    "RangeExpression": "A2:T",
+    "ValueRenderOption": 2
   },
   "CommandImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Commands",
-    "RangeExpression": "A2:R"
+    "RangeExpression": "A2:R",
+    "ValueRenderOption": 2
   },
   "OtherImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Other",
-    "RangeExpression": "A2:P"
+    "RangeExpression": "A2:P",
+    "ValueRenderOption": 2
   },
   "StatusImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Status",
-    "RangeExpression": "A2:H"
+    "RangeExpression": "A2:H",
+    "ValueRenderOption": 2
   },
   "RelicImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Relics",
-    "RangeExpression": "A2:AK"
+    "RangeExpression": "A2:AK",
+    "ValueRenderOption": 0
   },
   "MagiciteImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Magicite",
-    "RangeExpression": "A2:BD"
+    "RangeExpression": "A2:BD",
+    "ValueRenderOption": 2
   },
   "MagiciteSkillImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "'Magicite Skills'",
-    "RangeExpression": "A2:Q"
+    "RangeExpression": "A2:Q",
+    "ValueRenderOption": 2
   },
   "DungeonImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Dungeons",
-    "RangeExpression": "A2:M"
+    "RangeExpression": "A2:M",
+    "ValueRenderOption": 2
   },
   "EventImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Events",
-    "RangeExpression": "A2:O"
+    "RangeExpression": "A2:O",
+    "ValueRenderOption": 0
   },
   "MissionImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Missions",
-    "RangeExpression": "A2:D"
+    "RangeExpression": "A2:D",
+    "ValueRenderOption": 2
   },
   "ExperienceImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Experience",
-    "RangeExpression": "A2:U"
+    "RangeExpression": "A2:U",
+    "ValueRenderOption": 0
   }
 
 }

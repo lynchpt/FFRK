@@ -60,10 +60,10 @@ namespace FFRKApi.Logic.EnlirTransform
             model.IsCounterable = _stringToBooleanConverter.ConvertFromStringToBool(row.Counter);
             model.IsChecked = _stringToBooleanConverter.ConvertFromStringToBool(row.Checked);
 
-            model.ChanceForSkillUseWith0LevelCapBreaks = _percentConverter.ConvertFromStringToDouble(row.ChanceToUseTier0);
-            model.ChanceForSkillUseWith1LevelCapBreaks = _percentConverter.ConvertFromStringToDouble(row.ChanceToUseTier1);
-            model.ChanceForSkillUseWith2LevelCapBreaks = _percentConverter.ConvertFromStringToDouble(row.ChanceToUseTier2);
-            model.ChanceForSkillUseWith3LevelCapBreaks = _percentConverter.ConvertFromStringToDouble(row.ChanceToUseTier3);
+            model.ChanceForSkillUseWith0LevelCapBreaks = _doubleConverter.ConvertFromStringToDouble(row.ChanceToUseTier0);
+            model.ChanceForSkillUseWith1LevelCapBreaks = _doubleConverter.ConvertFromStringToDouble(row.ChanceToUseTier1);
+            model.ChanceForSkillUseWith2LevelCapBreaks = _doubleConverter.ConvertFromStringToDouble(row.ChanceToUseTier2);
+            model.ChanceForSkillUseWith3LevelCapBreaks = _doubleConverter.ConvertFromStringToDouble(row.ChanceToUseTier3);
 
             _logger.LogDebug("Converted MagiciteSkillRow to MagiciteSkill: {Id} - {Description}", model.Id, model.Description);
 

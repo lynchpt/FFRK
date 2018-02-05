@@ -297,6 +297,13 @@ namespace FFRKApi.Logic.EnlirMerge
                 _logger.LogDebug("wired up EventId {EventId} to Ability {Ability}", ability.IntroducingEventId, ability.Description);
             }
 
+            foreach (Mission mission in transformResults.Missions)
+            {
+                mission.AssociatedEventId = transformResults.Events.Where(e => e.EventName == mission.AssociatedEvent).Select(e => e.Id).SingleOrDefault();
+
+                _logger.LogDebug("wired up EventId {EventId} to Mission {Mission}", mission.AssociatedEventId, mission.Description);
+            }
+
         }
 
         private void WireUpSoulBreakIds(TransformResultsContainer transformResults)
@@ -346,6 +353,31 @@ namespace FFRKApi.Logic.EnlirMerge
                     _logger.LogDebug("wired up RelicId {RelicId} to SoulBreak {SoulBreak}", sb.RelicId, sb.Description);
                 }
             }
+
+        }
+
+        private void WireUpMagiciteIds(TransformResultsContainer transformResults)
+        {
+            foreach (MagiciteSkill ms in transformResults.MagiciteSkills)
+            {
+                if (!String.IsNullOrWhiteSpace(ms.MagiciteName))
+                {
+
+                    Magicite parentMagicite = transformResults.Magicites.FirstOrDefault(
+                        m => $"{m.MagiciteName} ({GetNameOfTypeListItem<RealmList>(m.Realm)})" == ms.MagiciteName);
+
+                    if (parentMagicite != null)
+                    {
+                        ms.MagiciteId = parentMagicite.Id;
+                    }
+                    else
+                    {
+                        ms.MagiciteId = 0; //couldn't match
+                    }
+
+                    _logger.LogDebug("wired up MagiciteId {MagiciteId} to MagiciteSkill {MagiciteSkill}", ms.MagiciteId, ms.Description);
+                }
+            }       
 
         }
 
@@ -443,6 +475,8 @@ namespace FFRKApi.Logic.EnlirMerge
             }
         }
 
+
+
         private void WireUpLegendSpheres(TransformResultsContainer transformResults)
         {
             foreach (Character character in transformResults.Characters)
@@ -528,6 +562,32 @@ namespace FFRKApi.Logic.EnlirMerge
 
         #endregion
 
+        #region Value Wireup/Calculation
+
+        private void CalculateLegendSphereTier(TransformResultsContainer transformResults)
+        {
+            foreach (Character character in transformResults.Characters)
+            {
+                if (character.LegendSpheres.Any())
+                {
+                    IList<LegendSphere> legendSpheres = character.LegendSpheres.OrderBy(s => s.Id).ToList();
+
+                    int legendSphereCount = legendSpheres.Count;
+
+                    for (int index = 0; index < legendSphereCount; index++)
+                    {
+                        legendSpheres[index].Tier = index + 1;
+                    }
+
+                    _logger.LogDebug("calculated up LegendSpheres Tiers for Character {Character}", character.Description);
+
+                }
+            }
+
+        }
+
+        #endregion
+
         #region Private Methods
 
         private MergeResultsContainer ExecuteMerge(TransformResultsContainer transformResults)
@@ -546,6 +606,9 @@ namespace FFRKApi.Logic.EnlirMerge
 
             WireUpRelicIds(transformResults);
             _logger.LogInformation("Finished wiring up RelicIds");
+
+            WireUpMagiciteIds(transformResults);
+            _logger.LogInformation("Finished wiring up MagiciteIds");
 
             WireUpEventIds(transformResults);
             _logger.LogInformation("Finished wiring up EventIds");
@@ -585,6 +648,9 @@ namespace FFRKApi.Logic.EnlirMerge
             WireUpRelics(transformResults);
             _logger.LogInformation("Finished wiring up Relics");
 
+            //Value Wireup/Calculation
+            CalculateLegendSphereTier(transformResults);
+            _logger.LogInformation("Finished calculating up LegendSphereTier");
 
             _logger.LogInformation("Finished MergeAll Operation");
 

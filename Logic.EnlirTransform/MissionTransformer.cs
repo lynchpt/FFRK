@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using FFRKApi.Model.EnlirImport;
 using FFRKApi.Model.EnlirTransform;
+using FFRKApi.Model.EnlirTransform.Converters;
+using FFRKApi.Model.EnlirTransform.IdLists;
 using Microsoft.Extensions.Logging;
 
 namespace FFRKApi.Logic.EnlirTransform
@@ -11,12 +13,13 @@ namespace FFRKApi.Logic.EnlirTransform
     public class MissionTransformer : RowTransformerBase<MissionRow, Mission>
     {
         #region Class Variables
-
+        private readonly TypeListConverter _missionTypeConverter;
         #endregion
 
         #region Constructors
         public MissionTransformer(ILogger<RowTransformerBase<MissionRow, Mission>> logger): base(logger)
         {
+            _missionTypeConverter = new TypeListConverter(new MissionTypeList());
         }
         #endregion
 
@@ -28,8 +31,9 @@ namespace FFRKApi.Logic.EnlirTransform
             model.Id = generatedId;
             model.Description = row.Description;
 
-            model.MissionType = row.Type;
+            model.MissionType = _missionTypeConverter.ConvertFromNameToId(row.Type);
             model.AssociatedEvent = row.Event;
+            model.AssociatedEventId = 0; //Fill in during Merge Phase
 
             model.Rewards = ExtractItemWithCountAndStarLevel(row.Reward);
 

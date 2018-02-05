@@ -9,8 +9,9 @@ namespace FFRKApi.Dto.Api
         public string Description { get; set; } 
         #endregion
 
-        public string MissionType { get; set; }
+        public int MissionType { get; set; }
         public string AssociatedEvent { get; set; }
+        public int AssociatedEventId { get; set; }
         public IEnumerable<ItemWithCountAndStarLevel> Rewards { get; set; }
     }
 
