@@ -48,6 +48,12 @@ namespace FFRKApi.Api.FFRK.Controllers
 
         #region IAbilitiesController Implementation
 
+        /// <summary>
+        /// Gets all abilities and their properties, including required orbs
+        /// </summary>
+        /// <remarks></remarks>
+        /// <response code="200"><see cref="D.Ability"/></response>
+        /// <returns><see cref="Ability"/></returns>
         [HttpGet]
         [Route(RouteConstants.AbilitiesRoute_All)]
         [SwaggerOperation(nameof(GetAllAbilities))]

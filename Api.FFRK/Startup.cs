@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using AutoMapper;
 using Data.Api;
 using FFRK.Api.Infra.Options.EnlirETL;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.PlatformAbstractions;
 using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
 using Swashbuckle.AspNetCore.Swagger;
@@ -37,6 +39,10 @@ namespace FFRKApi.Api.FFRK
             services.AddSwaggerGen(c =>
                                    {
                                        c.SwaggerDoc("v1", new Info { Title = "FFRK API", Version = "v1" });
+
+                                       var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "FFRKApi.Api.FFRK.xml");
+                                       c.IncludeXmlComments(filePath);
+
                                    });
 
             ConfigureLogger(services);
