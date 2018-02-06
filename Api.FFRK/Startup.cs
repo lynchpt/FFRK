@@ -87,7 +87,7 @@ namespace FFRKApi.Api.FFRK
         #region Private Configuration Methods
         protected virtual void ConfigureDependencyInjection(IServiceCollection services)
         {
-            services.AddScoped<IMergeStorageProvider, FileMergeStorageProvider>();
+            services.AddScoped<IMergeStorageProvider, AzureBlobStorageProvider>();
 
             services.AddScoped<IEnlirRepository, EnlirRepository>();
 
