@@ -40,8 +40,8 @@ namespace FFRKApi.Api.FFRK
                                    {
                                        c.SwaggerDoc("v1", new Info { Title = "FFRK API", Version = "v1" });
 
-                                       var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "FFRKApi.Api.FFRK.xml");
-                                       c.IncludeXmlComments(filePath);
+                                       //var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "FFRKApi.Api.FFRK.xml");
+                                       //c.IncludeXmlComments(filePath);
 
                                    });
 
