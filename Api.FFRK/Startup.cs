@@ -7,6 +7,7 @@ using FFRKApi.Data.Storage;
 using FFRKApi.Logic.Api;
 using FFRKApi.Model.EnlirMerge;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -57,6 +58,7 @@ namespace FFRKApi.Api.FFRK
         public virtual void ConfigureContainer(IServiceCollection services)
         {
             //services.AddMemoryCache();
+            services.AddCors();
             services.AddOptions();
             ConfigureOptions(services);
             ConfigureDependencyInjection(services);
@@ -70,6 +72,8 @@ namespace FFRKApi.Api.FFRK
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(c => c.AllowAnyOrigin());
 
             app.UseMvc();
 
