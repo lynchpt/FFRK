@@ -4,11 +4,18 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>FFRKApi.Api.FFRK</AssemblyName>
     <RootNamespace>FFRKApi.Api.FFRK</RootNamespace>
+    <ExcludeXmlAssemblyFiles>false</ExcludeXmlAssemblyFiles>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netcoreapp2.0\FFRKApi.Api.FFRK.xml</DocumentationFile>
     <NoWarn>1701;1702;1705;1591</NoWarn>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>bin\Release\netcoreapp2.0\FFRKApi.Api.FFRK.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
