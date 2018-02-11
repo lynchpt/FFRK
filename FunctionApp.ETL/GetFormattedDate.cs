@@ -46,6 +46,7 @@ namespace FunctionApp.ETL
                 string formattedDateString = resolvedDate.ToString(DateFormatSpecifier);
 
                 var response = req.CreateResponse(HttpStatusCode.OK, formattedDateString);
+                //var response = req.CreateResponse(HttpStatusCode.InternalServerError, "Fake Failure");
 
                 return response;
             }
