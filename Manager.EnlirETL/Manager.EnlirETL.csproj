@@ -30,6 +30,7 @@
     <ProjectReference Include="..\Logic.EnlirImport\Logic.EnlirImport.csproj" />
     <ProjectReference Include="..\Logic.EnlirMerge\Logic.EnlirMerge.csproj" />
     <ProjectReference Include="..\Logic.EnlirTransform\Logic.EnlirTransform.csproj" />
+    <ProjectReference Include="..\Logic.Validation\Logic.Validation.csproj" />
     <ProjectReference Include="..\Model.EnlirImport\Model.EnlirImport.csproj" />
     <ProjectReference Include="..\Model.EnlirMerge\Model.EnlirMerge.csproj" />
     <ProjectReference Include="..\Model.EnlirTransform\Model.EnlirTransform.csproj" />

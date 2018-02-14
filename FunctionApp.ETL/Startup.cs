@@ -20,6 +20,8 @@ using Microsoft.Extensions.Logging;
 using Model.EnlirImport;
 using Serilog;
 using Serilog.Sinks.SystemConsole.Themes;
+using FFRKApi.Logic.Validation.Enlir;
+using FFRKApi.Logic.Validation.GoogleSheets;
 
 namespace FunctionApp.ETL
 {
@@ -202,7 +204,7 @@ namespace FunctionApp.ETL
                 //.WriteTo.RollingFile(rollingFileLogPath).MinimumLevel.Information()
                 .WriteTo.ApplicationInsightsEvents(appInsightsKey).MinimumLevel.Information()
                 .WriteTo.Console(theme: SystemConsoleTheme.Literate).MinimumLevel.Information()
-                .WriteTo.Debug().MinimumLevel.Debug()
+                .WriteTo.Debug().MinimumLevel.Information()
                 .CreateLogger();
 
             services.AddLogging(loggingBuilder => loggingBuilder.AddSerilog());
