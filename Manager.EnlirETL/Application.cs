@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using System.Text;
 using FFRK.Api.Infra.Options.EnlirETL;
 using FFRKApi.Data.Storage;
@@ -20,6 +23,7 @@ using Microsoft.Extensions.Options;
 using Model.EnlirImport;
 using FFRKApi.Logic.Validation.Enlir;
 using FFRKApi.Logic.Validation.GoogleSheets;
+using Newtonsoft.Json;
 
 namespace Manager.EnlirETL
 {
@@ -36,6 +40,7 @@ namespace Manager.EnlirETL
         private IServiceCollection _servicesCollection;
         private readonly IConfiguration _configuration;
         private IImportValidator _importValidator;
+        private ITypeListValidator _typeListValidator;
         private IImportManager _importManager;
         private ITransformManager _transformManager;
         private IMergeManager _mergeManager;
@@ -71,6 +76,7 @@ namespace Manager.EnlirETL
                 _logger.LogInformation($"{nameof(Application)}.{nameof(Run)} execution invoked");
 
                 _importValidator = _serviceProvider.GetService<IImportValidator>();
+                _typeListValidator = _serviceProvider.GetService<ITypeListValidator>();
 
                 _importManager = _serviceProvider.GetService<IImportManager>();
                 _importStorageProvider = _serviceProvider.GetService<IImportStorageProvider>();
@@ -89,6 +95,7 @@ namespace Manager.EnlirETL
 
                 //string failureInfo;
 
+                ////Before we take the overhead of downloading all the import data, check that the data has the right overall structure
                 //bool isDataSourceValid = _importValidator.TryValidateDataSource(out failureInfo);
                 //if (!isDataSourceValid)
                 //{
@@ -100,21 +107,39 @@ namespace Manager.EnlirETL
                 //string importStoragePath = _importStorageProvider.StoreImportResults(importResultsContainer, formattedDateString);
                 //stopwatchImport.Stop();
 
-                //Transform
-                string importStoragePath = @"D:\Temp\FFRKApi\ImportsResults-2018-02-05_08-51-01.json";
-                string transformStoragePath = @"D:\Temp\FFRKApi\TransformResults-2018-02-05_08-51-01.json";
-                string formattedDateString = "2018-02-05_08-51-01";
+                //cheat data setup for testing - comment out when doing full run for real
+                string importStoragePath = @"D:\Docs\Personal\FFRKLinqQuery\ImportResults-Latest.json";
+                string transformStoragePath = @"D:\Docs\Personal\FFRKLinqQuery\TransformResults-Latest.json";
+                string formattedDateString = "2018-02-15_08-31-01";
+                string importContents = File.ReadAllText(importStoragePath);
+                ImportResultsContainer importResultsContainer = JsonConvert.DeserializeObject<ImportResultsContainer>(importContents);
 
+                ////Now that we have the import data, we need to check whether our TypeLists (used to convert staring data into ids)
+                ////is still accurate. If the source data has changed their list of values for each type, we need to stop and correct the TypeLists
+                IEnumerable<TypeListDifferences> typeListDifferences = _typeListValidator.TryValidateTypeLists(importResultsContainer);
+                if (typeListDifferences.Any(t => t.IsIdListDifferentFromSource))
+                {
+                    _logger.LogWarning("Enlir TypeList Data differs from coded TypeLists.");
+                    //write validation failure data to log for easy perusal
+                    string typeListDifferencesLogPath = $"{AppContext.BaseDirectory}\\TypeListDifferencesLog.json";
+                    string typeListDifferencesLogContents = JsonConvert.SerializeObject(typeListDifferences);
+                    File.WriteAllText(typeListDifferencesLogPath, typeListDifferencesLogContents);
+                    _logger.LogWarning("Enlir TypeList differences written to file: " + typeListDifferencesLogPath);
+
+                    throw new ValidationException("Enlir Type List Data differs from coded TypeLists");
+                }
+
+                //Transform
                 //Stopwatch stopwatchTransform = Stopwatch.StartNew();
                 //TransformResultsContainer transformResultsContainer = _transformManager.TransformAll(importStoragePath);
                 //string transformStoragePath = _transformStorageProvider.StoreTransformResults(transformResultsContainer, formattedDateString);
                 //stopwatchTransform.Stop();
 
                 //Merge
-                Stopwatch stopwatchMerge = Stopwatch.StartNew();
-                MergeResultsContainer mergeResultsContainer = _mergeManager.MergeAll(transformStoragePath);
-                string mergeStoragePath = _mergeStorageProvider.StoreMergeResults(mergeResultsContainer, formattedDateString);
-                stopwatchMerge.Stop();
+                //Stopwatch stopwatchMerge = Stopwatch.StartNew();
+                //MergeResultsContainer mergeResultsContainer = _mergeManager.MergeAll(transformStoragePath);
+                //string mergeStoragePath = _mergeStorageProvider.StoreMergeResults(mergeResultsContainer, formattedDateString);
+                //stopwatchMerge.Stop();
 
                 ////test merge storage
                 //MergeResultsContainer testMergeResultsContainer = _mergeStorageProvider.RetrieveMergeResults(mergeStoragePath);
@@ -135,9 +160,6 @@ namespace Manager.EnlirETL
                 _logger.LogInformation("Error in Top Level Application execution. Validate, Import, Transform, and Merge operations were NOT successfully completed. Previously existing data is unchanged");
                 throw;
             }
-
-
-            Console.Read();
         }
 
         private void ConfigureServices()
@@ -174,6 +196,7 @@ namespace Manager.EnlirETL
             _servicesCollection.AddSingleton<ISheetsApiHelper, SheetsApiHelper>();
             _servicesCollection.AddScoped<IGoogleSheetsDataValidator, GoogleSheetsDataValidator>();
             _servicesCollection.AddScoped<IImportValidator, ImportValidator>();
+            _servicesCollection.AddScoped<ITypeListValidator, TypeListValidator>();
 
             _servicesCollection.AddScoped<IRowImporter<CharacterRow>, CharacterImporter>();
             _servicesCollection.AddScoped<IRowImporter<RecordSphereRow>, RecordSphereImporter>();

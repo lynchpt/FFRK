@@ -42,7 +42,16 @@ namespace Manager.EnlirETL
 
             IApplication application = _services.GetService<IApplication>();
 
-            application.Run();
+            try
+            {
+                application.Run();
+                Console.Read();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("The application has suffered a fatal error - press any key to close.");
+                Console.Read();
+            }
         } 
         #endregion
 

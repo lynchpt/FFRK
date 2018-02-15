@@ -1,0 +1,16 @@
+2018-02-15 09:05:20.498 -05:00 [Information] Application.Run execution invoked
+2018-02-15 09:05:20.707 -05:00 [Information] SheetsService instance initialized for "FFRKApi"
+2018-02-15 09:05:49.611 -05:00 [Warning] Enlir TypeList Data differs from coded TypeLists.
+2018-02-15 09:05:58.992 -05:00 [Warning] Enlir TypeList differences written to file: C:\Users\lynchp\Source\Repos\FFRKApi\Manager.EnlirETL\bin\Debug\netcoreapp2.0\\TypeListDifferencesLog.json
+2018-02-15 09:06:21.368 -05:00 [Error] Enlir Type List Data differs from coded TypeLists
+System.ComponentModel.DataAnnotations.ValidationException: Enlir Type List Data differs from coded TypeLists
+   at Manager.EnlirETL.Application.Run() in C:\Users\lynchp\Source\Repos\FFRKApi\Manager.EnlirETL\Application.cs:line 155
+2018-02-15 09:06:22.576 -05:00 [Information] Error in Top Level Application execution. Validate, Import, Transform, and Merge operations were NOT successfully completed. Previously existing data is unchanged
+2018-02-15 09:10:41.902 -05:00 [Information] Application.Run execution invoked
+2018-02-15 09:10:42.116 -05:00 [Information] SheetsService instance initialized for "FFRKApi"
+2018-02-15 09:10:49.577 -05:00 [Warning] Enlir TypeList Data differs from coded TypeLists.
+2018-02-15 09:10:49.636 -05:00 [Warning] Enlir TypeList differences written to file: C:\Users\lynchp\Source\Repos\FFRKApi\Manager.EnlirETL\bin\Debug\netcoreapp2.0\\TypeListDifferencesLog.json
+2018-02-15 09:10:49.678 -05:00 [Error] Enlir Type List Data differs from coded TypeLists
+System.ComponentModel.DataAnnotations.ValidationException: Enlir Type List Data differs from coded TypeLists
+   at Manager.EnlirETL.Application.Run() in C:\Users\lynchp\Source\Repos\FFRKApi\Manager.EnlirETL\Application.cs:line 155
+2018-02-15 09:10:49.718 -05:00 [Information] Error in Top Level Application execution. Validate, Import, Transform, and Merge operations were NOT successfully completed. Previously existing data is unchanged
