@@ -40,7 +40,7 @@ namespace FFRKApi.FunctionApp.ETL
             catch (System.Exception ex)
             {
 
-                logger.LogError(ex, $"Error in Azure Function ExecuteImport : {ex.Message}");
+                logger.LogError(ex, $"Error in Azure Function ValidateSourceData : {ex.Message}");
 
                 var response = req.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
 
