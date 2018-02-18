@@ -21,12 +21,14 @@ namespace FFRKApi.FunctionApp.ETL
         public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)]HttpRequestMessage req,
             [Inject]ITypeListValidator typeListValidator, [Inject]ILogger<ITypeListValidator> logger)
         {
-            IEnumerable<TypeListDifferences> typeListDifferencesForError = null;
+            //IEnumerable<TypeListDifferences> typeListDifferencesForError = null;
 
             logger.LogInformation("Azure Function ValidateTypeLists processed a request.");
 
             try
             {
+                HttpResponseMessage response = null;
+
                 dynamic data = await req.Content.ReadAsAsync<object>();
 
                 string datastring = data.ToString();
@@ -35,36 +37,30 @@ namespace FFRKApi.FunctionApp.ETL
                 ImportResultsContainer irc = JsonConvert.DeserializeObject<ImportResultsContainer>(datastring);
 
 
-                IEnumerable<TypeListDifferences> typeListDifferences = typeListValidator.TryValidateTypeLists(irc);
+                IList<TypeListDifferences> typeListDifferences = typeListValidator.TryValidateTypeLists(irc).ToList();
                 if (typeListDifferences.Any(t => t.IsIdListDifferentFromSource))
                 {
                     logger.LogWarning("Enlir TypeList Data differs from coded TypeLists.");
 
-                    typeListDifferencesForError = typeListDifferences;
+                    //typeListDifferencesForError = typeListDifferences;
 
-                    throw new Exception("Enlir Type List Data differs from coded TypeLists");
+                    //throw new Exception("Enlir Type List Data differs from coded TypeLists");
+                    response = req.CreateResponse(HttpStatusCode.OK, typeListDifferences);
                 }
-
-                var response = req.CreateResponse(HttpStatusCode.OK, true);
-
+                else
+                {
+                    response = req.CreateResponse(HttpStatusCode.OK, true);
+                }
+                            
                 return response;
             }
             catch (System.Exception ex)
             {
-                object message;
+               
 
                 logger.LogError(ex, $"Error in Azure Function ValidateTypeLists : {ex.Message}");
 
-                if (typeListDifferencesForError != null)
-                {
-                    message = typeListDifferencesForError;
-                }
-                else
-                {
-                    message = ex.Message;
-                }
-
-                var response = req.CreateResponse(HttpStatusCode.InternalServerError, message);
+                var response = req.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
 
                 return response;
             }
