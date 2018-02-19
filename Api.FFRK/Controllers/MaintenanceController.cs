@@ -1,13 +1,16 @@
-﻿using FFRKApi.Api.FFRK.Constants;
+﻿using System.Net;
+using FFRKApi.Api.FFRK.Constants;
 using FFRKApi.Logic.Api;
 using FFRKApi.Model.EnlirMerge;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace FFRKApi.Api.FFRK.Controllers
 {
     public interface IMaintenanceController
     {
-        IActionResult LoadLatestMergeResultsContainer();
+        IActionResult RefreshMergeResultsContainer();
     }
 
     [Produces(RouteConstants.ContentType_ApplicationJson)]
@@ -17,16 +20,16 @@ namespace FFRKApi.Api.FFRK.Controllers
         #region Class Variables
 
         private readonly IMaintenanceLogic _maintenanceLogic;
-        private MergeResultsContainer _mergeResultsContainer;
+        private readonly ILogger<MaintenanceController> _logger;
         #endregion
 
 
         #region Constructors
 
-        public MaintenanceController(IMaintenanceLogic maintenanceLogic, MergeResultsContainer mergeResultsContainer)
+        public MaintenanceController(IMaintenanceLogic maintenanceLogic, ILogger<MaintenanceController> logger)
         {
             _maintenanceLogic = maintenanceLogic;
-            _mergeResultsContainer = mergeResultsContainer;
+            _logger = logger;
         }
         #endregion
 
@@ -34,11 +37,13 @@ namespace FFRKApi.Api.FFRK.Controllers
         #region IMaintenanceController Implementation
         [HttpGet]
         [Route(RouteConstants.MaintenanceRoute_DataStatus)]
-        public IActionResult LoadLatestMergeResultsContainer()
+        [SwaggerOperation(nameof(RefreshMergeResultsContainer))]
+        [ProducesResponseType(typeof(string), (int)HttpStatusCode.OK)]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public IActionResult RefreshMergeResultsContainer()
         {
-            MergeResultsContainer mergeResultsContainer = _maintenanceLogic.GetLatestMergeResultsContainer();
-
-            _mergeResultsContainer = mergeResultsContainer;
+            _logger.LogInformation($"Controller Method invoked: {nameof(RefreshMergeResultsContainer)}");
+            _maintenanceLogic.RefreshMergeResultsContainer();
 
             return new OkResult();
         } 

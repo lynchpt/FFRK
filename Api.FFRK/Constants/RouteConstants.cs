@@ -244,6 +244,6 @@ namespace FFRKApi.Api.FFRK.Constants
 
 
         //Maintenance Routes
-        public const string MaintenanceRoute_DataStatus = "DataStatus";
+        public const string MaintenanceRoute_DataStatus = "DataRefreshStatus";
     }
 }
