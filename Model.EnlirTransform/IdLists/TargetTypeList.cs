@@ -14,13 +14,15 @@ namespace FFRKApi.Model.EnlirTransform.IdLists
                                                                           new KeyValuePair<int, string>(3, "All allies"),
                                                                           new KeyValuePair<int, string>(4, "All enemies"),
                                                                           new KeyValuePair<int, string>(5, "Ally with status"),
-                                                                          new KeyValuePair<int, string>(6, "Lowest HP% ally"),
-                                                                          new KeyValuePair<int, string>(7, "Random ally"),
-                                                                          new KeyValuePair<int, string>(8, "Random enemies"),
-                                                                          new KeyValuePair<int, string>(9, "Random enemy"),
-                                                                          new KeyValuePair<int, string>(10, "Self"),
-                                                                          new KeyValuePair<int, string>(11, "Single"),
-                                                                          new KeyValuePair<int, string>(12, "Single enemy")
+                                                                          new KeyValuePair<int, string>(6, "Another ally"),
+                                                                          new KeyValuePair<int, string>(7, "Lowest HP% ally"),
+                                                                          new KeyValuePair<int, string>(8, "Random ally"),
+                                                                          new KeyValuePair<int, string>(9, "Random enemies"),
+                                                                          new KeyValuePair<int, string>(10, "Random enemy"),
+                                                                          new KeyValuePair<int, string>(11, "Self"),
+                                                                          new KeyValuePair<int, string>(12, "Single"),
+                                                                          new KeyValuePair<int, string>(13, "Single ally"),
+                                                                          new KeyValuePair<int, string>(14, "Single enemy")
                                                                       };
 
 

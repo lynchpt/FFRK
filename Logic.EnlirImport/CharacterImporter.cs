@@ -96,6 +96,7 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.GunarmAccess = ResolveColumnContents(columnCount, CharacterColumn.GunarmAccess, row);
             importedRow.GamblingGearAccess = ResolveColumnContents(columnCount, CharacterColumn.GamblingGearAccess, row);
             importedRow.DollAccess = ResolveColumnContents(columnCount, CharacterColumn.DollAccess, row);
+            importedRow.KeybladeAccess = ResolveColumnContents(columnCount, CharacterColumn.KeybladeAccess, row);
             importedRow.ShieldAccess = ResolveColumnContents(columnCount, CharacterColumn.ShieldAccess, row);
             importedRow.HatAccess = ResolveColumnContents(columnCount, CharacterColumn.HatAccess, row);
             importedRow.HelmAccess = ResolveColumnContents(columnCount, CharacterColumn.HelmAccess, row);

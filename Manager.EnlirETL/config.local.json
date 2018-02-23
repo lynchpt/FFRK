@@ -32,7 +32,7 @@
   "CharacterImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Characters",
-    "RangeExpression": "A2:DA",
+    "RangeExpression": "A2:DB",
     "ValueRenderOption": 2 
   },
   "RecordSphereImporterOptions": {

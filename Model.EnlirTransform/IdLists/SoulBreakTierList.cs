@@ -11,14 +11,15 @@ namespace FFRKApi.Model.EnlirTransform.IdLists
                                                                     new KeyValuePair<int, string>(0, "Unknown"),
                                                                     new KeyValuePair<int, string>(1, "Default"),
                                                                     new KeyValuePair<int, string>(2, "Shared"),
-                                                                    new KeyValuePair<int, string>(3, "SB"),
-                                                                    new KeyValuePair<int, string>(4, "SSB"),
-                                                                    new KeyValuePair<int, string>(5, "BSB"),
-                                                                    new KeyValuePair<int, string>(6, "OSB"),
-                                                                    new KeyValuePair<int, string>(7, "USB"),
-                                                                    new KeyValuePair<int, string>(8, "CSB"),
-                                                                    new KeyValuePair<int, string>(9, "UOSB"),
-                                                                    new KeyValuePair<int, string>(10, "FSB")
+                                                                    new KeyValuePair<int, string>(3, "RW"),
+                                                                    new KeyValuePair<int, string>(4, "SB"),
+                                                                    new KeyValuePair<int, string>(5, "SSB"),
+                                                                    new KeyValuePair<int, string>(6, "BSB"),
+                                                                    new KeyValuePair<int, string>(7, "OSB"),
+                                                                    new KeyValuePair<int, string>(8, "USB"),
+                                                                    new KeyValuePair<int, string>(9, "CSB"),
+                                                                    new KeyValuePair<int, string>(10, "Glint"),
+                                                                    new KeyValuePair<int, string>(11, "ASB")
                                                              };
 
         public IList<KeyValuePair<int, string>> TypeList => _typeList;

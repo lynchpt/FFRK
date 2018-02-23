@@ -29,14 +29,15 @@ namespace FFRKApi.Model.EnlirTransform.IdLists
                                                                           new KeyValuePair<int, string>(18, "Gun-arm"),
                                                                           new KeyValuePair<int, string>(19, "Gambling Gear"),
                                                                           new KeyValuePair<int, string>(20, "Doll"),
-                                                                          new KeyValuePair<int, string>(21, "Shield"),
-                                                                          new KeyValuePair<int, string>(22, "Hat"),
-                                                                          new KeyValuePair<int, string>(23, "Helm"),
-                                                                          new KeyValuePair<int, string>(24, "Light Armor"),
-                                                                          new KeyValuePair<int, string>(25, "Heavy Armor"),
-                                                                          new KeyValuePair<int, string>(26, "Robe"),
-                                                                          new KeyValuePair<int, string>(27, "Bracer"),
-                                                                          new KeyValuePair<int, string>(28, "Accessory")
+                                                                          new KeyValuePair<int, string>(21, "Keyblade"),
+                                                                          new KeyValuePair<int, string>(22, "Shield"),
+                                                                          new KeyValuePair<int, string>(23, "Hat"),
+                                                                          new KeyValuePair<int, string>(24, "Helm"),
+                                                                          new KeyValuePair<int, string>(25, "Light Armor"),
+                                                                          new KeyValuePair<int, string>(26, "Heavy Armor"),
+                                                                          new KeyValuePair<int, string>(27, "Robe"),
+                                                                          new KeyValuePair<int, string>(28, "Bracer"),
+                                                                          new KeyValuePair<int, string>(29, "Accessory")
                                                                       };
 
 

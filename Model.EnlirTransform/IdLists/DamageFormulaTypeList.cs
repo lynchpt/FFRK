@@ -10,9 +10,9 @@ namespace FFRKApi.Model.EnlirTransform.IdLists
                                                                       {
                                                                           new KeyValuePair<int, string>(0, "Unknown"),
                                                                           new KeyValuePair<int, string>(1, String.Empty),
-                                                                          new KeyValuePair<int, string>(2, "Magical"),
-                                                                          new KeyValuePair<int, string>(3, "Physical"),
-                                                                          new KeyValuePair<int, string>(4, "Hybrid")
+                                                                          new KeyValuePair<int, string>(2, "Hybrid"),
+                                                                          new KeyValuePair<int, string>(3, "Magical"),
+                                                                          new KeyValuePair<int, string>(4, "Physical")
                                                                       };
 
 

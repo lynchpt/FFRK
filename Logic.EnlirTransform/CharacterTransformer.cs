@@ -243,14 +243,15 @@ namespace FFRKApi.Logic.EnlirTransform
                     new EquipmentAccessInfo(){EquipmentType = 18, EquipmentName = "Gun-arm", IsWeapon = true, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.GunarmAccess)},
                     new EquipmentAccessInfo(){EquipmentType = 19, EquipmentName = "Gambling Gear", IsWeapon = true, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.GamblingGearAccess)},
                     new EquipmentAccessInfo(){EquipmentType = 20, EquipmentName = "Doll", IsWeapon = true, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.DollAccess)},
-                    new EquipmentAccessInfo(){EquipmentType = 21, EquipmentName = "Shield", IsWeapon = false, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.ShieldAccess)},
-                    new EquipmentAccessInfo(){EquipmentType = 22, EquipmentName = "Hat", IsWeapon = false, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.HatAccess)},
-                    new EquipmentAccessInfo(){EquipmentType = 23, EquipmentName = "Helm", IsWeapon = false, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.HelmAccess)},
-                    new EquipmentAccessInfo(){EquipmentType = 24, EquipmentName = "Light Armor",IsWeapon = false,  CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.LightArmorAccess)},
-                    new EquipmentAccessInfo(){EquipmentType = 25, EquipmentName = "Heavy Armor", IsWeapon = false, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.HeavyArmorAccess)},
-                    new EquipmentAccessInfo(){EquipmentType = 26, EquipmentName = "Robe", IsWeapon = false, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.RobeAccess)},
-                    new EquipmentAccessInfo(){EquipmentType = 27, EquipmentName = "Bracer", IsWeapon = false, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.BracerAccess)},
-                    new EquipmentAccessInfo(){EquipmentType = 28, EquipmentName = "Accessory", IsWeapon = false, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.AccessoryAccess)}
+                    new EquipmentAccessInfo(){EquipmentType = 21, EquipmentName = "Keyblade", IsWeapon = true, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.KeybladeAccess)},
+                    new EquipmentAccessInfo(){EquipmentType = 22, EquipmentName = "Shield", IsWeapon = false, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.ShieldAccess)},
+                    new EquipmentAccessInfo(){EquipmentType = 23, EquipmentName = "Hat", IsWeapon = false, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.HatAccess)},
+                    new EquipmentAccessInfo(){EquipmentType = 24, EquipmentName = "Helm", IsWeapon = false, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.HelmAccess)},
+                    new EquipmentAccessInfo(){EquipmentType = 25, EquipmentName = "Light Armor",IsWeapon = false,  CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.LightArmorAccess)},
+                    new EquipmentAccessInfo(){EquipmentType = 26, EquipmentName = "Heavy Armor", IsWeapon = false, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.HeavyArmorAccess)},
+                    new EquipmentAccessInfo(){EquipmentType = 27, EquipmentName = "Robe", IsWeapon = false, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.RobeAccess)},
+                    new EquipmentAccessInfo(){EquipmentType = 28, EquipmentName = "Bracer", IsWeapon = false, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.BracerAccess)},
+                    new EquipmentAccessInfo(){EquipmentType = 29, EquipmentName = "Accessory", IsWeapon = false, CanAccess = _stringToBooleanConverter.ConvertFromStringToBool(row.AccessoryAccess)}
 
 
                 };

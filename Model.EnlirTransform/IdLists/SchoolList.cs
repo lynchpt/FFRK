@@ -9,15 +9,15 @@ namespace FFRKApi.Model.EnlirTransform.IdLists
         private IList<KeyValuePair<int, string>> _typeList = new List<KeyValuePair<int, string>>()
                                                              {
                                                                  new KeyValuePair<int, string>(0, "Unknown"),
-                                                                 new KeyValuePair<int, string>(1, String.Empty),
-                                                                 new KeyValuePair<int, string>(2, "?"),
-                                                                 new KeyValuePair<int, string>(3, "Bard"),
-                                                                 new KeyValuePair<int, string>(4, "Black Magic"),
-                                                                 new KeyValuePair<int, string>(5, "Celerity"),
-                                                                 new KeyValuePair<int, string>(6, "Combat"),
-                                                                 new KeyValuePair<int, string>(7, "Dancer"),
-                                                                 new KeyValuePair<int, string>(8, "Darkness"),
-                                                                 new KeyValuePair<int, string>(9, "Dragoon"),
+                                                                 new KeyValuePair<int, string>(1, "?"),
+                                                                 new KeyValuePair<int, string>(2, "Bard"),
+                                                                 new KeyValuePair<int, string>(3, "Black Magic"),
+                                                                 new KeyValuePair<int, string>(4, "Celerity"),
+                                                                 new KeyValuePair<int, string>(5, "Combat"),
+                                                                 new KeyValuePair<int, string>(6, "Dancer"),
+                                                                 new KeyValuePair<int, string>(7, "Darkness"),
+                                                                 new KeyValuePair<int, string>(8, "Dragoon"),
+                                                                 new KeyValuePair<int, string>(9, "Heavy"),                                                                
                                                                  new KeyValuePair<int, string>(10, "Knight"),
                                                                  new KeyValuePair<int, string>(11, "Machinist"),
                                                                  new KeyValuePair<int, string>(12, "Monk"),
@@ -32,7 +32,7 @@ namespace FFRKApi.Model.EnlirTransform.IdLists
                                                                  new KeyValuePair<int, string>(21, "Thief"),
                                                                  new KeyValuePair<int, string>(22, "White Magic"),
                                                                  new KeyValuePair<int, string>(23, "Witch"),
-                                                                 new KeyValuePair<int, string>(24, "Heavy")
+  
                                                              };
 
         public IList<KeyValuePair<int, string>> TypeList => _typeList;
