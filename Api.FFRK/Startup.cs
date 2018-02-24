@@ -3,6 +3,7 @@ using System.IO;
 using AutoMapper;
 using Data.Api;
 using FFRK.Api.Infra.Options.EnlirETL;
+using FFRKApi.Data.Api;
 using FFRKApi.Data.Storage;
 using FFRKApi.Logic.Api;
 using FFRKApi.Model.EnlirMerge;
@@ -130,6 +131,7 @@ namespace FFRKApi.Api.FFRK
             services.AddScoped<ITypeListsLogic, TypeListsLogic>();
 
             services.AddSingleton<IEnlirRepository, EnlirRepository>();
+            services.AddScoped<ICacheProvider, CacheProvider>();
 
             services.AddSingleton<IMapper>(ConfigureMappings);
         }
@@ -139,6 +141,7 @@ namespace FFRKApi.Api.FFRK
             services.Configure<FileMergeStorageOptions>(Configuration.GetSection(nameof(FileMergeStorageOptions)));
 
             services.Configure<AzureBlobStorageOptions>(Configuration.GetSection(nameof(AzureBlobStorageOptions)));
+            services.Configure<CachingOptions>(Configuration.GetSection(nameof(CachingOptions)));
         }
         #endregion
 

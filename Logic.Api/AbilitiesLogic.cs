@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Data.Api;
+using FFRKApi.Data.Api;
 using FFRKApi.Model.EnlirTransform;
 using Microsoft.Extensions.Logging;
 
@@ -24,14 +25,16 @@ namespace FFRKApi.Logic.Api
         #region Class Variables
         private readonly IEnlirRepository _enlirRepository;
         private readonly ILogger<AbilitiesLogic> _logger;
+        private readonly ICacheProvider _cacheProvider;
         #endregion
 
         #region Constructors
 
-        public AbilitiesLogic(IEnlirRepository enlirRepository, ILogger<AbilitiesLogic> logger)
+        public AbilitiesLogic(IEnlirRepository enlirRepository, ICacheProvider cacheProvider, ILogger<AbilitiesLogic> logger)
         {
             _enlirRepository = enlirRepository;
             _logger = logger;
+            _cacheProvider = cacheProvider;
         }
         #endregion
 
@@ -41,7 +44,16 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllAbilities)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Abilities;
+            IList<Ability> results = _cacheProvider.ObjectGet<IList<Ability>>(nameof(GetAllAbilities));
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Abilities.ToList();
+
+                _cacheProvider.ObjectSet(nameof(GetAllAbilities), results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Ability> GetAbilitiesById(int abilityId)
