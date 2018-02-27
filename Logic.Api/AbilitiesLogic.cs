@@ -44,13 +44,14 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllAbilities)}");
 
-            IList<Ability> results = _cacheProvider.ObjectGet<IList<Ability>>(nameof(GetAllAbilities));
+            string cacheKey = nameof(GetAllAbilities);
+            IEnumerable<Ability> results = _cacheProvider.ObjectGet<IList<Ability>>(cacheKey);
 
             if (results == null)
             {
                 results = _enlirRepository.GetMergeResultsContainer().Abilities.ToList();
 
-                _cacheProvider.ObjectSet(nameof(GetAllAbilities), results);
+                _cacheProvider.ObjectSet(cacheKey, results);
             }
 
             return results;
@@ -60,35 +61,85 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAbilitiesById)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Abilities.Where(a => a.Id == abilityId);
+            string cacheKey = $"{nameof(GetAbilitiesById)}:{abilityId}";
+            IEnumerable<Ability> results = _cacheProvider.ObjectGet<IList<Ability>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Abilities.Where(a => a.Id == abilityId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Ability> GetAbilitiesByAbilityType(int abilityType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAbilitiesByAbilityType)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Abilities.Where(a => a.AbilityType == abilityType);
+            string cacheKey = $"{nameof(GetAbilitiesByAbilityType)}:{abilityType}";
+            IEnumerable<Ability> results = _cacheProvider.ObjectGet<IList<Ability>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Abilities.Where(a => a.AbilityType == abilityType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Ability> GetAbilitiesByRarity(int rarity)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAbilitiesByRarity)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Abilities.Where(a => a.Rarity == rarity);
+            string cacheKey = $"{nameof(GetAbilitiesByRarity)}:{rarity}";
+            IEnumerable<Ability> results = _cacheProvider.ObjectGet<IList<Ability>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Abilities.Where(a => a.Rarity == rarity);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Ability> GetAbilitiesBySchool(int schoolType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAbilitiesBySchool)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Abilities.Where(a => a.School == schoolType);
+            string cacheKey = $"{nameof(GetAbilitiesBySchool)}:{schoolType}";
+            IEnumerable<Ability> results = _cacheProvider.ObjectGet<IList<Ability>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Abilities.Where(a => a.School == schoolType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Ability> GetAbilitiesByElement(int elementType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAbilitiesByElement)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Abilities.Where(a => a.Elements.Contains(elementType));
+            string cacheKey = $"{nameof(GetAbilitiesByElement)}:{elementType}";
+            IEnumerable<Ability> results = _cacheProvider.ObjectGet<IList<Ability>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Abilities.Where(a => a.Elements.Contains(elementType));
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Ability> GetAbilitiesBySearch(Ability searchPrototype)
