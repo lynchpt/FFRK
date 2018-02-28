@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Data.Api;
+using FFRKApi.Data.Api;
 using FFRKApi.Model.EnlirTransform;
 using Microsoft.Extensions.Logging;
 
@@ -34,14 +35,16 @@ namespace FFRKApi.Logic.Api
         #region Class Variables
         private readonly IEnlirRepository _enlirRepository;
         private readonly ILogger<EventsLogic> _logger;
+        private readonly ICacheProvider _cacheProvider;
         #endregion
 
         #region Constructors
 
-        public EventsLogic(IEnlirRepository enlirRepository, ILogger<EventsLogic> logger)
+        public EventsLogic(IEnlirRepository enlirRepository, ICacheProvider cacheProvider, ILogger<EventsLogic> logger)
         {
             _enlirRepository = enlirRepository;
             _logger = logger;
+            _cacheProvider = cacheProvider;
         }
         #endregion
 
@@ -51,25 +54,53 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllEvents)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Events;
+            string cacheKey = $"{nameof(GetAllEvents)}";
+            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Events;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Event> GetEventsById(int eventId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsById)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.Id == eventId);
+            string cacheKey = $"{nameof(GetEventsById)}:{eventId}";
+            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.Id == eventId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Event> GetEventsByName(string eventName)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByName)}");
 
-            IEnumerable<Event> results = new List<Event>();
+            string cacheKey = $"{nameof(GetEventsByName)}:{eventName}";
+            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(eventName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.EventName.ToLower().Contains(eventName.ToLower()));
+                results = new List<Event>();
+
+                if (!String.IsNullOrWhiteSpace(eventName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.EventName.ToLower().Contains(eventName.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -79,25 +110,53 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByRealm)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.RealmId == realmType);
+            string cacheKey = $"{nameof(GetEventsByRealm)}:{realmType}";
+            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.RealmId == realmType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Event> GetEventsByEventType(int eventType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByEventType)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.EventTypeId == eventType);
+            string cacheKey = $"{nameof(GetEventsByEventType)}:{eventType}";
+            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.EventTypeId == eventType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Event> GetEventsByHeroRecords(string characterName)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByHeroRecords)}");
 
-            IEnumerable<Event> results = new List<Event>();
+            string cacheKey = $"{nameof(GetEventsByHeroRecords)}:{characterName}";
+            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(characterName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.HeroRecordsAwarded.Any(wr => wr.ToLower().Contains(characterName.ToLower())));
+                results = new List<Event>();
+
+                if (!String.IsNullOrWhiteSpace(characterName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.HeroRecordsAwarded.Any(wr => wr.ToLower().Contains(characterName.ToLower())));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -107,11 +166,19 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByMemoryCrystal1)}");
 
-            IEnumerable<Event> results = new List<Event>();
+            string cacheKey = $"{nameof(GetEventsByMemoryCrystal1)}:{characterName}";
+            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(characterName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalsLevel1Awarded.Any(wr => wr.ToLower().Contains(characterName.ToLower())));
+                results = new List<Event>();
+
+                if (!String.IsNullOrWhiteSpace(characterName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalsLevel1Awarded.Any(wr => wr.ToLower().Contains(characterName.ToLower())));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -121,11 +188,19 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByMemoryCrystal2)}");
 
-            IEnumerable<Event> results = new List<Event>();
+            string cacheKey = $"{nameof(GetEventsByMemoryCrystal2)}:{characterName}";
+            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(characterName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalsLevel2Awarded.Any(wr => wr.ToLower().Contains(characterName.ToLower())));
+                results = new List<Event>();
+
+                if (!String.IsNullOrWhiteSpace(characterName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalsLevel2Awarded.Any(wr => wr.ToLower().Contains(characterName.ToLower())));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -135,11 +210,19 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByMemoryCrystal3)}");
 
-            IEnumerable<Event> results = new List<Event>();
+            string cacheKey = $"{nameof(GetEventsByMemoryCrystal3)}:{characterName}";
+            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(characterName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalsLevel3Awarded.Any(wr => wr.ToLower().Contains(characterName.ToLower())));
+                results = new List<Event>();
+
+                if (!String.IsNullOrWhiteSpace(characterName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalsLevel3Awarded.Any(wr => wr.ToLower().Contains(characterName.ToLower())));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -149,39 +232,87 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsBySoulOfHero)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.SoulOfHerosAwarded > 0);
+            string cacheKey = $"{nameof(GetEventsBySoulOfHero)}";
+            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.SoulOfHerosAwarded > 0);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Event> GetEventsByMemoryLode1()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByMemoryLode1)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalLodesLevel1Awarded > 0);
+            string cacheKey = $"{nameof(GetEventsByMemoryLode1)}";
+            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalLodesLevel1Awarded > 0);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Event> GetEventsByMemoryLode2()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByMemoryLode2)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalLodesLevel2Awarded > 0);
+            string cacheKey = $"{nameof(GetEventsByMemoryLode2)}";
+            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalLodesLevel2Awarded > 0);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Event> GetEventsByMemoryLode3()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByMemoryLode3)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalLodesLevel3Awarded > 0);
+            string cacheKey = $"{nameof(GetEventsByMemoryLode3)}";
+            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalLodesLevel3Awarded > 0);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Event> GetEventsByWardrobeRecord(string characterName)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByWardrobeRecord)}");
 
-            IEnumerable<Event> results = new List<Event>();
+            string cacheKey = $"{nameof(GetEventsByWardrobeRecord)}:{characterName}";
+            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(characterName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.WardrobeRecordsAwarded.Any(wr => wr.ToLower().Contains(characterName.ToLower())));
+                results = new List<Event>();
+
+                if (!String.IsNullOrWhiteSpace(characterName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.WardrobeRecordsAwarded.Any(wr => wr.ToLower().Contains(characterName.ToLower())));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -191,14 +322,22 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByAbilities)}");
 
-            IEnumerable<Event> results = new List<Event>();
+            string cacheKey = $"{nameof(GetEventsByAbilities)}:{abilityName}";
+            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(abilityName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.AbilitiesAwarded.Any(wr => wr.ToLower().Contains(abilityName.ToLower())));
+                results = new List<Event>();
+
+                if (!String.IsNullOrWhiteSpace(abilityName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.AbilitiesAwarded.Any(wr => wr.ToLower().Contains(abilityName.ToLower())));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
-            return results;
+            return results;        
         }
         #endregion
     }

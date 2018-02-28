@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Data.Api;
+using FFRKApi.Data.Api;
 using FFRKApi.Model.EnlirTransform;
 using Microsoft.Extensions.Logging;
 
@@ -24,14 +25,16 @@ namespace FFRKApi.Logic.Api
         #region Class Variables
         private readonly IEnlirRepository _enlirRepository;
         private readonly ILogger<LegendSpheresLogic> _logger;
+        private readonly ICacheProvider _cacheProvider;
         #endregion
 
         #region Constructors
 
-        public LegendSpheresLogic(IEnlirRepository enlirRepository, ILogger<LegendSpheresLogic> logger)
+        public LegendSpheresLogic(IEnlirRepository enlirRepository, ICacheProvider cacheProvider, ILogger<LegendSpheresLogic> logger)
         {
             _enlirRepository = enlirRepository;
             _logger = logger;
+            _cacheProvider = cacheProvider;
         }
         #endregion
 
@@ -40,41 +43,90 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllLegendSpheres)}");
 
-            return _enlirRepository.GetMergeResultsContainer().LegendSpheres;
+            string cacheKey = $"{nameof(GetAllLegendSpheres)}";
+            IEnumerable<LegendSphere> results = _cacheProvider.ObjectGet<IList<LegendSphere>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().LegendSpheres;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<LegendSphere> GetLegendSpheresById(int legendSphereId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetLegendSpheresById)}");
 
-            return _enlirRepository.GetMergeResultsContainer().LegendSpheres.Where(e => e.Id == legendSphereId);
+            string cacheKey = $"{nameof(GetLegendSpheresById)}:{legendSphereId}";
+            IEnumerable<LegendSphere> results = _cacheProvider.ObjectGet<IList<LegendSphere>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().LegendSpheres.Where(e => e.Id == legendSphereId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<LegendSphere> GetLegendSpheresByRealm(int realmType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetLegendSpheresByRealm)}");
 
-            return _enlirRepository.GetMergeResultsContainer().LegendSpheres.Where(e => e.Realm == realmType);
+            string cacheKey = $"{nameof(GetLegendSpheresByRealm)}:{realmType}";
+            IEnumerable<LegendSphere> results = _cacheProvider.ObjectGet<IList<LegendSphere>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().LegendSpheres.Where(e => e.Realm == realmType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<LegendSphere> GetLegendSpheresByCharacter(int characterId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetLegendSpheresByCharacter)}");
 
-            return _enlirRepository.GetMergeResultsContainer().LegendSpheres.Where(e => e.CharacterId == characterId);
+            string cacheKey = $"{nameof(GetLegendSpheresByCharacter)}:{characterId}";
+            IEnumerable<LegendSphere> results = _cacheProvider.ObjectGet<IList<LegendSphere>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().LegendSpheres.Where(e => e.CharacterId == characterId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<LegendSphere> GetLegendSpheresByBenefit(string benefit)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetLegendSpheresByBenefit)}");
 
-            IEnumerable<LegendSphere> results = new List<LegendSphere>();
+            string cacheKey = $"{nameof(GetLegendSpheresByBenefit)}:{benefit}";
+            IEnumerable<LegendSphere> results = _cacheProvider.ObjectGet<IList<LegendSphere>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(benefit))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().LegendSpheres.Where(
-                    l => l.LegendSphereInfos.Any(i => i.Benefit.ToLower().Contains(benefit.ToLower())));
+                results = new List<LegendSphere>();
+
+                if (!String.IsNullOrWhiteSpace(benefit))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().LegendSpheres.Where(
+                        l => l.LegendSphereInfos.Any(i => i.Benefit.ToLower().Contains(benefit.ToLower())));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
+
             return results;
         }
 
@@ -82,15 +134,23 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetLegendSpheresByRequiredMotes)}");
 
-            IEnumerable<LegendSphere> results = new List<LegendSphere>();
+            string cacheKey = $"{nameof(GetLegendSpheresByRequiredMotes)}:{moteType1}:{moteType2}";
+            IEnumerable<LegendSphere> results = _cacheProvider.ObjectGet<IList<LegendSphere>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(moteType1) && !String.IsNullOrWhiteSpace(moteType2))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().LegendSpheres.Where(
-                    l => l.LegendSphereInfos.Any(i => i.RequiredMotes.Any(m => m.ItemName.ToLower() == moteType1.ToLower()) &&
-                    l.LegendSphereInfos.Any(j => j.RequiredMotes.Any(m => m.ItemName.ToLower() == moteType2.ToLower())
-                    )));
+                results = new List<LegendSphere>();
+
+                if (!String.IsNullOrWhiteSpace(moteType1) && !String.IsNullOrWhiteSpace(moteType2))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().LegendSpheres.Where(
+                        l => l.LegendSphereInfos.Any(i => i.RequiredMotes.Any(m => m.ItemName.ToLower() == moteType1.ToLower()) &&
+                                            l.LegendSphereInfos.Any(j => j.RequiredMotes.Any(m => m.ItemName.ToLower() == moteType2.ToLower())
+                                            )));
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
+
             return results;
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Data.Api;
+using FFRKApi.Data.Api;
 using FFRKApi.Model.EnlirTransform;
 using Microsoft.Extensions.Logging;
 
@@ -24,14 +25,16 @@ namespace FFRKApi.Logic.Api
         #region Class Variables
         private readonly IEnlirRepository _enlirRepository;
         private readonly ILogger<CommandsLogic> _logger;
+        private readonly ICacheProvider _cacheProvider;
         #endregion
 
         #region Constructors
 
-        public CommandsLogic(IEnlirRepository enlirRepository, ILogger<CommandsLogic> logger)
+        public CommandsLogic(IEnlirRepository enlirRepository, ICacheProvider cacheProvider, ILogger<CommandsLogic> logger)
         {
             _enlirRepository = enlirRepository;
             _logger = logger;
+            _cacheProvider = cacheProvider;
         }
         #endregion
 
@@ -41,42 +44,102 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllCommands)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Commands;
+            string cacheKey = $"{nameof(GetAllCommands)}";
+            IEnumerable<Command> results = _cacheProvider.ObjectGet<IList<Command>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Commands;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Command> GetCommandsById(int commandId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetCommandsById)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Commands.Where(c => c.Id == commandId);
+            string cacheKey = $"{nameof(GetCommandsById)}:{commandId}";
+            IEnumerable<Command> results = _cacheProvider.ObjectGet<IList<Command>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Commands.Where(c => c.Id == commandId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Command> GetCommandsByAbilityType(int abilityType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetCommandsByAbilityType)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Commands.Where(c => c.AbilityType == abilityType);
+            string cacheKey = $"{nameof(GetCommandsByAbilityType)}:{abilityType}";
+            IEnumerable<Command> results = _cacheProvider.ObjectGet<IList<Command>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Commands.Where(c => c.AbilityType == abilityType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Command> GetCommandsByCharacter(int characterId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetCommandsByCharacter)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Commands.Where(c => c.CharacterId == characterId);
+            string cacheKey = $"{nameof(GetCommandsByCharacter)}:{characterId}";
+            IEnumerable<Command> results = _cacheProvider.ObjectGet<IList<Command>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Commands.Where(c => c.CharacterId == characterId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Command> GetCommandBySchool(int schoolType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetCommandBySchool)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Commands.Where(c => c.School == schoolType);
+            string cacheKey = $"{nameof(GetCommandBySchool)}:{schoolType}";
+            IEnumerable<Command> results = _cacheProvider.ObjectGet<IList<Command>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Commands.Where(c => c.School == schoolType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Command> GetCommandByElement(int elementType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetCommandByElement)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Commands.Where(c => c.Elements.Contains(elementType));
+            string cacheKey = $"{nameof(GetCommandByElement)}:{elementType}";
+            IEnumerable<Command> results = _cacheProvider.ObjectGet<IList<Command>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Commands.Where(c => c.Elements.Contains(elementType));
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Command> GetCommandsBySearch(Command searchPrototype)

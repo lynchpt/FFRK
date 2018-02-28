@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Data.Api;
+using FFRKApi.Data.Api;
 using FFRKApi.Model.EnlirTransform;
 using Microsoft.Extensions.Logging;
 
@@ -24,14 +25,16 @@ namespace FFRKApi.Logic.Api
         #region Class Variables
         private readonly IEnlirRepository _enlirRepository;
         private readonly ILogger<CharactersLogic> _logger;
+        private readonly ICacheProvider _cacheProvider;
         #endregion
 
         #region Constructors
 
-        public CharactersLogic(IEnlirRepository enlirRepository, ILogger<CharactersLogic> logger)
+        public CharactersLogic(IEnlirRepository enlirRepository, ICacheProvider cacheProvider, ILogger<CharactersLogic> logger)
         {
             _enlirRepository = enlirRepository;
             _logger = logger;
+            _cacheProvider = cacheProvider;
         }
         #endregion
 
@@ -41,43 +44,102 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllCharacters)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Characters;
+            string cacheKey = nameof(GetAllCharacters);
+            IEnumerable<Character> results = _cacheProvider.ObjectGet<IList<Character>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Characters;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Character> GetCharactersById(int characterId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetCharactersById)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Characters.Where(c => c.Id == characterId);
+            string cacheKey = $"{nameof(GetCharactersById)}:{characterId}";
+            IEnumerable<Character> results = _cacheProvider.ObjectGet<IList<Character>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Characters.Where(c => c.Id == characterId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Character> GetCharactersByRealm(int realmType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetCharactersByRealm)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Characters.Where(c => c.Realm == realmType);
+            string cacheKey = $"{nameof(GetCharactersByRealm)}:{realmType}";
+            IEnumerable<Character> results = _cacheProvider.ObjectGet<IList<Character>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Characters.Where(c => c.Realm == realmType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Character> GetCharactersByName(string characterName)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetCharactersByName)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Characters.Where(c => c.CharacterName.ToLower().Contains(characterName.ToLower()));
+            string cacheKey = $"{nameof(GetCharactersByName)}:{characterName}";
+            IEnumerable<Character> results = _cacheProvider.ObjectGet<IList<Character>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Characters.Where(c => c.CharacterName.ToLower().Contains(characterName.ToLower()));
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Character> GetCharactersByEquipmentAccess(int equipmentType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetCharactersByEquipmentAccess)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Characters.Where(c => c.EquipmentAccessInfos.Any(i => i.EquipmentType == equipmentType && i.CanAccess == true));
+            string cacheKey = $"{nameof(GetCharactersByEquipmentAccess)}:{equipmentType}";
+            IEnumerable<Character> results = _cacheProvider.ObjectGet<IList<Character>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Characters.Where(c => c.EquipmentAccessInfos.Any(i => i.EquipmentType == equipmentType && i.CanAccess == true));
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Character> GetCharactersBySchoolAccess(int schoolType, int schoolMinLevel)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetCharactersBySchoolAccess)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Characters.Where(c => c.SchoolAccessInfos.Any(i => i.School == schoolType && i.AccessLevel >= schoolMinLevel));
+            string cacheKey = $"{nameof(GetCharactersBySchoolAccess)}:{schoolType}:{schoolMinLevel}";
+            IEnumerable<Character> results = _cacheProvider.ObjectGet<IList<Character>>(cacheKey);
 
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Characters.Where(c => c.SchoolAccessInfos.Any(i => i.School == schoolType && i.AccessLevel >= schoolMinLevel));
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Character> GetCharactersBySearch(Character searchPrototype)

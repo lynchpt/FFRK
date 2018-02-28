@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Data.Api;
+using FFRKApi.Data.Api;
 using FFRKApi.Model.EnlirTransform;
 using Microsoft.Extensions.Logging;
 
@@ -23,14 +24,16 @@ namespace FFRKApi.Logic.Api
         #region Class Variables
         private readonly IEnlirRepository _enlirRepository;
         private readonly ILogger<DungeonsLogic> _logger;
+        private readonly ICacheProvider _cacheProvider;
         #endregion
 
         #region Constructors
 
-        public DungeonsLogic(IEnlirRepository enlirRepository, ILogger<DungeonsLogic> logger)
+        public DungeonsLogic(IEnlirRepository enlirRepository, ICacheProvider cacheProvider, ILogger<DungeonsLogic> logger)
         {
             _enlirRepository = enlirRepository;
             _logger = logger;
+            _cacheProvider = cacheProvider;
         }
         #endregion
 
@@ -39,32 +42,70 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllDungeons)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Dungeons;
+            string cacheKey = $"{nameof(GetAllDungeons)}";
+            IEnumerable<Dungeon> results = _cacheProvider.ObjectGet<IList<Dungeon>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Dungeons;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Dungeon> GetDungeonsById(int dungeonId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetDungeonsById)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Dungeons.Where(d => d.Id == dungeonId);
+            string cacheKey = $"{nameof(GetDungeonsById)}:{dungeonId}";
+            IEnumerable<Dungeon> results = _cacheProvider.ObjectGet<IList<Dungeon>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Dungeons.Where(d => d.Id == dungeonId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Dungeon> GetDungeonsByRealm(int realmType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetDungeonsByRealm)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Dungeons.Where(d => d.Realm == realmType);
+            string cacheKey = $"{nameof(GetDungeonsByRealm)}:{realmType}";
+            IEnumerable<Dungeon> results = _cacheProvider.ObjectGet<IList<Dungeon>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Dungeons.Where(d => d.Realm == realmType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Dungeon> GetDungeonsByName(string dungeonName)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetDungeonsByName)}");
 
-            IEnumerable<Dungeon> results = new List<Dungeon>();
+            string cacheKey = $"{nameof(GetDungeonsByName)}:{dungeonName}";
+            IEnumerable<Dungeon> results = _cacheProvider.ObjectGet<IList<Dungeon>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(dungeonName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Dungeons.Where(d => d.DungeonName.ToLower().Contains(dungeonName.ToLower()));
+                results = new List<Dungeon>();
+
+                if (!String.IsNullOrWhiteSpace(dungeonName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Dungeons.Where(d => d.DungeonName.ToLower().Contains(dungeonName.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }                
             }
 
             return results;
@@ -74,16 +115,24 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetDungeonsByRewards)}");
 
-            IEnumerable<Dungeon> results = new List<Dungeon>();
+            string cacheKey = $"{nameof(GetDungeonsByRewards)}:{itemName}:{starlevel}";
+            IEnumerable<Dungeon> results = _cacheProvider.ObjectGet<IList<Dungeon>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(itemName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Dungeons.Where(d =>
-                                d.MasteryRewardsClassic.Any(r => r.ItemName.ToLower().Contains(itemName.ToLower()) && r.ItemStarLevel >= starlevel) ||
-                                d.MasteryRewardsElite.Any(r => r.ItemName.ToLower().Contains(itemName.ToLower()) && r.ItemStarLevel >= starlevel) ||
-                                d.FirstTimeRewardsClassic.Any(r => r.ItemName.ToLower().Contains(itemName.ToLower()) && r.ItemStarLevel >= starlevel) ||
-                                d.FirstTimeRewardsElite.Any(r => r.ItemName.ToLower().Contains(itemName.ToLower()) && r.ItemStarLevel >= starlevel)
-                );
+                results = new List<Dungeon>();
+
+                if (!String.IsNullOrWhiteSpace(itemName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Dungeons.Where(d =>
+                            d.MasteryRewardsClassic.Any(r => r.ItemName.ToLower().Contains(itemName.ToLower()) && r.ItemStarLevel >= starlevel) ||
+                            d.MasteryRewardsElite.Any(r => r.ItemName.ToLower().Contains(itemName.ToLower()) && r.ItemStarLevel >= starlevel) ||
+                            d.FirstTimeRewardsClassic.Any(r => r.ItemName.ToLower().Contains(itemName.ToLower()) && r.ItemStarLevel >= starlevel) ||
+                            d.FirstTimeRewardsElite.Any(r => r.ItemName.ToLower().Contains(itemName.ToLower()) && r.ItemStarLevel >= starlevel)
+                    );
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;

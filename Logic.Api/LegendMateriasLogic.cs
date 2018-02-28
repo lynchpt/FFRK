@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Data.Api;
+using FFRKApi.Data.Api;
 using FFRKApi.Model.EnlirTransform;
 using Microsoft.Extensions.Logging;
 
@@ -26,14 +27,16 @@ namespace FFRKApi.Logic.Api
         #region Class Variables
         private readonly IEnlirRepository _enlirRepository;
         private readonly ILogger<LegendMateriasLogic> _logger;
+        private readonly ICacheProvider _cacheProvider;
         #endregion
 
         #region Constructors
 
-        public LegendMateriasLogic(IEnlirRepository enlirRepository, ILogger<LegendMateriasLogic> logger)
+        public LegendMateriasLogic(IEnlirRepository enlirRepository, ICacheProvider cacheProvider, ILogger<LegendMateriasLogic> logger)
         {
             _enlirRepository = enlirRepository;
             _logger = logger;
+            _cacheProvider = cacheProvider;
         }
         #endregion
 
@@ -43,25 +46,53 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllLegendMaterias)}");
 
-            return _enlirRepository.GetMergeResultsContainer().LegendMaterias;
+            string cacheKey = $"{nameof(GetAllLegendMaterias)}";
+            IEnumerable<LegendMateria> results = _cacheProvider.ObjectGet<IList<LegendMateria>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().LegendMaterias;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<LegendMateria> GetLegendMateriasById(int legendMateriaId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetLegendMateriasById)}");
 
-            return _enlirRepository.GetMergeResultsContainer().LegendMaterias.Where(e => e.Id == legendMateriaId);
+            string cacheKey = $"{nameof(GetLegendMateriasById)}:{legendMateriaId}";
+            IEnumerable<LegendMateria> results = _cacheProvider.ObjectGet<IList<LegendMateria>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().LegendMaterias.Where(e => e.Id == legendMateriaId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<LegendMateria> GetLegendMateriasByName(string legendMateriaName)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetLegendMateriasByName)}");
 
-            IEnumerable<LegendMateria> results = new List<LegendMateria>();
+            string cacheKey = $"{nameof(GetLegendMateriasByName)}:{legendMateriaName}";
+            IEnumerable<LegendMateria> results = _cacheProvider.ObjectGet<IList<LegendMateria>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(legendMateriaName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().LegendMaterias.Where(e => e.LegendMateriaName.ToLower().Contains(legendMateriaName.ToLower()));
+                results = new List<LegendMateria>();
+
+                if (!String.IsNullOrWhiteSpace(legendMateriaName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().LegendMaterias.Where(e => e.LegendMateriaName.ToLower().Contains(legendMateriaName.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -71,26 +102,55 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetLegendMateriasByRealm)}");
 
-            return _enlirRepository.GetMergeResultsContainer().LegendMaterias.Where(e => e.Realm == realmType);
+            string cacheKey = $"{nameof(GetLegendMateriasByRealm)}:{realmType}";
+            IEnumerable<LegendMateria> results = _cacheProvider.ObjectGet<IList<LegendMateria>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().LegendMaterias.Where(e => e.Realm == realmType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<LegendMateria> GetLegendMateriasByCharacter(int characterId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetLegendMateriasByCharacter)}");
 
-            return _enlirRepository.GetMergeResultsContainer().LegendMaterias.Where(e => e.CharacterId == characterId);
+            string cacheKey = $"{nameof(GetLegendMateriasByCharacter)}:{characterId}";
+            IEnumerable<LegendMateria> results = _cacheProvider.ObjectGet<IList<LegendMateria>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().LegendMaterias.Where(e => e.CharacterId == characterId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<LegendMateria> GetLegendMateriasByEffect(string effectText)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetLegendMateriasByEffect)}");
 
-            IEnumerable<LegendMateria> results = new List<LegendMateria>();
+            string cacheKey = $"{nameof(GetLegendMateriasByEffect)}:{effectText}";
+            IEnumerable<LegendMateria> results = _cacheProvider.ObjectGet<IList<LegendMateria>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(effectText))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().LegendMaterias.Where(e => e.Effect.ToLower().Contains(effectText.ToLower()));
+                results = new List<LegendMateria>();
+
+                if (!String.IsNullOrWhiteSpace(effectText))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().LegendMaterias.Where(e => e.Effect.ToLower().Contains(effectText.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
+
             return results;
         }
 
@@ -98,12 +158,21 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetLegendMateriasByMasteryBonus)}");
 
-            IEnumerable<LegendMateria> results = new List<LegendMateria>();
+            string cacheKey = $"{nameof(GetLegendMateriasByMasteryBonus)}:{masteryBonusText}";
+            IEnumerable<LegendMateria> results = _cacheProvider.ObjectGet<IList<LegendMateria>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(masteryBonusText))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().LegendMaterias.Where(e => e.MasteryBonus.ToLower().Contains(masteryBonusText.ToLower()));
+                results = new List<LegendMateria>();
+
+                if (!String.IsNullOrWhiteSpace(masteryBonusText))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().LegendMaterias.Where(e => e.MasteryBonus.ToLower().Contains(masteryBonusText.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
+
             return results;
         }
 
@@ -111,7 +180,17 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetLegendMateriasByRelic)}");
 
-            return _enlirRepository.GetMergeResultsContainer().LegendMaterias.Where(e => e.RelicId == relicId);
+            string cacheKey = $"{nameof(GetLegendMateriasByRelic)}:{relicId}";
+            IEnumerable<LegendMateria> results = _cacheProvider.ObjectGet<IList<LegendMateria>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().LegendMaterias.Where(e => e.RelicId == relicId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<LegendMateria> GetLegendMateriasBySearch(LegendMateria searchPrototype)
