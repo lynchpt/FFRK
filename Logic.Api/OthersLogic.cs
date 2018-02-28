@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Data.Api;
+using FFRKApi.Data.Api;
 using FFRKApi.Model.EnlirTransform;
 using Microsoft.Extensions.Logging;
 
@@ -25,14 +26,16 @@ namespace FFRKApi.Logic.Api
         #region Class Variables
         private readonly IEnlirRepository _enlirRepository;
         private readonly ILogger<OthersLogic> _logger;
+        private readonly ICacheProvider _cacheProvider;
         #endregion
 
         #region Constructors
 
-        public OthersLogic(IEnlirRepository enlirRepository, ILogger<OthersLogic> logger)
+        public OthersLogic(IEnlirRepository enlirRepository, ICacheProvider cacheProvider, ILogger<OthersLogic> logger)
         {
             _enlirRepository = enlirRepository;
             _logger = logger;
+            _cacheProvider = cacheProvider;
         }
         #endregion
 
@@ -42,25 +45,53 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllOthers)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Others;
+            string cacheKey = $"{nameof(GetAllOthers)}";
+            IEnumerable<Other> results = _cacheProvider.ObjectGet<IList<Other>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Others;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Other> GetOthersById(int otherId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetOthersById)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Others.Where(e => e.Id == otherId);
+            string cacheKey = $"{nameof(GetOthersById)}:{otherId}";
+            IEnumerable<Other> results = _cacheProvider.ObjectGet<IList<Other>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Others.Where(e => e.Id == otherId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Other> GetOthersByName(string otherName)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetOthersByName)}");
 
-            IEnumerable<Other> results = new List<Other>();
+            string cacheKey = $"{nameof(GetOthersByName)}:{otherName}";
+            IEnumerable<Other> results = _cacheProvider.ObjectGet<IList<Other>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(otherName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Others.Where(e => e.Name.ToLower().Contains(otherName.ToLower()));
+                results = new List<Other>();
+
+                if (!String.IsNullOrWhiteSpace(otherName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Others.Where(e => e.Name.ToLower().Contains(otherName.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -70,11 +101,19 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetOthersBySourceName)}");
 
-            IEnumerable<Other> results = new List<Other>();
+            string cacheKey = $"{nameof(GetOthersBySourceName)}:{sourceName}";
+            IEnumerable<Other> results = _cacheProvider.ObjectGet<IList<Other>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(sourceName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Others.Where(e => e.SourceName.ToLower().Contains(sourceName.ToLower()));
+                results = new List<Other>();
+
+                if (!String.IsNullOrWhiteSpace(sourceName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Others.Where(e => e.SourceName.ToLower().Contains(sourceName.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -84,32 +123,70 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetOthersByAbilityType)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Others.Where(a => a.AbilityType == abilityType);
+            string cacheKey = $"{nameof(GetOthersByAbilityType)}:{abilityType}";
+            IEnumerable<Other> results = _cacheProvider.ObjectGet<IList<Other>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Others.Where(a => a.AbilityType == abilityType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Other> GetOthersBySchool(int schoolType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetOthersBySchool)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Others.Where(a => a.School == schoolType);
+            string cacheKey = $"{nameof(GetOthersBySchool)}:{schoolType}";
+            IEnumerable<Other> results = _cacheProvider.ObjectGet<IList<Other>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Others.Where(a => a.School == schoolType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Other> GetOthersByElement(int elementType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetOthersByElement)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Others.Where(a => a.Elements.Contains(elementType));
+            string cacheKey = $"{nameof(GetOthersByElement)}:{elementType}";
+            IEnumerable<Other> results = _cacheProvider.ObjectGet<IList<Other>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Others.Where(a => a.Elements.Contains(elementType));
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Other> GetOthersByEffect(string effectText)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetOthersByEffect)}");
 
-            IEnumerable<Other> results = new List<Other>();
+            string cacheKey = $"{nameof(GetOthersByEffect)}:{effectText}";
+            IEnumerable<Other> results = _cacheProvider.ObjectGet<IList<Other>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(effectText))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Others.Where(e => e.Effects.ToLower().Contains(effectText.ToLower()));
+                results = new List<Other>();
+
+                if (!String.IsNullOrWhiteSpace(effectText))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Others.Where(e => e.Effects.ToLower().Contains(effectText.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;

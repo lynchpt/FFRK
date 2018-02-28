@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Data.Api;
+using FFRKApi.Data.Api;
 using FFRKApi.Model.EnlirTransform;
 using Microsoft.Extensions.Logging;
 
@@ -24,14 +25,16 @@ namespace FFRKApi.Logic.Api
         #region Class Variables
         private readonly IEnlirRepository _enlirRepository;
         private readonly ILogger<RecordSpheresLogic> _logger;
+        private readonly ICacheProvider _cacheProvider;
         #endregion
 
         #region Constructors
 
-        public RecordSpheresLogic(IEnlirRepository enlirRepository, ILogger<RecordSpheresLogic> logger)
+        public RecordSpheresLogic(IEnlirRepository enlirRepository, ICacheProvider cacheProvider, ILogger<RecordSpheresLogic> logger)
         {
             _enlirRepository = enlirRepository;
             _logger = logger;
+            _cacheProvider = cacheProvider;
         }
         #endregion
 
@@ -41,41 +44,90 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllRecordSpheres)}");
 
-            return _enlirRepository.GetMergeResultsContainer().RecordSpheres;
+            string cacheKey = $"{nameof(GetAllRecordSpheres)}";
+            IEnumerable<RecordSphere> results = _cacheProvider.ObjectGet<IList<RecordSphere>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().RecordSpheres;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<RecordSphere> GetRecordSpheresById(int recordSphereId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRecordSpheresById)}");
 
-            return _enlirRepository.GetMergeResultsContainer().RecordSpheres.Where(e => e.Id == recordSphereId);
+            string cacheKey = $"{nameof(GetRecordSpheresById)}:{recordSphereId}";
+            IEnumerable<RecordSphere> results = _cacheProvider.ObjectGet<IList<RecordSphere>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().RecordSpheres.Where(e => e.Id == recordSphereId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<RecordSphere> GetRecordSpheresByRealm(int realmType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRecordSpheresByRealm)}");
 
-            return _enlirRepository.GetMergeResultsContainer().RecordSpheres.Where(e => e.Realm == realmType);
+            string cacheKey = $"{nameof(GetRecordSpheresByRealm)}:{realmType}";
+            IEnumerable<RecordSphere> results = _cacheProvider.ObjectGet<IList<RecordSphere>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().RecordSpheres.Where(e => e.Realm == realmType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<RecordSphere> GetRecordSpheresByCharacter(int characterId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRecordSpheresByCharacter)}");
 
-            return _enlirRepository.GetMergeResultsContainer().RecordSpheres.Where(e => e.CharacterId == characterId);
+            string cacheKey = $"{nameof(GetRecordSpheresByCharacter)}:{characterId}";
+            IEnumerable<RecordSphere> results = _cacheProvider.ObjectGet<IList<RecordSphere>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().RecordSpheres.Where(e => e.CharacterId == characterId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<RecordSphere> GetRecordSpheresByBenefit(string benefit)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRecordSpheresByBenefit)}");
 
-            IEnumerable<RecordSphere> results = new List<RecordSphere>();
+            string cacheKey = $"{nameof(GetRecordSpheresByBenefit)}:{benefit}";
+            IEnumerable<RecordSphere> results = _cacheProvider.ObjectGet<IList<RecordSphere>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(benefit))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().RecordSpheres.Where(
-                    l => l.RecordSphereLevels.Any(i => i.Benefit.ToLower().Contains(benefit.ToLower())));
+                results = new List<RecordSphere>();
+
+                if (!String.IsNullOrWhiteSpace(benefit))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().RecordSpheres.Where(
+                        l => l.RecordSphereLevels.Any(i => i.Benefit.ToLower().Contains(benefit.ToLower())));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
+
             return results;
         }
 
@@ -83,15 +135,24 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetLRecordSpheresByRequiredMotes)}");
 
-            IEnumerable<RecordSphere> results = new List<RecordSphere>();
+            string cacheKey = $"{nameof(GetLRecordSpheresByRequiredMotes)}:{moteType1}:{moteType2}";
+            IEnumerable<RecordSphere> results = _cacheProvider.ObjectGet<IList<RecordSphere>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(moteType1) && !String.IsNullOrWhiteSpace(moteType2))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().RecordSpheres.Where(
-                    l => l.RecordSphereLevels.Any(i => i.RequiredMotes.Any(m => m.ItemName.ToLower() == moteType1.ToLower()) &&
-                                                      l.RecordSphereLevels.Any(j => j.RequiredMotes.Any(m => m.ItemName.ToLower() == moteType2.ToLower())
-                                                      )));
+                results = new List<RecordSphere>();
+
+                if (!String.IsNullOrWhiteSpace(moteType1) && !String.IsNullOrWhiteSpace(moteType2))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().RecordSpheres.Where(
+                        l => l.RecordSphereLevels.Any(i => i.RequiredMotes.Any(m => m.ItemName.ToLower() == moteType1.ToLower()) &&
+                                    l.RecordSphereLevels.Any(j => j.RequiredMotes.Any(m => m.ItemName.ToLower() == moteType2.ToLower())
+                                    )));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
+
             return results;
         }
 

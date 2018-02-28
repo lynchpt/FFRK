@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Data.Api;
+using FFRKApi.Data.Api;
 using FFRKApi.Model.EnlirTransform;
 using Microsoft.Extensions.Logging;
 
@@ -25,14 +26,16 @@ namespace FFRKApi.Logic.Api
         #region Class Variables
         private readonly IEnlirRepository _enlirRepository;
         private readonly ILogger<RecordMateriasLogic> _logger;
+        private readonly ICacheProvider _cacheProvider;
         #endregion
 
         #region Constructors
 
-        public RecordMateriasLogic(IEnlirRepository enlirRepository, ILogger<RecordMateriasLogic> logger)
+        public RecordMateriasLogic(IEnlirRepository enlirRepository, ICacheProvider cacheProvider, ILogger<RecordMateriasLogic> logger)
         {
             _enlirRepository = enlirRepository;
             _logger = logger;
+            _cacheProvider = cacheProvider;
         }
         #endregion
 
@@ -42,25 +45,53 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllRecordMaterias)}");
 
-            return _enlirRepository.GetMergeResultsContainer().RecordMaterias;
+            string cacheKey = $"{nameof(GetAllRecordMaterias)}";
+            IEnumerable<RecordMateria> results = _cacheProvider.ObjectGet<IList<RecordMateria>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().RecordMaterias;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<RecordMateria> GetRecordMateriasById(int recordMateriaId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRecordMateriasById)}");
 
-            return _enlirRepository.GetMergeResultsContainer().RecordMaterias.Where(r => r.Id == recordMateriaId);
+            string cacheKey = $"{nameof(GetRecordMateriasById)}:{recordMateriaId}";
+            IEnumerable<RecordMateria> results = _cacheProvider.ObjectGet<IList<RecordMateria>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().RecordMaterias.Where(r => r.Id == recordMateriaId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<RecordMateria> GetRecordMateriasByName(string recordMateriaName)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRecordMateriasByName)}");
 
-            IEnumerable<RecordMateria> results = new List<RecordMateria>();
+            string cacheKey = $"{nameof(GetRecordMateriasByName)}:{recordMateriaName}";
+            IEnumerable<RecordMateria> results = _cacheProvider.ObjectGet<IList<RecordMateria>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(recordMateriaName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().RecordMaterias.Where(e => e.RecordMateriaName.ToLower().Contains(recordMateriaName.ToLower()));
+                results = new List<RecordMateria>();
+
+                if (!String.IsNullOrWhiteSpace(recordMateriaName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().RecordMaterias.Where(e => e.RecordMateriaName.ToLower().Contains(recordMateriaName.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -70,25 +101,53 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllRecordMateriasByRealm)}");
 
-            return _enlirRepository.GetMergeResultsContainer().RecordMaterias.Where(r => r.Realm == realmType);
+            string cacheKey = $"{nameof(GetAllRecordMateriasByRealm)}:{realmType}";
+            IEnumerable<RecordMateria> results = _cacheProvider.ObjectGet<IList<RecordMateria>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().RecordMaterias.Where(r => r.Realm == realmType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<RecordMateria> GetRecordMateriasByCharacter(int characterId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRecordMateriasByCharacter)}");
 
-            return _enlirRepository.GetMergeResultsContainer().RecordMaterias.Where(r => r.CharacterId == characterId);
+            string cacheKey = $"{nameof(GetRecordMateriasByCharacter)}:{characterId}";
+            IEnumerable<RecordMateria> results = _cacheProvider.ObjectGet<IList<RecordMateria>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().RecordMaterias.Where(r => r.CharacterId == characterId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<RecordMateria> GetRecordMateriasByEffect(string effectText)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRecordMateriasByEffect)}");
 
-            IEnumerable<RecordMateria> results = new List<RecordMateria>();
+            string cacheKey = $"{nameof(GetRecordMateriasByEffect)}:{effectText}";
+            IEnumerable<RecordMateria> results = _cacheProvider.ObjectGet<IList<RecordMateria>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(effectText))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().RecordMaterias.Where(e => e.Effect.ToLower().Contains(effectText.ToLower()));
+                results = new List<RecordMateria>();
+
+                if (!String.IsNullOrWhiteSpace(effectText))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().RecordMaterias.Where(e => e.Effect.ToLower().Contains(effectText.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -98,11 +157,19 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRecordMateriasByUnlockCriteria)}");
 
-            IEnumerable<RecordMateria> results = new List<RecordMateria>();
+            string cacheKey = $"{nameof(GetRecordMateriasByUnlockCriteria)}:{unlockText}";
+            IEnumerable<RecordMateria> results = _cacheProvider.ObjectGet<IList<RecordMateria>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(unlockText))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().RecordMaterias.Where(e => e.UnlockCriteria.ToLower().Contains(unlockText.ToLower()));
+                results = new List<RecordMateria>();
+
+                if (!String.IsNullOrWhiteSpace(unlockText))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().RecordMaterias.Where(e => e.UnlockCriteria.ToLower().Contains(unlockText.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;

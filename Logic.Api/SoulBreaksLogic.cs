@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Data.Api;
+using FFRKApi.Data.Api;
 using FFRKApi.Model.EnlirTransform;
 using Microsoft.Extensions.Logging;
 
@@ -30,14 +31,16 @@ namespace FFRKApi.Logic.Api
         #region Class Variables
         private readonly IEnlirRepository _enlirRepository;
         private readonly ILogger<SoulBreaksLogic> _logger;
+        private readonly ICacheProvider _cacheProvider;
         #endregion
 
         #region Constructors
 
-        public SoulBreaksLogic(IEnlirRepository enlirRepository, ILogger<SoulBreaksLogic> logger)
+        public SoulBreaksLogic(IEnlirRepository enlirRepository, ICacheProvider cacheProvider, ILogger<SoulBreaksLogic> logger)
         {
             _enlirRepository = enlirRepository;
             _logger = logger;
+            _cacheProvider = cacheProvider;
         }
         #endregion
 
@@ -47,32 +50,70 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllSoulBreaks)}");
 
-            return _enlirRepository.GetMergeResultsContainer().SoulBreaks;
+            string cacheKey = $"{nameof(GetAllSoulBreaks)}";
+            IEnumerable<SoulBreak> results = _cacheProvider.ObjectGet<IList<SoulBreak>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().SoulBreaks;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<SoulBreak> GetSoulBreaksById(int soulBreakId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetSoulBreaksById)}");
 
-            return _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(s => s.Id == soulBreakId);
+            string cacheKey = $"{nameof(GetSoulBreaksById)}:{soulBreakId}";
+            IEnumerable<SoulBreak> results = _cacheProvider.ObjectGet<IList<SoulBreak>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(s => s.Id == soulBreakId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<SoulBreak> GetSoulBreaksByAbilityType(int abilityType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetSoulBreaksByAbilityType)}");
 
-            return _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(s => s.AbilityType == abilityType);
+            string cacheKey = $"{nameof(GetSoulBreaksByAbilityType)}:{abilityType}";
+            IEnumerable<SoulBreak> results = _cacheProvider.ObjectGet<IList<SoulBreak>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(s => s.AbilityType == abilityType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<SoulBreak> GetSoulBreaksByName(string soulBreakName)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetSoulBreaksByName)}");
 
-            IEnumerable<SoulBreak> results = new List<SoulBreak>();
+            string cacheKey = $"{nameof(GetSoulBreaksByName)}:{soulBreakName}";
+            IEnumerable<SoulBreak> results = _cacheProvider.ObjectGet<IList<SoulBreak>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(soulBreakName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(e => e.SoulBreakName.ToLower().Contains(soulBreakName.ToLower()));
+                results = new List<SoulBreak>();
+
+                if (!String.IsNullOrWhiteSpace(soulBreakName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(e => e.SoulBreakName.ToLower().Contains(soulBreakName.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -82,14 +123,34 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetSoulBreaksByRealm)}");
 
-            return _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(s => s.Realm == realmType);
+            string cacheKey = $"{nameof(GetSoulBreaksByRealm)}:{realmType}";
+            IEnumerable<SoulBreak> results = _cacheProvider.ObjectGet<IList<SoulBreak>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(s => s.Realm == realmType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<SoulBreak> GetSoulBreaksByCharacter(int characterId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetSoulBreaksByCharacter)}");
 
-            return _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(s => s.CharacterId == characterId);
+            string cacheKey = $"{nameof(GetSoulBreaksByCharacter)}:{characterId}";
+            IEnumerable<SoulBreak> results = _cacheProvider.ObjectGet<IList<SoulBreak>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(s => s.CharacterId == characterId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<SoulBreak> GetSoulBreaksByMultiplier(int multiplier)
@@ -103,21 +164,39 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetSoulBreaksByElement)}");
 
-            return _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where
-                (a => a.Elements.Contains(elementType) ||
-                a.Commands.Any(c => c.Elements.Contains(elementType)) ||
-                a.OtherEffects.Any(e => e.Elements.Contains(elementType)));
+            string cacheKey = $"{nameof(GetSoulBreaksByElement)}:{elementType}";
+            IEnumerable<SoulBreak> results = _cacheProvider.ObjectGet<IList<SoulBreak>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where
+                    (a => a.Elements.Contains(elementType) ||
+                      a.Commands.Any(c => c.Elements.Contains(elementType)) ||
+                      a.OtherEffects.Any(e => e.Elements.Contains(elementType)));
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<SoulBreak> GetSoulBreaksByEffect(string effectText)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetSoulBreaksByEffect)}");
 
-            IEnumerable<SoulBreak> results = new List<SoulBreak>();
+            string cacheKey = $"{nameof(GetSoulBreaksByEffect)}:{effectText}";
+            IEnumerable<SoulBreak> results = _cacheProvider.ObjectGet<IList<SoulBreak>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(effectText))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(e => e.Effects.ToLower().Contains(effectText.ToLower()));
+                results = new List<SoulBreak>();
+
+                if (!String.IsNullOrWhiteSpace(effectText))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(e => e.Effects.ToLower().Contains(effectText.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -127,18 +206,36 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetSoulBreaksByTier)}");
 
-            return _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(a => a.SoulBreakTier == soulBreakTier);
+            string cacheKey = $"{nameof(GetSoulBreaksByTier)}:{soulBreakTier}";
+            IEnumerable<SoulBreak> results = _cacheProvider.ObjectGet<IList<SoulBreak>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(a => a.SoulBreakTier == soulBreakTier);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<SoulBreak> GetSoulBreaksByMasteryBonus(string masteryBonusText)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetSoulBreaksByMasteryBonus)}");
 
-            IEnumerable<SoulBreak> results = new List<SoulBreak>();
+            string cacheKey = $"{nameof(GetSoulBreaksByMasteryBonus)}:{masteryBonusText}";
+            IEnumerable<SoulBreak> results = _cacheProvider.ObjectGet<IList<SoulBreak>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(masteryBonusText))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(e => e.MasteryBonus.ToLower().Contains(masteryBonusText.ToLower()));
+                results = new List<SoulBreak>();
+
+                if (!String.IsNullOrWhiteSpace(masteryBonusText))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(e => e.MasteryBonus.ToLower().Contains(masteryBonusText.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -148,7 +245,17 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetSoulBreaksByStatus)}");
 
-            return _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(a => a.Statuses.Any(s => s.Id == statusId));
+            string cacheKey = $"{nameof(GetSoulBreaksByStatus)}:{statusId}";
+            IEnumerable<SoulBreak> results = _cacheProvider.ObjectGet<IList<SoulBreak>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().SoulBreaks.Where(a => a.Statuses.Any(s => s.Id == statusId));
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<SoulBreak> GetSoulBreaksBySearch(SoulBreak searchPrototype)

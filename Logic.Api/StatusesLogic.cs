@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Data.Api;
+using FFRKApi.Data.Api;
 using FFRKApi.Model.EnlirTransform;
 using Microsoft.Extensions.Logging;
 
@@ -23,14 +24,16 @@ namespace FFRKApi.Logic.Api
         #region Class Variables
         private readonly IEnlirRepository _enlirRepository;
         private readonly ILogger<StatusesLogic> _logger;
+        private readonly ICacheProvider _cacheProvider;
         #endregion
 
         #region Constructors
 
-        public StatusesLogic(IEnlirRepository enlirRepository, ILogger<StatusesLogic> logger)
+        public StatusesLogic(IEnlirRepository enlirRepository, ICacheProvider cacheProvider, ILogger<StatusesLogic> logger)
         {
             _enlirRepository = enlirRepository;
             _logger = logger;
+            _cacheProvider = cacheProvider;
         }
         #endregion
 
@@ -40,27 +43,56 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllStatuses)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Statuses;
+            string cacheKey = $"{nameof(GetAllStatuses)}";
+            IEnumerable<Status> results = _cacheProvider.ObjectGet<IList<Status>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Statuses;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Status> GetStatusesById(int statusId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetStatusesById)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Statuses.Where(e => e.Id == statusId);
+            string cacheKey = $"{nameof(GetStatusesById)}:{statusId}";
+            IEnumerable<Status> results = _cacheProvider.ObjectGet<IList<Status>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Statuses.Where(e => e.Id == statusId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Status> GetStatusesByCodedName(string codedName)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetStatusesByCodedName)}");
 
-            IEnumerable<Status> results = new List<Status>();
+            string cacheKey = $"{nameof(GetStatusesByCodedName)}:{codedName}";
+            IEnumerable<Status> results = _cacheProvider.ObjectGet<IList<Status>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(codedName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Statuses.Where(
-                    s => s.CodedName.ToLower().Contains(codedName.ToLower()));
+                results = new List<Status>();
+
+                if (!String.IsNullOrWhiteSpace(codedName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Statuses.Where(
+                        s => s.CodedName.ToLower().Contains(codedName.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
+
             return results;
         }
 
@@ -68,13 +100,22 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetStatusesByCommonName)}");
 
-            IEnumerable<Status> results = new List<Status>();
+            string cacheKey = $"{nameof(GetStatusesByCommonName)}:{commonName}";
+            IEnumerable<Status> results = _cacheProvider.ObjectGet<IList<Status>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(commonName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Statuses.Where(
-                    s => s.CommonName.ToLower().Contains(commonName.ToLower()));
+                results = new List<Status>();
+
+                if (!String.IsNullOrWhiteSpace(commonName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Statuses.Where(
+                        s => s.CommonName.ToLower().Contains(commonName.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
+
             return results;
         }
 
@@ -82,13 +123,22 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetStatusesByEffect)}");
 
-            IEnumerable<Status> results = new List<Status>();
+            string cacheKey = $"{nameof(GetStatusesByEffect)}:{effectText}";
+            IEnumerable<Status> results = _cacheProvider.ObjectGet<IList<Status>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(effectText))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Statuses.Where(
-                    s => s.Effects.ToLower().Contains(effectText.ToLower()));
+                results = new List<Status>();
+
+                if (!String.IsNullOrWhiteSpace(effectText))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Statuses.Where(
+                        s => s.Effects.ToLower().Contains(effectText.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
+
             return results;
         }
 
@@ -96,13 +146,22 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetStatusesByNotes)}");
 
-            IEnumerable<Status> results = new List<Status>();
+            string cacheKey = $"{nameof(GetStatusesByNotes)}:{notes}";
+            IEnumerable<Status> results = _cacheProvider.ObjectGet<IList<Status>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(notes))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Statuses.Where(
-                    s => s.Notes.ToLower().Contains(notes.ToLower()));
+                results = new List<Status>();
+
+                if (!String.IsNullOrWhiteSpace(notes))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Statuses.Where(
+                        s => s.Notes.ToLower().Contains(notes.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
+
             return results;
         }
         #endregion

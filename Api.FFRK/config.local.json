@@ -18,6 +18,6 @@
   "CachingOptions": {
     "ConnectionString": "ffrkapi.redis.cache.windows.net:6379,password=tJOe5RcTWt/Mmy4lN/xBSz9AvIYlITKfkN7kgThGKpM=,ssl=False,allowAdmin=true,abortConnect=False",
     "DefaultTimeToLiveInHours": "2",
-    "UseCache": "true"
+    "UseCache": "false"
   } 
 }

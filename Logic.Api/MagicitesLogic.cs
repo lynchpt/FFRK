@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Data.Api;
+using FFRKApi.Data.Api;
 using FFRKApi.Model.EnlirTransform;
 using Microsoft.Extensions.Logging;
 
@@ -38,14 +39,16 @@ namespace FFRKApi.Logic.Api
         #region Class Variables
         private readonly IEnlirRepository _enlirRepository;
         private readonly ILogger<MagicitesLogic> _logger;
+        private readonly ICacheProvider _cacheProvider;
         #endregion
 
         #region Constructors
 
-        public MagicitesLogic(IEnlirRepository enlirRepository, ILogger<MagicitesLogic> logger)
+        public MagicitesLogic(IEnlirRepository enlirRepository, ICacheProvider cacheProvider, ILogger<MagicitesLogic> logger)
         {
             _enlirRepository = enlirRepository;
             _logger = logger;
+            _cacheProvider = cacheProvider;
         }
         #endregion
 
@@ -56,25 +59,53 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllMagicites)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Magicites;
+            string cacheKey = $"{nameof(GetAllMagicites)}";
+            IEnumerable<Magicite> results = _cacheProvider.ObjectGet<IList<Magicite>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Magicites;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Magicite> GetMagicitesById(int magiciteId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMagicitesById)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.Id == magiciteId);
+            string cacheKey = $"{nameof(GetMagicitesById)}:{magiciteId}";
+            IEnumerable<Magicite> results = _cacheProvider.ObjectGet<IList<Magicite>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.Id == magiciteId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Magicite> GetMagicitesByName(string magiciteName)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMagicitesByName)}");
 
-            IEnumerable<Magicite> results = new List<Magicite>();
+            string cacheKey = $"{nameof(GetMagicitesByName)}:{magiciteName}";
+            IEnumerable<Magicite> results = _cacheProvider.ObjectGet<IList<Magicite>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(magiciteName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.MagiciteName.ToLower().Contains(magiciteName.ToLower()));
+                results = new List<Magicite>();
+
+                if (!String.IsNullOrWhiteSpace(magiciteName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.MagiciteName.ToLower().Contains(magiciteName.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -84,32 +115,70 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMagicitesByRealm)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.Realm == realmType);
+            string cacheKey = $"{nameof(GetMagicitesByRealm)}:{realmType}";
+            IEnumerable<Magicite> results = _cacheProvider.ObjectGet<IList<Magicite>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.Realm == realmType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Magicite> GetMagicitesByRarity(int rarity)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMagicitesByRarity)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.Rarity == rarity);
+            string cacheKey = $"{nameof(GetMagicitesByRarity)}:{rarity}";
+            IEnumerable<Magicite> results = _cacheProvider.ObjectGet<IList<Magicite>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.Rarity == rarity);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Magicite> GetMagicitesByElement(int elementType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMagicitesByElement)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.Element == elementType);
+            string cacheKey = $"{nameof(GetMagicitesByElement)}:{elementType}";
+            IEnumerable<Magicite> results = _cacheProvider.ObjectGet<IList<Magicite>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.Element == elementType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Magicite> GetMagicitesByPassiveEffect(string passiveEffect)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMagicitesByPassiveEffect)}");
 
-            IEnumerable<Magicite> results = new List<Magicite>();
+            string cacheKey = $"{nameof(GetMagicitesByPassiveEffect)}:{passiveEffect}";
+            IEnumerable<Magicite> results = _cacheProvider.ObjectGet<IList<Magicite>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(passiveEffect))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.PassiveEffects.Any(p => p.Name.ToLower().Contains(passiveEffect.ToLower())));
+                results = new List<Magicite>();
+
+                if (!String.IsNullOrWhiteSpace(passiveEffect))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.PassiveEffects.Any(p => p.Name.ToLower().Contains(passiveEffect.ToLower())));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -120,11 +189,18 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMagicitesByUltraSkillName)}");
 
-            IEnumerable<Magicite> results = new List<Magicite>();
+            string cacheKey = $"{nameof(GetMagicitesByUltraSkillName)}:{ultraSkillName}";
+            IEnumerable<Magicite> results = _cacheProvider.ObjectGet<IList<Magicite>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(ultraSkillName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.UltraSkill != null && e.UltraSkill.Name.ToLower().Contains(ultraSkillName.ToLower()));
+                results = new List<Magicite>();
+                if (!String.IsNullOrWhiteSpace(ultraSkillName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.UltraSkill != null && e.UltraSkill.Name.ToLower().Contains(ultraSkillName.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -134,25 +210,52 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMagicitesByUltraSkillAbilityType)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.UltraSkill != null && e.UltraSkill.AbilityType == abilityType);
+            string cacheKey = $"{nameof(GetMagicitesByUltraSkillAbilityType)}:{abilityType}";
+            IEnumerable<Magicite> results = _cacheProvider.ObjectGet<IList<Magicite>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.UltraSkill != null && e.UltraSkill.AbilityType == abilityType);
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Magicite> GetMagicitesByUltraSkillElement(int elementType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMagicitesByUltraSkillElement)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.UltraSkill != null && e.UltraSkill.Element == elementType);
+            string cacheKey = $"{nameof(GetMagicitesByUltraSkillElement)}:{elementType}";
+            IEnumerable<Magicite> results = _cacheProvider.ObjectGet<IList<Magicite>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.UltraSkill != null && e.UltraSkill.Element == elementType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Magicite> GetMagicitesByUltraSkillEffect(string effectText)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMagicitesByUltraSkillEffect)}");
 
-            IEnumerable<Magicite> results = new List<Magicite>();
+            string cacheKey = $"{nameof(GetMagicitesByUltraSkillEffect)}:{effectText}";
+            IEnumerable<Magicite> results = _cacheProvider.ObjectGet<IList<Magicite>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(effectText))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.UltraSkill != null && e.UltraSkill.Effects.ToLower().Contains(effectText.ToLower()));
+                results = new List<Magicite>();
+
+                if (!String.IsNullOrWhiteSpace(effectText))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.UltraSkill != null && e.UltraSkill.Effects.ToLower().Contains(effectText.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -163,18 +266,36 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMagicitesByMagiciteSkillId)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.MagiciteSkills.Any(s => s.Id == magiciteSkillId));
+            string cacheKey = $"{nameof(GetMagicitesByMagiciteSkillId)}:{magiciteSkillId}";
+            IEnumerable<Magicite> results = _cacheProvider.ObjectGet<IList<Magicite>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.MagiciteSkills.Any(s => s.Id == magiciteSkillId));
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Magicite> GetMagicitesByMagiciteSkillName(string magiciteSkillName)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMagicitesByMagiciteSkillName)}");
 
-            IEnumerable<Magicite> results = new List<Magicite>();
+            string cacheKey = $"{nameof(GetMagicitesByMagiciteSkillName)}:{magiciteSkillName}";
+            IEnumerable<Magicite> results = _cacheProvider.ObjectGet<IList<Magicite>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(magiciteSkillName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.MagiciteSkills.Any(s => s.SkillName.ToLower().Contains(magiciteSkillName.ToLower())));
+                results = new List<Magicite>();
+
+                if (!String.IsNullOrWhiteSpace(magiciteSkillName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.MagiciteSkills.Any(s => s.SkillName.ToLower().Contains(magiciteSkillName.ToLower())));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -184,21 +305,56 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMagicitesByMagiciteSkillAbilityType)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.MagiciteSkills.Any(s => s.AbilityType == abilityType));
+            string cacheKey = $"{nameof(GetMagicitesByMagiciteSkillAbilityType)}:{abilityType}";
+            IEnumerable<Magicite> results = _cacheProvider.ObjectGet<IList<Magicite>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.MagiciteSkills.Any(s => s.AbilityType == abilityType));
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Magicite> GetMagicitesByMagiciteSkillElement(int elementType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMagicitesByMagiciteSkillElement)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.MagiciteSkills.Any(s => s.Element == elementType));
+            string cacheKey = $"{nameof(GetMagicitesByMagiciteSkillElement)}:{elementType}";
+            IEnumerable<Magicite> results = _cacheProvider.ObjectGet<IList<Magicite>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.MagiciteSkills.Any(s => s.Element == elementType));
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Magicite> GetMagicitesByMagiciteSkillEffect(string effectText)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMagicitesByMagiciteSkillEffect)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.MagiciteSkills.Any(s => s.Effects.ToLower().Contains(effectText.ToLower())));
+            string cacheKey = $"{nameof(GetMagicitesByMagiciteSkillEffect)}:{effectText}";
+            IEnumerable<Magicite> results = _cacheProvider.ObjectGet<IList<Magicite>>(cacheKey);
+
+            if (results == null)
+            {
+                results = new List<Magicite>();
+
+                if (!String.IsNullOrWhiteSpace(effectText))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Magicites.Where(e => e.MagiciteSkills.Any(s => s.Effects.ToLower().Contains(effectText.ToLower())));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
+            }
+
+            return results;
         }
 
         #endregion

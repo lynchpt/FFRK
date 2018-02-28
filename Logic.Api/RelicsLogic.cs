@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Data.Api;
+using FFRKApi.Data.Api;
 using FFRKApi.Model.EnlirTransform;
 using FFRKApi.Model.EnlirTransform.IdLists;
 using Microsoft.Extensions.Logging;
@@ -31,14 +32,16 @@ namespace FFRKApi.Logic.Api
         #region Class Variables
         private readonly IEnlirRepository _enlirRepository;
         private readonly ILogger<RelicsLogic> _logger;
+        private readonly ICacheProvider _cacheProvider;
         #endregion
 
         #region Constructors
 
-        public RelicsLogic(IEnlirRepository enlirRepository, ILogger<RelicsLogic> logger)
+        public RelicsLogic(IEnlirRepository enlirRepository, ICacheProvider cacheProvider, ILogger<RelicsLogic> logger)
         {
             _enlirRepository = enlirRepository;
             _logger = logger;
+            _cacheProvider = cacheProvider;
         }
         #endregion
 
@@ -48,14 +51,34 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllRelics)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Relics;
+            string cacheKey = $"{nameof(GetAllRelics)}";
+            IEnumerable<Relic> results = _cacheProvider.ObjectGet<IList<Relic>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Relics;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Relic> GetRelicsById(int relicId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRelicsById)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Relics.Where(r => r.Id == relicId);
+            string cacheKey = $"{nameof(GetRelicsById)}:{relicId}";
+            IEnumerable<Relic> results = _cacheProvider.ObjectGet<IList<Relic>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Relics.Where(r => r.Id == relicId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Relic> GetRelicsByIdMulti(IEnumerable<int> relicIds)
@@ -76,11 +99,19 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRelicsByName)}");
 
-            IEnumerable<Relic> results = new List<Relic>();
+            string cacheKey = $"{nameof(GetRelicsByName)}:{relicName}";
+            IEnumerable<Relic> results = _cacheProvider.ObjectGet<IList<Relic>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(relicName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Relics.Where(e => e.RelicName.ToLower().Contains(relicName.ToLower()));
+                results = new List<Relic>();
+
+                if (!String.IsNullOrWhiteSpace(relicName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Relics.Where(e => e.RelicName.ToLower().Contains(relicName.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -90,46 +121,104 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRelicsByRealm)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Relics.Where(r => r.Realm == realmType);
+            string cacheKey = $"{nameof(GetRelicsByRealm)}:{realmType}";
+            IEnumerable<Relic> results = _cacheProvider.ObjectGet<IList<Relic>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Relics.Where(r => r.Realm == realmType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Relic> GetRelicsByCharacter(int characterId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRelicsByCharacter)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Relics.Where(r => r.CharacterId == characterId);
+            string cacheKey = $"{nameof(GetRelicsByCharacter)}:{characterId}";
+            IEnumerable<Relic> results = _cacheProvider.ObjectGet<IList<Relic>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Relics.Where(r => r.CharacterId == characterId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Relic> GetRelicsBySoulBreak(int soulBreakId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRelicsBySoulBreak)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Relics.Where(r => r.SoulBreakId == soulBreakId);
+            string cacheKey = $"{nameof(GetRelicsBySoulBreak)}:{soulBreakId}";
+            IEnumerable<Relic> results = _cacheProvider.ObjectGet<IList<Relic>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Relics.Where(r => r.SoulBreakId == soulBreakId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Relic> GetRelicsByLegendMateria(int legendMateriaId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRelicsByLegendMateria)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Relics.Where(r => r.LegendMateriaId == legendMateriaId);
+            string cacheKey = $"{nameof(GetRelicsByLegendMateria)}:{legendMateriaId}";
+            IEnumerable<Relic> results = _cacheProvider.ObjectGet<IList<Relic>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Relics.Where(r => r.LegendMateriaId == legendMateriaId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Relic> GetRelicsByRelicType(int relicType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRelicsByRelicType)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Relics.Where(r => r.RelicType == relicType);
+            string cacheKey = $"{nameof(GetRelicsByRelicType)}:{relicType}";
+            IEnumerable<Relic> results = _cacheProvider.ObjectGet<IList<Relic>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Relics.Where(r => r.RelicType == relicType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Relic> GetRelicsByEffect(string effectText)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRelicsByEffect)}");
 
-            IEnumerable<Relic> results = new List<Relic>();
+            string cacheKey = $"{nameof(GetRelicsByEffect)}:{effectText}";
+            IEnumerable<Relic> results = _cacheProvider.ObjectGet<IList<Relic>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(effectText))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Relics.Where(e => e.Effect.ToLower().Contains(effectText.ToLower()));
+                results = new List<Relic>();
+
+                if (!String.IsNullOrWhiteSpace(effectText))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Relics.Where(e => e.Effect.ToLower().Contains(effectText.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }                
             }
 
             return results;
@@ -139,7 +228,17 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRelicsByRarity)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Relics.Where(r => r.Rarity == rarity);
+            string cacheKey = $"{nameof(GetRelicsByRarity)}:{rarity}";
+            IEnumerable<Relic> results = _cacheProvider.ObjectGet<IList<Relic>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Relics.Where(r => r.Rarity == rarity);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Relic> GetRelicsByStat(int statSetType, int statType, int statValue)

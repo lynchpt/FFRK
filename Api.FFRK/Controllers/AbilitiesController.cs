@@ -49,11 +49,12 @@ namespace FFRKApi.Api.FFRK.Controllers
         #region IAbilitiesController Implementation
 
         /// <summary>
-        /// Gets all abilities and their properties, including required orbs
+        /// Summary info: Gets all abilities and their properties, including required orbs
         /// </summary>
-        /// <remarks></remarks>
-        /// <response code="200"><see cref="D.Ability"/></response>
-        /// <returns><see cref="Ability"/></returns>
+        /// <remarks>Remarks info</remarks>
+        /// <code>Code Info</code>
+        /// <example>Example Info</example>
+        /// <response code="200"><see cref="IEnumerable{T}"/></response>
         [HttpGet]
         [Route(RouteConstants.AbilitiesRoute_All)]
         [SwaggerOperation(nameof(GetAllAbilities))]
@@ -69,6 +70,12 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        /// Summary info: Gets one ability by its unique id
+        /// </summary>
+        /// <param name="abilityId">Param Info: about abilityId</param>
+        /// <returns></returns>
+        /// <response code="200"><see cref="D.Ability"/></response>
         [HttpGet]
         [Route(RouteConstants.AbilitiesRoute_Id)]
         [SwaggerOperation(nameof(GetAbilitiesById))]

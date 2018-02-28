@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Data.Api;
+using FFRKApi.Data.Api;
 using FFRKApi.Model.EnlirTransform;
 using Microsoft.Extensions.Logging;
 
@@ -23,14 +24,16 @@ namespace FFRKApi.Logic.Api
         #region Class Variables
         private readonly IEnlirRepository _enlirRepository;
         private readonly ILogger<MissionsLogic> _logger;
+        private readonly ICacheProvider _cacheProvider;
         #endregion
 
         #region Constructors
 
-        public MissionsLogic(IEnlirRepository enlirRepository, ILogger<MissionsLogic> logger)
+        public MissionsLogic(IEnlirRepository enlirRepository, ICacheProvider cacheProvider, ILogger<MissionsLogic> logger)
         {
             _enlirRepository = enlirRepository;
             _logger = logger;
+            _cacheProvider = cacheProvider;
         }
         #endregion
 
@@ -40,23 +43,49 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllMissions)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Missions;
+            string cacheKey = $"{nameof(GetAllMissions)}";
+            IEnumerable<Mission> results = _cacheProvider.ObjectGet<IList<Mission>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Missions;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Mission> GetMissionsById(int missionId)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMissionsById)}");
 
-            return _enlirRepository.GetMergeResultsContainer().Missions.Where(e => e.Id == missionId);
+            string cacheKey = $"{nameof(GetMissionsById)}:{missionId}";
+            IEnumerable<Mission> results = _cacheProvider.ObjectGet<IList<Mission>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Missions.Where(e => e.Id == missionId);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<Mission> GetMissionsByMissionType(int missionType)
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMissionsByMissionType)}");
 
-            IEnumerable<Mission> results = new List<Mission>();
+            string cacheKey = $"{nameof(GetMissionsByMissionType)}:{missionType}";
+            IEnumerable<Mission> results = _cacheProvider.ObjectGet<IList<Mission>>(cacheKey);
 
-            results = _enlirRepository.GetMergeResultsContainer().Missions.Where(e => e.MissionType == missionType);
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Missions.Where(e => e.MissionType == missionType);
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
 
             return results;
         }
@@ -65,10 +94,15 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMissionsByEventId)}");
 
-            IEnumerable<Mission> results = new List<Mission>();
+            string cacheKey = $"{nameof(GetMissionsByEventId)}:{eventId}";
+            IEnumerable<Mission> results = _cacheProvider.ObjectGet<IList<Mission>>(cacheKey);
 
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().Missions.Where(e => e.AssociatedEventId == eventId);
 
-            results = _enlirRepository.GetMergeResultsContainer().Missions.Where(e => e.AssociatedEventId == eventId);
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
 
             return results;
         }
@@ -77,11 +111,19 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMissionsByDescription)}");
 
-            IEnumerable<Mission> results = new List<Mission>();
+            string cacheKey = $"{nameof(GetMissionsByDescription)}:{description}";
+            IEnumerable<Mission> results = _cacheProvider.ObjectGet<IList<Mission>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(description))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Missions.Where(e => e.Description.ToLower().Contains(description.ToLower()));
+                results = new List<Mission>();
+
+                if (!String.IsNullOrWhiteSpace(description))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Missions.Where(e => e.Description.ToLower().Contains(description.ToLower()));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;
@@ -91,11 +133,19 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMissionsByReward)}");
 
-            IEnumerable<Mission> results = new List<Mission>();
+            string cacheKey = $"{nameof(GetMissionsByReward)}:{rewardName}";
+            IEnumerable<Mission> results = _cacheProvider.ObjectGet<IList<Mission>>(cacheKey);
 
-            if (!String.IsNullOrWhiteSpace(rewardName))
+            if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().Missions.Where(e => e.Rewards.Any(r => r.ItemName.ToLower().Contains(rewardName.ToLower())));
+                results = new List<Mission>();
+
+                if (!String.IsNullOrWhiteSpace(rewardName))
+                {
+                    results = _enlirRepository.GetMergeResultsContainer().Missions.Where(e => e.Rewards.Any(r => r.ItemName.ToLower().Contains(rewardName.ToLower())));
+
+                    _cacheProvider.ObjectSet(cacheKey, results);
+                }
             }
 
             return results;

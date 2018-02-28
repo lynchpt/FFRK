@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Data.Api;
+using FFRKApi.Data.Api;
 using FFRKApi.Model.Api;
 using FFRKApi.Model.EnlirMerge;
 using FFRKApi.Model.EnlirTransform.IdLists;
@@ -38,14 +39,16 @@ namespace FFRKApi.Logic.Api
 
         private readonly IEnlirRepository _enlirRepository;
         private readonly ILogger<TypeListsLogic> _logger;
+        private readonly ICacheProvider _cacheProvider;
         #endregion
 
         #region Constructors
 
-        public TypeListsLogic(IEnlirRepository enlirRepository, ILogger<TypeListsLogic> logger)
+        public TypeListsLogic(IEnlirRepository enlirRepository, ICacheProvider cacheProvider, ILogger<TypeListsLogic> logger)
         {
             _enlirRepository = enlirRepository;
             _logger = logger;
+            _cacheProvider = cacheProvider;
         }
         #endregion
 
@@ -55,129 +58,287 @@ namespace FFRKApi.Logic.Api
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllTypeLists)}");
 
-            TypeListBundle bundle = new TypeListBundle()
-                    {
-                        AbilityType = _enlirRepository.GetMergeResultsContainer().AbilityTypeList,
-                        AutoTargetType = _enlirRepository.GetMergeResultsContainer().AutoTargetTypeList,
-                        DamageFormulaType = _enlirRepository.GetMergeResultsContainer().DamageFormulaTypeList,
-                        ElementType = _enlirRepository.GetMergeResultsContainer().ElementList,
-                        EquipmentType = _enlirRepository.GetMergeResultsContainer().EquipmentTypeList,
-                        EventType = _enlirRepository.GetMergeResultsContainer().EventTypeList,
-                        MissionType = _enlirRepository.GetMergeResultsContainer().MissionTypeList,
-                        OrbType = _enlirRepository.GetMergeResultsContainer().OrbTypeList,
-                        RealmType = _enlirRepository.GetMergeResultsContainer().RealmList,
-                        RelicType = _enlirRepository.GetMergeResultsContainer().RelicIdList,
-                        SchoolType = _enlirRepository.GetMergeResultsContainer().SchoolList,
-                        SoulBreakTierType = _enlirRepository.GetMergeResultsContainer().SoulBreakTierList,
-                        TargetType = _enlirRepository.GetMergeResultsContainer().TargetTypeList
-                    };
+            string cacheKey = $"{nameof(GetAllTypeLists)}";
+            TypeListBundle results = _cacheProvider.ObjectGet<TypeListBundle>(cacheKey);
 
-            return bundle;
+            if (results == null)
+            {
+                results = new TypeListBundle()
+                {
+                    AbilityType = _enlirRepository.GetMergeResultsContainer().AbilityTypeList,
+                    AutoTargetType = _enlirRepository.GetMergeResultsContainer().AutoTargetTypeList,
+                    DamageFormulaType = _enlirRepository.GetMergeResultsContainer().DamageFormulaTypeList,
+                    ElementType = _enlirRepository.GetMergeResultsContainer().ElementList,
+                    EquipmentType = _enlirRepository.GetMergeResultsContainer().EquipmentTypeList,
+                    EventType = _enlirRepository.GetMergeResultsContainer().EventTypeList,
+                    MissionType = _enlirRepository.GetMergeResultsContainer().MissionTypeList,
+                    OrbType = _enlirRepository.GetMergeResultsContainer().OrbTypeList,
+                    RealmType = _enlirRepository.GetMergeResultsContainer().RealmList,
+                    RelicType = _enlirRepository.GetMergeResultsContainer().RelicIdList,
+                    SchoolType = _enlirRepository.GetMergeResultsContainer().SchoolList,
+                    SoulBreakTierType = _enlirRepository.GetMergeResultsContainer().SoulBreakTierList,
+                    TargetType = _enlirRepository.GetMergeResultsContainer().TargetTypeList
+                };
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<KeyValuePair<int, string>> GetAbilityTypeList()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAbilityTypeList)}");
 
-            return _enlirRepository.GetMergeResultsContainer().AbilityTypeList;
+            string cacheKey = $"{nameof(GetAbilityTypeList)}";
+            IList<KeyValuePair<int, string>> results = _cacheProvider.ObjectGet<IList<KeyValuePair<int, string>>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().AbilityTypeList;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<KeyValuePair<int, string>> GetAutoTargetTypeList()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAutoTargetTypeList)}");
 
-            return _enlirRepository.GetMergeResultsContainer().AutoTargetTypeList;
+            string cacheKey = $"{nameof(GetAutoTargetTypeList)}";
+            IList<KeyValuePair<int, string>> results = _cacheProvider.ObjectGet<IList<KeyValuePair<int, string>>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().AutoTargetTypeList;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<KeyValuePair<int, string>> GetDamageFormulaTypeList()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetDamageFormulaTypeList)}");
 
-            return _enlirRepository.GetMergeResultsContainer().DamageFormulaTypeList;
+            string cacheKey = $"{nameof(GetDamageFormulaTypeList)}";
+            IList<KeyValuePair<int, string>> results = _cacheProvider.ObjectGet<IList<KeyValuePair<int, string>>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().DamageFormulaTypeList;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<KeyValuePair<int, string>> GetElementTypeList()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetElementTypeList)}");
 
-            return _enlirRepository.GetMergeResultsContainer().ElementList;
+            string cacheKey = $"{nameof(GetElementTypeList)}";
+            IList<KeyValuePair<int, string>> results = _cacheProvider.ObjectGet<IList<KeyValuePair<int, string>>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().ElementList;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<KeyValuePair<int, string>> GetEquipmentTypeList()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetEquipmentTypeList)}");
 
-            return _enlirRepository.GetMergeResultsContainer().EquipmentTypeList;
+            string cacheKey = $"{nameof(GetEquipmentTypeList)}";
+            IList<KeyValuePair<int, string>> results = _cacheProvider.ObjectGet<IList<KeyValuePair<int, string>>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().EquipmentTypeList;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<KeyValuePair<int, string>> GetEventTypeList()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetEventTypeList)}");
 
-            return _enlirRepository.GetMergeResultsContainer().EventTypeList;
+            string cacheKey = $"{nameof(GetEventTypeList)}";
+            IList<KeyValuePair<int, string>> results = _cacheProvider.ObjectGet<IList<KeyValuePair<int, string>>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().EventTypeList;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<KeyValuePair<int, string>> GetMissionTypeList()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetMissionTypeList)}");
 
-            return _enlirRepository.GetMergeResultsContainer().MissionTypeList;
+            string cacheKey = $"{nameof(GetMissionTypeList)}";
+            IList<KeyValuePair<int, string>> results = _cacheProvider.ObjectGet<IList<KeyValuePair<int, string>>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().MissionTypeList;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<KeyValuePair<int, string>> GetOrbTypeList()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetOrbTypeList)}");
 
-            return _enlirRepository.GetMergeResultsContainer().OrbTypeList;
+            string cacheKey = $"{nameof(GetOrbTypeList)}";
+            IList<KeyValuePair<int, string>> results = _cacheProvider.ObjectGet<IList<KeyValuePair<int, string>>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().OrbTypeList;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<KeyValuePair<int, string>> GetRealmTypeList()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRealmTypeList)}");
 
-            return _enlirRepository.GetMergeResultsContainer().RealmList;
+            string cacheKey = $"{nameof(GetRealmTypeList)}";
+            IList<KeyValuePair<int, string>> results = _cacheProvider.ObjectGet<IList<KeyValuePair<int, string>>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().RealmList;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<KeyValuePair<int, string>> GetRelicTypeList()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetRelicTypeList)}");
 
-            return _enlirRepository.GetMergeResultsContainer().RelicTypeList;
+            string cacheKey = $"{nameof(GetRelicTypeList)}";
+            IList<KeyValuePair<int, string>> results = _cacheProvider.ObjectGet<IList<KeyValuePair<int, string>>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().RelicTypeList;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<KeyValuePair<int, string>> GetSchoolTypeList()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetSchoolTypeList)}");
 
-            return _enlirRepository.GetMergeResultsContainer().SchoolList;
+            string cacheKey = $"{nameof(GetSchoolTypeList)}";
+            IList<KeyValuePair<int, string>> results = _cacheProvider.ObjectGet<IList<KeyValuePair<int, string>>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().SchoolList;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<KeyValuePair<int, string>> GetStatSetTypeList()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetStatSetTypeList)}");
 
-            return _enlirRepository.GetMergeResultsContainer().StatSetTypeList;
+            string cacheKey = $"{nameof(GetStatSetTypeList)}";
+            IList<KeyValuePair<int, string>> results = _cacheProvider.ObjectGet<IList<KeyValuePair<int, string>>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().StatSetTypeList;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<KeyValuePair<int, string>> GetStatTypeList()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetStatTypeList)}");
 
-            return _enlirRepository.GetMergeResultsContainer().StatTypeList;
+            string cacheKey = $"{nameof(GetStatTypeList)}";
+            IList<KeyValuePair<int, string>> results = _cacheProvider.ObjectGet<IList<KeyValuePair<int, string>>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().StatTypeList;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<KeyValuePair<int, string>> GetSoulBreakTierTypeList()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetSoulBreakTierTypeList)}");
 
-            return _enlirRepository.GetMergeResultsContainer().SoulBreakTierList;
+            string cacheKey = $"{nameof(GetSoulBreakTierTypeList)}";
+            IList<KeyValuePair<int, string>> results = _cacheProvider.ObjectGet<IList<KeyValuePair<int, string>>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().SoulBreakTierList;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         public IEnumerable<KeyValuePair<int, string>> GetTargetTypeList()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetTargetTypeList)}");
 
-            return _enlirRepository.GetMergeResultsContainer().TargetTypeList;
+            string cacheKey = $"{nameof(GetTargetTypeList)}";
+            IList<KeyValuePair<int, string>> results = _cacheProvider.ObjectGet<IList<KeyValuePair<int, string>>>(cacheKey);
+
+            if (results == null)
+            {
+                results = _enlirRepository.GetMergeResultsContainer().TargetTypeList;
+
+                _cacheProvider.ObjectSet(cacheKey, results);
+            }
+
+            return results;
         }
 
         #endregion
