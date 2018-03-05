@@ -10,6 +10,7 @@ using FFRKApi.Model.Api;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using D = FFRKApi.Dto.Api;
 
 namespace FFRKApi.Api.FFRK.Controllers
 {
@@ -57,10 +58,35 @@ namespace FFRKApi.Api.FFRK.Controllers
         #endregion
 
         #region ITypeListsController Implementation
+
+        /// <summary>
+        /// Gets all TypeList instances in one call
+        /// </summary>
+        /// <remarks>
+        /// TypeLists are an artifact of trying to normalize the underlying Enlir data (which is all typed out strings) 
+        /// into a set of ids that make for easier programmatic use. A concrete example will make this clearer:
+        /// <br /> 
+        /// In the underlying Enlir data, when he refers to the realm to which something (like a character or relic) belongs, he 
+        /// uses a descriptive string like I, II, III,.. IX,...  IV:TAY etc. These are human readable and descriptive, but not 
+        /// easy to use programatically, so this api converts them into a sythesized id like 1, 2, 3, ..., 9, ... 21.
+        /// <br /> 
+        /// Thus, when you want to ask the api a question about all XYZ in realm X-2, you would need to find out the realm id 
+        /// first, because that is the key the api understands. In this example, you would get the RealmTypeList, 
+        /// and find out which id is associated with realm X-2, and use that id with the api.
+        /// <br /> 
+        /// RealmTypeList is just one example; there are TypeList for other things like EquipmentType, ElementType etc.
+        /// <br /> 
+        /// If you only need to access a small number of TypeLists, it is faster to get each individual instance, but if 
+        /// you need to access most of them, it will be faster to call this api to get them all at once and store them locally 
+        /// so you can use them repeatedly.
+        /// </remarks>
+        /// <response code="200">
+        ///     <see>TypeListBundle</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.TypeListsRoute_All)]
         [SwaggerOperation(nameof(GetAllTypeLists))]
-        [ProducesResponseType(typeof(IEnumerable<KeyValuePair<int, string>>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(D.TypeListBundle), (int)HttpStatusCode.OK)]
         public IActionResult GetAllTypeLists()
         {
             _logger.LogInformation($"Logic Method invoked: {nameof(GetAllTypeLists)}");
@@ -72,6 +98,16 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        /// Get the TypeList for AbilityType
+        /// </summary>
+        /// <remarks>
+        /// The values in this TypeList are drawn from those found in the columns in Enlir called "Type" when 
+        /// in the context of an ability. Some example values are BLK, NAT, NIN, PHY, etc.
+        /// </remarks>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;KeyValuePair&lt;int,string&gt;&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.TypeListsRoute_AbilityType)]
         [SwaggerOperation(nameof(GetAbilityTypeList))]

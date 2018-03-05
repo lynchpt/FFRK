@@ -51,9 +51,10 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// <summary>
         /// Gets all Abilities and their properties, including required orbs
         /// </summary>
-        /// <remarks>Header of Remarks
+        /// <remarks> Header of Remarks
         /// 
         /// Line 1
+        /// <b/>
         /// Line 2
         /// 
         /// Line 3
