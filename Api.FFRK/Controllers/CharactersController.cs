@@ -137,13 +137,13 @@ namespace FFRKApi.Api.FFRK.Controllers
         }
 
         /// <summary>
-        /// Gets all Characters whose name contains the provided name text
+        /// Gets all Characters whose name contains the provided name text (case is ignored)
         /// </summary>
         /// <remarks>
         /// Sample Use Case - You want to find out data about all Characters with "Cid" in their name.
-        /// - You can straight away call this api: api/v1.0/Characters/Name/Cid";
+        /// - You can straight away call this api: api/v1.0/Characters/Name/cid";
         /// <br /> 
-        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Characters/Name/Cid (or use Try It Out to see data in this page)
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Characters/Name/cid (or use Try It Out to see data in this page)
         /// </remarks>
         /// <param name="characterName">the string that must be a part of a Character's name in order for them to be returned by this api call.</param>
         /// <response code="200">
@@ -237,7 +237,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// 
         /// Any of the above considered fields that you leave blank in the template object are NOT considered as part of the search. 
         /// Any of the above considered fields that you specify in the template object must ALL be matched by any Character in order for it to be returned in the search.
-        /// 
+        /// <br /> 
         /// Sample Use Case - You want to find out data about all Characters that have an RealmType of "V" and a SchoolType of Black Magic with a minimum access level of 5
         /// - You first call TypeList Apis to get the ids for RealmType = "V" and SchoolType = Black Magic (5 and 3)
         /// - You create an Character object and fill in the above ids (and the minimum level of 5) into the Realm property and the SchoolAccessInfos collection property

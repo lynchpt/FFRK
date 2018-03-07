@@ -243,7 +243,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// 
         /// Any of the above considered fields that you leave blank in the template object are NOT considered as part of the search. 
         /// Any of the above considered fields that you specify in the template object must ALL be matched by any Ability in order for it to be returned in the search.
-        /// 
+        /// <br /> 
         /// Sample Use Case - You want to find out data about all Abilities that have an ElementType of "Fire" and a SchoolType of Black Magic
         /// - You first call Type List Apis to get the ids for Element = Fire and SchoolType = Black Magic (4 and 3)
         /// - You create an Ability object and fill in the above ids into the Element collection and School property
