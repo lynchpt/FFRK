@@ -174,7 +174,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// <br /> 
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Abilities/School/6 (or use Try It Out to see data in this page)
         /// </remarks>
-        /// <param name="abilityType">the integer id for the desired SchoolType; it can be found in the SchoolType TypeList</param>
+        /// <param name="schoolType">the integer id for the desired SchoolType; it can be found in the SchoolType TypeList</param>
         /// <response code="200">
         ///     <see>IEnumerable&lt;D.Ability&gt;</see>
         /// </response>
@@ -204,7 +204,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// <br /> 
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Abilities/Element/4 (or use Try It Out to see data in this page)
         /// </remarks>
-        /// <param name="abilityType">the integer id for the desired ElementType; it can be found in the ElementType TypeList</param>
+        /// <param name="elementType">the integer id for the desired ElementType; it can be found in the ElementType TypeList</param>
         /// <response code="200">
         ///     <see>IEnumerable&lt;D.Ability&gt;</see>
         /// </response>
