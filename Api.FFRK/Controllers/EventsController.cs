@@ -56,6 +56,18 @@ namespace FFRKApi.Api.FFRK.Controllers
 
         #region IEventsController Implementation
 
+        /// <summary>
+        /// Gets all Events and their associated data.
+        /// </summary>
+        /// <remarks>
+        /// Use Case - If you only need to access details for a small number of Events, it is faster to get each individual Event instance using a separate api call, but if 
+        /// you need to access most of them, it will be faster to call this api to get them all at once and store them locally so you can use them repeatedly.
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Dungeons (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_All)]
         [SwaggerOperation(nameof(GetAllEvents))]
@@ -71,6 +83,21 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        /// Gets one Event by its unique id
+        /// </summary>
+        /// <remarks>
+        /// Sample Use Case - You want to find out data about the Event named "To Slay a Sorceress"
+        /// - You first call /api/v1.0/IdLists/Event to get the proper IdList
+        /// - Then you look up the integer Key associated with the Value of "To Slay a Sorceress" in the IdList (the id is 10 in this case)
+        /// - Finally you call this api: api/v1.0/Events/10
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/10 (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <param name="eventId">the integer id for the desired Event; it can be found in the Event IdList</param>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_Id)]
         [SwaggerOperation(nameof(GetEventsById))]
@@ -86,6 +113,19 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        /// Gets all Events whose name contains the provided name text (case is ignored)
+        /// </summary>
+        /// <remarks>
+        /// Sample Use Case - You want to find out data about all Dungeons with "Reborn" in their name.
+        /// - You can straight away call this api: api/v1.0/Events/Name/reborn";
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/Name/reborn (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <param name="eventName">the string that must be a part of a Events's name in order for it to be returned by this api call.</param>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_Name)]
         [SwaggerOperation(nameof(GetEventsByName))]
@@ -101,6 +141,21 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        /// Gets all Events that belong to the specified Realm
+        /// </summary>
+        /// <remarks>
+        /// Sample Use Case - You want to find out data about all Events in the Realm of FF VI
+        /// - You first call /api/v1.0/TypeLists/RealmType to get the proper TypeList
+        /// - Then you look up the integer Key associated with the Value of "VI" in the IdList (the id is 6 in this case)
+        /// - Finally you call this api: api/v1.0/Events/RealmType/6
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/RealmType/6 (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <param name="realmType">the integer id for the desired Realm; it can be found in the RealmType TypeList</param>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_RealmType)]
         [SwaggerOperation(nameof(GetEventsByRealm))]
@@ -116,6 +171,21 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        /// Gets all Events that have the specified EventType
+        /// </summary>
+        /// <remarks>
+        /// Sample Use Case - You want to find out data about all Events that have the EventType of "Challenge Event"
+        /// - You first call /api/v1.0/TypeLists/EventType to get the proper TypeList
+        /// - Then you look up the integer Key associated with the Value of "Challenge Event" in the TypeList (the id is 1 in this case)
+        /// - Finally you call this api: api/v1.0/Events/EventType/1
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/EventType/1 (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <param name="eventType">the integer id for the desired EventType; it can be found in the EventType TypeList</param>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_EventType)]
         [SwaggerOperation(nameof(GetEventsByEventType))]
@@ -131,6 +201,19 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        /// Gets all Events that reward Hero Records for Characters whose name contains the provided name text (case is ignored)
+        /// </summary>
+        /// <remarks>
+        /// Sample Use Case - You want to find out data about all Events that reward Hero Records for a Character whose name includes "Cid".
+        /// - You can straight away call this api: api/v1.0/Events/HeroRecords/cid";
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/HeroRecords/cid (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <param name="characterName">the string that must be a part of a Character's name that has a Hero Record rewarded in an Event for that Event to be returned by this api call.</param>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_HeroRecords)]
         [SwaggerOperation(nameof(GetEventsByHeroRecords))]
@@ -146,6 +229,19 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        /// Gets all Events that reward Memory Crystal 1 for Characters whose name contains the provided name text (case is ignored)
+        /// </summary>
+        /// <remarks>
+        /// Sample Use Case - You want to find out data about all Events that reward Memory Crystal 1 for a Character whose name includes "Cid".
+        /// - You can straight away call this api: api/v1.0/Events/MemoryCrystal1/cid";
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/MemoryCrystal1/cid (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <param name="characterName">the string that must be a part of a Character's name that has a Memory Crystal 1 rewarded in an Event for that Event to be returned by this api call.</param>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_MemoryCrystal1)]
         [SwaggerOperation(nameof(GetEventsByMemoryCrystal1))]
@@ -161,6 +257,19 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        /// Gets all Events that reward Memory Crystal 2 for Characters whose name contains the provided name text (case is ignored)
+        /// </summary>
+        /// <remarks>
+        /// Sample Use Case - You want to find out data about all Events that reward Memory Crystal 2 for a Character whose name includes "Cid".
+        /// - You can straight away call this api: api/v1.0/Events/MemoryCrystal2/cid";
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/MemoryCrystal2/cid (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <param name="characterName">the string that must be a part of a Character's name that has a Memory Crystal 2 rewarded in an Event for that Event to be returned by this api call.</param>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_MemoryCrystal2)]
         [SwaggerOperation(nameof(GetEventsByMemoryCrystal2))]
@@ -176,6 +285,19 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        /// Gets all Events that reward Memory Crystal 3 for Characters whose name contains the provided name text (case is ignored)
+        /// </summary>
+        /// <remarks>
+        /// Sample Use Case - You want to find out data about all Events that reward Memory Crystal 2 for a Character whose name includes "Cid".
+        /// - You can straight away call this api: api/v1.0/Events/MemoryCrystal3/cid";
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/MemoryCrystal3/cid (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <param name="characterName">the string that must be a part of a Character's name that has a Memory Crystal 3 rewarded in an Event for that Event to be returned by this api call.</param>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_MemoryCrystal3)]
         [SwaggerOperation(nameof(GetEventsByMemoryCrystal3))]
@@ -191,6 +313,18 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        /// Gets all Events that reward a Soul of Hero
+        /// </summary>
+        /// <remarks>
+        /// Sample Use Case - You want to find out data about all Events that reward a Soul of Hero.
+        /// - You can straight away call this api: api/v1.0/Events/SoulOfHero";
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/SoulOfHero (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_SoulOfHero)]
         [SwaggerOperation(nameof(GetEventsBySoulOfHero))]
@@ -206,6 +340,18 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        /// Gets all Events that reward a Memory Lode 1
+        /// </summary>
+        /// <remarks>
+        /// Sample Use Case - You want to find out data about all Events that reward a Memory Lode 1.
+        /// - You can straight away call this api: api/v1.0/Events/MemoryLode1";
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/MemoryLode1 (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_MemoryLode1)]
         [SwaggerOperation(nameof(GetEventsByMemoryLode1))]
@@ -221,6 +367,18 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        /// Gets all Events that reward a Memory Lode 2
+        /// </summary>
+        /// <remarks>
+        /// Sample Use Case - You want to find out data about all Events that reward a Memory Lode 2.
+        /// - You can straight away call this api: api/v1.0/Events/MemoryLode2";
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/MemoryLode2 (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_MemoryLode2)]
         [SwaggerOperation(nameof(GetEventsByMemoryLode2))]
@@ -236,6 +394,18 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        /// Gets all Events that reward a Memory Lode 3
+        /// </summary>
+        /// <remarks>
+        /// Sample Use Case - You want to find out data about all Events that reward a Memory Lode 3.
+        /// - You can straight away call this api: api/v1.0/Events/MemoryLode3";
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/MemoryLode3 (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_MemoryLode3)]
         [SwaggerOperation(nameof(GetEventsByMemoryLode3))]
@@ -251,6 +421,19 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        /// Gets all Events that reward Wardrobe Records for Characters whose name contains the provided name text (case is ignored)
+        /// </summary>
+        /// <remarks>
+        /// Sample Use Case - You want to find out data about all Events that reward Wardrobe Records for a Character whose name includes "Cid".
+        /// - You can straight away call this api: api/v1.0/Events/WardrobeRecord/cid";
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/WardrobeRecord/cid (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <param name="characterName">the string that must be a part of a Character's name that has a Wardrobe Record rewarded in an Event for that Event to be returned by this api call.</param>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_WardrobeRecord)]
         [SwaggerOperation(nameof(GetEventsByWardrobeRecord))]
@@ -266,6 +449,19 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        /// Gets all Events that reward Abilities whose name contains the provided name text (case is ignored)
+        /// </summary>
+        /// <remarks>
+        /// Sample Use Case - You want to find out data about all Events that reward Abilities whose name includes "Fir".
+        /// - You can straight away call this api: api/v1.0/Events/Abilities/fir";
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/Abilities/fir (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <param name="abilityName">the string that must be a part of an Ability's name that is awarded in an Event for that Event to be returned by this api call.</param>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_Abilities)]
         [SwaggerOperation(nameof(GetEventsByAbilities))]
