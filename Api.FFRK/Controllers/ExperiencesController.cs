@@ -42,8 +42,20 @@ namespace FFRKApi.Api.FFRK.Controllers
 
         #region IExperiencesController Implementation
 
+        /// <summary>
+        /// Gets all (there is only one) Experience records.
+        /// </summary>
+        /// <remarks>
+        /// Use Case - There is only one experience record because it contains the entire experience table from Enlir showing 
+        /// you how much experience is required to level up Tyro, All other characters (as a group), and Magicites.
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Experiences (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;D.Experience&gt;</see>
+        /// </response>
         [HttpGet]
-        [Route(RouteConstants.EventsRoute_All)]
+        [Route(RouteConstants.ExperiencesRoute_All)]
         [SwaggerOperation(nameof(GetAllExperiences))]
         [ProducesResponseType(typeof(IEnumerable<D.Experience>), (int)HttpStatusCode.OK)]
         public IActionResult GetAllExperiences()

@@ -213,7 +213,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// - MasteryRewardsElite (only the first in the list is considered)
         /// 
         /// Any of the above considered fields that you leave blank in the template object are NOT considered as part of the search. 
-        /// Any of the above considered fields that you specify in the template object must ALL be matched by any Ability in order for it to be returned in the search.
+        /// Any of the above considered fields that you specify in the template object must ALL be matched by any Dungeon in order for it to be returned in the search.
         /// <br /> 
         /// Sample Use Case - You want to find out data about all Dungeons in Realm VI whose Elite Difficulty is lesas than 120
         /// - You first call Type List Apis to get the ids for RealmType = VI (the id is 6 in this case)
@@ -229,7 +229,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         ///     <see>IEnumerable&lt;D.Dungeon&gt;</see>
         /// </response>
         [HttpPost]
-        [Route(RouteConstants.CharactersRoute_Search)]
+        [Route(RouteConstants.DungeonsRoute_Search)]
         [SwaggerOperation(nameof(GetDungeonsBySearch))]
         [ProducesResponseType(typeof(IEnumerable<D.Dungeon>), (int)HttpStatusCode.OK)]
         public IActionResult GetDungeonsBySearch([FromBody]D.Dungeon searchPrototype)

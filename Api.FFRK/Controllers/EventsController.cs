@@ -425,7 +425,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// Gets all Events that reward Wardrobe Records for Characters whose name contains the provided name text (case is ignored)
         /// </summary>
         /// <remarks>
-        /// Sample Use Case - You want to find out data about all Events that reward Wardrobe Records for a Character whose name includes "Cid".
+        /// Sample Use Case - You want to find out data about all Events that reward Wardrobe Records for an Event whose name includes "Cid".
         /// - You can straight away call this api: api/v1.0/Events/WardrobeRecord/cid";
         /// <br /> 
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/WardrobeRecord/cid (or use Try It Out to see data in this page)
