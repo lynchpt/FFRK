@@ -58,7 +58,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Abilities (or use Try It Out to see data in this page)
         /// </remarks>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Ability&gt;</see>
+        ///     <see>IEnumerable&lt;Ability&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.AbilitiesRoute_All)]
@@ -88,7 +88,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="abilityId">the integer id for the desired Ability; it can be found in the Ability IdList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Ability&gt;</see>
+        ///     <see>IEnumerable&lt;Ability&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.AbilitiesRoute_Id)]
@@ -118,7 +118,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="abilityType">the integer id for the desired AbilityType; it can be found in the AbilityType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Ability&gt;</see>
+        ///     <see>IEnumerable&lt;Ability&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.AbilitiesRoute_AbilityType)]
@@ -146,7 +146,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="rarity">the integer rarity that all returned Abilities need to share</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Ability&gt;</see>
+        ///     <see>IEnumerable&lt;Ability&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.AbilitiesRoute_Rarity)]
@@ -176,7 +176,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="schoolType">the integer id for the desired SchoolType; it can be found in the SchoolType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Ability&gt;</see>
+        ///     <see>IEnumerable&lt;Ability&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.AbilitiesRoute_School)]
@@ -206,7 +206,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="elementType">the integer id for the desired ElementType; it can be found in the ElementType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Ability&gt;</see>
+        ///     <see>IEnumerable&lt;Ability&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.AbilitiesRoute_Element)]
@@ -254,7 +254,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="searchPrototype">the Ability object that contains the search criteria</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Ability&gt;</see>
+        ///     <see>IEnumerable&lt;Ability&gt;</see>
         /// </response>
         [HttpPost]
         [Route(RouteConstants.AbilitiesRoute_Search)]

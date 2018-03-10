@@ -66,7 +66,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Dungeons (or use Try It Out to see data in this page)
         /// </remarks>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        ///     <see>IEnumerable&lt;Event&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_All)]
@@ -96,7 +96,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="eventId">the integer id for the desired Event; it can be found in the Event IdList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        ///     <see>IEnumerable&lt;Event&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_Id)]
@@ -124,7 +124,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="eventName">the string that must be a part of a Events's name in order for it to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        ///     <see>IEnumerable&lt;Event&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_Name)]
@@ -154,7 +154,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="realmType">the integer id for the desired Realm; it can be found in the RealmType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        ///     <see>IEnumerable&lt;Event&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_RealmType)]
@@ -184,7 +184,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="eventType">the integer id for the desired EventType; it can be found in the EventType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        ///     <see>IEnumerable&lt;Event&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_EventType)]
@@ -212,7 +212,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="characterName">the string that must be a part of a Character's name that has a Hero Record rewarded in an Event for that Event to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        ///     <see>IEnumerable&lt;Event&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_HeroRecords)]
@@ -240,7 +240,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="characterName">the string that must be a part of a Character's name that has a Memory Crystal 1 rewarded in an Event for that Event to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        ///     <see>IEnumerable&lt;Event&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_MemoryCrystal1)]
@@ -268,7 +268,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="characterName">the string that must be a part of a Character's name that has a Memory Crystal 2 rewarded in an Event for that Event to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        ///     <see>IEnumerable&lt;Event&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_MemoryCrystal2)]
@@ -296,7 +296,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="characterName">the string that must be a part of a Character's name that has a Memory Crystal 3 rewarded in an Event for that Event to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        ///     <see>IEnumerable&lt;Event&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_MemoryCrystal3)]
@@ -323,7 +323,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/SoulOfHero (or use Try It Out to see data in this page)
         /// </remarks>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        ///     <see>IEnumerable&lt;Event&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_SoulOfHero)]
@@ -350,7 +350,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/MemoryLode1 (or use Try It Out to see data in this page)
         /// </remarks>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        ///     <see>IEnumerable&lt;Event&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_MemoryLode1)]
@@ -377,7 +377,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/MemoryLode2 (or use Try It Out to see data in this page)
         /// </remarks>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        ///     <see>IEnumerable&lt;Event&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_MemoryLode2)]
@@ -404,7 +404,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/MemoryLode3 (or use Try It Out to see data in this page)
         /// </remarks>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        ///     <see>IEnumerable&lt;Event&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_MemoryLode3)]
@@ -432,7 +432,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="characterName">the string that must be a part of a Character's name that has a Wardrobe Record rewarded in an Event for that Event to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        ///     <see>IEnumerable&lt;Event&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_WardrobeRecord)]
@@ -460,7 +460,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="abilityName">the string that must be a part of an Ability's name that is awarded in an Event for that Event to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Event&gt;</see>
+        ///     <see>IEnumerable&lt;Event&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.EventsRoute_Abilities)]

@@ -58,7 +58,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Dungeons (or use Try It Out to see data in this page)
         /// </remarks>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Dungeon&gt;</see>
+        ///     <see>IEnumerable&lt;Dungeon&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.DungeonsRoute_All)]
@@ -88,7 +88,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="dungeonId">the integer id for the desired Dungeon; it can be found in the Dungeon IdList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Dungeon&gt;</see>
+        ///     <see>IEnumerable&lt;Dungeon&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.DungeonsRoute_Id)]
@@ -118,7 +118,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="realmType">the integer id for the desired Realm; it can be found in the RealmType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Dungeon&gt;</see>
+        ///     <see>IEnumerable&lt;Dungeon&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.DungeonsRoute_RealmType)]
@@ -146,7 +146,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="dungeonName">the string that must be a part of a Dungeon's name in order for them to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Dungeon&gt;</see>
+        ///     <see>IEnumerable&lt;Dungeon&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.DungeonsRoute_Name)]
@@ -177,7 +177,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// <param name="itemName">the string that must be a part of one of the Dungeon's reward items in order for the Dungeon to be returned by this api call.</param>
         /// <param name="starlevel">the integer star level of the item; use 0 if the item has no star level (like Mythril, for example).</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Dungeon&gt;</see>
+        ///     <see>IEnumerable&lt;Dungeon&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.DungeonsRoute_Rewards)]
@@ -226,7 +226,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="searchPrototype">the Dungeon object that contains the search criteria</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Dungeon&gt;</see>
+        ///     <see>IEnumerable&lt;Dungeon&gt;</see>
         /// </response>
         [HttpPost]
         [Route(RouteConstants.DungeonsRoute_Search)]

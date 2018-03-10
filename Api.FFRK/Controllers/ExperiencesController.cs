@@ -52,7 +52,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Experiences (or use Try It Out to see data in this page)
         /// </remarks>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Experience&gt;</see>
+        ///     <see>IEnumerable&lt;Experience&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.ExperiencesRoute_All)]

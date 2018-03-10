@@ -51,6 +51,8 @@ namespace FFRKApi.Api.FFRK.Constants
         public const string TypeListsRoute_SoulBreakTierType = "SoulBreakTierType";
         public const string TypeListsRoute_TargetType = "TargetType";
 
+        #region MyRegion
+
         //Abilities Routes
         public const string AbilitiesRoute_All = "";
         public const string AbilitiesRoute_Id = "{abilityId}";
@@ -169,7 +171,7 @@ namespace FFRKApi.Api.FFRK.Constants
         public const string MissionsRoute_Event = "Event/{eventId}";
         public const string MissionsRoute_Description = "Description/{description}";
         public const string MissionsRoute_Reward = "Reward/{rewardName}";
-
+        #endregion
 
         //Others Routes
         public const string OthersRoute_All = "";

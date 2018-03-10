@@ -60,7 +60,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Commands (or use Try It Out to see data in this page)
         /// </remarks>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Command&gt;</see>
+        ///     <see>IEnumerable&lt;Command&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.CommandsRoute_All)]
@@ -90,7 +90,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="commandId">the integer id for the desired Command; it can be found in the Command IdList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Command&gt;</see>
+        ///     <see>IEnumerable&lt;Command&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.CommandsRoute_Id)]
@@ -120,7 +120,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="abilityType">the integer id for the desired AbilityType; it can be found in the AbilityType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Command&gt;</see>
+        ///     <see>IEnumerable&lt;Command&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.CommandsRoute_AbilityType)]
@@ -150,7 +150,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="characterId">the integer id for the desired Character; it can be found in the Character IdList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Command&gt;</see>
+        ///     <see>IEnumerable&lt;Command&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.CommandsRoute_Character)]
@@ -180,7 +180,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="schoolType">the integer id for the desired School; it can be found in the SchoolType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Command&gt;</see>
+        ///     <see>IEnumerable&lt;Command&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.CommandsRoute_School)]
@@ -210,7 +210,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="elementType">the integer id for the desired Element; it can be found in the ElementType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Command&gt;</see>
+        ///     <see>IEnumerable&lt;Command&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.CommandsRoute_Element)]
@@ -257,7 +257,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="searchPrototype">the Command object that contains the search criteria</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Command&gt;</see>
+        ///     <see>IEnumerable&lt;Command&gt;</see>
         /// </response>
         [HttpPost]
         [Route(RouteConstants.CommandsRoute_Search)]

@@ -74,7 +74,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/LegendMaterias (or use Try It Out to see data in this page)
         /// </remarks>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Magicites&gt;</see>
+        ///     <see>IEnumerable&lt;Magicite&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.MagicitesRoute_All)]
@@ -104,7 +104,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="magiciteId">the integer id for the desired Magicite; it can be found in the Magicite IdList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Magicite&gt;</see>
+        ///     <see>IEnumerable&lt;Magicite&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.MagicitesRoute_Id)]
@@ -132,7 +132,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="magiciteName">the string that must be a part of a Magicites's name in order for it to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Magicite&gt;</see>
+        ///     <see>IEnumerable&lt;Magicite&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.MagicitesRoute_Name)]
@@ -162,7 +162,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="realmType">the integer id for the desired Realm; it can be found in the RealmType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Magicite&gt;</see>
+        ///     <see>IEnumerable&lt;Magicite&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.MagicitesRoute_RealmType)]
@@ -190,7 +190,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="rarity">the integer rarity level (equates to star level) of the Magicites to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Magicite&gt;</see>
+        ///     <see>IEnumerable&lt;Magicite&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.MagicitesRoute_Rarity)]
@@ -220,7 +220,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="elementType">the integer id for the desired ElementType; it can be found in the ElementType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Magicite&gt;</see>
+        ///     <see>IEnumerable&lt;Magicite&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.MagicitesRoute_Element)]
@@ -248,7 +248,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="effectText">the string that must be a part of a Magicites's Passive Effect text in order for it to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.LegendMateria&gt;</see>
+        ///     <see>IEnumerable&lt;Magicite&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.MagicitesRoute_Effect)]
@@ -278,7 +278,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="ultraSkillName">the string that must be a part of a Magicites Ultra Skill's name in order for it to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Magicite&gt;</see>
+        ///     <see>IEnumerable&lt;Magicite&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.MagicitesUltraSkillRoute_Name)]
@@ -308,7 +308,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="abilityType">the integer id for the desired AbilityType; it can be found in the AbilityType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Magicite&gt;</see>
+        ///     <see>IEnumerable&lt;Magicite&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.MagicitesUltraSkillRoute_AbilityType)]
@@ -338,7 +338,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="elementType">the integer id for the desired ElementType; it can be found in the ElementType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Magicite&gt;</see>
+        ///     <see>IEnumerable&lt;Magicite&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.MagicitesUltraSkillRoute_Element)]
@@ -366,7 +366,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="effectText">the string that must be a part of a Magicites's Ultra Skill's Effect text in order for it to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Magicite&gt;</see>
+        ///     <see>IEnumerable&lt;Magicite&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.MagicitesUltraSkillRoute_Effect)]
@@ -398,7 +398,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="magiciteSkillId">the integer id for the desired MagiciteSkill; it can be found in the MagiciteSkill IdList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Magicite&gt;</see>
+        ///     <see>IEnumerable&lt;Magicite&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.MagicitesMagiciteSkillRoute_Id)]
@@ -426,7 +426,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="magiciteSkillName">the string that must be a part of a Magicites's Magicite Skill name in order for it to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Magicite&gt;</see>
+        ///     <see>IEnumerable&lt;Magicite&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.MagicitesMagiciteSkillRoute_Name)]
@@ -456,7 +456,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="abilityType">the integer id for the desired AbilityType; it can be found in the AbilityType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Magicite&gt;</see>
+        ///     <see>IEnumerable&lt;Magicite&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.MagicitesMagiciteSkillRoute_AbilityType)]
@@ -486,7 +486,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="elementType">the integer id for the desired ElementType; it can be found in the ElementType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Magicite&gt;</see>
+        ///     <see>IEnumerable&lt;Magicite&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.MagicitesMagiciteSkillRoute_Element)]
@@ -514,7 +514,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="effectText">the string that must be a part of a Magicites's Magicite Skill's Effect text in order for it to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Magicite&gt;</see>
+        ///     <see>IEnumerable&lt;Magicite&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.MagicitesMagiciteSkillRoute_Effect)]

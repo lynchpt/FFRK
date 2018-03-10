@@ -58,7 +58,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/LegendSpheres (or use Try It Out to see data in this page)
         /// </remarks>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.LegendSphere&gt;</see>
+        ///     <see>IEnumerable&lt;LegendSphere&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.LegendSpheresRoute_All)]
@@ -88,7 +88,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="legendSphereId">the integer id for the desired LegendSphere; it can be found in the LegendSphere IdList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.LegendSphere&gt;</see>
+        ///     <see>IEnumerable&lt;LegendSphere&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.LegendSpheresRoute_Id)]
@@ -118,7 +118,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="realmType">the integer id for the desired Realm; it can be found in the RealmType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.LegendSphere&gt;</see>
+        ///     <see>IEnumerable&lt;LegendSphere&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.LegendSpheresRoute_RealmType)]
@@ -148,7 +148,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="characterId">the integer id for the desired Character; it can be found in the Character IdList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.LegendSphere&gt;</see>
+        ///     <see>IEnumerable&lt;LegendSphere&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.LegendSpheresRoute_Character)]
@@ -176,7 +176,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="benefit">the string that must be a part of a LegendSpheres's Benefit text in order for it to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.LegendSphere&gt;</see>
+        ///     <see>IEnumerable&lt;LegendSphere&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.LegendSpheresRoute_Benefit)]
@@ -208,7 +208,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// <param name="moteType1">the (complete) string value of the first type of mote the LegendSphere uses</param>
         /// <param name="moteType2">the (complete) string value of the second type of mote the LegendSphere uses</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.LegendSphere&gt;</see>
+        ///     <see>IEnumerable&lt;LegendSphere&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.LegendSpheresRoute_RequiredMotes)]
@@ -246,7 +246,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="searchPrototype">the LegendSphere object that contains the search criteria</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.LegendSphere&gt;</see>
+        ///     <see>IEnumerable&lt;LegendSphere&gt;</see>
         /// </response>
         [HttpPost]
         [Route(RouteConstants.LegendSpheresRoute_Search)]

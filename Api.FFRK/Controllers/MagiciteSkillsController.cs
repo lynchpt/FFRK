@@ -43,6 +43,18 @@ namespace FFRKApi.Api.FFRK.Controllers
 
         #region IMagiciteSkillsController Implementation
 
+        /// <summary>
+        /// Gets all MagiciteSkills and their properties
+        /// </summary>
+        /// <remarks>
+        /// Use Case - If you only need to access details for a small number of MagiciteSkills, it is faster to get each individual ability MagiciteSkills using a separate api call, but if 
+        /// you need to access most of them, it will be faster to call this api to get them all at once and store them locally so you can use them repeatedly.
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/MagiciteSkills (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;MagiciteSkill&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.MagiciteSkillsRoute_All)]
         [SwaggerOperation(nameof(GetAllMagiciteSkills))]
@@ -58,6 +70,21 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        /// Gets one MagiciteSkill by its unique id
+        /// </summary>
+        /// <remarks>
+        /// Sample Use Case - You want to find out data about the King Bomb (XII) MagiciteSkill Short Fuse.
+        /// - You first call /api/v1.0/IdLists/MagiciteSkill to get the proper IdList
+        /// - Then you look up the integer Key associated with the Value that contains "King Bomb" and "Short Fuse" in the IdList (the id is 19 in this case)
+        /// - Finally you call this api: api/v1.0/MagiciteSkills/19
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/MagiciteSkills/19 (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <param name="magiciteSkillId">the integer id for the desired MagiciteSkill; it can be found in the MagiciteSkill IdList</param>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;MagiciteSkill&gt;</see>
+        /// </response>
         [HttpGet]
         [Route(RouteConstants.MagiciteSkillsRoute_Id)]
         [SwaggerOperation(nameof(GetMagiciteSkillsById))]

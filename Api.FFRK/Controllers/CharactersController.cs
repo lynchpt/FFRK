@@ -59,7 +59,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Characters (or use Try It Out to see data in this page)
         /// </remarks>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Character&gt;</see>
+        ///     <see>IEnumerable&lt;Character&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.CharactersRoute_All)]
@@ -89,7 +89,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="characterId">the integer id for the desired Character; it can be found in the Character IdList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Character&gt;</see>
+        ///     <see>IEnumerable&lt;Character&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.CharactersRoute_Id)]
@@ -119,7 +119,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="realmType">the integer id for the desired Realm; it can be found in the RealmType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Character&gt;</see>
+        ///     <see>IEnumerable&lt;Character&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.CharactersRoute_RealmType)]
@@ -147,7 +147,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="characterName">the string that must be a part of a Character's name in order for them to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Character&gt;</see>
+        ///     <see>IEnumerable&lt;Character&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.CharactersRoute_Name)]
@@ -177,7 +177,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="equipmentType">the integer id for the desired EquipmentType; it can be found in the EquipmentType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Character&gt;</see>
+        ///     <see>IEnumerable&lt;Character&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.CharactersRoute_Equipment)]
@@ -208,7 +208,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// <param name="schoolType">the integer id for the desired SchoolType; it can be found in the SchoolType TypeList</param>
         /// <param name="schoolMinLevel">the integer that specifies the minimum access level to an Ability School that a Character needs to be returned from this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Character&gt;</see>
+        ///     <see>IEnumerable&lt;Character&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.CharactersRoute_School)]
@@ -248,7 +248,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="searchPrototype">the Character object that contains the search criteria</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.Characters&gt;</see>
+        ///     <see>IEnumerable&lt;Characters&gt;</see>
         /// </response>
         [HttpPost]
         [Route(RouteConstants.CharactersRoute_Search)]

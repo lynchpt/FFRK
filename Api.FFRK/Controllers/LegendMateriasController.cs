@@ -61,7 +61,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/LegendMaterias (or use Try It Out to see data in this page)
         /// </remarks>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.LegendMateria&gt;</see>
+        ///     <see>IEnumerable&lt;LegendMateria&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.LegendMateriasRoute_All)]
@@ -91,7 +91,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="legendMateriaId">the integer id for the desired LegendMateria; it can be found in the LegendMateria IdList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.LegendMateria&gt;</see>
+        ///     <see>IEnumerable&lt;LegendMateria&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.LegendMateriasRoute_Id)]
@@ -119,7 +119,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="legendMateriaName">the string that must be a part of a LegendMateria's name in order for them to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.LegendMateria&gt;</see>
+        ///     <see>IEnumerable&lt;LegendMateria&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.LegendMateriasRoute_Name)]
@@ -149,7 +149,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="realmType">the integer id for the desired Realm; it can be found in the RealmType TypeList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.LegendMateria&gt;</see>
+        ///     <see>IEnumerable&lt;LegendMateria&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.LegendMateriasRoute_RealmType)]
@@ -179,7 +179,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="characterId">the integer id for the desired Character; it can be found in the Character IdList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.LegendMateria&gt;</see>
+        ///     <see>IEnumerable&lt;LegendMateria&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.LegendMateriasRoute_Character)]
@@ -207,7 +207,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="effectText">the string that must be a part of a LegendMateria's Effect text in order for it to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.LegendMateria&gt;</see>
+        ///     <see>IEnumerable&lt;LegendMateria&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.LegendMateriasRoute_Effect)]
@@ -235,7 +235,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="effectText">the string that must be a part of a LegendMateria's MasteryBonus text in order for it to be returned by this api call.</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.LegendMateria&gt;</see>
+        ///     <see>IEnumerable&lt;LegendMateria&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.LegendMateriasRoute_MasteryBonus)]
@@ -265,7 +265,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="relicId">the integer id for the desired Relic; it can be found in the Relic IdList</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.LegendMateria&gt;</see>
+        ///     <see>IEnumerable&lt;LegendMateria&gt;</see>
         /// </response>
         [HttpGet]
         [Route(RouteConstants.LegendMateriasRoute_Relic)]
@@ -307,7 +307,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </remarks>
         /// <param name="searchPrototype">the LegendMateria object that contains the search criteria</param>
         /// <response code="200">
-        ///     <see>IEnumerable&lt;D.LegendMateria&gt;</see>
+        ///     <see>IEnumerable&lt;LegendMateria&gt;</see>
         /// </response>
         [HttpPost]
         [Route(RouteConstants.LegendMateriasRoute_Search)]
