@@ -199,10 +199,10 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// <remarks>
         /// Sample Use Case - You want to find out data about all Abilities that have an ElementType of "Fire"
         /// - You first call /api/v1.0/TypeLists/ElementType to get the proper TypeList
-        /// - Then you look up the integer Key associated with the Value of "Fire" in the TypeList (the id is 4 in this case)
-        /// - Finally you call this api: api/v1.0/Abilities/Element/4;
+        /// - Then you look up the integer Key associated with the Value of "Fire" in the TypeList (the id is 5 in this case)
+        /// - Finally you call this api: api/v1.0/Abilities/Element/5;
         /// <br /> 
-        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Abilities/Element/4 (or use Try It Out to see data in this page)
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Abilities/Element/5 (or use Try It Out to see data in this page)
         /// </remarks>
         /// <param name="elementType">the integer id for the desired ElementType; it can be found in the ElementType TypeList</param>
         /// <response code="200">
