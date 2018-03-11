@@ -32,11 +32,12 @@ namespace FFRKApi.Model.EnlirTransform.IdLists
                                                                     new KeyValuePair<int, string>(20, "Core"),
                                                                     new KeyValuePair<int, string>(21, "IV:TAY"),
                                                                     new KeyValuePair<int, string>(22, "CC:VII"),
-                                                                    new KeyValuePair<int, string>(23, "DC:VII"),
+                                                                    new KeyValuePair<int, string>(23, "DoC:VII"),
                                                                     new KeyValuePair<int, string>(24, "X-2"),
                                                                     new KeyValuePair<int, string>(25, "XIII-2"),
-                                                                    new KeyValuePair<int, string>(26, "-")
-                                                                   
+                                                                    new KeyValuePair<int, string>(26, "-"),
+                                                                    new KeyValuePair<int, string>(27, String.Empty)
+
 
                                                              };
 

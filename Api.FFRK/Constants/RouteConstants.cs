@@ -51,8 +51,6 @@ namespace FFRKApi.Api.FFRK.Constants
         public const string TypeListsRoute_SoulBreakTierType = "SoulBreakTierType";
         public const string TypeListsRoute_TargetType = "TargetType";
 
-        #region MyRegion
-
         //Abilities Routes
         public const string AbilitiesRoute_All = "";
         public const string AbilitiesRoute_Id = "{abilityId}";
@@ -219,8 +217,6 @@ namespace FFRKApi.Api.FFRK.Constants
         //statType = [acc, atk, def, eva, mag, mnd, res]
         public const string RelicsRoute_Stat = "Stat/{statSetType}/{statType}/{statValue}";
         public const string RelicsRoute_Search = "Search"; //POST
-
-        #endregion
 
         //SoulBreaks Routes
         public const string SoulBreaksRoute_All = "";

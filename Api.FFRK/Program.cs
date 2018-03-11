@@ -54,6 +54,8 @@ namespace FFRKApi.Api.FFRK
                 builder.AddJsonFile($"{ConfigFileName}.{ConfigFileExtension}");
             }
 
+            builder.AddEnvironmentVariables();
+
             return builder;
         }
     }
