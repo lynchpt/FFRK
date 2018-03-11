@@ -112,8 +112,8 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// Gets all LegendMaterias whose name contains the provided name text (case is ignored)
         /// </summary>
         /// <remarks>
-        /// Sample Use Case - You want to find out data about all Dungeons with "Warrior" in their name.
-        /// - You can straight away call this api: api/v1.0/Dungeons/Name/lunar";
+        /// Sample Use Case - You want to find out data about all LegendMaterias with "Warrior" in their name.
+        /// - You can straight away call this api: api/v1.0/LegendMaterias/Name/warrior";
         /// <br /> 
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/LegendMaterias/Name/warrior (or use Try It Out to see data in this page)
         /// </remarks>
@@ -229,11 +229,11 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </summary>
         /// <remarks>
         /// Sample Use Case - You want to find out data about all LegendMaterias with "MND" as the stat improved upon mastery.
-        /// - You can straight away call this api: api/v1.0/LegendMaterias/Effect/dualcast";
+        /// - You can straight away call this api: api/v1.0/LegendMaterias/MasteryBonus/mnd";
         /// <br /> 
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/LegendMaterias/MasteryBonus/mnd (or use Try It Out to see data in this page)
         /// </remarks>
-        /// <param name="effectText">the string that must be a part of a LegendMateria's MasteryBonus text in order for it to be returned by this api call.</param>
+        /// <param name="masteryBonusText">the string that must be a part of a LegendMateria's MasteryBonus text in order for it to be returned by this api call.</param>
         /// <response code="200">
         ///     <see>IEnumerable&lt;LegendMateria&gt;</see>
         /// </response>

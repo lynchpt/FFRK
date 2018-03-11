@@ -171,7 +171,7 @@ namespace FFRKApi.Api.FFRK.Constants
         public const string MissionsRoute_Event = "Event/{eventId}";
         public const string MissionsRoute_Description = "Description/{description}";
         public const string MissionsRoute_Reward = "Reward/{rewardName}";
-        #endregion
+
 
         //Others Routes
         public const string OthersRoute_All = "";
@@ -182,6 +182,7 @@ namespace FFRKApi.Api.FFRK.Constants
         public const string OthersRoute_School = "School/{schoolType}";
         public const string OthersRoute_Element = "Element/{elementType}";
         public const string OthersRoute_Effect = "Effect/{effectText}";
+ 
 
         //RecordMaterias Routes
         public const string RecordMateriasRoute_All = "";
@@ -193,7 +194,6 @@ namespace FFRKApi.Api.FFRK.Constants
         public const string RecordMateriasRoute_Unlock = "Unlock/{unlockText}";
         public const string RecordMateriasRoute_Search = "Search"; //POST
 
-
         //RecordSpheres Routes
         public const string RecordSpheresRoute_All = "";
         public const string RecordSpheresRoute_Id = "{recordSphereId}";
@@ -202,7 +202,6 @@ namespace FFRKApi.Api.FFRK.Constants
         public const string RecordSpheresRoute_Benefit = "Benefit/{benefit}";
         public const string RecordSpheresRoute_RequiredMotes = "RequiredMotes/{moteType1}/{moteType2}";
         public const string RecordSpheresRoute_Search = "Search"; //POST
-
 
         //Relics Routes
         public const string RelicsRoute_All = "";
@@ -220,6 +219,8 @@ namespace FFRKApi.Api.FFRK.Constants
         //statType = [acc, atk, def, eva, mag, mnd, res]
         public const string RelicsRoute_Stat = "Stat/{statSetType}/{statType}/{statValue}";
         public const string RelicsRoute_Search = "Search"; //POST
+
+        #endregion
 
         //SoulBreaks Routes
         public const string SoulBreaksRoute_All = "";

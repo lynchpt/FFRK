@@ -170,11 +170,11 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// </summary>
         /// <remarks>
         /// Sample Use Case - You want to find out data about all LegendSpheres with "Silence Imm" as their benefit.
-        /// - You can straight away call this api: api/v1.0/LegendMaterias/LegendSpheres/dualcast";
+        /// - You can straight away call this api: api/v1.0/LegendMaterias/LegendSpheres/silence%20imm";
         /// <br /> 
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/LegendSpheres/Benefit/silence%20imm (or use Try It Out to see data in this page)
         /// </remarks>
-        /// <param name="benefit">the string that must be a part of a LegendSpheres's Benefit text in order for it to be returned by this api call.</param>
+        /// <param name="benefit">the string that must be a part of a LegendSphere's Benefit text in order for it to be returned by this api call.</param>
         /// <response code="200">
         ///     <see>IEnumerable&lt;LegendSphere&gt;</see>
         /// </response>

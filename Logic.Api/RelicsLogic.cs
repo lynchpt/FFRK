@@ -387,31 +387,31 @@ namespace FFRKApi.Logic.Api
 
             if (searchPrototype.Accuracy != 0)
             {
-                query = query.Where(a => a.Accuracy == searchPrototype.Accuracy);
+                query = query.Where(a => a.Accuracy <= searchPrototype.Accuracy);
             }
             if (searchPrototype.Attack != 0)
             {
-                query = query.Where(a => a.Attack == searchPrototype.Attack);
+                query = query.Where(a => a.Attack <= searchPrototype.Attack);
             }
             if (searchPrototype.Defense != 0)
             {
-                query = query.Where(a => a.Defense == searchPrototype.Defense);
+                query = query.Where(a => a.Defense <= searchPrototype.Defense);
             }
             if (searchPrototype.Evasion != 0)
             {
-                query = query.Where(a => a.Evasion == searchPrototype.Evasion);
+                query = query.Where(a => a.Evasion <= searchPrototype.Evasion);
             }
             if (searchPrototype.Magic != 0)
             {
-                query = query.Where(a => a.Magic == searchPrototype.Magic);
+                query = query.Where(a => a.Magic <= searchPrototype.Magic);
             }
             if (searchPrototype.Mind != 0)
             {
-                query = query.Where(a => a.Mind == searchPrototype.Mind);
+                query = query.Where(a => a.Mind <= searchPrototype.Mind);
             }
             if (searchPrototype.Resistance != 0)
             {
-                query = query.Where(a => a.Resistance == searchPrototype.Resistance);
+                query = query.Where(a => a.Resistance <= searchPrototype.Resistance);
             }
            
             return query;
