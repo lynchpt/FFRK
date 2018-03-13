@@ -8,9 +8,9 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp2.0\FFRKApi.Api.FFRK.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\netcoreapp2.0\FFRKApi.Api.FFRK.xml</DocumentationFile>
     <NoWarn>1701;1702;1705;1591</NoWarn>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\Release\netcoreapp2.0\</OutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -47,5 +47,12 @@
     <ProjectReference Include="..\Model.EnlirMerge\Model.EnlirMerge.csproj" />
     <ProjectReference Include="..\Model.EnlirTransform\Model.EnlirTransform.csproj" />
   </ItemGroup>
+
+  <!-- This was added to enure that the Swagger / Swashbuckle XML documentation file gets copied to the output directory on the build server for self contained build -->
+  <Target Name="CopyDocumentationFile" AfterTargets="ComputeFilesToPublish">
+    <ItemGroup>
+      <ResolvedFileToPublish Include="@(FinalDocFile)" RelativePath="@(FinalDocFile->'%(Filename)%(Extension)')" />
+    </ItemGroup>
+  </Target>
 
 </Project>

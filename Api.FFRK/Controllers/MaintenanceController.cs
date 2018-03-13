@@ -46,7 +46,9 @@ namespace FFRKApi.Api.FFRK.Controllers
             _maintenanceLogic.RefreshMergeResultsContainer();
 
             return new OkResult();
-        } 
+        }
+
+        //comment to force push to azure
         #endregion
     }
 }
