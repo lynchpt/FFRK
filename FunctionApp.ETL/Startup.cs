@@ -179,6 +179,8 @@ namespace FunctionApp.ETL
                     .SetBasePath(configFileDir)
                     .AddJsonFile($"{ConfigFileName}.{environmentName}.{ConfigFileExtension}", optional: true);
 
+                builder.AddEnvironmentVariables();
+
                 _configuration = builder.Build();
             }
             else
@@ -187,8 +189,12 @@ namespace FunctionApp.ETL
                     .SetBasePath(configFileDir)
                     .AddJsonFile($"{ConfigFileName}.{ConfigFileExtension}", optional: true);
 
+                builder.AddEnvironmentVariables();
+
                 _configuration = builder.Build();
             }
+
+           
         }
 
         private void ConfigureLogger(IServiceCollection services)
