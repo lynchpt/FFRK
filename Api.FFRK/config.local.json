@@ -3,21 +3,21 @@
     "MergeResultsStoragePath": "D:\\Temp\\FFRKApi\\MergeResults-{Date}.json"
   },
   "AzureBlobStorageOptions": {
-    "StorageAccountName": "ffrkstorage",
-    "ContainerName": "etl",
-    "ConnectionString": "DefaultEndpointsProtocol=https;AccountName=ffrkstorage;AccountKey=a8Eu/OG8HYM28X896q+7XTVnMaMGhEDSUkYmO0+wjPjpn1Is5HwQlqHYMcnvNubZleFJNl18GBL1fuFLMqYxrw==;EndpointSuffix=core.windows.net",
+    "StorageAccountName": "Placeholder",
+    "ContainerName": "Placeholder",
+    "ConnectionString": "Placeholder",
     "ImportResultsStoragePath": "Import\\ImportsResults-{Date}.json",
     "TransformResultsStoragePath": "Transform\\TransformResults-{Date}.json",
     "MergeResultsStoragePath": "Merge\\MergeResults-{Date}.json"
   },
   "LoggingOptions": {
     "LogFilePath": "FFRKApi.ETL.Log-{Date}.txt",
-    "ApplicationInsightsKey": "fd426711-00c7-467e-9741-2525dc798ab9",
+    "ApplicationInsightsKey": "Placeholder",
     "AppComponentName": "Api.FFRK"
   },
   "CachingOptions": {
-    "ConnectionString": "ffrkapi.redis.cache.windows.net:6379,password=tJOe5RcTWt/Mmy4lN/xBSz9AvIYlITKfkN7kgThGKpM=,ssl=False,allowAdmin=true,abortConnect=False",
+    "ConnectionString": "Placeholder",
     "DefaultTimeToLiveInHours": "2",
     "UseCache": "false"
-  } 
+  }
 }
