@@ -68,6 +68,8 @@ namespace Manager.EnlirETL
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile($"{ConfigFileName}.{environmentName}.{ConfigFileExtension}", optional: true);
 
+                builder.AddEnvironmentVariables();
+
                 _configuration = builder.Build();
             }
             else
@@ -75,6 +77,8 @@ namespace Manager.EnlirETL
                 var builder = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile($"{ConfigFileName}.{ConfigFileExtension}", optional: true);
+
+                builder.AddEnvironmentVariables();
 
                 _configuration = builder.Build();
             }
