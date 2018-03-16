@@ -26,9 +26,6 @@ namespace FFRKApi.Api.FFRK
         private const string LoggingOptionsAppComponentNameKey = "AppComponent";
         #endregion
 
-        //Comment 1 pre-token
-        //comment 2 post token
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
