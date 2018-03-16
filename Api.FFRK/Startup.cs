@@ -26,8 +26,6 @@ namespace FFRKApi.Api.FFRK
         private const string LoggingOptionsAppComponentNameKey = "AppComponent";
         #endregion
 
-        //Change to test push from work to GitHub
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
