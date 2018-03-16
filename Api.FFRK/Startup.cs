@@ -27,6 +27,7 @@ namespace FFRKApi.Api.FFRK
         #endregion
 
         //Adding change to trigger ability to load to GitHub
+        //trying to make master branch in this repo visible to VS
 
         public Startup(IConfiguration configuration)
         {
