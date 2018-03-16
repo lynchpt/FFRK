@@ -26,8 +26,7 @@ namespace FFRKApi.Api.FFRK
         private const string LoggingOptionsAppComponentNameKey = "AppComponent";
         #endregion
 
-        //Adding change to trigger ability to load to GitHub
-        //trying to make master branch in this repo visible to VS
+        //Change to test push from work to GitHub
 
         public Startup(IConfiguration configuration)
         {
