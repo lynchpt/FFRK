@@ -1,4 +1,4 @@
-# Final Fantasy Record Keeper (FFRK) Tools #
+()# Final Fantasy Record Keeper (FFRK) Tools #
 
 ## This project contains the code for tooling and services related to the Final Fantasy Record Keeper mobile game. ##
 
@@ -17,15 +17,28 @@
 
 ### There are three main components to the overall system, briefly described below. You can find further details as appropriate for each component in the wiki. ###
 
-### The REST Service Endpoint (Api.FFRK) ###
+### The REST Api Endpoint - Api.FFRK ###
 
 This is the component which will be most interesting to the majority of people. This REST api serves out game data related to the Final Fantasy Record Keeper (FFRK) mobile game. This includes data such as Characters, their Relics, the Soul Breaks attached to Relics, Abilities, Dungeons and more. 
 
-The service is currently hosted at: http://ffrkapi.azurewebsites.net/api/v1.0/, with an associated [Swagger page](http://ffrkapi.azurewebsites.net/swagger/ui/).
+The service is currently hosted at: http://ffrkapi.azurewebsites.net/api/v1.0/, with an associated [Swagger page](http://ffrkapi.azurewebsites.net/swagger/ui/). The Swagger page will show you all available api endpoints and give you instructions on how to call them.
 
 Important Note: As of Release, All data currently exposed via the api is sourced from [Enlir's magisterial spreadsheet](https://docs.google.com/spreadsheets/d/16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ). The whole FFRK community owes a debt to his work! In the future, I plan to add more data from other sources, and I will call these out as they come online.
 
-As noted above the service endpoints are organized around core entities/concepts in FFRK, like Characters, Relics, etc. There is one major difference between the data exposed by the api and the underlying data from Enlir. While the Enlir data is naturally entirely tabular, being hosted on a spreadsheet, the data from this api is highly relational and hierarchical. Please see the details in the wiki.
+As noted above the service endpoints are organized around core entities/concepts in FFRK, like Characters, Relics, etc. There is one major difference between the data exposed by the api and the underlying data from Enlir. While the Enlir data is naturally entirely tabular, being hosted on a spreadsheet, the data from this api is highly relational and hierarchical, and overall more friendly for programmatic use. Please see the details in the wiki.
+
+### The Extraction / Transform / Load (ETL) Process - Manager.ETL ###
+
+As mentioned above the Enlir data that the service uses is structured far differently than what the api wants to actually serve out to callers. The ETL Process extensively manipulates and massasges the Enlir data to turn it into the final desired structure, and then stores that structure where the REST Api can use it.
+
+This version of the ETL Process is implemented in a Console App, so anyone can download the code and run it locally.
+
+### The ETL Process, Azure Edition - FFRKLogicApp and FunctionApp.ETL ###
+
+This component does exactly what Manager.ETL does (and even uses the same business logic), but it is implemented using Azure Logic Apps and Azure Functions. FFRKLogicApp is not publically accessible, but you can see the Azure Function part of the solution in the FunctionApp.ETL project.
+
+
+
 
 
 
