@@ -192,13 +192,14 @@ namespace FFRKApi.Logic.EnlirTransform
         {
             IList<SchoolAccessInfo> schoolAccessInfos = new List<SchoolAccessInfo>()
                 {
-                    new SchoolAccessInfo(){School = 3, SchoolName = "Bard", AccessLevel = _intConverter.ConvertFromStringToInt(row.BardAccess)},
-                    new SchoolAccessInfo(){School = 4, SchoolName = "Black Magic", AccessLevel = _intConverter.ConvertFromStringToInt(row.BlackMagicAccess)},
-                    new SchoolAccessInfo(){School = 5, SchoolName = "Celerity", AccessLevel = _intConverter.ConvertFromStringToInt(row.CelerityAccess)},
-                    new SchoolAccessInfo(){School = 6, SchoolName = "Combat", AccessLevel = _intConverter.ConvertFromStringToInt(row.CombatAccess)},
-                    new SchoolAccessInfo(){School = 7, SchoolName = "Dancer", AccessLevel = _intConverter.ConvertFromStringToInt(row.DancerAccess)},
-                    new SchoolAccessInfo(){School = 8, SchoolName = "Darkness", AccessLevel = _intConverter.ConvertFromStringToInt(row.DarknessAccess)},
-                    new SchoolAccessInfo(){School = 9, SchoolName = "Dragoon", AccessLevel = _intConverter.ConvertFromStringToInt(row.DragoonAccess)},
+                    new SchoolAccessInfo(){School = 2, SchoolName = "Bard", AccessLevel = _intConverter.ConvertFromStringToInt(row.BardAccess)},
+                    new SchoolAccessInfo(){School = 3, SchoolName = "Black Magic", AccessLevel = _intConverter.ConvertFromStringToInt(row.BlackMagicAccess)},
+                    new SchoolAccessInfo(){School = 4, SchoolName = "Celerity", AccessLevel = _intConverter.ConvertFromStringToInt(row.CelerityAccess)},
+                    new SchoolAccessInfo(){School = 5, SchoolName = "Combat", AccessLevel = _intConverter.ConvertFromStringToInt(row.CombatAccess)},
+                    new SchoolAccessInfo(){School = 6, SchoolName = "Dancer", AccessLevel = _intConverter.ConvertFromStringToInt(row.DancerAccess)},
+                    new SchoolAccessInfo(){School = 7, SchoolName = "Darkness", AccessLevel = _intConverter.ConvertFromStringToInt(row.DarknessAccess)},
+                    new SchoolAccessInfo(){School = 8, SchoolName = "Dragoon", AccessLevel = _intConverter.ConvertFromStringToInt(row.DragoonAccess)},
+                    new SchoolAccessInfo(){School = 9, SchoolName = "Heavy", AccessLevel = _intConverter.ConvertFromStringToInt(row.HeavyAccess)},
                     new SchoolAccessInfo(){School = 10, SchoolName = "Knight", AccessLevel = _intConverter.ConvertFromStringToInt(row.KnightAccess)},
                     new SchoolAccessInfo(){School = 11, SchoolName = "Machinist", AccessLevel = _intConverter.ConvertFromStringToInt(row.MachinistAccess)},
                     new SchoolAccessInfo(){School = 12, SchoolName = "Monk", AccessLevel = _intConverter.ConvertFromStringToInt(row.MonkAccess)},
@@ -210,8 +211,8 @@ namespace FFRKApi.Logic.EnlirTransform
                     new SchoolAccessInfo(){School = 20, SchoolName = "Support", AccessLevel = _intConverter.ConvertFromStringToInt(row.SupportAccess)},
                     new SchoolAccessInfo(){School = 21, SchoolName = "Thief", AccessLevel = _intConverter.ConvertFromStringToInt(row.ThiefAccess)},
                     new SchoolAccessInfo(){School = 22, SchoolName = "White Magic", AccessLevel = _intConverter.ConvertFromStringToInt(row.WhiteMagicAccess)},
-                    new SchoolAccessInfo(){School = 23, SchoolName = "Witch", AccessLevel = _intConverter.ConvertFromStringToInt(row.WitchAccess)},
-                    new SchoolAccessInfo(){School = 24, SchoolName = "Heavy", AccessLevel = _intConverter.ConvertFromStringToInt(row.HeavyAccess)}
+                    new SchoolAccessInfo(){School = 23, SchoolName = "Witch", AccessLevel = _intConverter.ConvertFromStringToInt(row.WitchAccess)}
+                    
 
                 };
 
