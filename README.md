@@ -12,6 +12,7 @@
 - Please contact me via [Reddit](/u/lynchpt) if you are interested in contributing to this project by working on the code.
 - I'm looking forward to polishing this project to better serve the community, thus I can use your help in determining areas of focus. The Issues section of this wiki is well suited to this purpose. When you are using the Issues section to make requests, please include on of the following tags in the title of your Issue:
   - [Feature] : For when you would like me to add some new capability to the api.
+  - [Documentation] : For when you can't figure out how something works and you hope that more documentation might make it clearer.
   - [Bug] : For when the api is not giving the expected response or returns an error.
   - [Data] : For when the response is generally correct, but is missing an item or two. This can happen if the underlying data source that feeds the api has a small discrepancy.
 
