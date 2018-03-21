@@ -74,7 +74,7 @@ namespace FFRKApi.Logic.Api
                     MissionType = _enlirRepository.GetMergeResultsContainer().MissionTypeList,
                     OrbType = _enlirRepository.GetMergeResultsContainer().OrbTypeList,
                     RealmType = _enlirRepository.GetMergeResultsContainer().RealmList,
-                    RelicType = _enlirRepository.GetMergeResultsContainer().RelicIdList,
+                    RelicType = _enlirRepository.GetMergeResultsContainer().RelicTypeList,
                     SchoolType = _enlirRepository.GetMergeResultsContainer().SchoolList,
                     SoulBreakTierType = _enlirRepository.GetMergeResultsContainer().SoulBreakTierList,
                     TargetType = _enlirRepository.GetMergeResultsContainer().TargetTypeList
