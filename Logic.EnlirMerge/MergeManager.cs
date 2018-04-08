@@ -521,7 +521,11 @@ namespace FFRKApi.Logic.EnlirMerge
         {
             foreach (SoulBreak soulBreak in transformResults.SoulBreaks)
             {
-                soulBreak.Statuses = transformResults.Statuses.Where(s => !String.IsNullOrWhiteSpace(s.CommonName) && soulBreak.Effects.Contains(s.CommonName)).ToList();
+                IList<Status> potentialMatches = transformResults.Statuses.Where(s => !String.IsNullOrWhiteSpace(s.CommonName) && soulBreak.Effects.Contains(s.CommonName)).ToList();
+
+                IList<Status> processedMatches = ProcessStatusesToRemoveSuperfluousQuickCasts(potentialMatches);
+
+                soulBreak.Statuses = processedMatches;
 
                 _logger.LogDebug("wired up {StatusesCount} Statuses to SoulBreak {SoulBreak}", soulBreak.Statuses.Count(), soulBreak.Description);
             }
@@ -723,6 +727,38 @@ namespace FFRKApi.Logic.EnlirMerge
         }
 
 
+        private IList<Status> ProcessStatusesForSoulBreak(IList<Status> potentialMatches)
+        {
+            IList<Status> processedMatches = new List<Status>();
+
+            processedMatches = ProcessStatusesToRemoveSuperfluousQuickCasts(potentialMatches);
+
+            return processedMatches;
+        }
+
+        private IList<Status> ProcessStatusesToRemoveSuperfluousQuickCasts(IList<Status> potentialMatches)
+        {
+            IList<Status> processedMatches = potentialMatches;
+
+            //to avoid superflous matches like "Quick Cast 2" and "Quick Cast" when the effect text has "Quick Cast 2", find any statuses
+            //that differ only by having a number, find all Status containing Quick Cast, and take the longest
+            IList<Status> potentialMatchesContainingQuickCast = potentialMatches.Where(m => m.CommonName.Contains("Quick Cast")).ToList();
+
+            if (potentialMatchesContainingQuickCast.Any())
+            {
+                Status longestQuickCastMatch = potentialMatchesContainingQuickCast
+                    .OrderByDescending(s => s.CommonName.Length).FirstOrDefault();
+
+                //the ones that weren't the longest need to be removed, so get their ids
+                IList<Status> shorterQuickCastMatches = potentialMatchesContainingQuickCast
+                    .Except(new List<Status>() { longestQuickCastMatch }).ToList();
+
+                IList<int> idsForShorterQuickCastMatches = shorterQuickCastMatches.Select(s => s.Id).ToList();
+                processedMatches = potentialMatches.Where(s => !idsForShorterQuickCastMatches.Contains(s.Id)).ToList();
+            }
+
+            return processedMatches;
+        }
 
         #endregion
     }

@@ -6,7 +6,7 @@
     "StorageAccountName": "Placeholder",
     "ContainerName": "Placeholder",
     "ConnectionString": "Placeholder",
-    "ImportResultsStoragePath": "Import\\ImportsResults-{Date}.json",
+    "ImportResultsStoragePath": "Import\\ImportResults-{Date}.json",
     "TransformResultsStoragePath": "Transform\\TransformResults-{Date}.json",
     "MergeResultsStoragePath": "Merge\\MergeResults-{Date}.json"
   },

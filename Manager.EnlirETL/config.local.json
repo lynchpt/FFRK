@@ -8,7 +8,7 @@
     "AppComponentName": "Manager.EnlirETL"
   },
   "FileImportStorageOptions": {
-    "ImportResultsStoragePath": "D:\\Temp\\FFRKApi\\ImportsResults-{Date}.json"
+    "ImportResultsStoragePath": "D:\\Temp\\FFRKApi\\ImportResults-{Date}.json"
   },
   "FileTransformStorageOptions": {
     "TransformResultsStoragePath": "D:\\Temp\\FFRKApi\\TransformResults-{Date}.json"

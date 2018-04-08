@@ -5,7 +5,7 @@
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ"
   },
   "FileImportStorageOptions": {
-    "ImportResultsStoragePath": "D:\\Temp\\FFRKApi\\ImportsResults-{Date}.json"
+    "ImportResultsStoragePath": "D:\\Temp\\FFRKApi\\ImportResults-{Date}.json"
   },
   "FileTransformStorageOptions": {
     "TransformResultsStoragePath": "D:\\Temp\\FFRKApi\\TransformResults-{Date}.json"

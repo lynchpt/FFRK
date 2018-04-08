@@ -23,7 +23,8 @@ namespace FFRKApi.Model.EnlirTransform.IdLists
                                                                  new KeyValuePair<int, string>(12, "Tome of Trials, Vol. VII"),
                                                                  new KeyValuePair<int, string>(13, "Tome of Trials, Vol. VIII"),
                                                                  new KeyValuePair<int, string>(14, "Tome of Trials, Vol. IX"),
-                                                                 new KeyValuePair<int, string>(15, "Wayfarer")
+                                                                 new KeyValuePair<int, string>(15, "Wayfarer"),
+                                                                 new KeyValuePair<int, string>(16, "Boundless Tome")
 
                                                              };
 

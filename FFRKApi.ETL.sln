@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SheetsApiHelper", "SheetsApiHelper\SheetsApiHelper.csproj", "{1BD111AA-C246-474A-B6E2-F0B8F1DCE280}"
 EndProject
@@ -35,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dto.Api", "Dto.Api\Dto.Api.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model.Api", "Model.Api\Model.Api.csproj", "{F68BF87E-E265-41CB-850A-D3E5A11BB337}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic.Validation", "Logic.Validation\Logic.Validation.csproj", "{60374A41-850E-4119-90AA-B732A0FB57B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic.Validation", "Logic.Validation\Logic.Validation.csproj", "{60374A41-850E-4119-90AA-B732A0FB57B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
