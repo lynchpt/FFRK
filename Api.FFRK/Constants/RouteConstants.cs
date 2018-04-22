@@ -244,5 +244,25 @@ namespace FFRKApi.Api.FFRK.Constants
 
         //Maintenance Routes
         public const string MaintenanceRoute_DataStatus = "DataRefreshStatus";
+
+        //CharacterRatingRoutes
+        public const string CharacterRatingRoute_All = "";
+        public const string CharacterRatingRoute_Id = "{characterId}";
+        public const string CharacterRatingRoute_Name = "Name/characterName";
+        public const string CharacterRatingRoute_AltemaRatings = "AltemaRatings";
+        public const string CharacterRatingRoute_RatingPools = "RatingPools";
+
+        /*
+        IActionResult GetAltemaCharacterInfos();
+
+        IActionResult GetRatingPools();
+
+        IActionResult GetCharacterRatingContextInfos();
+
+        IActionResult GetCharacterRatingContextInfosByCharacterId(int characterId);
+
+        IActionResult GetCharacterRatingContextInfosByCharacterName(string characterName);
+         */
+
     }
 }

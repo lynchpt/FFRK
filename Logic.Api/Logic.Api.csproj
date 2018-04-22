@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Data.Api\Data.Api.csproj" />
     <ProjectReference Include="..\Data.Storage\Data.Storage.csproj" />
     <ProjectReference Include="..\Model.Api\Model.Api.csproj" />

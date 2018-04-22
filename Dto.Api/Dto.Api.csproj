@@ -6,4 +6,8 @@
     <RootNamespace>FFRKApi.Dto.Api</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="CharacterRating\" />
+  </ItemGroup>
+
 </Project>

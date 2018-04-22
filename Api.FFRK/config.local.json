@@ -19,5 +19,8 @@
     "ConnectionString": "Placeholder",
     "DefaultTimeToLiveInHours": "2",
     "UseCache": "false"
+  },
+  "ApiExternalWebsiteOptions": {
+    "AltemaCharacterRatingsUrl": "https://altema.jp/ffrk/charahyoka"
   }
 }

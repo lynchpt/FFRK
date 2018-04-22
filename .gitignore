@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /Manager.EnlirETL/FFRKApi.ETL.Log-20171222.txt
+/Api.FFRK/Altema_Charyoka_JP_20180418.html

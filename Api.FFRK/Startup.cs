@@ -6,6 +6,7 @@ using FFRK.Api.Infra.Options.EnlirETL;
 using FFRKApi.Data.Api;
 using FFRKApi.Data.Storage;
 using FFRKApi.Logic.Api;
+using FFRKApi.Logic.Api.CharacterRating;
 using FFRKApi.Model.EnlirMerge;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
@@ -107,7 +108,7 @@ namespace FFRKApi.Api.FFRK
             services.AddScoped<IMergeStorageProvider, AzureBlobStorageProvider>();
             //services.AddScoped<IMergeStorageProvider, FileMergeStorageProvider>();
 
-            services.AddScoped<IEnlirRepository, EnlirRepository>();
+            //services.AddScoped<IEnlirRepository, EnlirRepository>();
 
             services.AddScoped<IAbilitiesLogic, AbilitiesLogic>();
             services.AddScoped<ICharactersLogic, CharactersLogic>();
@@ -131,10 +132,19 @@ namespace FFRKApi.Api.FFRK
             services.AddScoped<IIdListsLogic, IdListsLogic>();
             services.AddScoped<ITypeListsLogic, TypeListsLogic>();
 
+            //services.AddScoped<IAltemaCharacterRatingRepository, AltemaCharacterRatingFileRepository>();
+            services.AddScoped<IAltemaCharacterRatingRepository, AltemaCharacterRatingWebRepository>();
+
+            services.AddScoped<IAltemaCharacterNodeParser, AltemaCharacterNodeParser>();
+            services.AddScoped<IAltemaCharacterJapaneseTextMapper, AltemaCharacterJapaneseTextMapper>();
+            services.AddScoped<IAltemaCharacterNodeInterpreter, AltemaCharacterNodeInterpreter>();
+            services.AddScoped<ICharacterRatingLogic, CharacterRatingLogic>();
+
             services.AddSingleton<IEnlirRepository, EnlirRepository>();
             services.AddScoped<ICacheProvider, CacheProvider>();
 
             services.AddSingleton<IMapper>(ConfigureMappings);
+
         }
 
         private void ConfigureOptions(IServiceCollection services)
@@ -143,6 +153,8 @@ namespace FFRKApi.Api.FFRK
 
             services.Configure<AzureBlobStorageOptions>(Configuration.GetSection(nameof(AzureBlobStorageOptions)));
             services.Configure<CachingOptions>(Configuration.GetSection(nameof(CachingOptions)));
+
+            services.Configure<ApiExternalWebsiteOptions>(Configuration.GetSection(nameof(ApiExternalWebsiteOptions)));
         }
         #endregion
 
@@ -174,7 +186,8 @@ namespace FFRKApi.Api.FFRK
                 new MapperConfiguration(
                     mce =>
                     {
-                        mce.AddProfile<EnlirTransformMappingProfile>();                        
+                        mce.AddProfile<EnlirTransformMappingProfile>();
+                        mce.AddProfile<CharacterRatingMappingProfile>();
                         mce.ConstructServicesUsing(t => ActivatorUtilities.CreateInstance(provider, t));
                     });
 
