@@ -348,7 +348,8 @@ namespace FFRKApi.Logic.EnlirMerge
                 {
                     string realmName = GetNameOfTypeListItem<RealmList>(sb.Realm);
 
-                    sb.RelicId = transformResults.Relics.Where(r => (sb.RelicName == $"{r.RelicName} ({realmName})") && r.Realm == sb.Realm).Select(r => r.Id).SingleOrDefault();
+                    sb.RelicId = transformResults.Relics.Where(r => (sb.RelicName == $"{r.RelicName} ({realmName})") && 
+                    r.Realm == sb.Realm && sb.CharacterName == r.CharacterName).Select(r => r.Id).SingleOrDefault();
 
                     _logger.LogDebug("wired up RelicId {RelicId} to SoulBreak {SoulBreak}", sb.RelicId, sb.Description);
                 }
