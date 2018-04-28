@@ -30,9 +30,9 @@ namespace FFRKApi.Logic.Api.CharacterRating
             components.RatingNode = characterNode.SelectSingleNode(@"./td[3]/span[@class='redtxt']");
 
             components.CharacterIdAttribute = components.NameNode.Attributes.FirstOrDefault();
-            components.ImageLazyLoadedAttribute = components.ImageNode.Attributes.Where(a => a.Name == ImageLazyLoadedAttributeName).FirstOrDefault();
-            components.ImageLazySourceAttribute = components.ImageNode.Attributes.Where(a => a.Name == ImageLazySourceAttributeName).FirstOrDefault();
-            components.ImageSourceAttribute = components.ImageNode.Attributes.Where(a => a.Name == ImageSourceAttributeName).FirstOrDefault();
+            components.ImageLazyLoadedAttribute = components.ImageNode?.Attributes.FirstOrDefault(a => a.Name == ImageLazyLoadedAttributeName);
+            components.ImageLazySourceAttribute = components.ImageNode?.Attributes.FirstOrDefault(a => a.Name == ImageLazySourceAttributeName);
+            components.ImageSourceAttribute = components.ImageNode?.Attributes.FirstOrDefault(a => a.Name == ImageSourceAttributeName);
 
             return components;
         }

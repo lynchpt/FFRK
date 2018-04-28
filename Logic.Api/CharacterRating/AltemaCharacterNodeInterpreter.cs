@@ -32,7 +32,7 @@ namespace FFRKApi.Logic.Api.CharacterRating
             AltemaCharacterInfo characterInfo = null;
 
 
-            if (characterNodeComponents.IsRatedCharacter)
+            if (characterNodeComponents != null && characterNodeComponents.IsRatedCharacter) //IsRatedCharacter makes sure important fields are not null
             {
                 characterInfo = new AltemaCharacterInfo()
                                 {
