@@ -9,6 +9,7 @@ using FFRKApi.Logic.Api.CharacterRating;
 using FFRKApi.Model.Api.CharacterRating;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using D = FFRKApi.Dto.Api.CharacterRating;
 
@@ -93,7 +94,7 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// for whom you had good relics
         /// 
         /// Other RatingPools (besides the school based ones like above) are Mote (e.g. Spirit / Wisdom), Role (e.g. Healing, Fire ATK),
-        /// and LM2 (e.g. Trance, 35% Chnace to Dualcast Spellblade)
+        /// and LM2 (e.g. Trance, 35% Chance to Dualcast Spellblade)
         /// 
         /// <br /> 
         /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/RatingPools (or use Try It Out to see data in this page)
@@ -176,7 +177,7 @@ namespace FFRKApi.Api.FFRK.Controllers
 
             IEnumerable<D.CharacterRatingContextInfo> result = _mapper.Map<IEnumerable<D.CharacterRatingContextInfo>>(model);
 
-            return new ObjectResult(result);
+            return new JsonResult(result, new JsonSerializerSettings() { Formatting = Formatting.Indented });
         }
 
         /// <summary>
@@ -207,7 +208,7 @@ namespace FFRKApi.Api.FFRK.Controllers
 
             IEnumerable<D.CharacterRatingContextInfo> result = _mapper.Map<IEnumerable<D.CharacterRatingContextInfo>>(model);
 
-            return new ObjectResult(result);
+            return new JsonResult(result, new JsonSerializerSettings(){Formatting = Formatting.Indented});
         } 
 
         #endregion

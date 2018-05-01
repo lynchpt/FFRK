@@ -103,7 +103,7 @@ namespace FFRKApi.Api.FFRK.Controllers
 
             IEnumerable<D.Character> result = _mapper.Map<IEnumerable<D.Character>>(model);
 
-            return new ObjectResult(result);
+            return new JsonResult(result, new JsonSerializerSettings() { Formatting = Formatting.Indented });
         }
 
         /// <summary>

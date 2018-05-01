@@ -246,7 +246,7 @@ namespace FFRKApi.Logic.Api.CharacterRating
 			{"雷物理", "Lightning ATK"},
 			{"雷魔法", "Lightning MAG"},
 			{"地魔法", "Earth MAG"},
-			{"魔バフ", "Hybrid Buff"}, //魔バフ vs 攻魔バフ
+			{"魔バフ", "MAG Buff"}, //魔バフ vs 攻魔バフ
 			{"風魔法", "Wind MAG"},
 			{"炎氷雷物理", "Fire Ice Lightning ATK"},
 			{"炎物理", "Fire ATK"},
@@ -263,7 +263,7 @@ namespace FFRKApi.Logic.Api.CharacterRating
 			{"雷物魔", "Lightning Hybrid"},
 			{"氷魔法", "Ice MAG"},
 			{"聖魔法", "Holy MAG"},
-			{"地水魔法", "Earth MAG"},
+			{"地水魔法", "Earth Water MAG"},
 			{"毒魔法", "Poison MAG"},
 			{"闇毒魔法", "Dark Poison MAG"},
 			{"炎雷毒物理", "Fire Thunder Poison ATK"},
@@ -308,7 +308,7 @@ namespace FFRKApi.Logic.Api.CharacterRating
 			{"雷物理", new List<string> {"Lightning ATK"}},
 			{"雷魔法", new List<string> {"Lightning MAG"}},
 			{"地魔法", new List<string> {"Earth MAG"}},
-			{"魔バフ", new List<string> {"Hybrid Buff"}}, //魔バフ vs 攻魔バフ
+			{"魔バフ", new List<string> {"MAG Buff"}}, //魔バフ vs 攻魔バフ
 			{"風魔法", new List<string> {"Wind MAG"}},
 			{"炎氷雷物理", new List<string> {"Fire ATK", "Ice ATK", "Lightning ATK"}}, //"Fire Ice Lightning ATK"
 			{"炎物理", new List<string> {"Fire ATK"}},
@@ -325,7 +325,7 @@ namespace FFRKApi.Logic.Api.CharacterRating
 			{"雷物魔", new List<string> {"Lightning Hybrid"}},
 			{"氷魔法", new List<string> {"Ice MAG"}},
 			{"聖魔法", new List<string> {"Holy MAG"}},
-			{"地水魔法", new List<string> {"Earth MAG"}},
+			{"地水魔法", new List<string> {"Earth MAG", "Water MAG"}},
 			{"毒魔法", new List<string> {"Poison MAG"}},
 			{"闇毒魔法", new List<string> {"Dark MAG", "Poison MAG"}}, //"Dark Poison MAG"
 			{"炎雷毒物理", new List<string> {"Fire ATK", "Thunder ATK", "Poison ATK"}}, //"Fire Thunder Poison ATK"

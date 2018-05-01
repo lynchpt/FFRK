@@ -248,7 +248,7 @@ namespace FFRKApi.Api.FFRK.Constants
         //CharacterRatingRoutes
         public const string CharacterRatingRoute_All = "";
         public const string CharacterRatingRoute_Id = "{characterId}";
-        public const string CharacterRatingRoute_Name = "Name/characterName";
+        public const string CharacterRatingRoute_Name = "Name/{characterName}";
         public const string CharacterRatingRoute_AltemaRatings = "AltemaRatings";
         public const string CharacterRatingRoute_RatingPools = "RatingPools";
 

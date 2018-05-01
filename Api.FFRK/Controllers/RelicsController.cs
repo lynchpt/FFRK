@@ -9,6 +9,7 @@ using FFRKApi.Logic.Api;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using FFRKApi.Model.EnlirTransform;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using D = FFRKApi.Dto.Api;
 
@@ -229,7 +230,7 @@ namespace FFRKApi.Api.FFRK.Controllers
 
             IEnumerable<D.Relic> result = _mapper.Map<IEnumerable<D.Relic>>(model);
 
-            return new ObjectResult(result);
+            return new JsonResult(result, new JsonSerializerSettings() { Formatting = Formatting.Indented });
         }
 
         /// <summary>
