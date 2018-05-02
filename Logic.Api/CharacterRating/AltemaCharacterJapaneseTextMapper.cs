@@ -130,7 +130,7 @@ namespace FFRKApi.Logic.Api.CharacterRating
 			{"/ffrk/character/225", "Porom"},	// 	ポロム
 			{"/ffrk/character/229", "Cait Sith"},	// 	ケットシー
 			{"/ffrk/character/297", "Zeid"},	// 	ザイド
-			{"/ffrk/character/7", "Joseph"},	// 	ヨーゼフ
+			{"/ffrk/character/7", "Josef"},	// 	ヨーゼフ
 			{"/ffrk/character/31", "Setzer"},	// 	セッツァー
 			{"/ffrk/character/234", "Papalymo"},	// 	パパリモ
 			{"/ffrk/character/305", "Aria"},	// 	エリア
