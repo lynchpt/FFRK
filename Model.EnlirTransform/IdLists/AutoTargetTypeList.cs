@@ -10,7 +10,7 @@ namespace FFRKApi.Model.EnlirTransform.IdLists
                                                                       {
                                                                           new KeyValuePair<int, string>(0, "Unknown"),
                                                                           new KeyValuePair<int, string>(1, "-"),
-                                                                          //new KeyValuePair<int, string>(2, "?"),
+                                                                          new KeyValuePair<int, string>(2, "?"),
                                                                           new KeyValuePair<int, string>(3, "All allies"),
                                                                           new KeyValuePair<int, string>(4, "All enemies"),
                                                                           new KeyValuePair<int, string>(5, "Ally with KO or lowest HP% ally"),
