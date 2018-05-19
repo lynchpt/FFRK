@@ -39,7 +39,7 @@ namespace FFRKApi.Logic.Api.CharacterRating
 			{"/ffrk/character/58", "Ashe"},	// 	アーシェ
 			{"/ffrk/character/104", "Edge"},	// 	エッジ
 			{"/ffrk/character/224", "Shantotto"},	// 	シャントット
-			{"/ffrk/character/334", "Enna Kros"},	// 	エナクロ
+			{"/ffrk/character/334", "Enna"},	// 	エナクロ
 			{"/ffrk/character/3", "Maria"},	// 	マリア
 			{"/ffrk/character/46", "Garnet"},	// 	ガーネット
 			{"/ffrk/character/47", "Vivi"},	// 	ビビ
@@ -192,7 +192,7 @@ namespace FFRKApi.Logic.Api.CharacterRating
 			{"/ffrk/character/293", "Nine"},	// 	ナイン
 			{"/ffrk/character/299", "Gladiolus"},	// 	グラディオラス
 			{"/ffrk/character/333", "Seven"},	// 	セブン
-			{"/ffrk/character/34", "Barrett"},	// 	バレット
+			{"/ffrk/character/34", "Barret"},	// 	バレット
 			{"/ffrk/character/90", "Amarant"},	// 	サラマンダー
 			{"/ffrk/character/272", "Lion"},	// 	ライオン
 			{"/ffrk/character/313", "Ursula"},	// 	アーシュラ
@@ -221,7 +221,8 @@ namespace FFRKApi.Logic.Api.CharacterRating
 			{"/ffrk/character/102", "Thancred"},	// 	サンクレッド
 			{"/ffrk/character/253", "Angeal"},	// 	アンジール
 			{"/ffrk/character/296", "Rubicante"},	// 	ルビカンテ
-			{"/ffrk/character/207", "Gau"}	// 	ガウ
+			{"/ffrk/character/207", "Gau"},	// 	ガウ
+		    {"/ffrk/character/336", "Hilda"}	// 	ヒルダ
 		};
 
 		private readonly IDictionary<string, string> _roleSummaryMap = new Dictionary<string, string>()
@@ -246,7 +247,7 @@ namespace FFRKApi.Logic.Api.CharacterRating
 			{"雷物理", "Lightning ATK"},
 			{"雷魔法", "Lightning MAG"},
 			{"地魔法", "Earth MAG"},
-			{"魔バフ", "MAG Buff"}, //魔バフ vs 攻魔バフ
+			{"魔バフ", "MAG Buff"}, 
 			{"風魔法", "Wind MAG"},
 			{"炎氷雷物理", "Fire Ice Lightning ATK"},
 			{"炎物理", "Fire ATK"},

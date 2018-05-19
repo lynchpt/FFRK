@@ -84,6 +84,7 @@ namespace FFRKApi.Logic.Api.CharacterRating
 
                 IEnumerable<HtmlNode> characterNodes = GetCharacterNodes(htmlDoc);
 
+                int altemaOrder = 1;
                 foreach (HtmlNode node in characterNodes)
                 {
                     AltemaCharacterNodeComponents characterNodeComponents = _altemaCharacterNodeParser.ParseCharacterNode(node);
@@ -91,6 +92,7 @@ namespace FFRKApi.Logic.Api.CharacterRating
 
                     if (characterInfo != null)
                     {
+                        characterInfo.AltemaOrder = altemaOrder++;
                         altemaCharacterInfos.Add(characterInfo);
                     }
                 }
@@ -146,7 +148,7 @@ namespace FFRKApi.Logic.Api.CharacterRating
                 foreach (RatingPool pool in allRatingPools)
                 {
                     pool.CharactersInRatingPool =
-                        pool.CharactersInRatingPool.OrderByDescending(c => c.AltemaCharacterRating).ToList();
+                        pool.CharactersInRatingPool.OrderBy(c => c.AltemaOrder).ToList();
                 }
 
                 //step 7 - calculate characters rank in the various pools in which they participate
@@ -175,7 +177,7 @@ namespace FFRKApi.Logic.Api.CharacterRating
 
                 //extract CharacterRatingContextInfo objects from rating pools (sort by overall altema rating)
                 IList<CharacterRatingContextInfo> characterRatingContextInfos = ratingPools.SelectMany(p => p.CharactersInRatingPool).
-                    Distinct().OrderByDescending(c => c.AltemaCharacterRating).ToList();
+                    Distinct().OrderBy(c => c.AltemaOrder).ToList();
 
                 results = characterRatingContextInfos;
 
@@ -314,6 +316,7 @@ namespace FFRKApi.Logic.Api.CharacterRating
                 if (altemaMap.ContainsKey(character.CharacterName))
                 {
                     character.AltemaCharacterRating = (altemaMap[character.CharacterName]).Rating;
+                    character.AltemaOrder = (altemaMap[character.CharacterName]).AltemaOrder;
                     character.Roles = (altemaMap[character.CharacterName]).Roles;
                 }
             }

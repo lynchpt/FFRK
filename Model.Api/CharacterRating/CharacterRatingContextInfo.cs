@@ -10,6 +10,7 @@ namespace FFRKApi.Model.Api.CharacterRating
         public string CharacterName { get; set; }
 
         public int AltemaCharacterRating { get; set; }
+        public int AltemaOrder { get; set; }
 
         public IList<string> Roles { get; set; }
 

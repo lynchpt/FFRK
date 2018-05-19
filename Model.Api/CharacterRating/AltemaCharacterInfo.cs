@@ -15,6 +15,7 @@ namespace FFRKApi.Model.Api.CharacterRating
         public string RoleSummary { get; set; }
         public IList<string> Roles { get; set; }
         public int Rating { get; set; }
+        public int AltemaOrder { get; set; }
         public string ImageUrl { get; set; }
 
         public override string ToString()
