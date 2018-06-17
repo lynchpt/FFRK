@@ -21,7 +21,9 @@ namespace FFRKApi.Api.FFRK.Controllers
         IActionResult GetAbilityIdList();    
         IActionResult GetCharacterIdList();
         IActionResult GetCommandIdList();
-        IActionResult GetDungeonIdList();
+
+        IActionResult GetBraveActionIdList();
+        //IActionResult GetDungeonIdList();
         IActionResult GetEventIdList();
         IActionResult GetExperienceIdList();
         IActionResult GetLegendMateriaIdList();
@@ -193,6 +195,36 @@ namespace FFRKApi.Api.FFRK.Controllers
         }
 
         /// <summary>
+        /// Get the IdList for BraveAction
+        /// </summary>
+        /// <remarks>
+        /// Each value in this IdList is created from a row in the Enlir "Brave" sheet, using a generated integer as the Key and the string value in the "Name" column as the Value. 
+        /// Some example values are "Rising High", "Riot Fire" etc.
+        /// <br /> 
+        /// Enlir Mapping - sheet: "Brave", column "Name" (which then gets a synthesized integer id associated with it in this IdList)
+        /// <br /> 
+        /// Sample Use Case - You would call this method if you wanted to call the BraveActions api and find info for Riot Fire. 
+        /// The results of this method would give you the id fo rRiot Fire that you need use in that BraveActions Api call
+        /// <br /> 
+        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/IdLists/BraveAction (or use Try It Out to see data in this page)
+        /// </remarks>
+        /// <response code="200">
+        ///     <see>IEnumerable&lt;KeyValuePair&lt;int,string&gt;&gt;</see>
+        /// </response>
+        [HttpGet]
+        [Route(RouteConstants.IdListsRoute_BraveAction)]
+        [SwaggerOperation(nameof(GetBraveActionIdList))]
+        [ProducesResponseType(typeof(IEnumerable<KeyValuePair<int, string>>), (int)HttpStatusCode.OK)]
+        public IActionResult GetBraveActionIdList()
+        {
+            _logger.LogInformation($"Controller Method invoked: {nameof(GetBraveActionIdList)}");
+
+            IEnumerable<KeyValuePair<int, string>> result = _idListsLogic.GetBraveActionIdList();
+
+            return new ObjectResult(result);
+        }
+
+        /// <summary>
         /// Get the IdList for Dungeon
         /// </summary>
         /// <remarks>
@@ -209,18 +241,18 @@ namespace FFRKApi.Api.FFRK.Controllers
         /// <response code="200">
         ///     <see>IEnumerable&lt;KeyValuePair&lt;int,string&gt;&gt;</see>
         /// </response>
-        [HttpGet]
-        [Route(RouteConstants.IdListsRoute_Dungeon)]
-        [SwaggerOperation(nameof(GetDungeonIdList))]
-        [ProducesResponseType(typeof(IEnumerable<KeyValuePair<int, string>>), (int)HttpStatusCode.OK)]
-        public IActionResult GetDungeonIdList()
-        {
-            _logger.LogInformation($"Controller Method invoked: {nameof(GetDungeonIdList)}");
+        //[HttpGet]
+        //[Route(RouteConstants.IdListsRoute_Dungeon)]
+        //[SwaggerOperation(nameof(GetDungeonIdList))]
+        //[ProducesResponseType(typeof(IEnumerable<KeyValuePair<int, string>>), (int)HttpStatusCode.OK)]
+        //public IActionResult GetDungeonIdList()
+        //{
+        //    _logger.LogInformation($"Controller Method invoked: {nameof(GetDungeonIdList)}");
 
-            IEnumerable<KeyValuePair<int, string>> result = _idListsLogic.GetDungeonIdList();
+        //    IEnumerable<KeyValuePair<int, string>> result = _idListsLogic.GetDungeonIdList();
 
-            return new ObjectResult(result);
-        }
+        //    return new ObjectResult(result);
+        //}
 
         /// <summary>
         /// Get the IdList for Event

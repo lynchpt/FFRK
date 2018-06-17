@@ -30,7 +30,6 @@ namespace FFRKApi.Dto.Api
         public bool IsCounterable { get; set; }
         public bool IsChecked { get; set; }
         public int SoulBreakPointsGained { get; set; }
-        public int SoulBreakPointsGainedJapan { get; set; }
 
         public string IntroducingEventName { get; set; }
         public int IntroducingEventId { get; set; } //filled in during merge phase

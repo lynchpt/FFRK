@@ -283,9 +283,10 @@ namespace FFRKApi.Logic.Api.CharacterRating
 			{"風地魔法", "Earth Wind MAG"},
 			{"地物魔", "Hybrid MAG"},
 			{"毒物理", "Poison ATK"},
-			{"炎毒物理", "Fire Poison ATK"}
+			{"炎毒物理", "Fire Poison ATK"},
+		    {"地炎毒物理", "Earth Fire Poison ATK"}
 
-		};
+        };
 
 		private readonly IDictionary<string, IList<string>> _rolePartMap = new Dictionary<string, IList<string>>()
 		{
@@ -345,7 +346,8 @@ namespace FFRKApi.Logic.Api.CharacterRating
 			{"風地魔法", new List<string> {"Earth MAG", "Wind MAG"}}, //"Earth Wind MAG"
 			{"地物魔", new List<string> {"Hybrid MAG"}},
 			{"毒物理", new List<string> {"Poison ATK"}},
-			{"炎毒物理", new List<string> {"Fire ATK", "Poison ATK"}} //"Fire Poison ATK"
+			{"炎毒物理", new List<string> {"Fire ATK", "Poison ATK"}}, //"Fire Poison ATK"
+		    {"地炎毒物理", new List<string> { "Earth ATK", "Fire ATK", "Poison ATK"}} //"Earth Fire Poison ATK"
 		};
 
 

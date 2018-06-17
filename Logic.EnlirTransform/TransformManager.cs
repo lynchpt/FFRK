@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using FFRKApi.Data.Storage;
 using FFRKApi.Model.EnlirImport;
@@ -39,12 +40,13 @@ namespace FFRKApi.Logic.EnlirTransform
         private readonly IRowTransformer<MissionRow, Mission> _missionRowTransformer;
         private readonly IRowTransformer<EventRow, Event> _eventRowTransformer;
         private readonly IRowTransformer<ExperienceRow, Experience> _experienceRowTransformer;
-        private readonly IRowTransformer<DungeonRow, Dungeon> _dungeonRowTransformer;
+        //private readonly IRowTransformer<DungeonRow, Dungeon> _dungeonRowTransformer;
         private readonly IRowTransformer<MagiciteSkillRow, MagiciteSkill> _magiciteSkillRowTransformer;
         private readonly IRowTransformer<MagiciteRow, Magicite> _magiciteRowTransformer;
         private readonly IRowTransformer<StatusRow, Status> _statusRowTransformer;
         private readonly IRowTransformer<OtherRow, Other> _otherRowTransformer;
         private readonly IRowTransformer<CommandRow, Command> _commandRowTransformer;
+        private readonly IRowTransformer<BraveActionRow, BraveAction> _braveActionRowTransformer;
         private readonly IRowTransformer<SoulBreakRow, SoulBreak> _soulBreakRowTransformer;
         private readonly IRowTransformer<RelicRow, Relic> _relicRowTransformer;
         private readonly IRowTransformer<AbilityRow, Ability> _abilityRowTransformer;
@@ -62,10 +64,11 @@ namespace FFRKApi.Logic.EnlirTransform
         #region Constructors
 
         public TransformManager(IRowTransformer<EventRow, Event> eventRowTransformer, IRowTransformer<MissionRow, Mission> missionRowTransformer,
-            IRowTransformer<ExperienceRow, Experience> experienceRowTransformer, IRowTransformer<DungeonRow, Dungeon> dungeonRowTransformer,
+            IRowTransformer<ExperienceRow, Experience> experienceRowTransformer,
             IRowTransformer<MagiciteSkillRow, MagiciteSkill> magiciteSkillRowTransformer, IRowTransformer<MagiciteRow, Magicite> magiciteRowTransformer,
             IRowTransformer<StatusRow, Status> statusRowTransformer, IRowTransformer<OtherRow, Other> otherRowTransformer,
-            IRowTransformer<CommandRow, Command> commandRowTransformer, IRowTransformer<SoulBreakRow, SoulBreak> soulBreakRowTransformer,
+            IRowTransformer<CommandRow, Command> commandRowTransformer, IRowTransformer<BraveActionRow, BraveAction> braveActionRowTransformer, 
+            IRowTransformer<SoulBreakRow, SoulBreak> soulBreakRowTransformer,
             IRowTransformer<RelicRow, Relic> relicRowTransformer, IRowTransformer<AbilityRow, Ability> abilityRowTransformer,
             IRowTransformer<LegendMateriaRow, LegendMateria> legendMateriaRowTransformer, IRowTransformer<RecordMateriaRow, RecordMateria> recordMateriaRowTransformer,
             IRowTransformer<RecordSphereRow, RecordSphere> recordSphereRowTransformer, IRowTransformer<LegendSphereRow, LegendSphere> legendSphereRowTransformer,
@@ -75,12 +78,13 @@ namespace FFRKApi.Logic.EnlirTransform
             _eventRowTransformer = eventRowTransformer;
             _missionRowTransformer = missionRowTransformer;
             _experienceRowTransformer = experienceRowTransformer;
-            _dungeonRowTransformer = dungeonRowTransformer;
+            //_dungeonRowTransformer = dungeonRowTransformer;
             _magiciteSkillRowTransformer = magiciteSkillRowTransformer;
             _magiciteRowTransformer = magiciteRowTransformer;
             _statusRowTransformer = statusRowTransformer;
             _otherRowTransformer = otherRowTransformer;
             _commandRowTransformer = commandRowTransformer;
+            _braveActionRowTransformer = braveActionRowTransformer;
             _soulBreakRowTransformer = soulBreakRowTransformer;
             _relicRowTransformer = relicRowTransformer;
             _abilityRowTransformer = abilityRowTransformer;
@@ -169,10 +173,10 @@ namespace FFRKApi.Logic.EnlirTransform
             transformResultsContainer.Experiences = _experienceRowTransformer.Transform(importResults.ExperienceRows);
             _logger.LogInformation("finished transforming ExperienceRows to a single Experience object in a list");
 
-            transformResultsContainer.Dungeons = _dungeonRowTransformer.Transform(importResults.DungeonRows);
-            _logger.LogInformation("finished transforming DungeonRows to Dungeons");
+            //transformResultsContainer.Dungeons = _dungeonRowTransformer.Transform(importResults.DungeonRows);
+            //_logger.LogInformation("finished transforming DungeonRows to Dungeons");
 
-            transformResultsContainer.MagiciteSkills = _magiciteSkillRowTransformer.Transform(importResults.MagiciteSkillRows);
+            transformResultsContainer.MagiciteSkills = _magiciteSkillRowTransformer.Transform(importResults.MagiciteSkillRows.Where(ms => !String.IsNullOrWhiteSpace(ms.Name)));
             _logger.LogInformation("finished transforming MagiciteSkillRows to MagiciteSkills");
 
             transformResultsContainer.Magicites = _magiciteRowTransformer.Transform(importResults.MagiciteRows);
@@ -186,6 +190,9 @@ namespace FFRKApi.Logic.EnlirTransform
 
             transformResultsContainer.Commands = _commandRowTransformer.Transform(importResults.CommandRows);
             _logger.LogInformation("finished transforming CommandRows to Commands");
+
+            transformResultsContainer.BraveActions = _braveActionRowTransformer.Transform(importResults.BraveActionRows);
+            _logger.LogInformation("finished transforming BraveActionRows to BraveActions");
 
             transformResultsContainer.SoulBreaks = _soulBreakRowTransformer.Transform(importResults.SoulBreakRows);
             _logger.LogInformation("finished transforming SoulBreakRows to SoulBreaks");

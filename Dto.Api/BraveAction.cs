@@ -2,31 +2,27 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FFRKApi.Model.EnlirTransform
+namespace FFRKApi.Dto.Api
 {
-    public class SoulBreak : IModelDescriptor
+    public class BraveAction
     {
         #region IModelDescriptor Implementation
         public int Id { get; set; }
         public string Description { get; set; }
         #endregion
 
-        public int Realm { get; set; }
-
         public string CharacterName { get; set; }
         public int CharacterId { get; set; } //filled in during merge phase
-        public string RelicName { get; set; }
-        public int RelicId { get; set; } //filled in during merge phase
-
-        public IEnumerable<Command> Commands { get; set; } //filled in during merge phase
-        public IEnumerable<BraveAction> BraveActions { get; set; } //filled in during merge phase
-        public IEnumerable<Status> Statuses { get; set; } //filled in during merge phase
-        public IEnumerable<Other> OtherEffects { get; set; } //filled in during merge phase
+        public string SourceSoulBreakName { get; set; }
+        public int SourceSoulBreakId { get; set; } //filled in during merge phase
 
         public string ImagePath { get; set; }
-
-        public string SoulBreakName { get; set; }
+        public string BraveActionName { get; set; }
         public string JapaneseName { get; set; }
+
+        public string BraveCondition { get; set; }
+        public int BraveLevel { get; set; }
+
 
         public int AbilityType { get; set; }
         public int TargetType { get; set; }
@@ -34,19 +30,13 @@ namespace FFRKApi.Model.EnlirTransform
         public int DamageFormulaType { get; set; }
         public double Multiplier { get; set; }
         public IEnumerable<int> Elements { get; set; }
+
         public double CastTime { get; set; }
         public string Effects { get; set; }
         public bool IsCounterable { get; set; }
         public bool IsChecked { get; set; }
 
-
-        public int SoulBreakPointsRequired { get; set; }
-        public int SoulBreakTier { get; set; }
-        public string MasteryBonus { get; set; }
-
-
-
-        public string EnlirId { get; set; }
-
+        public int SoulBreakPointsGained { get; set; }
+        public int School { get; set; }
     }
 }

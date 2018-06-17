@@ -31,11 +31,11 @@
     "ApplicationInsightsKey": "Placeholder",
     "AppComponentName": "Manager.EnlirETL"
   },
-   "CharacterImporterOptions": {
+  "CharacterImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Characters",
     "RangeExpression": "A2:DB",
-    "ValueRenderOption": 2 
+    "ValueRenderOption": 2
   },
   "RecordSphereImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
@@ -64,7 +64,7 @@
   "AbilityImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Abilities",
-    "RangeExpression": "A2:AS",
+    "RangeExpression": "A2:AR",
     "ValueRenderOption": 2
   },
   "SoulBreakImporterOptions": {
@@ -75,8 +75,14 @@
   },
   "CommandImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
-    "WorkSheetName": "Commands",
+    "WorkSheetName": "Burst",
     "RangeExpression": "A2:R",
+    "ValueRenderOption": 2
+  },
+  "BraveActionImporterOptions": {
+    "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
+    "WorkSheetName": "Brave",
+    "RangeExpression": "A2:S",
     "ValueRenderOption": 2
   },
   "OtherImporterOptions": {
@@ -107,12 +113,6 @@
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "'Magicite Skills'",
     "RangeExpression": "A2:Q",
-    "ValueRenderOption": 2
-  },
-  "DungeonImporterOptions": {
-    "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
-    "WorkSheetName": "Dungeons",
-    "RangeExpression": "A2:M",
     "ValueRenderOption": 2
   },
   "EventImporterOptions": {

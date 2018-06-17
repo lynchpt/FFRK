@@ -13,7 +13,7 @@ namespace FFRKApi.Model.EnlirMerge
 
         public IEnumerable<Experience> Experiences { get; set; }
 
-        public IEnumerable<Dungeon> Dungeons { get; set; }
+        //public IEnumerable<Dungeon> Dungeons { get; set; }
 
         public IEnumerable<MagiciteSkill> MagiciteSkills { get; set; }
 
@@ -24,6 +24,7 @@ namespace FFRKApi.Model.EnlirMerge
         public IEnumerable<Other> Others { get; set; }
 
         public IEnumerable<Command> Commands { get; set; }
+        public IEnumerable<BraveAction> BraveActions { get; set; }
 
         public IEnumerable<SoulBreak> SoulBreaks { get; set; }
 
@@ -62,12 +63,13 @@ namespace FFRKApi.Model.EnlirMerge
         public IList<KeyValuePair<int, string>> EventIdList { get; set; }
         public IList<KeyValuePair<int, string>> MissionList { get; set; }
         public IList<KeyValuePair<int, string>> ExperienceIdList { get; set; }
-        public IList<KeyValuePair<int, string>> DungeonIdList { get; set; }
+        //public IList<KeyValuePair<int, string>> DungeonIdList { get; set; }
         public IList<KeyValuePair<int, string>> MagiciteSkillIdList { get; set; }
         public IList<KeyValuePair<int, string>> MagiciteIdList { get; set; }
         public IList<KeyValuePair<int, string>> StatusIdList { get; set; }
         public IList<KeyValuePair<int, string>> OtherIdList { get; set; }
         public IList<KeyValuePair<int, string>> CommandIdList { get; set; }
+        public IList<KeyValuePair<int, string>> BraveActionIdList { get; set; }
         public IList<KeyValuePair<int, string>> SoulBreakIdList { get; set; }
         public IList<KeyValuePair<int, string>> RelicIdList { get; set; }
         public IList<KeyValuePair<int, string>> AbilityIdList { get; set; }

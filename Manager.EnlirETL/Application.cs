@@ -108,9 +108,9 @@ namespace Manager.EnlirETL
                 stopwatchImport.Stop();
 
                 //cheat data setup for testing - comment out when doing full run for real
-                //string importStoragePath = @"D:\Docs\Personal\FFRKLinqQuery\ImportResults-Latest.json";
+                //string importStoragePath = @"D:\Temp\FFRKApi\ImportResults-2018-06-17_01-57-36.json";
                 //string transformStoragePath = @"D:\Docs\Personal\FFRKLinqQuery\TransformResults-Latest.json";
-                //string formattedDateString = "2018-02-15_08-31-01";
+                //string formattedDateString = "2018-06-17_02-00-00";
                 //string importContents = File.ReadAllText(importStoragePath);
                 //ImportResultsContainer importResultsContainer = JsonConvert.DeserializeObject<ImportResultsContainer>(importContents);
 
@@ -174,12 +174,13 @@ namespace Manager.EnlirETL
             _servicesCollection.Configure<AbilityImporterOptions>(_configuration.GetSection(nameof(AbilityImporterOptions)));
             _servicesCollection.Configure<SoulBreakImporterOptions>(_configuration.GetSection(nameof(SoulBreakImporterOptions)));
             _servicesCollection.Configure<CommandImporterOptions>(_configuration.GetSection(nameof(CommandImporterOptions)));
+            _servicesCollection.Configure<BraveActionImporterOptions>(_configuration.GetSection(nameof(BraveActionImporterOptions)));
             _servicesCollection.Configure<OtherImporterOptions>(_configuration.GetSection(nameof(OtherImporterOptions)));
             _servicesCollection.Configure<StatusImporterOptions>(_configuration.GetSection(nameof(StatusImporterOptions)));
             _servicesCollection.Configure<RelicImporterOptions>(_configuration.GetSection(nameof(RelicImporterOptions)));
             _servicesCollection.Configure<MagiciteImporterOptions>(_configuration.GetSection(nameof(MagiciteImporterOptions)));
             _servicesCollection.Configure<MagiciteSkillImporterOptions>(_configuration.GetSection(nameof(MagiciteSkillImporterOptions)));
-            _servicesCollection.Configure<DungeonImporterOptions>(_configuration.GetSection(nameof(DungeonImporterOptions)));
+            //_servicesCollection.Configure<DungeonImporterOptions>(_configuration.GetSection(nameof(DungeonImporterOptions)));
             _servicesCollection.Configure<EventImporterOptions>(_configuration.GetSection(nameof(EventImporterOptions)));
             _servicesCollection.Configure<MissionImporterOptions>(_configuration.GetSection(nameof(MissionImporterOptions)));
             _servicesCollection.Configure<ExperienceImporterOptions>(_configuration.GetSection(nameof(ExperienceImporterOptions)));
@@ -206,12 +207,13 @@ namespace Manager.EnlirETL
             _servicesCollection.AddScoped<IRowImporter<AbilityRow>, AbilityImporter>();
             _servicesCollection.AddScoped<IRowImporter<SoulBreakRow>, SoulBreakImporter>();
             _servicesCollection.AddScoped<IRowImporter<CommandRow>, CommandImporter>();
+            _servicesCollection.AddScoped<IRowImporter<BraveActionRow>, BraveActionImporter>();
             _servicesCollection.AddScoped<IRowImporter<OtherRow>, OtherImporter>();
             _servicesCollection.AddScoped<IRowImporter<StatusRow>, StatusImporter>();
             _servicesCollection.AddScoped<IRowImporter<RelicRow>, RelicImporter>();
             _servicesCollection.AddScoped<IRowImporter<MagiciteRow>, MagiciteImporter>();
             _servicesCollection.AddScoped<IRowImporter<MagiciteSkillRow>, MagiciteSkillImporter>();
-            _servicesCollection.AddScoped<IRowImporter<DungeonRow>, DungeonImporter>();
+            //_servicesCollection.AddScoped<IRowImporter<DungeonRow>, DungeonImporter>();
             _servicesCollection.AddScoped<IRowImporter<EventRow>, EventImporter>();
             _servicesCollection.AddScoped<IRowImporter<MissionRow>, MissionImporter>();
             _servicesCollection.AddScoped<IRowImporter<ExperienceRow>, ExperienceImporter>();
@@ -219,12 +221,13 @@ namespace Manager.EnlirETL
             _servicesCollection.AddScoped<IRowTransformer<MissionRow, Mission>, MissionTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<EventRow, Event>, EventTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<ExperienceRow, Experience>, ExperienceTransformer>();
-            _servicesCollection.AddScoped<IRowTransformer<DungeonRow, Dungeon>, DungeonTransformer>();
+            //_servicesCollection.AddScoped<IRowTransformer<DungeonRow, Dungeon>, DungeonTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<MagiciteSkillRow, MagiciteSkill>, MagiciteSkillTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<MagiciteRow, Magicite>, MagiciteTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<StatusRow, Status>, StatusTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<OtherRow, Other>, OtherTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<CommandRow, Command>, CommandTransformer>();
+            _servicesCollection.AddScoped<IRowTransformer<BraveActionRow, BraveAction>, BraveActionTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<SoulBreakRow, SoulBreak>, SoulBreakTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<RelicRow, Relic>, RelicTransformer>();
             _servicesCollection.AddScoped<IRowTransformer<AbilityRow, Ability>, AbilityTransformer>();

@@ -113,7 +113,8 @@ namespace FFRKApi.Api.FFRK
             services.AddScoped<IAbilitiesLogic, AbilitiesLogic>();
             services.AddScoped<ICharactersLogic, CharactersLogic>();
             services.AddScoped<ICommandsLogic, CommandsLogic>();
-            services.AddScoped<IDungeonsLogic, DungeonsLogic>();
+            services.AddScoped<IBraveActionsLogic, BraveActionsLogic>();
+            //services.AddScoped<IDungeonsLogic, DungeonsLogic>();
             services.AddScoped<IEventsLogic, EventsLogic>();
             services.AddScoped<IExperiencesLogic, ExperiencesLogic>();
             services.AddScoped<ILegendMateriasLogic, LegendMateriasLogic>();

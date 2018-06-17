@@ -37,9 +37,11 @@ namespace FFRKApi.Api.FFRK
             CreateMap<Command, D.Command>();
             CreateMap<D.Command, Command>();
 
+            CreateMap<BraveAction, D.BraveAction>();
+            CreateMap<D.BraveAction, BraveAction>();
 
-            CreateMap<Dungeon, D.Dungeon>();
-            CreateMap<D.Dungeon, Dungeon>();
+            //CreateMap<Dungeon, D.Dungeon>();
+            //CreateMap<D.Dungeon, Dungeon>();
 
 
             CreateMap<Event, D.Event>();

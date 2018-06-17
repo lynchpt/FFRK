@@ -66,7 +66,7 @@ namespace FFRKApi.Logic.Validation.Enlir
             var magiciteAbilityTypes = irc.MagiciteRows.Select(ar => ar.Type.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
-            var magiciteSkillAbilityTypes = irc.MagiciteSkillRows.Select(ar => ar.Type.Split(",".ToCharArray())).
+            var magiciteSkillAbilityTypes = irc.MagiciteSkillRows.Where(ar => !String.IsNullOrWhiteSpace(ar.Type)).Select(ar => ar.Type.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
             var otherAbilityTypes = irc.OtherRows.Select(ar => ar.Type.Split(",".ToCharArray())).
@@ -105,7 +105,7 @@ namespace FFRKApi.Logic.Validation.Enlir
             var magiciteAutoTargetTypes = irc.MagiciteRows.Select(ar => ar.AutoTarget.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
-            var magiciteSkillAutoTargetTypes = irc.MagiciteSkillRows.Select(ar => ar.AutoTarget.Split(",".ToCharArray())).
+            var magiciteSkillAutoTargetTypes = irc.MagiciteSkillRows.Where(ar => !String.IsNullOrWhiteSpace(ar.Type)).Select(ar => ar.AutoTarget.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
             var otherAutoTargetTypes = irc.OtherRows.Select(ar => ar.AutoTarget.Split(",".ToCharArray())).
@@ -144,7 +144,7 @@ namespace FFRKApi.Logic.Validation.Enlir
             var magiciteDamageFormulaTypes = irc.MagiciteRows.Select(ar => ar.Formula.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
-            var magiciteSkillDamageFormulaTypes = irc.MagiciteSkillRows.Select(ar => ar.Formula.Split(",".ToCharArray())).
+            var magiciteSkillDamageFormulaTypes = irc.MagiciteSkillRows.Where(ar => !String.IsNullOrWhiteSpace(ar.Type)).Select(ar => ar.Formula.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
             var otherDamageFormulaTypes = irc.OtherRows.Select(ar => ar.Formula.Split(",".ToCharArray())).
@@ -183,7 +183,7 @@ namespace FFRKApi.Logic.Validation.Enlir
             var magiciteElements = irc.MagiciteRows.Select(ar => ar.Element.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
-            var magiciteSkillElements = irc.MagiciteSkillRows.Select(ar => ar.Element.Split(",".ToCharArray())).
+            var magiciteSkillElements = irc.MagiciteSkillRows.Where(ar => !String.IsNullOrWhiteSpace(ar.Type)).Select(ar => ar.Element.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
             var otherElements = irc.OtherRows.Select(ar => ar.Element.Split(",".ToCharArray())).
@@ -286,8 +286,8 @@ namespace FFRKApi.Logic.Validation.Enlir
             var characterRealms = irc.CharacterRows.Select(ar => ar.Realm.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
-            var dungeonRealms = irc.DungeonRows.Select(ar => ar.Realm.Split(",".ToCharArray())).
-                SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
+            //var dungeonRealms = irc.DungeonRows.Select(ar => ar.Realm.Split(",".ToCharArray())).
+            //    SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
             var eventRealms = irc.EventRows.Select(ar => ar.Realm.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
@@ -314,7 +314,7 @@ namespace FFRKApi.Logic.Validation.Enlir
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
             //Realms - source
-            var unifiedRealmsList = characterRealms.Union(dungeonRealms).Union(eventRealms).
+            var unifiedRealmsList = characterRealms.Union(eventRealms).
                 Union(legendMateriaRealms).Union(legendSphereRealms).Union(magiciteRealms).
                 Union(recordMateriaRealms).Union(recordSphereRealms).Union(relicRealms).Union(soulBreakRealms).OrderBy(e => e);
 

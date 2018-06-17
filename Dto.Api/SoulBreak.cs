@@ -17,6 +17,7 @@ namespace FFRKApi.Dto.Api
         public int RelicId { get; set; } //filled in during merge phase
 
         public IEnumerable<Command> Commands { get; set; } //filled in during merge phase
+        public IEnumerable<BraveAction> BraveActions { get; set; } //filled in during merge phase
         public IEnumerable<Status> Statuses { get; set; } //filled in during merge phase
         public IEnumerable<Other> OtherEffects { get; set; } //filled in during merge phase
 

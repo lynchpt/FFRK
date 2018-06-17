@@ -22,12 +22,13 @@ namespace FFRKApi.Logic.Validation.Enlir
         private readonly AbilityImporterOptions _abilityImporterOptions;
         private readonly SoulBreakImporterOptions _soulBreakImporterOptions;
         private readonly CommandImporterOptions _commandImporterOptions;
+        private readonly BraveActionImporterOptions _braveActionImporterOptions;
         private readonly OtherImporterOptions _otherImporterOptions;
         private readonly StatusImporterOptions _statusImporterOptions;
         private readonly RelicImporterOptions _relicImporterOptions;
         private readonly MagiciteImporterOptions _magiciteImporterOptions;
         private readonly MagiciteSkillImporterOptions _magiciteSkillImporterOptions;
-        private readonly DungeonImporterOptions _dungeonImporterOptions;
+        //private readonly DungeonImporterOptions _dungeonImporterOptions;
         private readonly EventImporterOptions _eventImporterOptions;
         private readonly MissionImporterOptions _missionImporterOptions;
         private readonly ExperienceImporterOptions _experienceImporterOptions;
@@ -49,9 +50,10 @@ namespace FFRKApi.Logic.Validation.Enlir
             IOptions<LegendSphereImporterOptions> legendSphereImporterOptions, IOptions<RecordMateriaImporterOptions> recordMateriaImporterOptions,
             IOptions<LegendMateriaImporterOptions> legendMateriaImporterOptions, IOptions<AbilityImporterOptions> abilityImporterOptions,
             IOptions<SoulBreakImporterOptions> soulBreakImporterOptions, IOptions<CommandImporterOptions> commandImporterOptions,
+            IOptions<BraveActionImporterOptions> braveActionImporterOptions,
             IOptions<OtherImporterOptions> otherImporterOptions, IOptions<StatusImporterOptions> statusImporterOptions,
             IOptions<RelicImporterOptions> relicImporterOptions, IOptions<MagiciteImporterOptions> magiciteImporterOptions,
-            IOptions<MagiciteSkillImporterOptions> magiciteSkillImporterOptions, IOptions<DungeonImporterOptions> dungeonImporterOptions,
+            IOptions<MagiciteSkillImporterOptions> magiciteSkillImporterOptions, 
             IOptions<EventImporterOptions> eventImporterOptions, IOptions<MissionImporterOptions> missionImporterOptions,
             IOptions<ExperienceImporterOptions> experienceImporterOptions, IOptions<SheetsServiceOptions> sheetsServiceOptions,
             IGoogleSheetsDataValidator googleSheetsDataValidator, ILogger<ImportValidator> logger)
@@ -64,12 +66,13 @@ namespace FFRKApi.Logic.Validation.Enlir
             _abilityImporterOptions = abilityImporterOptions.Value;
             _soulBreakImporterOptions = soulBreakImporterOptions.Value;
             _commandImporterOptions = commandImporterOptions.Value;
+            _braveActionImporterOptions = braveActionImporterOptions.Value;
             _otherImporterOptions = otherImporterOptions.Value;
             _statusImporterOptions = statusImporterOptions.Value;
             _relicImporterOptions = relicImporterOptions.Value;
             _magiciteImporterOptions = magiciteImporterOptions.Value;
             _magiciteSkillImporterOptions = magiciteSkillImporterOptions.Value;
-            _dungeonImporterOptions = dungeonImporterOptions.Value;
+            //_dungeonImporterOptions = dungeonImporterOptions.Value;
             _eventImporterOptions = eventImporterOptions.Value;
             _missionImporterOptions = missionImporterOptions.Value;
             _experienceImporterOptions = experienceImporterOptions.Value;
@@ -147,6 +150,13 @@ namespace FFRKApi.Logic.Validation.Enlir
                 LoggerExtensions.LogWarning(_logger, "Actual worksheet Structure does not match the expected structure for worksheet {WorksheetName}.", _commandImporterOptions.WorkSheetName);
 
             }
+            if (!_googleSheetsDataValidator.ValidateWorksheetMetadata(_braveActionImporterOptions))
+            {
+                isValid = false;
+                builder.AppendLine(nameof(BraveActionImporterOptions));
+                LoggerExtensions.LogWarning(_logger, "Actual worksheet Structure does not match the expected structure for worksheet {WorksheetName}.", _braveActionImporterOptions.WorkSheetName);
+
+            }
             if (!_googleSheetsDataValidator.ValidateWorksheetMetadata(_otherImporterOptions))
             {
                 isValid = false;
@@ -180,13 +190,6 @@ namespace FFRKApi.Logic.Validation.Enlir
                 isValid = false;
                 builder.AppendLine(nameof(MagiciteSkillImporterOptions));
                 LoggerExtensions.LogWarning(_logger, "Actual worksheet Structure does not match the expected structure for worksheet {WorksheetName}.", _magiciteSkillImporterOptions.WorkSheetName);
-
-            }
-            if (!_googleSheetsDataValidator.ValidateWorksheetMetadata(_dungeonImporterOptions))
-            {
-                isValid = false;
-                builder.AppendLine(nameof(DungeonImporterOptions));
-                LoggerExtensions.LogWarning(_logger, "Actual worksheet Structure does not match the expected structure for worksheet {WorksheetName}.", _dungeonImporterOptions.WorkSheetName);
 
             }
             if (!_googleSheetsDataValidator.ValidateWorksheetMetadata(_eventImporterOptions))

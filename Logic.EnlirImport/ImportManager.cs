@@ -26,12 +26,13 @@ namespace FFRKApi.Logic.EnlirImport
         private readonly IRowImporter<AbilityRow> _abilityImporter;
         private readonly IRowImporter<SoulBreakRow> _soulBreakImporter;
         private readonly IRowImporter<CommandRow> _commandImporter;
+        private readonly IRowImporter<BraveActionRow> _braveActionImporter;
         private readonly IRowImporter<OtherRow> _otherImporter;
         private readonly IRowImporter<StatusRow> _statusImporter;
         private readonly IRowImporter<RelicRow> _relicImporter;
         private readonly IRowImporter<MagiciteRow> _magiciteImporter;
         private readonly IRowImporter<MagiciteSkillRow> _magiciteSkillImporter;
-        private readonly IRowImporter<DungeonRow> _dungeonImporter;
+        //private readonly IRowImporter<DungeonRow> _dungeonImporter;
         private readonly IRowImporter<EventRow> _eventImporter;
         private readonly IRowImporter<MissionRow> _missionImporter;
         private readonly IRowImporter<ExperienceRow> _experienceImporter;
@@ -44,10 +45,10 @@ namespace FFRKApi.Logic.EnlirImport
         public ImportManager(IRowImporter<CharacterRow> characterImporter, IRowImporter<RecordSphereRow> recordSphereImporter,
             IRowImporter<LegendSphereRow> legendSphereImporter, IRowImporter<RecordMateriaRow> recordMateriaImporter,
             IRowImporter<LegendMateriaRow> legendMateriaImporter, IRowImporter<AbilityRow> abilityImporter,
-            IRowImporter<SoulBreakRow> soulBreakImporter, IRowImporter<CommandRow> commandImporter,
+            IRowImporter<SoulBreakRow> soulBreakImporter, IRowImporter<CommandRow> commandImporter, IRowImporter<BraveActionRow> braveActionImporter,
             IRowImporter<OtherRow> otherImporter, IRowImporter<StatusRow> statusImporter,
             IRowImporter<RelicRow> relicImporter, IRowImporter<MagiciteRow> magiciteImporter,
-            IRowImporter<MagiciteSkillRow> magiciteSkillImporter, IRowImporter<DungeonRow> dungeonImporter,
+            IRowImporter<MagiciteSkillRow> magiciteSkillImporter,
             IRowImporter<MissionRow> missionImporter, IRowImporter<EventRow> eventImporter,
             IRowImporter<ExperienceRow> experienceImporter, ISheetsApiHelper sheetsApiHelper,
             ILogger<ImportManager> logger)
@@ -60,12 +61,13 @@ namespace FFRKApi.Logic.EnlirImport
             _abilityImporter = abilityImporter;
             _soulBreakImporter = soulBreakImporter;
             _commandImporter = commandImporter;
+            _braveActionImporter = braveActionImporter;
             _otherImporter = otherImporter;
             _statusImporter = statusImporter;
             _relicImporter = relicImporter;
             _magiciteImporter = magiciteImporter;
             _magiciteSkillImporter = magiciteSkillImporter;
-            _dungeonImporter = dungeonImporter;
+            //_dungeonImporter = dungeonImporter;
             _eventImporter = eventImporter;
             _missionImporter = missionImporter;
             _experienceImporter = experienceImporter;
@@ -107,6 +109,9 @@ namespace FFRKApi.Logic.EnlirImport
                 resultsContainer.CommandRows = _commandImporter.Import();
                 _logger.LogInformation("finished loading {RowCount} CommandRows", resultsContainer.CommandRows?.Count());
 
+                resultsContainer.BraveActionRows = _braveActionImporter.Import();
+                _logger.LogInformation("finished loading {RowCount} BraveActionRows", resultsContainer.BraveActionRows?.Count());
+
                 resultsContainer.OtherRows = _otherImporter.Import();
                 _logger.LogInformation("finished loading {RowCount} OtherRows", resultsContainer.OtherRows?.Count());
 
@@ -122,8 +127,8 @@ namespace FFRKApi.Logic.EnlirImport
                 resultsContainer.MagiciteSkillRows = _magiciteSkillImporter.Import();
                 _logger.LogInformation("finished loading {RowCount} MagiciteSkillRows", resultsContainer.MagiciteSkillRows?.Count());
 
-                resultsContainer.DungeonRows = _dungeonImporter.Import();
-                _logger.LogInformation("finished loading {RowCount} DungeonRows", resultsContainer.DungeonRows?.Count());
+                //resultsContainer.DungeonRows = _dungeonImporter.Import();
+                //_logger.LogInformation("finished loading {RowCount} DungeonRows", resultsContainer.DungeonRows?.Count());
 
                 resultsContainer.EventRows = _eventImporter.Import();
                 _logger.LogInformation("finished loading {RowCount} EventRows", resultsContainer.EventRows?.Count());

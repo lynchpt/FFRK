@@ -233,6 +233,16 @@ namespace FFRKApi.Logic.EnlirMerge
                 }
             }
 
+            foreach (BraveAction braveAction in transformResults.BraveActions)
+            {
+                if (!String.IsNullOrWhiteSpace(braveAction.CharacterName))
+                {
+                    braveAction.CharacterId = transformResults.Characters.Where(c => c.CharacterName == braveAction.CharacterName).Select(c => c.Id).SingleOrDefault();
+
+                    _logger.LogDebug("wired up CharacterId {CharacterId} to BraveAction {BraveAction}", braveAction.CharacterId, braveAction.Description);
+                }
+            }
+
             foreach (SoulBreak soulbreak in transformResults.SoulBreaks)
             {
                 if (!String.IsNullOrWhiteSpace(soulbreak.CharacterName))
@@ -260,12 +270,12 @@ namespace FFRKApi.Logic.EnlirMerge
 
         private void WireUpEventIds(TransformResultsContainer transformResults)
         {
-            foreach (Dungeon dungeon in transformResults.Dungeons)
-            {
-                dungeon.IntroducingEventId = transformResults.Events.Where(e => e.EventName == dungeon.IntroducingEvent).Select(e => e.Id).SingleOrDefault();
+            //foreach (Dungeon dungeon in transformResults.Dungeons)
+            //{
+            //    dungeon.IntroducingEventId = transformResults.Events.Where(e => e.EventName == dungeon.IntroducingEvent).Select(e => e.Id).SingleOrDefault();
 
-                _logger.LogDebug("wired up EventId {EventId} to Dungeon {Dungeon}", dungeon.IntroducingEventId, dungeon.Description);
-            }
+            //    _logger.LogDebug("wired up EventId {EventId} to Dungeon {Dungeon}", dungeon.IntroducingEventId, dungeon.Description);
+            //}
 
             foreach (Magicite magicite in transformResults.Magicites)
             {
@@ -314,6 +324,14 @@ namespace FFRKApi.Logic.EnlirMerge
                 && sb.CharacterName.Trim() == command.CharacterName.Trim()).Select(e => e.Id).SingleOrDefault();
 
                 _logger.LogDebug("wired up SoulBreakId {SoulBreakId} to Command {Command}", command.SourceSoulBreakId, command.Description);
+            }
+
+            foreach (BraveAction braveAction in transformResults.BraveActions)
+            {
+                braveAction.SourceSoulBreakId = transformResults.SoulBreaks.Where(sb => sb.SoulBreakName == braveAction.SourceSoulBreakName
+                                                                                    && sb.CharacterName.Trim() == braveAction.CharacterName.Trim()).Select(e => e.Id).SingleOrDefault();
+
+                _logger.LogDebug("wired up SoulBreakId {SoulBreakId} to BraveAction {BraveAction}", braveAction.SourceSoulBreakId, braveAction.Description);
             }
 
             foreach (Relic relic in transformResults.Relics)
@@ -518,6 +536,16 @@ namespace FFRKApi.Logic.EnlirMerge
             }
         }
 
+        private void WireUpBraveActions(TransformResultsContainer transformResults)
+        {
+            foreach (SoulBreak soulBreak in transformResults.SoulBreaks)
+            {
+                soulBreak.BraveActions = transformResults.BraveActions.Where(c => c.SourceSoulBreakName == soulBreak.SoulBreakName).ToList();
+
+                _logger.LogDebug("wired up {BraveActionsCount} BraveActions to SoulBreak {SoulBreak}", soulBreak.BraveActions.Count(), soulBreak.Description);
+            }
+        }
+
         private void WireUpStatuses(TransformResultsContainer transformResults)
         {
             foreach (SoulBreak soulBreak in transformResults.SoulBreaks)
@@ -641,6 +669,9 @@ namespace FFRKApi.Logic.EnlirMerge
             WireUpCommands(transformResults);
             _logger.LogInformation("Finished wiring up Commands");
 
+            WireUpBraveActions(transformResults);
+            _logger.LogInformation("Finished wiring up BraveActions");
+
             WireUpStatuses(transformResults);
             _logger.LogInformation("Finished wiring up Statuses");
 
@@ -664,7 +695,8 @@ namespace FFRKApi.Logic.EnlirMerge
             mergeResultsContainer.Abilities = transformResults.Abilities;
             mergeResultsContainer.Characters = transformResults.Characters;
             mergeResultsContainer.Commands = transformResults.Commands;
-            mergeResultsContainer.Dungeons = transformResults.Dungeons;
+            mergeResultsContainer.BraveActions = transformResults.BraveActions;
+            //mergeResultsContainer.Dungeons = transformResults.Dungeons;
             mergeResultsContainer.Events = transformResults.Events;
             mergeResultsContainer.Experiences = transformResults.Experiences;
             mergeResultsContainer.LegendMaterias = transformResults.LegendMaterias;
@@ -700,12 +732,13 @@ namespace FFRKApi.Logic.EnlirMerge
             mergeResultsContainer.EventIdList = mergeResultsContainer.Events.Select(i => new KeyValuePair<int, string>(i.Id, i.EventName)).ToList();
             mergeResultsContainer.MissionList = mergeResultsContainer.Missions.Select(i => new KeyValuePair<int, string>(i.Id, i.Description)).ToList();
             mergeResultsContainer.ExperienceIdList = mergeResultsContainer.Experiences.Select(i => new KeyValuePair<int, string>(i.Id, i.Description)).ToList();
-            mergeResultsContainer.DungeonIdList = mergeResultsContainer.Dungeons.Select(i => new KeyValuePair<int, string>(i.Id, i.DungeonName)).ToList();
+            //mergeResultsContainer.DungeonIdList = mergeResultsContainer.Dungeons.Select(i => new KeyValuePair<int, string>(i.Id, i.DungeonName)).ToList();
             mergeResultsContainer.MagiciteSkillIdList = mergeResultsContainer.MagiciteSkills.Select(i => new KeyValuePair<int, string>(i.Id, i.Description)).ToList();
             mergeResultsContainer.MagiciteIdList = mergeResultsContainer.Magicites.Select(i => new KeyValuePair<int, string>(i.Id, i.MagiciteName)).ToList();
             mergeResultsContainer.StatusIdList = mergeResultsContainer.Statuses.Select(i => new KeyValuePair<int, string>(i.Id, i.CommonName)).ToList();
             mergeResultsContainer.OtherIdList = mergeResultsContainer.Others.Select(i => new KeyValuePair<int, string>(i.Id, i.Name)).ToList();
             mergeResultsContainer.CommandIdList = mergeResultsContainer.Commands.Select(i => new KeyValuePair<int, string>(i.Id, i.Description)).ToList();
+            mergeResultsContainer.BraveActionIdList = mergeResultsContainer.BraveActions.Select(i => new KeyValuePair<int, string>(i.Id, i.Description)).ToList();
             mergeResultsContainer.SoulBreakIdList = mergeResultsContainer.SoulBreaks.Select(i => new KeyValuePair<int, string>(i.Id, i.SoulBreakName)).ToList();
             mergeResultsContainer.RelicIdList = mergeResultsContainer.Relics.Select(i => new KeyValuePair<int, string>(i.Id, i.Description)).ToList();
             mergeResultsContainer.AbilityIdList = mergeResultsContainer.Abilities.Select(i => new KeyValuePair<int, string>(i.Id, i.AbilityName)).ToList();

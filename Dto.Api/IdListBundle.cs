@@ -7,7 +7,9 @@ namespace FFRKApi.Dto.Api
         public IEnumerable<KeyValuePair<int, string>> Ability { get; set; }
         public IEnumerable<KeyValuePair<int, string>> Character { get; set; }
         public IEnumerable<KeyValuePair<int, string>> Command { get; set; }
-        public IEnumerable<KeyValuePair<int, string>> Dungeon { get; set; }
+        public IEnumerable<KeyValuePair<int, string>> BraveAction { get; set; }
+
+        //public IEnumerable<KeyValuePair<int, string>> Dungeon { get; set; }
         public IEnumerable<KeyValuePair<int, string>> Event { get; set; }
         public IEnumerable<KeyValuePair<int, string>> Experience { get; set; }
         public IEnumerable<KeyValuePair<int, string>> LegendMateria { get; set; }

@@ -34,7 +34,6 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.Counter = ResolveColumnContents(columnCount, AbilityColumn.Counter, row);
             importedRow.AutoTarget = ResolveColumnContents(columnCount, AbilityColumn.AutoTarget, row);
             importedRow.SB = ResolveColumnContents(columnCount, AbilityColumn.SB, row);
-            importedRow.SBJP = ResolveColumnContents(columnCount, AbilityColumn.SBJP, row);
             importedRow.Uses = ResolveColumnContents(columnCount, AbilityColumn.Uses, row);
             importedRow.Max = ResolveColumnContents(columnCount, AbilityColumn.Max, row);
             importedRow.Orb1RequiredType = ResolveColumnContents(columnCount, AbilityColumn.Orb1RequiredType, row);

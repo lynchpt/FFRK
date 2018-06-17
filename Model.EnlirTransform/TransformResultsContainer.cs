@@ -22,6 +22,8 @@ namespace FFRKApi.Model.EnlirTransform
 
         public IEnumerable<Command> Commands { get; set; }
 
+        public IEnumerable<BraveAction> BraveActions { get; set; }
+
         public IEnumerable<SoulBreak> SoulBreaks { get; set; }
 
         public IEnumerable<Relic> Relics { get; set; }

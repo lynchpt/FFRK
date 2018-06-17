@@ -18,7 +18,8 @@ namespace FFRKApi.Logic.Api
         IEnumerable<KeyValuePair<int, string>> GetAbilityIdList();
         IEnumerable<KeyValuePair<int, string>> GetCharacterIdList();
         IEnumerable<KeyValuePair<int, string>> GetCommandIdList();
-        IEnumerable<KeyValuePair<int, string>> GetDungeonIdList();
+        IEnumerable<KeyValuePair<int, string>> GetBraveActionIdList();
+        //IEnumerable<KeyValuePair<int, string>> GetDungeonIdList();
         IEnumerable<KeyValuePair<int, string>> GetEventIdList();
         IEnumerable<KeyValuePair<int, string>> GetExperienceIdList();
         IEnumerable<KeyValuePair<int, string>> GetLegendMateriaIdList();
@@ -67,7 +68,8 @@ namespace FFRKApi.Logic.Api
                               Ability = _enlirRepository.GetMergeResultsContainer().AbilityIdList,
                               Character = _enlirRepository.GetMergeResultsContainer().CharacterIdList,
                               Command = _enlirRepository.GetMergeResultsContainer().CommandIdList,
-                              Dungeon = _enlirRepository.GetMergeResultsContainer().DungeonIdList,
+                              BraveAction = _enlirRepository.GetMergeResultsContainer().BraveActionIdList,
+                              //Dungeon = _enlirRepository.GetMergeResultsContainer().DungeonIdList,
                               Event = _enlirRepository.GetMergeResultsContainer().EventIdList,
                               Experience = _enlirRepository.GetMergeResultsContainer().ExperienceIdList,
                               LegendMateria = _enlirRepository.GetMergeResultsContainer().LegendMateriaIdList,
@@ -140,22 +142,39 @@ namespace FFRKApi.Logic.Api
             return results;
         }
 
-        public IEnumerable<KeyValuePair<int, string>> GetDungeonIdList()
+        public IEnumerable<KeyValuePair<int, string>> GetBraveActionIdList()
         {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetDungeonIdList)}");
+            _logger.LogInformation($"Logic Method invoked: {nameof(GetBraveActionIdList)}");
 
-            string cacheKey = $"{nameof(GetDungeonIdList)}";
+            string cacheKey = $"{nameof(GetBraveActionIdList)}";
             IList<KeyValuePair<int, string>> results = _cacheProvider.ObjectGet<IList<KeyValuePair<int, string>>>(cacheKey);
 
             if (results == null)
             {
-                results = _enlirRepository.GetMergeResultsContainer().DungeonIdList;
+                results = _enlirRepository.GetMergeResultsContainer().BraveActionIdList;
 
                 _cacheProvider.ObjectSet(cacheKey, results);
             }
 
             return results;
         }
+
+        //public IEnumerable<KeyValuePair<int, string>> GetDungeonIdList()
+        //{
+        //    _logger.LogInformation($"Logic Method invoked: {nameof(GetDungeonIdList)}");
+
+        //    string cacheKey = $"{nameof(GetDungeonIdList)}";
+        //    IList<KeyValuePair<int, string>> results = _cacheProvider.ObjectGet<IList<KeyValuePair<int, string>>>(cacheKey);
+
+        //    if (results == null)
+        //    {
+        //        results = _enlirRepository.GetMergeResultsContainer().DungeonIdList;
+
+        //        _cacheProvider.ObjectSet(cacheKey, results);
+        //    }
+
+        //    return results;
+        //}
 
         public IEnumerable<KeyValuePair<int, string>> GetEventIdList()
         {

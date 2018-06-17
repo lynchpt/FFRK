@@ -17,7 +17,8 @@ namespace FFRKApi.Api.FFRK.Constants
         public const string IdListsRoute_Ability = "Ability";
         public const string IdListsRoute_Character = "Character";
         public const string IdListsRoute_Command = "Command";
-        public const string IdListsRoute_Dungeon = "Dungeon";
+        public const string IdListsRoute_BraveAction = "BraveAction";
+        //public const string IdListsRoute_Dungeon = "Dungeon";
         public const string IdListsRoute_Event = "Event";
         public const string IdListsRoute_Experience = "Experience";
         public const string IdListsRoute_LegendMateria = "LegendMateria";
@@ -79,13 +80,22 @@ namespace FFRKApi.Api.FFRK.Constants
         public const string CommandsRoute_Element = "Element/{elementType}";
         public const string CommandsRoute_Search = "Search"; //POST
 
+        //BraveActions Routes
+        public const string BraveActionsRoute_All = "";
+        public const string BraveActionsRoute_Id = "{braveActionId}";
+        public const string BraveActionsRoute_AbilityType = "AbilityType/{abilityType}";
+        public const string BraveActionsRoute_Character = "Character/{characterId}";
+        public const string BraveActionsRoute_School = "School/{schoolType}";
+        public const string BraveActionsRoute_Element = "Element/{elementType}";
+        public const string BraveActionsRoute_Search = "Search"; //POST
+
         //Dungeons Routes
-        public const string DungeonsRoute_All = "";
-        public const string DungeonsRoute_Id = "{dungeonId}";
-        public const string DungeonsRoute_RealmType = "RealmType/{realmType}";
-        public const string DungeonsRoute_Name = "Name/{dungeonName}";
-        public const string DungeonsRoute_Rewards = "Rewards/{itemName}/{starLevel}";
-        public const string DungeonsRoute_Search = "Search"; //POST
+        //public const string DungeonsRoute_All = "";
+        //public const string DungeonsRoute_Id = "{dungeonId}";
+        //public const string DungeonsRoute_RealmType = "RealmType/{realmType}";
+        //public const string DungeonsRoute_Name = "Name/{dungeonName}";
+        //public const string DungeonsRoute_Rewards = "Rewards/{itemName}/{starLevel}";
+        //public const string DungeonsRoute_Search = "Search"; //POST
 
 
         //Events Routes
