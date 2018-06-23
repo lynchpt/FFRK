@@ -15,5 +15,8 @@ namespace FFRK.Api.Infra.Options.EnlirETL
         public string TransformResultsStoragePath { get; set; }
 
         public string MergeResultsStoragePath { get; set; }
+
+        public string BannerStoragePath { get; set; }
+        
     }
 }

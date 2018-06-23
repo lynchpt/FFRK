@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Infra.Options.EnlirETL\Infra.Options.EnlirETL.csproj" />
+    <ProjectReference Include="..\Model.Api\Model.Api.csproj" />
     <ProjectReference Include="..\Model.EnlirImport\Model.EnlirImport.csproj" />
     <ProjectReference Include="..\Model.EnlirMerge\Model.EnlirMerge.csproj" />
     <ProjectReference Include="..\Model.EnlirTransform\Model.EnlirTransform.csproj" />

@@ -262,6 +262,10 @@ namespace FFRKApi.Api.FFRK.Constants
         public const string CharacterRatingRoute_AltemaRatings = "AltemaRatings";
         public const string CharacterRatingRoute_RatingPools = "RatingPools";
 
+        //Banner Routes
+        public const string BannersRoute_PullResults = "PullResults/{bannerId}";
+        public const string BannersRoute_PullResultsTable = "PullResultsTable/{bannerId}";
+
         /*
         IActionResult GetAltemaCharacterInfos();
 

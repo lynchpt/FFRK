@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="CharacterRating\" />
+    <Folder Include="Banners\" />
   </ItemGroup>
 
 </Project>

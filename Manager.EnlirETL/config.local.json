@@ -22,7 +22,8 @@
     "ConnectionString": "Placeholder",
     "ImportResultsStoragePath": "Import\\ImportsResults-{Date}.json",
     "TransformResultsStoragePath": "Transform\\TransformResults-{Date}.json",
-    "MergeResultsStoragePath": "Merge\\MergeResults-{Date}.json"
+    "MergeResultsStoragePath": "Merge\\MergeResults-{Date}.json",
+    "BannerStoragePath": "Banner"
   },
   "SheetsServiceOptions": {
     "Name": "Placeholder",

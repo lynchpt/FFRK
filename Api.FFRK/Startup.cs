@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Net.Http;
 using AutoMapper;
 using Data.Api;
 using FFRK.Api.Infra.Options.EnlirETL;
 using FFRKApi.Data.Api;
 using FFRKApi.Data.Storage;
 using FFRKApi.Logic.Api;
+using FFRKApi.Logic.Api.Banners;
 using FFRKApi.Logic.Api.CharacterRating;
 using FFRKApi.Model.EnlirMerge;
 using Microsoft.AspNetCore.Builder;
@@ -106,6 +108,7 @@ namespace FFRKApi.Api.FFRK
         protected virtual void ConfigureDependencyInjection(IServiceCollection services)
         {
             services.AddScoped<IMergeStorageProvider, AzureBlobStorageProvider>();
+            services.AddScoped<IBannerSpecProvider, BannerSpecAzureBlobProvider>();
             //services.AddScoped<IMergeStorageProvider, FileMergeStorageProvider>();
 
             //services.AddScoped<IEnlirRepository, EnlirRepository>();
@@ -135,14 +138,17 @@ namespace FFRKApi.Api.FFRK
 
             //services.AddScoped<IAltemaCharacterRatingRepository, AltemaCharacterRatingFileRepository>();
             services.AddScoped<IAltemaCharacterRatingRepository, AltemaCharacterRatingWebRepository>();
+            services.AddScoped<IPrizeSelectionServiceClient, PrizeSelectionServiceClient>();
 
             services.AddScoped<IAltemaCharacterNodeParser, AltemaCharacterNodeParser>();
             services.AddScoped<IAltemaCharacterJapaneseTextMapper, AltemaCharacterJapaneseTextMapper>();
             services.AddScoped<IAltemaCharacterNodeInterpreter, AltemaCharacterNodeInterpreter>();
             services.AddScoped<ICharacterRatingLogic, CharacterRatingLogic>();
+            services.AddScoped<IBannersLogic, BannersLogic>();
 
             services.AddSingleton<IEnlirRepository, EnlirRepository>();
             services.AddScoped<ICacheProvider, CacheProvider>();
+            services.AddScoped<HttpClient>();
 
             services.AddSingleton<IMapper>(ConfigureMappings);
 

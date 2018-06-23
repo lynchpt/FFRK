@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Data.Storage\Data.Storage.csproj" />
+    <ProjectReference Include="..\Model.Api\Model.Api.csproj" />
     <ProjectReference Include="..\Model.EnlirMerge\Model.EnlirMerge.csproj" />
   </ItemGroup>
 

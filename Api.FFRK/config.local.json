@@ -8,7 +8,8 @@
     "ConnectionString": "Placeholder",
     "ImportResultsStoragePath": "Import\\ImportResults-{Date}.json",
     "TransformResultsStoragePath": "Transform\\TransformResults-{Date}.json",
-    "MergeResultsStoragePath": "Merge\\MergeResults-{Date}.json"
+    "MergeResultsStoragePath": "Merge\\MergeResults-{Date}.json",
+    "BannerStoragePath": "Banner"
   },
   "LoggingOptions": {
     "LogFilePath": "FFRKApi.ETL.Log-{Date}.txt",
@@ -21,6 +22,7 @@
     "UseCache": "false"
   },
   "ApiExternalWebsiteOptions": {
-    "AltemaCharacterRatingsUrl": "https://altema.jp/ffrk/charahyoka"
+    "AltemaCharacterRatingsUrl": "https://altema.jp/ffrk/charahyoka",
+    "PrizeSelectionUrl": "http://localhost:14831/api/v1.0"
   }
 }
