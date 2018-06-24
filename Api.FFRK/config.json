@@ -23,6 +23,6 @@
   },
   "ApiExternalWebsiteOptions": {
     "AltemaCharacterRatingsUrl": "https://altema.jp/ffrk/charahyoka",
-    "PrizeSelectionUrl": "http://localhost:14831/api/v1.0"
+    "PrizeSelectionUrl": "http://prizeselectionapi.azurewebsites.net/api/v1.0"
   } 
 }
