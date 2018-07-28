@@ -31,6 +31,7 @@ namespace FFRKApi.Model.EnlirTransform
         public double CastTime { get; set; }
         public string Effects { get; set; }
         public bool IsCounterable { get; set; }
+        public bool IsInGlobal { get; set; }
         public bool IsChecked { get; set; }
         public int SoulBreakPointsGained { get; set; }
         public int School { get; set; }

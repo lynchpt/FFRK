@@ -30,7 +30,7 @@
         public string Effects { get; set; }
 
         public bool IsCounterable { get; set; }
-
+        public bool IsInGlobal { get; set; }
         public bool IsChecked { get; set; }
 
         public double ChanceForSkillUseWith0LevelCapBreaks { get; set; }

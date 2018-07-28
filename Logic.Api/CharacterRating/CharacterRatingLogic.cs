@@ -270,37 +270,40 @@ namespace FFRKApi.Logic.Api.CharacterRating
         private IEnumerable<CharacterRatingContextInfo> GetBaseCharacterRatingContextInfo()
         {
             // get summary Enlir character and Legend Dive Info
-            IEnumerable<CharacterRatingContextInfo> characterRatingContextInfos = _enlirRepository.GetMergeResultsContainer().
-                Characters.Select(c => new CharacterRatingContextInfo()
+            
+            //exclude Biggs, Wedge and Lilliset because they do not yet have full character data
+            var charactersGood = _enlirRepository.GetMergeResultsContainer().Characters.Where(c => c.Id != 3 && c.Id != 4 && c.Id != 159);
+
+            IEnumerable<CharacterRatingContextInfo> characterRatingContextInfos = charactersGood.Select(c => new CharacterRatingContextInfo()
+            {
+                CharacterId = c.Id,
+                CharacterName = c.CharacterName,
+                LegendDiveMote1Type = c.LegendSpheres.Any() ? c.LegendSpheres.First().LegendSphereInfos.First().RequiredMotes.Skip(0).Take(1).First().ItemName : null,
+                LegendDiveMote2Type = c.LegendSpheres.Any() ? c.LegendSpheres.First().LegendSphereInfos.First().RequiredMotes.Skip(1).Take(1).First().ItemName : null,
+                LegendMateria1 = c.LegendSpheres.Any() ? new LegendMateriaSummaryInfo()
                 {
-                    CharacterId = c.Id,
-                    CharacterName = c.CharacterName,
-                    LegendDiveMote1Type = c.LegendSpheres.Any() ? c.LegendSpheres.First().LegendSphereInfos.First().RequiredMotes.Skip(0).Take(1).First().ItemName : null,
-                    LegendDiveMote2Type = c.LegendSpheres.Any() ? c.LegendSpheres.First().LegendSphereInfos.First().RequiredMotes.Skip(1).Take(1).First().ItemName : null,
-                    LegendMateria1 = c.LegendSpheres.Any() ? new LegendMateriaSummaryInfo()
-                    {
-                        Effect = c.LegendMaterias.Skip(0).Take(1).First().Effect,
-                        LegendMateriaId = c.LegendMaterias.Skip(0).Take(1).First().Id,
-                        LegendMateriaName = c.LegendMaterias.Skip(0).Take(1).First().LegendMateriaName,
-                        RelicId = 0
-                    } : null,
-                    LegendMateria2 = c.LegendSpheres.Any() ? new LegendMateriaSummaryInfo()
-                    {
-                        Effect = c.LegendMaterias.Skip(1).Take(1).First().Effect,
-                        LegendMateriaId = c.LegendMaterias.Skip(1).Take(1).First().Id,
-                        LegendMateriaName = c.LegendMaterias.Skip(1).Take(1).First().LegendMateriaName,
-                        RelicId = 0
-                    } : null,
-                    LegendMateriaFromRelics = c.LegendMaterias.Any() ? c.LegendMaterias.Where(lm => lm.RelicId != 0).Select(lm => new LegendMateriaSummaryInfo()
-                    {
-                        Effect = lm.Effect,
-                        LegendMateriaId = lm.Id,
-                        LegendMateriaName = lm.LegendMateriaName,
-                        RelicId = lm.RelicId
-                    }).ToList() : null,
-                    ProficientSchools = c.SchoolAccessInfos.Where(sai => sai.AccessLevel >= 5).Select(sai => sai.SchoolName).ToList(),
-                    RatingPoolRankInfos = new List<RatingPoolRankInfo>()
-                });
+                    Effect = c.LegendMaterias.Skip(0).Take(1).First().Effect,
+                    LegendMateriaId = c.LegendMaterias.Skip(0).Take(1).First().Id,
+                    LegendMateriaName = c.LegendMaterias.Skip(0).Take(1).First().LegendMateriaName,
+                    RelicId = 0
+                } : null,
+                LegendMateria2 = c.LegendSpheres.Any() ? new LegendMateriaSummaryInfo()
+                {
+                    Effect = c.LegendMaterias.Skip(1).Take(1).First().Effect,
+                    LegendMateriaId = c.LegendMaterias.Skip(1).Take(1).First().Id,
+                    LegendMateriaName = c.LegendMaterias.Skip(1).Take(1).First().LegendMateriaName,
+                    RelicId = 0
+                } : null,
+                LegendMateriaFromRelics = c.LegendMaterias.Any() ? c.LegendMaterias.Where(lm => lm.RelicId != 0).Select(lm => new LegendMateriaSummaryInfo()
+                {
+                    Effect = lm.Effect,
+                    LegendMateriaId = lm.Id,
+                    LegendMateriaName = lm.LegendMateriaName,
+                    RelicId = lm.RelicId
+                }).ToList() : null,
+                ProficientSchools = c.SchoolAccessInfos.Where(sai => sai.AccessLevel >= 5).Select(sai => sai.SchoolName).ToList(),
+                RatingPoolRankInfos = new List<RatingPoolRankInfo>()
+            });         
 
             return characterRatingContextInfos;
         }

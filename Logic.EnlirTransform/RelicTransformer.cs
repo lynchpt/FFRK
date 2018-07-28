@@ -41,6 +41,7 @@ namespace FFRKApi.Logic.EnlirTransform
             model.Realm = _realmConverter.ConvertFromNameToId(row.Realm);
             model.RelicType = _relicTypeConverter.ConvertFromNameToId(row.Type);
             model.EnlirId = row.ID;
+            model.IsInGlobal = _stringToBooleanConverter.ConvertFromStringToBool(row.IsInGlobal);
 
             model.CharacterName = row.Character.Replace(DashCharacter, String.Empty);
             model.CharacterId = 0; //fill during merge phase

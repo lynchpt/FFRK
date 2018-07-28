@@ -35,6 +35,7 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.AutoTarget = ResolveColumnContents(columnCount, OtherColumn.AutoTarget, row);
             importedRow.SB = ResolveColumnContents(columnCount, OtherColumn.SB, row);
             importedRow.School = ResolveColumnContents(columnCount, OtherColumn.School, row);
+            importedRow.IsInGlobal = ResolveColumnContents(columnCount, OtherColumn.IsInGlobal, row);
             importedRow.Checked = ResolveColumnContents(columnCount, OtherColumn.Checked, row);
 
             return importedRow;

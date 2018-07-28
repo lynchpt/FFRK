@@ -77,6 +77,7 @@ namespace FFRKApi.Logic.EnlirTransform
             model.CastTime = _doubleConverter.ConvertFromStringToDouble(row.Time);
             model.Effects = row.Effects;
             model.IsCounterable = _stringToBooleanConverter.ConvertFromStringToBool(row.Counter);
+            model.IsInGlobal = _stringToBooleanConverter.ConvertFromStringToBool(row.IsInGlobal);
             model.IsChecked = _stringToBooleanConverter.ConvertFromStringToBool(row.Checked);
 
             model.SoulBreakPointsRequired = _intConverter.ConvertFromStringToInt(row.Points);

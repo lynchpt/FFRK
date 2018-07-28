@@ -24,7 +24,8 @@ namespace FFRKApi.Model.EnlirImport
         School = 14,
         JapaneseName = 15,
         ID = 16,
-        Checked = 17
+        IsInGlobal = 17,
+        Checked = 18
     }
 
     public class CommandRow
@@ -47,6 +48,7 @@ namespace FFRKApi.Model.EnlirImport
         public string School { get; set; }
         public string JapaneseName { get; set; }
         public string ID { get; set; }
+        public string IsInGlobal { get; set; }
         public string Checked { get; set; }
     }
 }

@@ -50,43 +50,43 @@
   "RecordMateriaImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "'Record Materia'",
-    "RangeExpression": "A2:H",
+    "RangeExpression": "A2:I",
     "ValueRenderOption": 2
   },
   "LegendMateriaImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "'Legend Materia'",
-    "RangeExpression": "A2:I",
+    "RangeExpression": "A2:J",
     "ValueRenderOption": 2
   },
   "AbilityImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Abilities",
-    "RangeExpression": "A2:AR",
+    "RangeExpression": "A2:AS",
     "ValueRenderOption": 2
   },
   "SoulBreakImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "'Soul Breaks'",
-    "RangeExpression": "A2:T",
+    "RangeExpression": "A2:U",
     "ValueRenderOption": 2
   },
   "CommandImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Burst",
-    "RangeExpression": "A2:R",
+    "RangeExpression": "A2:S",
     "ValueRenderOption": 2
   },
   "BraveActionImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Brave",
-    "RangeExpression": "A2:S",
+    "RangeExpression": "A2:T",
     "ValueRenderOption": 2
   },
   "OtherImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Other",
-    "RangeExpression": "A2:P",
+    "RangeExpression": "A2:Q",
     "ValueRenderOption": 2
   },
   "StatusImporterOptions": {
@@ -98,19 +98,19 @@
   "RelicImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Relics",
-    "RangeExpression": "A2:AK",
+    "RangeExpression": "A2:AL",
     "ValueRenderOption": 0
   },
   "MagiciteImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "Magicite",
-    "RangeExpression": "A2:BD",
+    "RangeExpression": "A2:BF",
     "ValueRenderOption": 2
   },
   "MagiciteSkillImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "'Magicite Skills'",
-    "RangeExpression": "A2:Q",
+    "RangeExpression": "A2:R",
     "ValueRenderOption": 2
   },
   "EventImporterOptions": {

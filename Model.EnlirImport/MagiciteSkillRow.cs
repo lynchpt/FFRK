@@ -22,7 +22,8 @@ namespace FFRKApi.Model.EnlirImport
         Effects = 13,
         Counter = 14,
         JapaneseName = 15,
-        Checked = 16
+        IsInGlobal = 16,
+        Checked = 17
     }
 
     public class MagiciteSkillRow
@@ -43,6 +44,7 @@ namespace FFRKApi.Model.EnlirImport
         public string Effects { get; set; }
         public string Counter { get; set; }
         public string JapaneseName { get; set; }
+        public string IsInGlobal { get; set; }
         public string Checked { get; set; }
     }
 }

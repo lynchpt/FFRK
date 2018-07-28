@@ -39,6 +39,7 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.Relic = ResolveColumnContents(columnCount, SoulBreakColumn.Relic, row);
             importedRow.JapaneseName = ResolveColumnContents(columnCount, SoulBreakColumn.JapaneseName, row);
             importedRow.ID = ResolveColumnContents(columnCount, SoulBreakColumn.ID, row);
+            importedRow.IsInGlobal = ResolveColumnContents(columnCount, SoulBreakColumn.IsInGlobal, row);
             importedRow.Checked = ResolveColumnContents(columnCount, SoulBreakColumn.Checked, row);
 
 

@@ -60,6 +60,7 @@
         public int MaxEvasion { get; set; }
 
         public string EnlirId { get; set; }
+        public bool IsInGlobal { get; set; }
 
     }
 }

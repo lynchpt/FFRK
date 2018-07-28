@@ -27,6 +27,7 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.Effect = ResolveColumnContents(columnCount, RecordMateriaColumn.Effect, row);
             importedRow.UnlockCriteria = ResolveColumnContents(columnCount, RecordMateriaColumn.UnlockCriteria, row);
             importedRow.JapaneseName = ResolveColumnContents(columnCount, RecordMateriaColumn.JapaneseName, row);
+            importedRow.IsInGlobal = ResolveColumnContents(columnCount, RecordMateriaColumn.IsInGlobal, row);
             importedRow.Checked = ResolveColumnContents(columnCount, RecordMateriaColumn.Checked, row);
 
             return importedRow;

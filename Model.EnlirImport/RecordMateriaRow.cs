@@ -13,7 +13,8 @@ namespace FFRKApi.Model.EnlirImport
         Effect = 4,
         UnlockCriteria = 5,
         JapaneseName = 6,
-        Checked = 7
+        IsInGlobal = 7,
+        Checked = 8
     }
 
     public class RecordMateriaRow
@@ -26,6 +27,7 @@ namespace FFRKApi.Model.EnlirImport
         public string Effect { get; set; }
         public string UnlockCriteria { get; set; }
         public string JapaneseName { get; set; }
+        public string IsInGlobal { get; set; }
         public string Checked { get; set; }
     }
 }

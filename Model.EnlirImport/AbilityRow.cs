@@ -60,7 +60,8 @@ namespace FFRKApi.Model.EnlirImport
         IntroducingEvent = 40,
         JapaneseName = 41,
         ID = 42,
-        Checked = 43
+        IsInGlobal = 43,
+        Checked = 44
     }
 
     public class AbilityRow
@@ -121,6 +122,7 @@ namespace FFRKApi.Model.EnlirImport
         public string IntroducingEvent { get; set; }
         public string JapaneseName { get; set; }
         public string ID { get; set; }
+        public string IsInGlobal { get; set; }
         public string Checked { get; set; }
 
     }

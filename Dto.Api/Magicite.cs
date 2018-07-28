@@ -22,6 +22,8 @@ namespace FFRKApi.Dto.Api
 
         public string IntroducingEventName { get; set; }
         public int IntroducingEventId { get; set; }
+        public bool IsInGlobal { get; set; }
+        public bool IsChecked { get; set; }
 
         //stats
         public int HitPoints { get; set; }

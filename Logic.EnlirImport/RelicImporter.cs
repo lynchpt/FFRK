@@ -57,6 +57,7 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.MACC = ResolveColumnContents(columnCount, RelicColumn.MACC, row);
             importedRow.MEVA = ResolveColumnContents(columnCount, RelicColumn.MEVA, row);
             importedRow.ID = ResolveColumnContents(columnCount, RelicColumn.ID, row);
+            importedRow.IsInGlobal = ResolveColumnContents(columnCount, RelicColumn.IsInGlobal, row);
 
             return importedRow;
         }

@@ -42,7 +42,8 @@ namespace FFRKApi.Model.EnlirImport
         MMND = 33,
         MACC = 34,
         MEVA = 35,
-        ID = 36
+        ID = 36,
+        IsInGlobal = 37
     }
 
     public class RelicRow
@@ -84,5 +85,6 @@ namespace FFRKApi.Model.EnlirImport
         public string MACC { get; set; }
         public string MEVA { get; set; }
         public string ID { get; set; }
+        public string IsInGlobal { get; set; }
     }
 }

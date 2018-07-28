@@ -63,6 +63,7 @@ namespace FFRKApi.Logic.EnlirTransform
             model.AutoTargetType = _autoTargetTypeConverter.ConvertFromNameToId(row.AutoTarget);
             model.SoulBreakPointsGained = _intConverter.ConvertFromStringToInt(row.SB);
             model.School = _schoolConverter.ConvertFromNameToId(row.School);
+            model.IsInGlobal = _stringToBooleanConverter.ConvertFromStringToBool(row.IsInGlobal);
             model.IsChecked = _stringToBooleanConverter.ConvertFromStringToBool(row.Checked);
 
             _logger.LogDebug("Converted OtherRow to Other: {Id} - {Description}", model.Id, model.Description);

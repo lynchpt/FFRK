@@ -38,6 +38,7 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.School = ResolveColumnContents(columnCount, BraveActionColumn.School, row);
             importedRow.BraveCondition = ResolveColumnContents(columnCount, BraveActionColumn.BraveCondition, row);
             importedRow.JapaneseName = ResolveColumnContents(columnCount, BraveActionColumn.JapaneseName, row);
+            importedRow.IsInGlobal = ResolveColumnContents(columnCount, BraveActionColumn.IsInGlobal, row);
             importedRow.Checked = ResolveColumnContents(columnCount, BraveActionColumn.Checked, row);
 
             return importedRow;

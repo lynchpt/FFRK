@@ -18,6 +18,7 @@
         public string MasteryBonus { get; set; }
         public string RelicName { get; set; }
         public int RelicId { get; set; }//filled in during merge phase
+        public bool IsInGlobal { get; set; }
         public bool IsChecked { get; set; }
     }
 }

@@ -64,6 +64,9 @@ namespace FFRKApi.Logic.EnlirTransform
             model.IntroducingEventName = row.IntroducingEvent;
             model.IntroducingEventId = 0; //fill in during merge phase
 
+            model.IsInGlobal = _stringToBooleanConverter.ConvertFromStringToBool(row.IsInGlobal);
+            model.IsChecked = _stringToBooleanConverter.ConvertFromStringToBool(row.Checked);
+
             //stats
             model.HitPoints = _intConverter.ConvertFromStringToInt(row.HP);
             model.Attack = _intConverter.ConvertFromStringToInt(row.ATK);

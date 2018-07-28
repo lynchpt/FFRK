@@ -63,6 +63,7 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.IntroducingEvent = ResolveColumnContents(columnCount, AbilityColumn.IntroducingEvent, row);
             importedRow.JapaneseName = ResolveColumnContents(columnCount, AbilityColumn.JapaneseName, row);
             importedRow.ID = ResolveColumnContents(columnCount, AbilityColumn.ID, row);
+            importedRow.IsInGlobal = ResolveColumnContents(columnCount, AbilityColumn.IsInGlobal, row);
             importedRow.Checked = ResolveColumnContents(columnCount, AbilityColumn.Checked, row);
 
             return importedRow;

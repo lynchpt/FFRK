@@ -85,6 +85,8 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.Counter = ResolveColumnContents(columnCount, MagiciteColumn.Counter, row);
             importedRow.JapaneseName = ResolveColumnContents(columnCount, MagiciteColumn.JapaneseName, row);
             importedRow.ID = ResolveColumnContents(columnCount, MagiciteColumn.ID, row);
+            importedRow.IsInGlobal = ResolveColumnContents(columnCount, MagiciteColumn.IsInGlobal, row);
+            importedRow.Checked = ResolveColumnContents(columnCount, MagiciteColumn.Checked, row);
 
             return importedRow;
         }
