@@ -6,6 +6,7 @@
     <RootNamespace>FFRKApi.Api.FFRK</RootNamespace>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <ExcludeXmlAssemblyFiles>false</ExcludeXmlAssemblyFiles>
+    <UserSecretsId>239f948e-df33-4372-95df-1e1169e1e7e1</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
