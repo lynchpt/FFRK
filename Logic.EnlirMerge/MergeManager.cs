@@ -457,10 +457,10 @@ namespace FFRKApi.Logic.EnlirMerge
                     continue;
                 }
 
-                LegendMateria relatedLegendMateria = transformResults.LegendMaterias.SingleOrDefault(l => l.LegendMateriaName == other.SourceName);
-                if (relatedLegendMateria != null) //this is the match
+                IList<LegendMateria> relatedLegendMateria = transformResults.LegendMaterias.Where(l => l.LegendMateriaName == other.SourceName).ToList();
+                if (relatedLegendMateria != null && relatedLegendMateria.Count == 1) //this is the match
                 {
-                    other.SourceId = relatedLegendMateria.Id;
+                    other.SourceId = relatedLegendMateria.First().Id;
                     other.SourceType = nameof(LegendMateria);
 
                     _logger.LogDebug("wired up SourceId {SourceId} and SourceType {SourceType} to Other {Other}", other.SourceId, other.SourceType, other.Description);
