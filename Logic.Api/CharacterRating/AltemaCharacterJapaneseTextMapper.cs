@@ -224,6 +224,8 @@ namespace FFRKApi.Logic.Api.CharacterRating
 			{"/ffrk/character/207", "Gau"},	// 	ガウ
 		    {"/ffrk/character/336", "Hilda"},	// 	ヒルダ
 		    {"/ffrk/character/341", "Orran"}, // オーラン 
+		    {"/ffrk/character/340", "Lilisette"}, //リリゼット
+            {"/ffrk/character/339", "Jack"} //ジャック
         };
 
 		private readonly IDictionary<string, string> _roleSummaryMap = new Dictionary<string, string>()
@@ -289,6 +291,8 @@ namespace FFRKApi.Logic.Api.CharacterRating
 		    {"氷炎物理", "Ice Fire ATK"},
 		    {"氷水魔法", "Ice Water MAG"},
 		    {"雷風無物理", "NE Celerity ATK"},
+		    {"風聖魔法", "Holy MAG"},
+		    {"雷風物理", "Lightning Wind ATK"}
 
 
         };
@@ -355,7 +359,10 @@ namespace FFRKApi.Logic.Api.CharacterRating
 		    {"地炎毒物理", new List<string> { "Earth ATK", "Fire ATK", "Poison ATK"}}, //"Earth Fire Poison ATK
 		    {"氷炎物理", new List<string> { "Ice ATK", "Fire ATK"}}, //Ice Fire ATK
             {"氷水魔法", new List<string> { "Ice MAG", "Water MAG"}}, //Ice Water MAG
-		    {"雷風無物理", new List<string> { "NE ATK", "Celerity ATK"}} //NE Celerity ATK
+		    {"雷風無物理", new List<string> { "NE ATK", "Celerity ATK"}}, //NE Celerity ATK
+		    {"風聖魔法", new List<string> { "Holy MAG"}}, //Holy MAG
+		    {"雷風物理", new List<string> { "Lightning ATK", "Wind ATK"}} //Lightning Wind ATK
+
 		};
 
 
