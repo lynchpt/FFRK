@@ -292,15 +292,17 @@ namespace FFRKApi.Logic.Api.CharacterRating
 		    {"氷水魔法", "Ice Water MAG"},
 		    {"雷風無物理", "NE Celerity ATK"},
 		    {"風聖魔法", "Holy MAG"},
-		    {"雷風物理", "Lightning Wind ATK"}
-
+		    {"雷風物理", "Lightning Wind ATK"},
+		    {"風闇物理", "Wind ATK"},
+		    {"水毒物理", "Poison ATK"}
 
         };
 
 		private readonly IDictionary<string, IList<string>> _rolePartMap = new Dictionary<string, IList<string>>()
 		{
 			{"風物理", new List<string> { "Wind ATK" }},
-			{"回復", new List<string> { "Healing" }},
+		    {"風闇物理", new List<string> { "Wind ATK" }},
+            {"回復", new List<string> { "Healing" }},
 			{"バフ", new List<string> {"Buff"}},
 			{"デバフ", new List<string> {"Debuff"}},
 			{"オールマイティ", new List<string> {"Almighty"}},
@@ -355,7 +357,8 @@ namespace FFRKApi.Logic.Api.CharacterRating
 			{"風地魔法", new List<string> {"Earth MAG", "Wind MAG"}}, //"Earth Wind MAG"
 			{"地物魔", new List<string> {"Hybrid MAG"}},
 			{"毒物理", new List<string> {"Poison ATK"}},
-			{"炎毒物理", new List<string> {"Fire ATK", "Poison ATK"}}, //"Fire Poison ATK"
+		    {"水毒物理", new List<string> {"Poison ATK"}},
+            {"炎毒物理", new List<string> {"Fire ATK", "Poison ATK"}}, //"Fire Poison ATK"
 		    {"地炎毒物理", new List<string> { "Earth ATK", "Fire ATK", "Poison ATK"}}, //"Earth Fire Poison ATK
 		    {"氷炎物理", new List<string> { "Ice ATK", "Fire ATK"}}, //Ice Fire ATK
             {"氷水魔法", new List<string> { "Ice MAG", "Water MAG"}}, //Ice Water MAG
