@@ -22,7 +22,9 @@ namespace FFRKApi.Model.EnlirTransform.IdLists
                                                                     new KeyValuePair<int, string>(11, "Posion"),
                                                                     new KeyValuePair<int, string>(12, "Water"),
                                                                     new KeyValuePair<int, string>(13, "Wind"),
-                                                                    new KeyValuePair<int, string>(14, "Light.")
+                                                                    new KeyValuePair<int, string>(14, "Light."),
+                                                                    new KeyValuePair<int, string>(15, "Ea."),
+                                                                    new KeyValuePair<int, string>(16, "Wat.")
                                                                 };
 
         public IList<KeyValuePair<int, string>> TypeList => _typeList;

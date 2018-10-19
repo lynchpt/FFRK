@@ -56,7 +56,7 @@
   "LegendMateriaImporterOptions": {
     "SpreadsheetId": "16K1Zryyxrh7vdKVF1f7eRrUAOC5wuzvC3q2gFLch6LQ",
     "WorkSheetName": "'Legend Materia'",
-    "RangeExpression": "A2:J",
+    "RangeExpression": "A2:K",
     "ValueRenderOption": 2
   },
   "AbilityImporterOptions": {

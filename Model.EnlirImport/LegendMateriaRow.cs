@@ -14,8 +14,9 @@ namespace FFRKApi.Model.EnlirImport
         Master = 5,
         Relic = 6,
         JapaneseName = 7,
-        IsInGlobal = 8,
-        Checked = 9
+        ID = 8,
+        IsInGlobal = 9,
+        Checked = 10
     }
 
 
@@ -31,6 +32,7 @@ namespace FFRKApi.Model.EnlirImport
         public string Master { get; set; }
         public string Relic { get; set; }
         public string JapaneseName { get; set; }
+        public string ID { get; set; }
         public string IsInGlobal { get; set; }
         public string Checked { get; set; }
 

@@ -108,7 +108,7 @@ namespace Manager.EnlirETL
                 stopwatchImport.Stop();
 
                 //cheat data setup for testing - comment out when doing full run for real
-                //string importStoragePath = @"D:\Temp\FFRKApi\ImportResults-2018-06-17_01-57-36.json";
+                //string importStoragePath = @"D:\Temp\FFRKApi\ImportResults-2018-10-19_11-00-34.json";
                 //string transformStoragePath = @"D:\Docs\Personal\FFRKLinqQuery\TransformResults-Latest.json";
                 //string formattedDateString = "2018-06-17_02-00-00";
                 //string importContents = File.ReadAllText(importStoragePath);
