@@ -225,7 +225,13 @@ namespace FFRKApi.Logic.Api.CharacterRating
 		    {"/ffrk/character/336", "Hilda"},	// 	ヒルダ
 		    {"/ffrk/character/341", "Orran"}, // オーラン 
 		    {"/ffrk/character/340", "Lilisette"}, //リリゼット
-            {"/ffrk/character/339", "Jack"} //ジャック
+            {"/ffrk/character/339", "Jack"}, //ジャック
+		    {"/ffrk/character/344", "Dr. Mog"},	// Dr.モグ      
+		    {"/ffrk/character/343", "Wedge"},	// ウェッジ 
+		    {"/ffrk/character/342", "Biggs"},	// ビッグス
+		    {"/ffrk/character/345", "Eight"},	// ウェッジ 
+		    {"/ffrk/character/346", "Cater"}	// ビッグス
+
         };
 
 		private readonly IDictionary<string, string> _roleSummaryMap = new Dictionary<string, string>()
