@@ -22,8 +22,9 @@ namespace FFRKApi.Model.EnlirImport
         AutoTarget = 12,
         SB = 13,
         School = 14,
-        IsInGlobal = 15,
-        Checked = 16
+        ID = 15,
+        IsInGlobal = 16,
+        Checked = 17
     }
 
     public class OtherRow
@@ -43,6 +44,7 @@ namespace FFRKApi.Model.EnlirImport
         public string AutoTarget { get; set; }
         public string SB { get; set; }
         public string School { get; set; }
+        public string ID { get; set; }
         public string IsInGlobal { get; set; }
         public string Checked { get; set; }
     }

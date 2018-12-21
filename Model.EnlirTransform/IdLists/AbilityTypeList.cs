@@ -16,7 +16,8 @@ namespace FFRKApi.Model.EnlirTransform.IdLists
                                                                  new KeyValuePair<int, string>(5, "NIN"),
                                                                  new KeyValuePair<int, string>(6, "PHY"),
                                                                  new KeyValuePair<int, string>(7, "SUM"),
-                                                                 new KeyValuePair<int, string>(8, "WHT")
+                                                                 new KeyValuePair<int, string>(8, "WHT"),
+                                                                 new KeyValuePair<int, string>(9, "")
                                                              };
 
 

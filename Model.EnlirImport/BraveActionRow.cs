@@ -25,8 +25,9 @@ namespace FFRKApi.Model.EnlirImport
         School = 15,
         BraveCondition = 16,
         JapaneseName = 17,
-        IsInGlobal = 18,
-        Checked = 19
+        ID = 18,
+        IsInGlobal = 19,
+        Checked = 20
     }
 
     public class BraveActionRow
@@ -50,6 +51,7 @@ namespace FFRKApi.Model.EnlirImport
         public string School { get; set; }
         public string BraveCondition { get; set; }
         public string JapaneseName { get; set; }
+        public string ID { get; set; }
         public string IsInGlobal { get; set; }
         public string Checked { get; set; }
     }

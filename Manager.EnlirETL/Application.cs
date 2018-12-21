@@ -90,7 +90,7 @@ namespace Manager.EnlirETL
                 //uncomment below to actually run import and transform stages - file based
                 string formattedDateString = DateTime.UtcNow.ToString(DateFormatSpecifier);
 
-                ////Import
+                //Import
                 Stopwatch stopwatchImport = Stopwatch.StartNew();
 
                 string failureInfo;
@@ -108,9 +108,9 @@ namespace Manager.EnlirETL
                 stopwatchImport.Stop();
 
                 //cheat data setup for testing - comment out when doing full run for real
-                //string importStoragePath = @"D:\Temp\FFRKApi\ImportResults-2018-10-19_11-00-34.json";
+                //string importStoragePath = @"D:\Temp\FFRKApi\ImportResults-2018-12-21_09-48-46.json";
                 //string transformStoragePath = @"D:\Docs\Personal\FFRKLinqQuery\TransformResults-Latest.json";
-                //string formattedDateString = "2018-06-17_02-00-00";
+                //string formattedDateString = "2018-12-21_09-48-46";
                 //string importContents = File.ReadAllText(importStoragePath);
                 //ImportResultsContainer importResultsContainer = JsonConvert.DeserializeObject<ImportResultsContainer>(importContents);
 

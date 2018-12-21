@@ -27,14 +27,24 @@ namespace FFRKApi.Model.EnlirTransform.Converters
         #endregion
 
         #region Public Methods
+
         public int ConvertFromNameToId(string input)
         {
             int id = 0;
 
-            id = _typeList.TypeList.SingleOrDefault(r => r.Value == input.Trim()).Key;
-
+            try
+            {
+                id = _typeList.TypeList.SingleOrDefault(r => r.Value == input.Trim()).Key;
+            }
+            catch (Exception e)
+            {
+                id = 0;
+            }
             return id;
         }
+
+
+  
 
         public IEnumerable<int> ConvertFromCommaSeparatedListToIds(string input)
         {

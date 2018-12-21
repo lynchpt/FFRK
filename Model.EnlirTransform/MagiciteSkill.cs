@@ -34,6 +34,8 @@ namespace FFRKApi.Model.EnlirTransform
         public string Effects { get; set; }
 
         public bool IsCounterable { get; set; }
+
+        public string EnlirId { get; set; }
         public bool IsInGlobal { get; set; }
 
         public bool IsChecked { get; set; }

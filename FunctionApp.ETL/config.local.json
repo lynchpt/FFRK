@@ -80,13 +80,13 @@
   "BraveActionImporterOptions": {
     "SpreadsheetId": "1f8OJIQhpycljDQ8QNDk_va1GJ1u7RVoMaNjFcHH0LKk",
     "WorkSheetName": "Brave",
-    "RangeExpression": "A2:T",
+    "RangeExpression": "A2:U",
     "ValueRenderOption": 2
   },
   "OtherImporterOptions": {
     "SpreadsheetId": "1f8OJIQhpycljDQ8QNDk_va1GJ1u7RVoMaNjFcHH0LKk",
     "WorkSheetName": "Other",
-    "RangeExpression": "A2:Q",
+    "RangeExpression": "A2:R",
     "ValueRenderOption": 2
   },
   "StatusImporterOptions": {
@@ -110,7 +110,7 @@
   "MagiciteSkillImporterOptions": {
     "SpreadsheetId": "1f8OJIQhpycljDQ8QNDk_va1GJ1u7RVoMaNjFcHH0LKk",
     "WorkSheetName": "'Magicite Skills'",
-    "RangeExpression": "A2:R",
+    "RangeExpression": "A2:S",
     "ValueRenderOption": 2
   },
   "EventImporterOptions": {

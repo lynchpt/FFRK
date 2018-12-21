@@ -36,6 +36,7 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.Effects = ResolveColumnContents(columnCount, MagiciteSkillColumn.Effects, row);
             importedRow.Counter = ResolveColumnContents(columnCount, MagiciteSkillColumn.Counter, row);
             importedRow.JapaneseName = ResolveColumnContents(columnCount, MagiciteSkillColumn.JapaneseName, row);
+            importedRow.ID = ResolveColumnContents(columnCount, MagiciteSkillColumn.ID, row);
             importedRow.IsInGlobal = ResolveColumnContents(columnCount, MagiciteSkillColumn.IsInGlobal, row);
             importedRow.Checked = ResolveColumnContents(columnCount, MagiciteSkillColumn.Checked, row);
 

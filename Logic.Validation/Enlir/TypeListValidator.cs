@@ -69,7 +69,7 @@ namespace FFRKApi.Logic.Validation.Enlir
             var magiciteSkillAbilityTypes = irc.MagiciteSkillRows.Where(ar => !String.IsNullOrWhiteSpace(ar.Type)).Select(ar => ar.Type.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
-            var otherAbilityTypes = irc.OtherRows.Select(ar => ar.Type.Split(",".ToCharArray())).
+            var otherAbilityTypes = irc.OtherRows.Where(ar => !String.IsNullOrWhiteSpace(ar.Type)).Select(ar => ar.Type.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
             var soulBreakAbilityTypes = irc.SoulBreakRows.Select(ar => ar.Type.Split(",".ToCharArray())).
@@ -108,7 +108,7 @@ namespace FFRKApi.Logic.Validation.Enlir
             var magiciteSkillAutoTargetTypes = irc.MagiciteSkillRows.Where(ar => !String.IsNullOrWhiteSpace(ar.Type)).Select(ar => ar.AutoTarget.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
-            var otherAutoTargetTypes = irc.OtherRows.Select(ar => ar.AutoTarget.Split(",".ToCharArray())).
+            var otherAutoTargetTypes = irc.OtherRows.Where(ar => !String.IsNullOrWhiteSpace(ar.Type)).Select(ar => ar.AutoTarget.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
             var soulBreakAutoTargetTypes = irc.SoulBreakRows.Select(ar => ar.AutoTarget.Split(",".ToCharArray())).
@@ -147,7 +147,7 @@ namespace FFRKApi.Logic.Validation.Enlir
             var magiciteSkillDamageFormulaTypes = irc.MagiciteSkillRows.Where(ar => !String.IsNullOrWhiteSpace(ar.Type)).Select(ar => ar.Formula.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
-            var otherDamageFormulaTypes = irc.OtherRows.Select(ar => ar.Formula.Split(",".ToCharArray())).
+            var otherDamageFormulaTypes = irc.OtherRows.Where(ar => !String.IsNullOrWhiteSpace(ar.Type)).Select(ar => ar.Formula.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
             var soulBreakDamageFormulaTypes = irc.SoulBreakRows.Select(ar => ar.Formula.Split(",".ToCharArray())).
@@ -186,7 +186,7 @@ namespace FFRKApi.Logic.Validation.Enlir
             var magiciteSkillElements = irc.MagiciteSkillRows.Where(ar => !String.IsNullOrWhiteSpace(ar.Type)).Select(ar => ar.Element.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
-            var otherElements = irc.OtherRows.Select(ar => ar.Element.Split(",".ToCharArray())).
+            var otherElements = irc.OtherRows.Where(ar => !String.IsNullOrWhiteSpace(ar.Type)).Select(ar => ar.Element.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
             var soulBreakElements = irc.SoulBreakRows.Select(ar => ar.Element.Split(",".ToCharArray())).
@@ -261,7 +261,7 @@ namespace FFRKApi.Logic.Validation.Enlir
             var abilityOrb1Types = irc.AbilityRows.Select(a => a.Orb1RequiredType.Trim()).Distinct().OrderBy(e => e).ToList();
             var abilityOrb2Types = irc.AbilityRows.Select(a => a.Orb2RequiredType.Trim()).Distinct().OrderBy(e => e).ToList();
             var abilityOrb3Types = irc.AbilityRows.Select(a => a.Orb3RequiredType.Trim()).Distinct().OrderBy(e => e).ToList();
-            var abilityOrb4Types = irc.AbilityRows.Select(a => a.Orb4RequiredType.Trim()).Distinct().OrderBy(e => e).ToList();
+            var abilityOrb4Types = irc.AbilityRows.Where(ar => !String.IsNullOrWhiteSpace(ar.Orb4RequiredType)).Select(a => a.Orb4RequiredType.Trim()).Distinct().OrderBy(e => e).ToList();
 
             //OrbTypes - source
             var unifiedOrbTypeList = abilityOrb1Types.Union(abilityOrb2Types).Union(abilityOrb3Types).Union(abilityOrb4Types).OrderBy(e => e);
@@ -363,7 +363,7 @@ namespace FFRKApi.Logic.Validation.Enlir
             var commandSchoolTypes = irc.CommandRows.Select(ar => ar.School.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
-            var otherSchoolTypes = irc.OtherRows.Select(ar => ar.School.Split(",".ToCharArray())).
+            var otherSchoolTypes = irc.OtherRows.Where(ar => !String.IsNullOrWhiteSpace(ar.Type)).Select(ar => ar.School.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
             //SchoolTypes - source
@@ -414,7 +414,7 @@ namespace FFRKApi.Logic.Validation.Enlir
             var commandTargetTypes = irc.CommandRows.Select(ar => ar.Target.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
-            var otherTargetTypes = irc.OtherRows.Select(ar => ar.Target.Split(",".ToCharArray())).
+            var otherTargetTypes = irc.OtherRows.Where(ar => !String.IsNullOrWhiteSpace(ar.Type)).Select(ar => ar.Target.Split(",".ToCharArray())).
                 SelectMany(el => el).Select(s => s.Trim()).Distinct().OrderBy(e => e).ToList();
 
             var soulBreakTargetTypes = irc.SoulBreakRows.Select(ar => ar.Target.Split(",".ToCharArray())).

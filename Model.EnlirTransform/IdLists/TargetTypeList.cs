@@ -22,7 +22,8 @@ namespace FFRKApi.Model.EnlirTransform.IdLists
                                                                           new KeyValuePair<int, string>(11, "Single"),
                                                                           new KeyValuePair<int, string>(12, "Single ally"),
                                                                           new KeyValuePair<int, string>(13, "Single enemy"),
-                                                                          //new KeyValuePair<int, string>(14, "")
+                                                                          new KeyValuePair<int, string>(14, ""),
+                                                                          new KeyValuePair<int, string>(15, "ALl enemies")
                                                                       };
 
 

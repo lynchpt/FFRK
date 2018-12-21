@@ -11,18 +11,22 @@ namespace FFRKApi.Model.EnlirTransform.Converters
         {
             double result = 0;
 
-            //the source spreadsheet has number formatted in french way, as in 1,80.
-            //However, at least sometimes the Google Sheets api spontaneously converts those number into English format, like 1.80
-            //this way we can detect what is coming in and pick the right formula.
-            //Obviously, this only works because we know we will not be getting any number greater than the hundreds.
-            if (input.Contains(","))
+            if (!String.IsNullOrWhiteSpace(input))
             {
-                result = ConvertFromStringToDoubleFrench(input);
+                //the source spreadsheet has number formatted in french way, as in 1,80.
+                //However, at least sometimes the Google Sheets api spontaneously converts those number into English format, like 1.80
+                //this way we can detect what is coming in and pick the right formula.
+                //Obviously, this only works because we know we will not be getting any number greater than the hundreds.
+                if (input.Contains(","))
+                {
+                    result = ConvertFromStringToDoubleFrench(input);
+                }
+                else
+                {
+                    result = ConvertFromStringToDoubleEnglish(input);
+                }
             }
-            else
-            {
-                result = ConvertFromStringToDoubleEnglish(input);
-            }
+
 
             return result;
         }
