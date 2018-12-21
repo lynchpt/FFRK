@@ -50,16 +50,16 @@ namespace FFRKApi.Logic.EnlirTransform
             model.EventTypeName = row.Type;
 
             model.HeroRecordsAwarded = ConvertCommaSeparatedStringToList(row.HeroRecords);
-            model.SoulOfHerosAwarded = _intConverter.ConvertFromStringToInt(row.SpiritOfAHero);
+            //model.SoulOfHerosAwarded = _intConverter.ConvertFromStringToInt(row.SpiritOfAHero);
 
             model.MemoryCrystalsLevel1Awarded = ConvertCommaSeparatedStringToList(row.MemoryCrystalsLevel1);
-            model.MemoryCrystalLodesLevel1Awarded = _intConverter.ConvertFromStringToInt(row.MemoryCrystalLodesLevel1);
+            //model.MemoryCrystalLodesLevel1Awarded = _intConverter.ConvertFromStringToInt(row.MemoryCrystalLodesLevel1);
 
             model.MemoryCrystalsLevel2Awarded = ConvertCommaSeparatedStringToList(row.MemoryCrystalsLevel2);
-            model.MemoryCrystalLodesLevel2Awarded = _intConverter.ConvertFromStringToInt(row.MemoryCrystalLodesLevel2);
+            //model.MemoryCrystalLodesLevel2Awarded = _intConverter.ConvertFromStringToInt(row.MemoryCrystalLodesLevel2);
 
             model.MemoryCrystalsLevel3Awarded = ConvertCommaSeparatedStringToList(row.MemoryCrystalsLevel3);
-            model.MemoryCrystalLodesLevel3Awarded = _intConverter.ConvertFromStringToInt(row.MemoryCrystalLodesLevel3);
+            //model.MemoryCrystalLodesLevel3Awarded = _intConverter.ConvertFromStringToInt(row.MemoryCrystalLodesLevel3);
 
             model.WardrobeRecordsAwarded = ConvertCommaSeparatedStringToList(row.WardrobeRecords);
             model.AbilitiesAwarded = ConvertCommaSeparatedStringToList(row.AbilitiesAwarded);

@@ -46,6 +46,7 @@ namespace FFRKApi.Logic.EnlirTransform
 
             model.Effect = row.Effect;
             model.UnlockCriteria = row.UnlockCriteria;
+            model.EnlirId = row.ID;
             model.IsInGlobal = _stringToBooleanConverter.ConvertFromStringToBool(row.IsInGlobal);
             model.IsChecked = _stringToBooleanConverter.ConvertFromStringToBool(row.Checked);
 

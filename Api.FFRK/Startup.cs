@@ -108,10 +108,9 @@ namespace FFRKApi.Api.FFRK
         protected virtual void ConfigureDependencyInjection(IServiceCollection services)
         {
             services.AddScoped<IMergeStorageProvider, AzureBlobStorageProvider>();
-            services.AddScoped<IBannerSpecProvider, BannerSpecAzureBlobProvider>();
             //services.AddScoped<IMergeStorageProvider, FileMergeStorageProvider>();
 
-            //services.AddScoped<IEnlirRepository, EnlirRepository>();
+            services.AddScoped<IBannerSpecProvider, BannerSpecAzureBlobProvider>();
 
             services.AddScoped<IAbilitiesLogic, AbilitiesLogic>();
             services.AddScoped<ICharactersLogic, CharactersLogic>();

@@ -25,10 +25,10 @@ namespace FFRKApi.Api.FFRK.Controllers
         IActionResult GetEventsByMemoryCrystal1(string characterName);
         IActionResult GetEventsByMemoryCrystal2(string characterName);
         IActionResult GetEventsByMemoryCrystal3(string characterName);
-        IActionResult GetEventsBySoulOfHero();
-        IActionResult GetEventsByMemoryLode1();
-        IActionResult GetEventsByMemoryLode2();
-        IActionResult GetEventsByMemoryLode3();
+        //IActionResult GetEventsBySoulOfHero();
+        //IActionResult GetEventsByMemoryLode1();
+        //IActionResult GetEventsByMemoryLode2();
+        //IActionResult GetEventsByMemoryLode3();
         IActionResult GetEventsByWardrobeRecord(string characterName);
         IActionResult GetEventsByAbilities(string chaabilityNameracterName);
     }
@@ -313,113 +313,113 @@ namespace FFRKApi.Api.FFRK.Controllers
             return new ObjectResult(result);
         }
 
-        /// <summary>
-        /// Gets all Events that reward a Soul of Hero
-        /// </summary>
-        /// <remarks>
-        /// Sample Use Case - You want to find out data about all Events that reward a Soul of Hero.
-        /// - You can straight away call this api: api/v1.0/Events/SoulOfHero";
-        /// <br /> 
-        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/SoulOfHero (or use Try It Out to see data in this page)
-        /// </remarks>
-        /// <response code="200">
-        ///     <see>IEnumerable&lt;Event&gt;</see>
-        /// </response>
-        [HttpGet]
-        [Route(RouteConstants.EventsRoute_SoulOfHero)]
-        [SwaggerOperation(nameof(GetEventsBySoulOfHero))]
-        [ProducesResponseType(typeof(IEnumerable<D.Event>), (int)HttpStatusCode.OK)]
-        public IActionResult GetEventsBySoulOfHero()
-        {
-            _logger.LogInformation($"Controller Method invoked: {nameof(GetEventsBySoulOfHero)}");
+        ///// <summary>
+        ///// Gets all Events that reward a Soul of Hero
+        ///// </summary>
+        ///// <remarks>
+        ///// Sample Use Case - You want to find out data about all Events that reward a Soul of Hero.
+        ///// - You can straight away call this api: api/v1.0/Events/SoulOfHero";
+        ///// <br /> 
+        ///// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/SoulOfHero (or use Try It Out to see data in this page)
+        ///// </remarks>
+        ///// <response code="200">
+        /////     <see>IEnumerable&lt;Event&gt;</see>
+        ///// </response>
+        //[HttpGet]
+        //[Route(RouteConstants.EventsRoute_SoulOfHero)]
+        //[SwaggerOperation(nameof(GetEventsBySoulOfHero))]
+        //[ProducesResponseType(typeof(IEnumerable<D.Event>), (int)HttpStatusCode.OK)]
+        //public IActionResult GetEventsBySoulOfHero()
+        //{
+        //    _logger.LogInformation($"Controller Method invoked: {nameof(GetEventsBySoulOfHero)}");
 
-            IEnumerable<Event> model = _eventsLogic.GetEventsBySoulOfHero();
+        //    IEnumerable<Event> model = _eventsLogic.GetEventsBySoulOfHero();
 
-            IEnumerable<D.Event> result = _mapper.Map<IEnumerable<D.Event>>(model);
+        //    IEnumerable<D.Event> result = _mapper.Map<IEnumerable<D.Event>>(model);
 
-            return new ObjectResult(result);
-        }
+        //    return new ObjectResult(result);
+        //}
 
-        /// <summary>
-        /// Gets all Events that reward a Memory Lode 1
-        /// </summary>
-        /// <remarks>
-        /// Sample Use Case - You want to find out data about all Events that reward a Memory Lode 1.
-        /// - You can straight away call this api: api/v1.0/Events/MemoryLode1";
-        /// <br /> 
-        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/MemoryLode1 (or use Try It Out to see data in this page)
-        /// </remarks>
-        /// <response code="200">
-        ///     <see>IEnumerable&lt;Event&gt;</see>
-        /// </response>
-        [HttpGet]
-        [Route(RouteConstants.EventsRoute_MemoryLode1)]
-        [SwaggerOperation(nameof(GetEventsByMemoryLode1))]
-        [ProducesResponseType(typeof(IEnumerable<D.Event>), (int)HttpStatusCode.OK)]
-        public IActionResult GetEventsByMemoryLode1()
-        {
-            _logger.LogInformation($"Controller Method invoked: {nameof(GetEventsByMemoryLode1)}");
+        ///// <summary>
+        ///// Gets all Events that reward a Memory Lode 1
+        ///// </summary>
+        ///// <remarks>
+        ///// Sample Use Case - You want to find out data about all Events that reward a Memory Lode 1.
+        ///// - You can straight away call this api: api/v1.0/Events/MemoryLode1";
+        ///// <br /> 
+        ///// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/MemoryLode1 (or use Try It Out to see data in this page)
+        ///// </remarks>
+        ///// <response code="200">
+        /////     <see>IEnumerable&lt;Event&gt;</see>
+        ///// </response>
+        //[HttpGet]
+        //[Route(RouteConstants.EventsRoute_MemoryLode1)]
+        //[SwaggerOperation(nameof(GetEventsByMemoryLode1))]
+        //[ProducesResponseType(typeof(IEnumerable<D.Event>), (int)HttpStatusCode.OK)]
+        //public IActionResult GetEventsByMemoryLode1()
+        //{
+        //    _logger.LogInformation($"Controller Method invoked: {nameof(GetEventsByMemoryLode1)}");
 
-            IEnumerable<Event> model = _eventsLogic.GetEventsByMemoryLode1();
+        //    IEnumerable<Event> model = _eventsLogic.GetEventsByMemoryLode1();
 
-            IEnumerable<D.Event> result = _mapper.Map<IEnumerable<D.Event>>(model);
+        //    IEnumerable<D.Event> result = _mapper.Map<IEnumerable<D.Event>>(model);
 
-            return new ObjectResult(result);
-        }
+        //    return new ObjectResult(result);
+        //}
 
-        /// <summary>
-        /// Gets all Events that reward a Memory Lode 2
-        /// </summary>
-        /// <remarks>
-        /// Sample Use Case - You want to find out data about all Events that reward a Memory Lode 2.
-        /// - You can straight away call this api: api/v1.0/Events/MemoryLode2";
-        /// <br /> 
-        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/MemoryLode2 (or use Try It Out to see data in this page)
-        /// </remarks>
-        /// <response code="200">
-        ///     <see>IEnumerable&lt;Event&gt;</see>
-        /// </response>
-        [HttpGet]
-        [Route(RouteConstants.EventsRoute_MemoryLode2)]
-        [SwaggerOperation(nameof(GetEventsByMemoryLode2))]
-        [ProducesResponseType(typeof(IEnumerable<D.Event>), (int)HttpStatusCode.OK)]
-        public IActionResult GetEventsByMemoryLode2()
-        {
-            _logger.LogInformation($"Controller Method invoked: {nameof(GetEventsByMemoryLode2)}");
+        ///// <summary>
+        ///// Gets all Events that reward a Memory Lode 2
+        ///// </summary>
+        ///// <remarks>
+        ///// Sample Use Case - You want to find out data about all Events that reward a Memory Lode 2.
+        ///// - You can straight away call this api: api/v1.0/Events/MemoryLode2";
+        ///// <br /> 
+        ///// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/MemoryLode2 (or use Try It Out to see data in this page)
+        ///// </remarks>
+        ///// <response code="200">
+        /////     <see>IEnumerable&lt;Event&gt;</see>
+        ///// </response>
+        //[HttpGet]
+        //[Route(RouteConstants.EventsRoute_MemoryLode2)]
+        //[SwaggerOperation(nameof(GetEventsByMemoryLode2))]
+        //[ProducesResponseType(typeof(IEnumerable<D.Event>), (int)HttpStatusCode.OK)]
+        //public IActionResult GetEventsByMemoryLode2()
+        //{
+        //    _logger.LogInformation($"Controller Method invoked: {nameof(GetEventsByMemoryLode2)}");
 
-            IEnumerable<Event> model = _eventsLogic.GetEventsByMemoryLode2();
+        //    IEnumerable<Event> model = _eventsLogic.GetEventsByMemoryLode2();
 
-            IEnumerable<D.Event> result = _mapper.Map<IEnumerable<D.Event>>(model);
+        //    IEnumerable<D.Event> result = _mapper.Map<IEnumerable<D.Event>>(model);
 
-            return new ObjectResult(result);
-        }
+        //    return new ObjectResult(result);
+        //}
 
-        /// <summary>
-        /// Gets all Events that reward a Memory Lode 3
-        /// </summary>
-        /// <remarks>
-        /// Sample Use Case - You want to find out data about all Events that reward a Memory Lode 3.
-        /// - You can straight away call this api: api/v1.0/Events/MemoryLode3";
-        /// <br /> 
-        /// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/MemoryLode3 (or use Try It Out to see data in this page)
-        /// </remarks>
-        /// <response code="200">
-        ///     <see>IEnumerable&lt;Event&gt;</see>
-        /// </response>
-        [HttpGet]
-        [Route(RouteConstants.EventsRoute_MemoryLode3)]
-        [SwaggerOperation(nameof(GetEventsByMemoryLode3))]
-        [ProducesResponseType(typeof(IEnumerable<D.Event>), (int)HttpStatusCode.OK)]
-        public IActionResult GetEventsByMemoryLode3()
-        {
-            _logger.LogInformation($"Controller Method invoked: {nameof(GetEventsByMemoryLode3)}");
+        ///// <summary>
+        ///// Gets all Events that reward a Memory Lode 3
+        ///// </summary>
+        ///// <remarks>
+        ///// Sample Use Case - You want to find out data about all Events that reward a Memory Lode 3.
+        ///// - You can straight away call this api: api/v1.0/Events/MemoryLode3";
+        ///// <br /> 
+        ///// Example - http://ffrkapi.azurewebsites.net/api/v1.0/Events/MemoryLode3 (or use Try It Out to see data in this page)
+        ///// </remarks>
+        ///// <response code="200">
+        /////     <see>IEnumerable&lt;Event&gt;</see>
+        ///// </response>
+        //[HttpGet]
+        //[Route(RouteConstants.EventsRoute_MemoryLode3)]
+        //[SwaggerOperation(nameof(GetEventsByMemoryLode3))]
+        //[ProducesResponseType(typeof(IEnumerable<D.Event>), (int)HttpStatusCode.OK)]
+        //public IActionResult GetEventsByMemoryLode3()
+        //{
+        //    _logger.LogInformation($"Controller Method invoked: {nameof(GetEventsByMemoryLode3)}");
 
-            IEnumerable<Event> model = _eventsLogic.GetEventsByMemoryLode3();
+        //    IEnumerable<Event> model = _eventsLogic.GetEventsByMemoryLode3();
 
-            IEnumerable<D.Event> result = _mapper.Map<IEnumerable<D.Event>>(model);
+        //    IEnumerable<D.Event> result = _mapper.Map<IEnumerable<D.Event>>(model);
 
-            return new ObjectResult(result);
-        }
+        //    return new ObjectResult(result);
+        //}
 
         /// <summary>
         /// Gets all Events that reward Wardrobe Records for Characters whose name contains the provided name text (case is ignored)

@@ -31,6 +31,8 @@ namespace FFRKApi.Model.EnlirTransform
         public IEnumerable<SchoolAccessInfo> SchoolAccessInfos { get; set; }
 
         public IEnumerable<EquipmentAccessInfo> EquipmentAccessInfos { get; set; }
+
+        public string EnlirId { get; set; }
     }
 
     public class StatsByLevelInfo

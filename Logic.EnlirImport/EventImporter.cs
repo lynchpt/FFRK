@@ -26,13 +26,13 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.JapanDate = ResolveColumnContents(columnCount, EventColumn.JapanDate, row);
             importedRow.Type = ResolveColumnContents(columnCount, EventColumn.Type, row);
             importedRow.HeroRecords = ResolveColumnContents(columnCount, EventColumn.HeroRecords, row);
-            importedRow.SpiritOfAHero = ResolveColumnContents(columnCount, EventColumn.SpiritOfAHero, row);
+            //importedRow.SpiritOfAHero = ResolveColumnContents(columnCount, EventColumn.SpiritOfAHero, row);
             importedRow.MemoryCrystalsLevel1 = ResolveColumnContents(columnCount, EventColumn.MemoryCrystalsLevel1, row);
-            importedRow.MemoryCrystalLodesLevel1 = ResolveColumnContents(columnCount, EventColumn.MemoryCrystalLodesLevel1, row);
+            //importedRow.MemoryCrystalLodesLevel1 = ResolveColumnContents(columnCount, EventColumn.MemoryCrystalLodesLevel1, row);
             importedRow.MemoryCrystalsLevel2 = ResolveColumnContents(columnCount, EventColumn.MemoryCrystalsLevel2, row);
-            importedRow.MemoryCrystalLodesLevel2 = ResolveColumnContents(columnCount, EventColumn.MemoryCrystalLodesLevel2, row);
+            //importedRow.MemoryCrystalLodesLevel2 = ResolveColumnContents(columnCount, EventColumn.MemoryCrystalLodesLevel2, row);
             importedRow.MemoryCrystalsLevel3 = ResolveColumnContents(columnCount, EventColumn.MemoryCrystalsLevel3, row);
-            importedRow.MemoryCrystalLodesLevel3 = ResolveColumnContents(columnCount, EventColumn.MemoryCrystalLodesLevel3, row);
+            //importedRow.MemoryCrystalLodesLevel3 = ResolveColumnContents(columnCount, EventColumn.MemoryCrystalLodesLevel3, row);
             importedRow.WardrobeRecords = ResolveColumnContents(columnCount, EventColumn.WardrobeRecords, row);
             importedRow.AbilitiesAwarded = ResolveColumnContents(columnCount, EventColumn.AbilitiesAwarded, row);
 

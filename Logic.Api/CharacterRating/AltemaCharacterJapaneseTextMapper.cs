@@ -299,15 +299,21 @@ namespace FFRKApi.Logic.Api.CharacterRating
 		    {"雷風無物理", "NE Celerity ATK"},
 		    {"風聖魔法", "Holy MAG"},
 		    {"雷風物理", "Lightning Wind ATK"},
-		    {"風闇物理", "Wind ATK"},
-		    {"水毒物理", "Poison ATK"}
+		    {"水毒物理", "Poison ATK"},
+		    {"風闇物理", "Wind Dark ATK"}, 
+		    {"風物魔", "Wind ATK MAG"},
+		    {"炎風魔法", "Fire Wind MAG"},
+		    {"炎雷水氷魔法", "Fire Lightning Water Ice MAG"},
+		    {"炎地魔法", "Fire Earth MAG"},
+		    {"炎氷雷聖闇魔法", "Fire Ice Lightning Holy Dark MAG"},
+		    {"雷聖物理", "Lightning ATK"},
+		    {"炎氷魔法", "Fire Ice MAG"},
 
         };
 
 		private readonly IDictionary<string, IList<string>> _rolePartMap = new Dictionary<string, IList<string>>()
 		{
 			{"風物理", new List<string> { "Wind ATK" }},
-		    {"風闇物理", new List<string> { "Wind ATK" }},
             {"回復", new List<string> { "Healing" }},
 			{"バフ", new List<string> {"Buff"}},
 			{"デバフ", new List<string> {"Debuff"}},
@@ -370,9 +376,16 @@ namespace FFRKApi.Logic.Api.CharacterRating
             {"氷水魔法", new List<string> { "Ice MAG", "Water MAG"}}, //Ice Water MAG
 		    {"雷風無物理", new List<string> { "NE ATK", "Celerity ATK"}}, //NE Celerity ATK
 		    {"風聖魔法", new List<string> { "Holy MAG"}}, //Holy MAG
-		    {"雷風物理", new List<string> { "Lightning ATK", "Wind ATK"}} //Lightning Wind ATK
-
-		};
+		    {"雷風物理", new List<string> { "Lightning ATK", "Wind ATK"}}, //Lightning Wind ATK,
+		    {"風闇物理", new List<string> { "Wind ATK", "Dark ATK"}},  //Wind Dark ATK,
+		    {"風物魔", new List<string> { "Wind Hybrid"}},
+		    {"炎風魔法", new List<string> { "Fire MAG", "Wind MAG"}}, //"Fire Wind MAG"
+		    {"炎雷水氷魔法", new List<string> { "Fire MAG", "Lightning MAG", "Water MAG", "Ice MAG"}}, //"Fire Lightning Water Ice MAG"
+		    {"炎地魔法", new List<string> { "Fire MAG", "Earth MAG"}}, //Fire Earth MAG
+		    {"炎氷雷聖闇魔法", new List<string> { "Fire MAG", "Ice MAG", "Lightning MAG", "Holy MAG", "Dark MAG"}}, //Fire Ice Lightning Holy Dark MAG
+		    {"雷聖物理", new List<string> { "Lightning ATK"}}, //Lightning ATK
+		    {"炎氷魔法", new List<string> { "Fire MAG", "Ice MAG"}}, //Fire Ice MAG
+        };
 
 
 		public string GetCharacterNameFromId(string altemaCharacterId)

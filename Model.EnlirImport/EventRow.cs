@@ -12,15 +12,15 @@ namespace FFRKApi.Model.EnlirImport
         JapanDate = 3,
         Type = 4,
         HeroRecords = 5,
-        SpiritOfAHero = 6,
-        MemoryCrystalsLevel1 = 7,
-        MemoryCrystalLodesLevel1 = 8,
-        MemoryCrystalsLevel2 = 9,
-        MemoryCrystalLodesLevel2 = 10,
-        MemoryCrystalsLevel3 = 11,
-        MemoryCrystalLodesLevel3 = 12,
-        WardrobeRecords = 13,
-        AbilitiesAwarded = 14
+        //SpiritOfAHero = 6,
+        MemoryCrystalsLevel1 = 6,
+        //MemoryCrystalLodesLevel1 = 8,
+        MemoryCrystalsLevel2 = 7,
+        //MemoryCrystalLodesLevel2 = 10,
+        MemoryCrystalsLevel3 = 8,
+        //MemoryCrystalLodesLevel3 = 12,
+        WardrobeRecords = 9,
+        AbilitiesAwarded = 10
     }
 
     public class EventRow
@@ -31,13 +31,13 @@ namespace FFRKApi.Model.EnlirImport
         public string JapanDate { get; set; }
         public string Type { get; set; }
         public string HeroRecords { get; set; }
-        public string SpiritOfAHero { get; set; }
+        //public string SpiritOfAHero { get; set; }
         public string MemoryCrystalsLevel1 { get; set; }
-        public string MemoryCrystalLodesLevel1 { get; set; }
+        //public string MemoryCrystalLodesLevel1 { get; set; }
         public string MemoryCrystalsLevel2 { get; set; }
-        public string MemoryCrystalLodesLevel2 { get; set; }
+        //public string MemoryCrystalLodesLevel2 { get; set; }
         public string MemoryCrystalsLevel3 { get; set; }
-        public string MemoryCrystalLodesLevel3 { get; set; }
+        //public string MemoryCrystalLodesLevel3 { get; set; }
         public string WardrobeRecords { get; set; }
         public string AbilitiesAwarded { get; set; }
 

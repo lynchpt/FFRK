@@ -21,10 +21,10 @@ namespace FFRKApi.Logic.Api
         IEnumerable<Event> GetEventsByMemoryCrystal1(string characterName);
         IEnumerable<Event> GetEventsByMemoryCrystal2(string characterName);
         IEnumerable<Event> GetEventsByMemoryCrystal3(string characterName);
-        IEnumerable<Event> GetEventsBySoulOfHero();
-        IEnumerable<Event> GetEventsByMemoryLode1();
-        IEnumerable<Event> GetEventsByMemoryLode2();
-        IEnumerable<Event> GetEventsByMemoryLode3();
+        //IEnumerable<Event> GetEventsBySoulOfHero();
+        //IEnumerable<Event> GetEventsByMemoryLode1();
+        //IEnumerable<Event> GetEventsByMemoryLode2();
+        //IEnumerable<Event> GetEventsByMemoryLode3();
         IEnumerable<Event> GetEventsByWardrobeRecord(string characterName);
         IEnumerable<Event> GetEventsByAbilities(string abilityName);
 
@@ -228,73 +228,73 @@ namespace FFRKApi.Logic.Api
             return results;
         }
 
-        public IEnumerable<Event> GetEventsBySoulOfHero()
-        {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsBySoulOfHero)}");
+        //public IEnumerable<Event> GetEventsBySoulOfHero()
+        //{
+        //    _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsBySoulOfHero)}");
 
-            string cacheKey = $"{nameof(GetEventsBySoulOfHero)}";
-            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
+        //    string cacheKey = $"{nameof(GetEventsBySoulOfHero)}";
+        //    IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
 
-            if (results == null)
-            {
-                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.SoulOfHerosAwarded > 0);
+        //    if (results == null)
+        //    {
+        //        results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.SoulOfHerosAwarded > 0);
 
-                _cacheProvider.ObjectSet(cacheKey, results);
-            }
+        //        _cacheProvider.ObjectSet(cacheKey, results);
+        //    }
 
-            return results;
-        }
+        //    return results;
+        //}
 
-        public IEnumerable<Event> GetEventsByMemoryLode1()
-        {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByMemoryLode1)}");
+        //public IEnumerable<Event> GetEventsByMemoryLode1()
+        //{
+        //    _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByMemoryLode1)}");
 
-            string cacheKey = $"{nameof(GetEventsByMemoryLode1)}";
-            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
+        //    string cacheKey = $"{nameof(GetEventsByMemoryLode1)}";
+        //    IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
 
-            if (results == null)
-            {
-                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalLodesLevel1Awarded > 0);
+        //    if (results == null)
+        //    {
+        //        results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalLodesLevel1Awarded > 0);
 
-                _cacheProvider.ObjectSet(cacheKey, results);
-            }
+        //        _cacheProvider.ObjectSet(cacheKey, results);
+        //    }
 
-            return results;
-        }
+        //    return results;
+        //}
 
-        public IEnumerable<Event> GetEventsByMemoryLode2()
-        {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByMemoryLode2)}");
+        //public IEnumerable<Event> GetEventsByMemoryLode2()
+        //{
+        //    _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByMemoryLode2)}");
 
-            string cacheKey = $"{nameof(GetEventsByMemoryLode2)}";
-            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
+        //    string cacheKey = $"{nameof(GetEventsByMemoryLode2)}";
+        //    IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
 
-            if (results == null)
-            {
-                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalLodesLevel2Awarded > 0);
+        //    if (results == null)
+        //    {
+        //        results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalLodesLevel2Awarded > 0);
 
-                _cacheProvider.ObjectSet(cacheKey, results);
-            }
+        //        _cacheProvider.ObjectSet(cacheKey, results);
+        //    }
 
-            return results;
-        }
+        //    return results;
+        //}
 
-        public IEnumerable<Event> GetEventsByMemoryLode3()
-        {
-            _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByMemoryLode3)}");
+        //public IEnumerable<Event> GetEventsByMemoryLode3()
+        //{
+        //    _logger.LogInformation($"Logic Method invoked: {nameof(GetEventsByMemoryLode3)}");
 
-            string cacheKey = $"{nameof(GetEventsByMemoryLode3)}";
-            IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
+        //    string cacheKey = $"{nameof(GetEventsByMemoryLode3)}";
+        //    IEnumerable<Event> results = _cacheProvider.ObjectGet<IList<Event>>(cacheKey);
 
-            if (results == null)
-            {
-                results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalLodesLevel3Awarded > 0);
+        //    if (results == null)
+        //    {
+        //        results = _enlirRepository.GetMergeResultsContainer().Events.Where(e => e.MemoryCrystalLodesLevel3Awarded > 0);
 
-                _cacheProvider.ObjectSet(cacheKey, results);
-            }
+        //        _cacheProvider.ObjectSet(cacheKey, results);
+        //    }
 
-            return results;
-        }
+        //    return results;
+        //}
 
         public IEnumerable<Event> GetEventsByWardrobeRecord(string characterName)
         {

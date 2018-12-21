@@ -24,6 +24,7 @@ namespace FFRKApi.Model.EnlirTransform
 
         public string Effect { get; set; }
         public string UnlockCriteria { get; set; }
+        public string EnlirId { get; set; }
         public bool IsInGlobal { get; set; }
         public bool IsChecked { get; set; }
     }

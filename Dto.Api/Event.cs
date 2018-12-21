@@ -25,19 +25,19 @@ namespace FFRKApi.Dto.Api
 
         public IEnumerable<string> HeroRecordsAwarded { get; set; }
 
-        public int SoulOfHerosAwarded { get; set; }
+        //public int SoulOfHerosAwarded { get; set; }
 
         public IEnumerable<string> MemoryCrystalsLevel1Awarded { get; set; }
 
-        public int MemoryCrystalLodesLevel1Awarded { get; set; }
+        //public int MemoryCrystalLodesLevel1Awarded { get; set; }
 
         public IEnumerable<string> MemoryCrystalsLevel2Awarded { get; set; }
 
-        public int MemoryCrystalLodesLevel2Awarded { get; set; }
+        //public int MemoryCrystalLodesLevel2Awarded { get; set; }
 
         public IEnumerable<string> MemoryCrystalsLevel3Awarded { get; set; }
 
-        public int MemoryCrystalLodesLevel3Awarded { get; set; }
+        //public int MemoryCrystalLodesLevel3Awarded { get; set; }
 
         public IEnumerable<string> WardrobeRecordsAwarded { get; set; }
 

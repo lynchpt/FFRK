@@ -29,6 +29,8 @@ namespace FFRKApi.Dto.Api
         public IEnumerable<SchoolAccessInfo> SchoolAccessInfos { get; set; }
 
         public IEnumerable<EquipmentAccessInfo> EquipmentAccessInfos { get; set; }
+
+        public string EnlirId { get; set; }
     }
 
     public class StatsByLevelInfo

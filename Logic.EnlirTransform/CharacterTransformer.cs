@@ -56,6 +56,8 @@ namespace FFRKApi.Logic.EnlirTransform
 
             model.EquipmentAccessInfos = GetEquipmentAccessInfos(row);
 
+            model.EnlirId = row.ID;
+
             _logger.LogDebug("Converted CharacterRow to Character: {Id} - {Description}", model.Id, model.Description);
 
             return model;

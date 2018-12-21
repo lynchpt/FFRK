@@ -271,10 +271,11 @@ namespace FFRKApi.Logic.Api.CharacterRating
         {
             // get summary Enlir character and Legend Dive Info
 
-            //exclude Biggs, Wedge because they do not yet have full character data
-            //var charactersGood = _enlirRepository.GetMergeResultsContainer().Characters.Where(c => c.Id != 3 && c.Id != 4);
+
             //exclude Eight, Cater because they do not yet have full character data
-            var charactersGood = _enlirRepository.GetMergeResultsContainer().Characters.Where(c => c.Id != 222 && c.Id != 223);
+            //var charactersGood = _enlirRepository.GetMergeResultsContainer().Characters.Where(c => c.Id != 222 && c.Id != 223);
+            //no one excluded on 12/21
+            var charactersGood = _enlirRepository.GetMergeResultsContainer().Characters.ToList();
 
             IEnumerable<CharacterRatingContextInfo> characterRatingContextInfos = charactersGood.Select(c => new CharacterRatingContextInfo()
             {

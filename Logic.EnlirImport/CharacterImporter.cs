@@ -147,6 +147,7 @@ namespace FFRKApi.Logic.EnlirImport
             importedRow.MNDLegendSphere = ResolveColumnContents(columnCount, CharacterColumn.MNDLegendSphere, row);
             importedRow.SPDLegendSphere = ResolveColumnContents(columnCount, CharacterColumn.SPDLegendSphere, row);
 
+            importedRow.ID = ResolveColumnContents(columnCount, CharacterColumn.ID, row);
             return importedRow;
         }
     }
