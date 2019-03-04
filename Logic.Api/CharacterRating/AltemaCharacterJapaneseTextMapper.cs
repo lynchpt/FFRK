@@ -308,6 +308,18 @@ namespace FFRKApi.Logic.Api.CharacterRating
 		    {"炎氷雷聖闇魔法", "Fire Ice Lightning Holy Dark MAG"},
 		    {"雷聖物理", "Lightning ATK"},
 		    {"炎氷魔法", "Fire Ice MAG"},
+		    {"地水聖魔法", "Earth Holy Water MAG"},
+		    {"炎氷雷地風魔法", "Fire Ice Lightning Wind MAG"},
+		    {"風氷聖物理", "Ice Wind Holy ATK"},
+		    {"風闇魔法", "Dark Wind MAG"},
+		    {"炎氷雷水魔法", "Lighting MAG"}, //but translate had: fire ice lightning MAG
+		    {"炎雷地物理", "Earth, Fire, Lightning ATK"},
+		    {"聖物魔", "Holy Hybrid"},
+		    {"水聖魔法", "Holy Water MAG"},
+		    {"炎雷物理", "Fire Lightning ATK"},
+		    {"氷雷魔法", "Fire Ice Lightning MAG"},
+		    {"風聖物理", "Holy Wind ATK"},
+		    {"炎雷魔法", "Fire Lightning MAG"},
 
         };
 
@@ -385,6 +397,18 @@ namespace FFRKApi.Logic.Api.CharacterRating
 		    {"炎氷雷聖闇魔法", new List<string> { "Fire MAG", "Ice MAG", "Lightning MAG", "Holy MAG", "Dark MAG"}}, //Fire Ice Lightning Holy Dark MAG
 		    {"雷聖物理", new List<string> { "Lightning ATK"}}, //Lightning ATK
 		    {"炎氷魔法", new List<string> { "Fire MAG", "Ice MAG"}}, //Fire Ice MAG
+		    {"地水聖魔法", new List<string> { "Earth MAG", "Holy MAG", "Water MAG"}}, //Earth Holy Water MAG
+		    {"炎氷雷地風魔法", new List<string> { "Fire MAG", "Ice MAG", "Lightning MAG", "Wind MAG"}}, //Fire Ice Lightning Wind MAG
+		    {"風氷聖物理", new List<string> { "Ice ATK", "Holy ATK", "Wind Atk"}}, //Ice Wind Holy ATK
+		    {"風闇魔法", new List<string> { "Dark MAG", "Wind MAG"}}, //Dark Wind MAG
+		    {"炎氷雷水魔法", new List<string> { "Lighting MAG"}}, //Lighting MAG
+		    {"炎雷地物理", new List<string> { "Earth ATK", "Fire ATK", "Lightning Atk"}}, //"Earth, Fire, Lightning ATK
+		    {"聖物魔", new List<string> { "Holy Hybrid"}}, //Holy Hybrid
+		    {"水聖魔法", new List<string> { "Holy MAG", "Water MAG"}}, //Holy Water MAG
+		    {"炎雷物理", new List<string> { "Fire ATK", "Lightning ATK"}}, //Fire Lightning ATK
+		    {"氷雷魔法", new List<string> { "Fire MAG", "Ice MAG", "Lightning MAG"}}, //Fire Ice Lightning MAG
+		    {"風聖物理", new List<string> { "Holy ATK", "Wind ATK"}}, //"Holy Wind ATK
+		    {"炎雷魔法", new List<string> { "Fire MAG", "Lightning MAG"}}, //Fire Lightning MAG
         };
 
 
