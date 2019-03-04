@@ -230,7 +230,9 @@ namespace FFRKApi.Logic.Api.CharacterRating
 		    {"/ffrk/character/343", "Wedge"},	// ウェッジ 
 		    {"/ffrk/character/342", "Biggs"},	// ビッグス
 		    {"/ffrk/character/345", "Eight"},	// ウェッジ 
-		    {"/ffrk/character/346", "Cater"}	// ビッグス
+		    {"/ffrk/character/346", "Cater"},	// ビッグス
+		    {"/ffrk/character/347", "Roxas"},	// ロクサス
+		    {"/ffrk/character/348", "Axel"},	// アクセル
 
         };
 
@@ -320,7 +322,7 @@ namespace FFRKApi.Logic.Api.CharacterRating
 		    {"氷雷魔法", "Fire Ice Lightning MAG"},
 		    {"風聖物理", "Holy Wind ATK"},
 		    {"炎雷魔法", "Fire Lightning MAG"},
-
+		    {"聖", "Holy ATK"}
         };
 
 		private readonly IDictionary<string, IList<string>> _rolePartMap = new Dictionary<string, IList<string>>()
@@ -409,6 +411,7 @@ namespace FFRKApi.Logic.Api.CharacterRating
 		    {"氷雷魔法", new List<string> { "Fire MAG", "Ice MAG", "Lightning MAG"}}, //Fire Ice Lightning MAG
 		    {"風聖物理", new List<string> { "Holy ATK", "Wind ATK"}}, //"Holy Wind ATK
 		    {"炎雷魔法", new List<string> { "Fire MAG", "Lightning MAG"}}, //Fire Lightning MAG
+		    {"聖", new List<string> { "Holy ATK"}}, //really just Holy
         };
 
 
